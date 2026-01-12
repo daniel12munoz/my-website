@@ -1,0 +1,226 @@
+@import url('./austin.css');
+
+.home {
+  position: relative;
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;                  /* prevent scroll on HOME only */
+  background: #ffffff;               /* neutral */
+  color: var(--au-ink);
+  display: grid;
+  grid-template-rows: auto auto auto;
+  align-content: start;
+  row-gap: clamp(10px, 2vh, 18px);
+  
+  /* Safe-area protection for iOS notch + base padding */
+  padding-top: max(clamp(56px, 7vh, 96px), env(safe-area-inset-top));
+  padding-right: clamp(18px, 4vw, 46px);
+  padding-bottom: clamp(18px, 3vw, 34px);
+  padding-left: clamp(18px, 4vw, 46px);
+
+  /* FINAL GLOBAL NUDGE: move entire Home content up 25px */
+  transform: translateY(-25px);
+  will-change: transform;
+}
+
+/* If the outer app wrapper adds extra padding/margins, DO NOT change it globally.
+   Only adjust .home padding via clamp() if needed to eliminate overflow. */
+
+.home__spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  /* EXTREMELY SUBTLE spotlight - NO COLOR TINT */
+  background:
+    radial-gradient(
+      circle at 50% 46%,
+      rgba(0,0,0,0.06) 0%,
+      rgba(0,0,0,0.035) 18%,
+      rgba(0,0,0,0.015) 34%,
+      rgba(0,0,0,0.00) 56%
+    );
+}
+
+.home__top,
+.home__center,
+.home__bottom {
+  position: relative;
+  z-index: 1;
+}
+
+/* HEADLINE placement */
+.home__top {
+  display: flex;
+  justify-content: center;           /* MUST BE CENTERED (user complained it wasn't) */
+  align-items: flex-start;
+
+  /* Increased drop: ~50% more than previous */
+  margin-top: clamp(48px, 9vh, 108px);
+
+  /* Ensure headline stays above hero shadow */
+  position: relative;
+  z-index: 5;
+}
+
+.home__headline {
+  margin: 0;
+  font-family: 'IBM Plex Serif', 'Georgia', 'Times New Roman', serif;
+  font-weight: 500;
+  font-size: clamp(34px, 5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  text-align: center;
+
+  /* IMPORTANT: remove transforms so it cannot clip */
+  transform: none;
+  will-change: auto;
+}
+
+.home__it {
+  font-style: italic;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+}
+
+/* CENTER illustration */
+.home__center {
+  display: grid;
+  place-items: center;
+  /* tighten vertical spacing slightly */
+  padding-top: clamp(8px, 2vh, 20px);
+}
+
+.home__heroArt {
+  margin: 0;
+  width: min(920px, 86vw);
+  display: grid;
+  place-items: center;
+}
+
+/* Composite wrapper: does NOT affect layout size, just enables layering */
+.home__heroComposite {
+  position: relative;
+  width: 100%;
+  display: block;
+  isolation: isolate;
+  height: auto;
+
+  /* Hero composite (video + PNG + shadow) sits below text */
+  z-index: 1;
+
+  /* Shadow/glow behind the hero WITHOUT changing layout */
+  filter:
+    drop-shadow(0 18px 22px rgba(0,0,0,0.18))
+    drop-shadow(0 42px 60px rgba(0,0,0,0.12))
+    drop-shadow(0 80px 120px rgba(0,0,0,0.08));
+}
+
+/* Keep the image on top */
+.home__heroComposite .home__heroImg {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: auto;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  max-width: 100%;
+  pointer-events: none;
+}
+
+/* Video behind image, same footprint as image */
+.home__tvStatic {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  /* keep same vertical size as before */
+  height: 100%;
+
+  /* squash width without moving anything else */
+  width: 100%;
+  transform: translateY(-75px) scale(0.5) scaleX(0.70);
+  transform-origin: center;
+
+  /* keep filling the visible area */
+  object-fit: cover;
+
+  pointer-events: none;
+}
+
+/* Fallback placeholder (visible only when img fails to l
+oad) */
+.home__heroFallback {
+  width: 100%;
+  height: clamp(310px, 48vh, 620px);
+  background: rgba(0,0,0,0.06);
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  filter: none; /* keep fallback flat */
+  max-width: 100%;
+}
+
+/* BOTTOM copy */
+.home__bottom {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  /* FINAL micro-drop (~20px) */
+  margin-top: clamp(20px, 0vh, -30px);
+
+  padding-bottom: clamp(12px, 2vh, 28px);
+
+  /* Ensure bottom copy stays above hero shadow */
+  position: relative;
+  z-index: 5;
+}
+
+.home__copy {
+  margin: 0;
+  max-width: 72ch;
+  color: var(--au-muted);
+  font-size: clamp(16px, 2.0vw, 22px);
+  line-height: 1.55;
+  text-align: center;
+}
+
+.home__copyLine {
+  display: block;                    /* FORCE two lines */
+}
+
+/* Provide a small, intentional gap between the two lines */
+.home__copyLine + .home__copyLine {
+  margin-top: 8px;
+}
+
+/* Responsive */
+@media (max-width: 760px) {
+  .home__headline {
+    font-size: clamp(30px, 7vw, 46px);
+  }
+
+  .home__center {
+    padding-top: 10px;
+  }
+
+  .home__heroArt {
+    width: min(680px, 92vw);
+  }
+
+  .home__heroFallback {
+    height: clamp(240px, 40vh, 420px);
+  }
+
+  .home__copy {
+    max-width: 46ch;
+    font-size: clamp(15px, 3.8vw, 18px);
+  }
+}
+
+

@@ -1,0 +1,169 @@
+@import url("./austin.css");
+
+.aboutMe {
+  position: relative;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #ffffff !important;
+  color: var(--au-ink);
+
+  /* Two-column editorial layout */
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) minmax(360px, 1fr);
+  gap: clamp(18px, 3vw, 46px);
+
+  padding: clamp(18px, 3vw, 34px) clamp(18px, 4vw, 46px);
+  align-items: center;
+}
+
+.aboutMe::before,
+.aboutMe::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Remove spotlight overlay completely - pure white background */
+.aboutMe__spotlight {
+  display: none !important;
+}
+
+.aboutMe__left,
+.aboutMe__right {
+  position: relative;
+  z-index: 1;
+}
+
+/* LEFT: paragraph in left-center, center-aligned */
+.aboutMe__left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transform: translateY(-120px);
+  will-change: transform;
+}
+
+.aboutMe__copy {
+  margin: 0;
+  max-width: 62ch;
+  text-align: center;
+  color: var(--au-muted);
+  font-size: clamp(16px, 2.0vw, 22px);
+  line-height: 1.55;
+}
+
+/* RIGHT: name top-right area */
+.aboutMe__right {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-content: start;
+  justify-items: end;
+  padding-top: clamp(10px, 2vw, 24px);
+}
+
+/* Name (large, top-right) */
+.aboutMe__name {
+  margin: 0;
+  text-align: right;
+  font-family: "IBM Plex Serif", "Georgia", "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-size: clamp(34px, 4.2vw, 64px);
+  position: relative;
+  transform: translate(-140px, -66px) scale(1.38);
+  transform-origin: top right;
+  will-change: transform;
+}
+
+/* Photo collage sits under name, slightly left from the edge */
+.aboutMe__photos {
+  position: relative;
+  width: min(460px, 38vw);
+  height: min(420px, 36vw);
+  justify-self: end;
+  margin-top: clamp(18px, 3vw, 34px);
+  margin-right: clamp(10px, 1.5vw, 18px);
+  transform: translateX(-40px);
+  transform-origin: top right;
+}
+
+/* Portrait images (3:4 aspect ratio) */
+.aboutMe__photo {
+  position: absolute;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border: 1px solid rgba(0,0,0,0.12);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 8px 16px rgba(0,0,0,0.08);
+  border-radius: 2px;
+  display: block;
+}
+
+/* Clean triangle layout with NO overlap - gaps between photos */
+/* Top photo */
+.aboutMe__photo--a {
+  top: 0;
+  left: 5px;
+  width: 46%;
+  transform: translate(-70px, 5px) rotate(-3deg);
+}
+
+/* Right photo */
+.aboutMe__photo--b {
+  top: 10%;
+  right: 0;
+  width: 46%;
+  transform: translateX(-110px) rotate(0.5deg);
+}
+
+/* Bottom-center photo */
+.aboutMe__photo--c {
+  bottom: 0;
+  left: 27%;
+  width: 46%;
+  transform: translate(-90px, 130px) rotate(3deg);
+}
+
+/* tiny helper note (optional) */
+.aboutMe__photoNote {
+  margin: 10px 0 0 0;
+  justify-self: end;
+  text-align: right;
+  font-size: 12px;
+  opacity: 0.35;
+  font-family: "IBM Plex Mono", "Fira Mono", monospace;
+}
+
+/* Responsive: collapse to stacked layout on small screens */
+@media (max-width: 900px) {
+  .aboutMe {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    align-items: start;
+  }
+
+  .aboutMe__right {
+    order: 1;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .aboutMe__name {
+    text-align: center;
+  }
+
+  .aboutMe__photos {
+    justify-self: center;
+    margin-right: 0;
+  }
+
+  .aboutMe__left {
+    order: 2;
+  }
+
+  .aboutMe__copy {
+    max-width: 56ch;
+  }
+}

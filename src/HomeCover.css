@@ -1,0 +1,122 @@
+.homecover-root {
+  width: 100%;
+  min-height: 100vh;
+  padding: 60px 40px;
+}
+
+.hero-section-pastel {
+  text-align: center;
+  padding: 80px 20px 60px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-title-bubbly {
+  font-family: 'Comic Sans MS', 'Comic Sans', 'Chalkboard SE', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 4.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #FF6B9D 0%, #C084FC 50%, #60A5FA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 20px;
+  text-shadow: 4px 4px 0px rgba(255, 182, 193, 0.3);
+  letter-spacing: 0.02em;
+}
+
+.hero-subtitle {
+  font-family: 'IBM Plex Mono', 'Fira Mono', 'Menlo', 'Consolas', 'Courier New', monospace;
+  font-size: 1.3rem;
+  color: #8B5A9F;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.work-section {
+  max-width: 1200px;
+  margin: 60px auto 0;
+  padding: 0 20px 40px;
+}
+
+.work-title {
+  font-family: 'IBM Plex Mono', 'Fira Mono', 'Menlo', monospace;
+  font-size: 2.5rem;
+  color: #6B46C1;
+  text-align: center;
+  margin-bottom: 40px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.project-card {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 8px 24px rgba(182, 131, 255, 0.15);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(182, 131, 255, 0.25);
+}
+
+.project-number {
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+  font-size: 3rem;
+  color: rgba(255, 182, 193, 0.6);
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-weight: 700;
+  z-index: 1;
+}
+
+.project-title {
+  font-family: 'IBM Plex Mono', 'Fira Mono', 'Menlo', monospace;
+  font-size: 1.5rem;
+  color: #7C3AED;
+  margin-bottom: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  position: relative;
+  z-index: 2;
+}
+
+.project-description {
+  font-family: 'IBM Plex Mono', 'Fira Mono', 'Menlo', monospace;
+  font-size: 1rem;
+  color: #6B5B8C;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .hero-title-bubbly {
+    font-size: 3rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .work-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .homecover-root {
+    padding: 40px 20px;
+  }
+} 

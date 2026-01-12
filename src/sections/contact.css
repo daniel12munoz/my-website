@@ -1,0 +1,71 @@
+@import url("./austin.css");
+
+.contact {
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #fff;
+  color: var(--au-ink);
+  position: relative;
+
+  display: grid;
+  place-items: center;
+  padding: clamp(18px, 3vw, 34px) clamp(18px, 4vw, 46px);
+}
+
+.contact__center {
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+  text-align: center;
+  margin-top: -305px;
+  margin-left: -225px;
+}
+
+.contact__email {
+  font-family: "IBM Plex Mono", "Fira Mono", "Menlo", "Consolas", monospace;
+  font-size: clamp(22px, 3.2vw, 44px);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+
+  /* Plain text behavior */
+  color: #1a1a1a;
+  opacity: 1;
+
+  /* Make sure it doesn't feel clickable */
+  cursor: default;
+  user-select: text;
+}
+
+.contact__center .contact__email {
+  text-decoration: none !important;
+}
+
+.contact__ig {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  font-family: "IBM Plex Mono", "Fira Mono", "Menlo", "Consolas", monospace;
+  font-size: clamp(17px, 1.9vw, 22px);
+  font-weight: 500;
+
+  text-decoration: none;
+  color: var(--au-ink);
+  opacity: 0.85;
+}
+
+.contact__ig:hover {
+  opacity: 0.6;
+}
+
+.contact__igIcon {
+  width: 22px;
+  height: 22px;
+  display: block;
+  opacity: 0.9;
+}
+
+.contact__igHandle {
+  letter-spacing: 0.04em;
+}

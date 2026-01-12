@@ -1,0 +1,790 @@
+.ma__logoWrap {
+  margin-top: clamp(10px, 1.6vw, 16px);
+}
+
+.ma__logo {
+  width: clamp(120px, 12vw, 160px);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+}
+@import url('./austin.css');
+
+.ma {
+  color: var(--au-ink);
+  position: relative;
+  margin-top: -47px;
+  padding-top: 0;
+}
+
+@media (max-width: 980px) {
+  .ma {
+    margin-top: 0;
+  }
+}
+
+.ma .media {
+  border-radius: 10px;
+  background: #f4f4f4;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.ma__row1 {
+  display: grid;
+  grid-template-columns: 0.56fr 0.44fr;
+  align-items: start;
+  gap: var(--au-gap);
+  margin-bottom: clamp(16px, 3vw, 28px);
+}
+
+.ma__videoBlock .media {
+  aspect-ratio: 16 / 9;
+}
+
+.ma__video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  background: #000;
+  border-radius: 10px;
+}
+
+.ma__heading {
+  display: grid;
+  justify-items: end;
+  gap: 10px;
+  margin-top: 0;
+}
+
+.ma__title {
+  margin: 0;
+  font-family: 'IBM Plex Serif', 'Georgia', 'Times New Roman', serif;
+  font-size: clamp(28px, 4.6vw, 44px);
+  line-height: 1.1;
+}
+
+.ma__rule {
+  width: clamp(140px, 16vw, 220px);
+  height: 1px;
+  display: inline-block;
+}
+
+.ma__roles {
+  text-align: right;
+  color: var(--au-ink);
+  font-size: clamp(15px, 2vw, 20px);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.ma__row2 {
+  display: grid;
+  grid-template-columns: 0.56fr 0.44fr;
+  gap: clamp(12px, 2vw, 18px);
+  align-items: start;
+  margin-top: clamp(6px, 1.2vw, 14px);
+  margin-bottom: clamp(10px, 2vw, 18px);
+}
+
+.ma__desc {
+  margin-top: 10px;
+  color: var(--au-muted);
+  max-width: 62ch;
+  font-size: clamp(20px, 2.6vw, 24px);
+  line-height: 1.55;
+}
+
+.ma__fold {
+  margin-top: clamp(18px, 2.6vw, 28px);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: calc(var(--au-gap) * 1.25);
+}
+
+.ma__subhead {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ma__subhead h3 {
+  margin: 0;
+  font-size: clamp(18px, 3vw, 28px);
+  font-family: 'IBM Plex Serif', 'Georgia', 'Times New Roman', serif;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+/* Generic "left" subhead alignment */
+.ma__subhead--left {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* Strong scoped override to ensure Testimonials is on the left */
+.ma__shortsBlock .ma__subhead--testimonials {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start !important;
+  text-align: left !important;
+  width: 100%;
+  justify-content: flex-start;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+/* Testimonials line – gradient from white on right to gray */
+.ma__rule--testimonials {
+  display: inline-block;
+  height: 1px;
+  width: clamp(60px, 6vw, 110px); /* reasonable length */
+  background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 15%,
+    rgba(0, 0, 0, 0.2) 100%
+  ); /* fade from white on right to gray on left */
+}
+
+.ma__subhead--right {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.ma__videoGrid--quad {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: clamp(14px, 2.2vw, 24px);
+}
+
+.ma__videoBox .media {
+  aspect-ratio: 16 / 9;
+}
+
+@media (min-width: 980px) {
+  .ma__videoGrid--quad {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.ma__photos {
+  position: relative;
+  margin-top: clamp(32px, 4vw, 56px); /* move Photography section down */
+}
+
+.ma__photoStrip,
+.ma__photoStrip--lower {
+  display: inline-flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: clamp(10px, 1.4vw, 18px);
+}
+
+.ma__photoStrip img,
+.ma__photoStrip--lower img {
+  width: clamp(160px, 18vw, 220px);
+  aspect-ratio: 4 / 5;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.ma__photoStrip img + img,
+.ma__photoStrip--lower img + img {
+  margin-left: -10px;
+}
+
+.ma__photoStrip {
+  margin-top: clamp(8px, 1vw, 12px);
+  z-index: 1;
+}
+
+.ma__photoStrip--lower {
+  margin-top: clamp(-18px, -1.6vw, -26px);
+  z-index: 0;
+}
+
+.ma__videoPyramid {
+  display: grid;
+  gap: clamp(14px, 2.2vw, 24px);
+}
+
+.media--short {
+  aspect-ratio: 9 / 16;
+  border-radius: 10px;
+  background: #000;
+  overflow: hidden;
+}
+
+.media--short video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ma__overviewHeadshots {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: var(--au-gap);
+  align-items: start;
+}
+
+@media (max-width: 980px) {
+  .ma__row1,
+  .ma__row2,
+  .ma__overviewHeadshots {
+    grid-template-columns: 1fr;
+  }
+
+  .ma__heading {
+    justify-items: start;
+  }
+
+  .ma__rule {
+    width: clamp(100px, 12vw, 160px);
+  }
+
+  .ma__photoStrip,
+  .ma__photoStrip--lower {
+    left: 0;
+    transform: none;
+  }
+
+  .ma__photoStrip--lower {
+    margin-top: clamp(6px, 1vw, 10px);
+  }
+
+  .ma__videoGrid--quad {
+    grid-template-columns: 1fr;
+  }
+
+  .ma__shorts {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =================== HERO VIDEO — remove play icon/overlay =================== */
+.ma .media--video::before,
+.ma .media--video::after,
+.ma .media__play {
+  display: none !important;
+  content: none !important;
+  pointer-events: none !important;
+}
+
+.ma .ma__heroVideo {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+}
+
+.ma .ma__heroVideo::-webkit-media-controls {
+  display: none !important;
+}
+
+/* =================== LOGO — big 1×1, left & slightly down, no shadow =================== */
+.ma__logoWrap {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: clamp(6px, 1vw, 12px);
+}
+
+.ma__logo {
+  width: clamp(220px, 28vw, 340px);
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  box-shadow: none;
+  background: #fff;
+  object-fit: contain;
+}
+
+/* =================== SUBHEAD RULE SHORTENERS =================== */
+.ma__photos .ma__subhead {
+  align-items: flex-end;
+}
+
+.ma__photos .ma__subhead .ma__rule {
+  width: clamp(80px, 7vw, 110px);
+}
+
+.ma__testimonials .ma__subhead .ma__rule {
+  width: clamp(80px, 7vw, 110px);
+}
+
+.ma__shortsBlock {
+  margin-top: clamp(32px, 4vw, 56px); /* move Testimonials section down */
+}
+
+.ma__shortsBlock .ma__subhead {
+  align-items: flex-end;
+}
+
+.ma__shortsBlock .ma__subhead .ma__rule {
+  width: clamp(60px, 6vw, 90px);
+}
+
+.ma__overview .ma__subhead .ma__rule {
+  width: clamp(90px, 8vw, 120px);
+}
+
+.ma__overviewHeadshots .ma__headshots .ma__subhead .ma__rule {
+  width: clamp(70px, 6vw, 95px);
+}
+
+/* =================== SHORTS — push 9 left, 11 right, 10 center =================== */
+.ma__shorts {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: clamp(12px, 1.8vw, 18px);
+  max-width: min(980px, 92vw);
+  margin: clamp(10px, 1.4vw, 16px) auto 0;
+}
+
+.ma__shorts .media--short {
+  width: clamp(140px, 14vw, 220px);
+  aspect-ratio: 9 / 16;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.ma__shorts .media--short video {
+  border-radius: 10px;
+}
+
+@media (max-width: 980px) {
+  .ma__shorts {
+    flex-direction: column;
+    align-items: center;
+    max-width: clamp(240px, 72vw, 420px);
+  }
+
+  .ma__shorts .media--short {
+    width: clamp(160px, 50vw, 240px);
+  }
+}
+
+.ma__logoWrap {
+  justify-content: flex-start !important;
+  margin-left: clamp(60px, 4vw, 80px) !important;
+  margin-top: clamp(8px, 1vw, 14px) !important;
+}
+
+.ma__logo {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  object-fit: contain;
+}
+
+.ma__desc {
+  position: relative;
+  top: -25px !important;
+  margin-top: 0 !important;
+}
+
+/* ===========================================================
+   Marketing Alliance — Header group (title + underline + position)
+   Lower slightly without touching the logo
+   =========================================================== */
+.ma__header,
+.ma__heading {
+  position: relative;
+  top: 18px;
+}
+
+.ma__subheading,
+.ma__underline {
+  position: relative;
+  top: 18px;
+}
+
+/* =================== OVERVIEW — smaller and lowered under rule =================== */
+.ma__overview .media {
+  width: clamp(420px, 52vw, 760px);
+  aspect-ratio: 16 / 9;
+  margin-top: clamp(12px, 1.4vw, 18px);
+}
+
+/* =================== HEADSHOTS — label down, two 1×1 overlapping squares =================== */
+.ma__overviewHeadshots .ma__headshots .ma__subhead {
+  align-items: flex-end;
+  margin-top: 50px;
+}
+
+.ma__headshotPile {
+  position: relative;
+  width: clamp(340px, 36vw, 460px);
+  height: clamp(260px, 28vw, 360px);
+  margin-top: clamp(10px, 1.2vw, 16px);
+}
+
+.ma__headshotPile .shot {
+  position: absolute;
+  width: clamp(160px, 18vw, 220px);
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: var(--shadow);
+}
+
+.ma__headshotPile .shot--13 {
+  left: 0;
+  bottom: 0;
+  transform: rotate(-0.8deg);
+  z-index: 1;
+}
+
+.ma__headshotPile .shot--12 {
+  right: 0;
+  top: 0;
+  transform: rotate(1deg);
+  z-index: 2;
+}
+
+/* =================== TESTIMONIALS — equalized sizes remain =================== */
+.ma__videoPyramid {
+  display: grid;
+  gap: clamp(14px, 2.2vw, 24px);
+}
+
+.ma__videoPyramid .row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(14px, 2.2vw, 24px);
+  flex-wrap: nowrap;
+}
+
+.ma__videoPyramid .row .media {
+  width: clamp(300px, 30vw, 420px);
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.ma__videoPyramid .row--bottom {
+  justify-content: center;
+}
+
+@media (max-width: 980px) {
+  .ma__videoPyramid .row {
+    flex-wrap: wrap;
+  }
+
+  .ma__videoPyramid .row .media {
+    width: clamp(240px, 60vw, 340px);
+  }
+}
+
+/* =================== 1) Fix Hero Video size =================== */
+.ma__heroVideo {
+  width: clamp(420px, 52vw, 760px);
+  aspect-ratio: 16 / 9;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  margin: clamp(10px, 1.4vw, 18px) auto 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* =================== 2) Lower entire Marketing Alliance page =================== */
+/* overrides replaced below */
+
+/* =======================================================================
+   2) LOGO (Image 1) — PURE PNG, LEFT + DOWN, NO BOX LOOK
+   ----------------------------------------------------------------------- */
+/* =======================
+   Marketing Alliance — Logo
+   Center in the right column, then nudge slightly right.
+   ======================= */
+:root {
+  --ma-logo-nudge-x: 90px;
+  --ma-logo-nudge-y: 50px;
+}
+
+.ma__logoWrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: clamp(18px, 2vw, 26px) auto 0;
+  transform: translateX(var(--ma-logo-nudge-x)) translateY(var(--ma-logo-nudge-y));
+  will-change: transform;
+}
+
+.ma__logo {
+  width: clamp(220px, 28vw, 340px);
+  aspect-ratio: 1 / 1;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  object-fit: contain;
+  display: block;
+}
+
+/* =======================================================================
+   3) PARAGRAPH TIGHTEN — reduce the gap under the hero video
+   ----------------------------------------------------------------------- */
+.ma__row2 {
+  margin-top: clamp(0px, 0.4vw, 6px) !important;
+}
+
+.ma__desc {
+  margin-top: clamp(2px, 0.5vw, 6px) !important;
+}
+/* ===================== 2) Big square logo (fills the right column) ===================== */
+.ma__logoWrap {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin-top: clamp(10px, 1.6vw, 16px);
+}
+
+.ma__logo {
+  width: clamp(220px, 28vw, 340px);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+/* ===================== 3) Testimonials — equal card sizing ===================== */
+.ma__videoPyramid {
+  display: grid;
+  gap: clamp(14px, 2.2vw, 24px);
+}
+
+.ma__videoPyramid .row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(14px, 2.2vw, 24px);
+  flex-wrap: nowrap;
+}
+
+.ma__videoPyramid .row .media {
+  width: clamp(300px, 30vw, 420px);
+  aspect-ratio: 16 / 9;
+}
+
+.ma__videoPyramid .row--bottom {
+  justify-content: center;
+}
+
+/* ===================== 4) Shorts — make smaller & center ===================== */
+.ma__shorts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(140px, 200px));
+  gap: clamp(12px, 1.8vw, 18px);
+  justify-content: center;
+}
+
+.media--short video {
+  border-radius: 10px;
+}
+
+/* ===================== 5) Overview — smaller and lowered under rule ===================== */
+.ma__overview .media {
+  width: clamp(420px, 52vw, 760px);
+  aspect-ratio: 16 / 9;
+  margin-top: clamp(10px, 1.2vw, 16px);
+}
+
+/* ===================== 6) Photography & Headshots — right align & nudge ===================== */
+.ma__photos .ma__subhead {
+  align-items: flex-end;
+}
+
+.ma__overviewHeadshots .ma__headshots .ma__subhead {
+  align-items: flex-end;
+  margin-top: clamp(6px, 0.8vw, 10px);
+}
+
+.ma__headshotPile {
+  margin-top: clamp(8px, 1vw, 14px);
+}
+
+@media (max-width: 980px) {
+  .ma__videoPyramid .row {
+    flex-wrap: wrap;
+  }
+
+  .ma__videoPyramid .row .media {
+    width: clamp(240px, 60vw, 340px);
+  }
+
+  .ma__shorts {
+    grid-template-columns: repeat(1, minmax(140px, 1fr));
+  }
+}
+
+/* ===== Testimonials: fixed 2×2 grid, keep existing card size ===== */
+.ma__testimonialsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: clamp(14px, 2.2vw, 24px);
+  align-items: start;
+  justify-items: center;
+  margin-top: clamp(10px, 1.2vw, 14px);
+}
+
+/* Maintain the same typical testimonial card width you’re using now */
+.ma__testimonialsGrid .ma__videoCard {
+  width: min(480px, 30vw);
+}
+
+.ma__testimonialsGrid .media {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* Video element polish */
+.ma__videoEl {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===== Shorts underline: much shorter only for this subhead ===== */
+.ma__subhead--shorts .ma__rule {
+  width: clamp(40px, 4vw, 68px);
+}
+
+/* ===== Testimonials: keep grid but tighten middle gap with tiny X-shifts ===== */
+.ma__testimonialsGrid .ma__testimonial {
+  transition: transform 0.16s ease;
+}
+
+.ma__testimonialsGrid .ma__testimonial--v6 {
+  transform: translateX(10px);
+}
+
+.ma__testimonialsGrid .ma__testimonial--v7 {
+  transform: translateX(-10px);
+}
+
+.ma__testimonialsGrid .ma__testimonial--v8 {
+  transform: translateX(10px);
+}
+
+.ma__testimonialsGrid .ma__testimonial--v9 {
+  transform: translateX(-10px);
+}
+
+/* ===== Shorts: horizontal alignment ===== */
+.ma__shortsGrid .ma__shortCard {
+  transition: transform 0.16s ease;
+  flex: 0 0 clamp(150px, 24vw, 220px);
+  max-width: clamp(150px, 24vw, 220px);
+  transform: none;
+}
+
+.ma__shortsGrid .ma__shortMedia {
+  width: 100%;
+}
+
+.ma__shortsGrid .ma__shortVideo {
+  width: 100%;
+  height: auto;
+}
+
+/* ===== Shorts + Headshots two-column layout ===== */
+.ma__shortsHeadshots {
+  margin-top: clamp(32px, 4vw, 56px); /* move Shorts and Headshots sections down */
+  display: grid;
+  grid-template-columns: minmax(220px, 0.9fr) minmax(220px, 0.9fr);
+  gap: clamp(18px, 4vw, 44px);
+  align-items: start;
+}
+
+.ma__shortsColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(12px, 1.6vw, 18px);
+}
+
+.ma__shortsColumn .ma__shortsGrid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: clamp(10px, 1.6vw, 18px);
+}
+
+.ma__headshotsColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: clamp(12px, 1.4vw, 18px);
+}
+
+.ma__headshotsColumn .ma__headshotPile {
+  margin-top: clamp(0px, 0.6vw, 10px);
+}
+
+.ma__rule--shorts,
+.ma__rule--headshots {
+  width: clamp(50px, 5vw, 80px);
+}
+
+@media (max-width: 980px) {
+  .ma__shortsHeadshots {
+    grid-template-columns: 1fr;
+    gap: clamp(16px, 5vw, 28px);
+  }
+
+  .ma__headshotsColumn {
+    align-items: center;
+  }
+
+  .ma__headshotsColumn .ma__headshotPile {
+    margin-top: clamp(8px, 2vw, 16px);
+  }
+}
+
+/* Marketing Alliance hero link – match AU/Blaze/Vonix link style */
+.ma__link {
+  display: inline-block;
+  margin-top: clamp(10px, 1.4vw, 18px);
+  color: var(--au-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--au-rule);
+  font-size: clamp(14px, 1.2vw, 16px);  /* increased to match other hero links */
+  font-weight: 500;
+}
+
+.ma__link:hover {
+  opacity: 0.75;
+}
+
+.ma__link:visited {
+  color: var(--au-ink);  /* prevent purple visited state */
+}
+
+/* Underline rule aligned to the link text width */
+.ma__linkRule {
+  display: block;
+  height: 1px;
+  width: fit-content;
+  background: rgba(0, 0, 0, 0.3) !important; /* solid gray, no fade, no gradient */
+  background-image: none !important; /* prevent any gradients */
+  opacity: 1 !important; /* ensure no opacity inheritance */
+  margin-top: 2px;
+}
+

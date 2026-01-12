@@ -1,0 +1,122 @@
+.otherChannels {
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background: #ffffff;
+  color: #1a1a1a;
+  
+  /* Safe-area protection for iOS notch + base padding */
+  padding-top: max(clamp(56px, 7vh, 96px), env(safe-area-inset-top));
+  padding-right: clamp(18px, 4vw, 46px);
+  padding-bottom: clamp(18px, 3vw, 34px);
+  padding-left: clamp(18px, 4vw, 46px);
+}
+
+.otherChannels__spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  /* Subtle neutral spotlight - similar to Home but simpler */
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      rgba(0,0,0,0.04) 0%,
+      rgba(0,0,0,0.02) 25%,
+      rgba(0,0,0,0.00) 50%
+    );
+}
+
+/* Content frame wrapper - moves entire composition up and left */
+.otherChannels__frame {
+  min-height: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  transform: translate(-106px, -220px);
+  will-change: transform;
+  position: relative;
+  z-index: 1;
+}
+
+.otherChannels__hero,
+.otherChannels__bottom {
+  position: relative;
+}
+
+/* Hero section - centered in upper-middle */
+.otherChannels__hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.otherChannels__stats {
+  transform: translateY(10px) scale(1.2);
+  transform-origin: center top;
+  will-change: transform;
+}
+
+.otherChannels__heroLine1,
+.otherChannels__heroLine2 {
+  font-family: 'IBM Plex Serif', 'Georgia', 'Times New Roman', serif;
+  font-weight: 400;
+  font-size: clamp(42px, 6vw, 80px);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+.otherChannels__heroLine1 {
+  margin-bottom: clamp(12px, 2vh, 20px);
+}
+
+.otherChannels__heroLine1 strong,
+.otherChannels__heroLine2 strong {
+  font-weight: 700;
+}
+
+/* Bottom paragraph */
+.otherChannels__bottom {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: clamp(20px, 3vh, 40px);
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  transform: translateY(-35px);
+  will-change: transform;
+}
+
+.otherChannels__copy {
+  margin: 0;
+  max-width: 70ch;
+  color: rgba(0, 0, 0, 0.64);
+  font-family: 'IBM Plex Mono', 'Fira Mono', 'Menlo', 'Consolas', 'Courier New', monospace;
+  font-size: clamp(16px, 2.0vw, 22px);
+  line-height: 1.55;
+  text-align: center;
+  font-weight: 400;
+}
+
+.otherChannels__copy strong {
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 760px) {
+  .otherChannels__heroLine1,
+  .otherChannels__heroLine2 {
+    font-size: clamp(32px, 8vw, 56px);
+  }
+
+  .otherChannels__copy {
+    max-width: 46ch;
+    font-size: clamp(15px, 3.8vw, 18px);
+  }
+}

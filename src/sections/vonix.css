@@ -1,0 +1,591 @@
+@import url('./austin.css');
+
+/* Root Vonix section */
+.vo {
+  color: var(--au-ink);
+}
+
+/* Match hero vertical height with Marketing Alliance / Blaze / Austin Underground */
+.vo {
+  position: relative;
+  top: -28px;      /* slightly lower (less negative = further down) */
+}
+
+@media (max-width: 980px) {
+  .vo {
+    top: -12px;     /* consistent proportional adjustment */
+  }
+}
+
+/* HERO ROW: same grid ratio as Blaze + Marketing Alliance */
+.vo__row1 {
+  display: grid;
+  grid-template-columns: 0.56fr 0.44fr;    /* video slightly larger than text column */
+  align-items: start;
+  gap: var(--au-gap);
+  margin-bottom: clamp(16px, 3vw, 28px);
+}
+
+/* Left column: hero video block */
+.vo__videoBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Hero video frame */
+.vo__heroMedia {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  background: #000;
+  overflow: hidden;
+}
+
+.vo__heroVideo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Link under hero — visually match Austin Underground hero link */
+.vo__linkWrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 10px;
+  width: max-content;
+}
+
+.vo__link {
+  display: inline-block;
+  margin-top: clamp(6px, 1vw, 12px);   /* slightly less space than before */
+  color: var(--au-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--au-rule);
+}
+
+.vo__link:hover {
+  opacity: 0.75;
+}
+
+.vo__link:visited {
+  color: var(--au-ink);  /* prevent purple visited state */
+}
+
+/* Underline that ends exactly where the link text ends */
+.vo__linkRule {
+  display: block;
+  height: 1px;
+  width: fit-content;
+  background: rgba(0, 0, 0, 0.3) !important; /* solid gray, no fade, no gradient */
+  background-image: none !important; /* prevent any gradients */
+  opacity: 1 !important; /* ensure no opacity inheritance */
+  margin-top: 2px;
+}
+
+/* Paragraph: same feel as Blaze / MA descriptions (moved to separate row, see below) */
+
+/* Right column: title, underline, roles, logo */
+.vo__heading {
+  display: grid;
+  justify-items: end;
+  gap: 10px;
+  align-content: flex-start;
+}
+
+.vo__title {
+  margin: 0;
+  font-family: 'IBM Plex Serif', 'Georgia', 'Times New Roman', serif;
+  font-size: clamp(28px, 4.6vw, 44px);
+  line-height: 1.1;
+}
+
+/* Base Vonix rule for labels */
+.vo__rule {
+  display: inline-block;
+  height: 1px;
+}
+
+/* Main Vonix header line – shorter than the word "Vonix" with gradient from white on left */
+.vo__rule--main {
+  display: inline-block;
+  height: 1px;
+  width: clamp(40px, 5vw, 80px); /* slightly longer */
+  max-width: 80px; /* ensure it never exceeds this */
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 20%,
+    rgba(128, 128, 128, 0.6) 100%
+  ) !important; /* fade from white on left to gray on right */
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 20%,
+    rgba(128, 128, 128, 0.6) 100%
+  ) !important;
+  background-color: transparent !important;
+}
+
+/* Psychology (left label) – gradient from white on right to gray on left */
+.vo__rule--psychology {
+  display: inline-block;
+  height: 1px;
+  width: clamp(80px, 10vw, 140px);
+  background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 20%,
+    rgba(128, 128, 128, 0.6) 100%
+  ) !important; /* fade from white on right to gray on left */
+  background-image: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 20%,
+    rgba(128, 128, 128, 0.6) 100%
+  ) !important;
+  background-color: transparent !important;
+}
+
+/* Technology (right label) – gradient from white on left to gray on right */
+.vo__rule--technology {
+  display: inline-block;
+  height: 1px;
+  width: clamp(80px, 10vw, 140px);
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 20%,
+    rgba(128, 128, 128, 0.6) 100%
+  ) !important; /* fade from white on left to gray on right */
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 20%,
+    rgba(128, 128, 128, 0.6) 100%
+  ) !important;
+  background-color: transparent !important;
+}
+
+/* Vlogs line – short with gradient fading to white on right */
+.vo__rule--vlogs {
+  display: inline-block;
+  height: 1px;
+  width: clamp(40px, 5vw, 80px);  /* much shorter than Technology/Other Favorites */
+  background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 20%,
+    rgba(128, 128, 128, 0.6) 100%
+  ) !important; /* fade from white on right to gray on left */
+  background-image: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 20%,
+    rgba(128, 128, 128, 0.6) 100%
+  ) !important;
+  background-color: transparent !important;
+}
+
+/* Other Favorites – gradient from white on left to gray on right */
+.vo__rule--favorites {
+  display: inline-block;
+  height: 1px;
+  width: clamp(80px, 10vw, 140px);
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 20%,
+    rgba(128, 128, 128, 0.6) 100%
+  ) !important;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 20%,
+    rgba(128, 128, 128, 0.6) 100%
+  ) !important;
+  background-color: transparent !important;
+}
+
+.vo__roles {
+  text-align: right;
+  color: var(--au-ink);
+  font-size: clamp(15px, 2vw, 20px);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* Logo: pure PNG, no box/border/shadow; position similar to Blaze/MA logos */
+.vo__logoWrap {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: clamp(38px, 3.8vw, 56px);     /* keep current height – DO NOT CHANGE */
+  margin-right: clamp(20px, 3vw, -10px);     /* moved slightly to the right */
+  padding-right: 0;                          /* reset padding so it doesn't fight our transform */
+  position: relative;
+  transform: translateX(18px);               /* nudge logo to the RIGHT */
+  will-change: transform;
+}
+
+.vo__logo {
+  width: clamp(280px, 34vw, 440px);                      /* ~30% larger than before */
+  aspect-ratio: 1 / 1;
+  display: block;
+  object-fit: contain;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;                           /* keep it a clean PNG – user can add shadow later */
+}
+
+/* Anchor container for top-right logo area */
+.vonix__topRight {
+  position: relative; /* enables absolute positioning for plaque */
+}
+
+/* 100 plaque overlay */
+.vonix__plaque {
+  position: absolute;
+  z-index: 50; /* above the face logo */
+  pointer-events: none;
+  user-select: none;
+
+  /* Easy tuning controls */
+  --plaq-x: 100px;   /* move right (+) / left (-) */
+  --plaq-y: 280px;   /* move down (+) / up (-) */
+  --plaq-w: 255px;  /* overall size */
+
+  width: var(--plaq-w);
+  height: auto;
+
+  /* Place it slightly down and right from the logo */
+  top: 0;
+  right: 0;
+  transform: translate(var(--plaq-x), var(--plaq-y)) rotate(4deg);
+  transform-origin: top right;
+
+  /* drop shadow */
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)) drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+}
+
+/* Remove video play icon/overlay */
+.vo .media--video::before,
+.vo .media--video::after,
+.vo .media__play {
+  display: none !important;
+  content: none !important;
+  pointer-events: none !important;
+}
+
+/* Placeholder tile only (no internal link/footer) */
+.comingSoonTile {
+  width: 100%;
+  height: 100%;
+  background: #111;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.comingSoonTile__center {
+  font-family: "IBM Plex Mono", "Fira Mono", monospace;
+  font-size: clamp(14px, 1.6vw, 18px);
+  letter-spacing: 0.06em;
+  opacity: 0.95;
+  text-align: center;
+  padding: 16px;
+}
+
+/* ensure no play overlay appears */
+.comingSoonTile .playOverlay,
+.comingSoonTile .playOverlay__icon {
+  display: none !important;
+}
+
+/* Disabled caption line: inherit same styling as the normal link/caption */
+.vo__link--disabled,
+.vo__shortLink--disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+/* Responsive: stack columns on small screens */
+@media (max-width: 980px) {
+  .vo__row1 {
+    grid-template-columns: 1fr;
+  }
+
+  .vo__heading {
+    justify-items: start;
+  }
+
+  .vo__logoWrap {
+    justify-content: flex-start;
+  }
+}
+
+/* ===== Vonix description row (under hero) ===== */
+.vo__rowDesc {
+  margin-top: clamp(6px, 0.8vw, 10px);   /* pull the paragraph much closer to the hero row */
+}
+
+/* Paragraph: slightly wider, but not all the way to the logo */
+.vo__desc {
+  max-width: 62ch;
+  margin-top: -170px;
+  color: var(--au-muted);
+  font-size: clamp(20px, 2.6vw, 24px);
+  line-height: 1.55;
+}
+
+/* ===== Generic Vonix folds ===== */
+.vo__fold {
+  margin-top: clamp(32px, 4vw, 48px);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(14px, 2vw, 22px);
+}
+
+.vo__subhead {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vo__subhead h3 {
+  margin: 0;
+  font-family: 'IBM Plex Serif', 'Georgia', 'Times New Roman', serif;
+  font-weight: 600;
+  font-size: clamp(18px, 2.4vw, 26px);
+  letter-spacing: 0.02em;
+}
+
+.vo__subhead--left {
+  align-items: flex-start;
+}
+
+.vo__subhead .vo__rule {
+  width: clamp(80px, 7vw, 120px);
+  height: 1px;
+  background: var(--au-rule);
+  display: inline-block;
+}
+
+/* ===== Psychology — layout tuning ===== */
+.vo__psychGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: clamp(18px, 2.4vw, 28px);
+  align-items: flex-start;
+}
+
+/* Each duo is a relative container */
+.vo__psychDuo {
+  position: relative;
+  padding-top: clamp(10px, 1vw, 14px);
+}
+
+/* MAIN horizontal video: slightly narrower to make room for the short */
+.vo__psychMain {
+  width: 88%; /* was effectively 100% of the column; reduce a bit */
+  max-width: 88%;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.vo__videoEl {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Link under main psych video */
+.vo__link--mini {
+  display: inline-block;
+  margin-top: clamp(6px, 0.8vw, 10px);
+  font-size: clamp(11px, 1vw, 13px);
+  font-weight: 500;
+  color: var(--au-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--au-rule);
+}
+
+.vo__link--mini:hover {
+  opacity: 0.75;
+}
+
+.vo__link--mini:visited {
+  color: var(--au-ink);
+}
+
+/* ===== Psychology shorts: stacked video + tiny link ===== */
+
+/* Container for each short: let content flow vertically */
+/* ===== Psychology shorts: short + link ABOVE without moving the video ===== */
+.vo__psychShort {
+  position: absolute;
+  top: clamp(-16px, -1.6vw, -10px);
+  right: clamp(-6px, 0.5vw, 10px);
+  width: clamp(110px, 20vw, 150px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: visible; /* allow the link to sit outside if needed */
+}
+
+/* Link container: absolutely positioned ABOVE the short video, centered */
+.vo__psychShort .vo__linkWrap {
+  position: absolute;
+  bottom: 100%;       /* place it just above the short container */
+  left: 50%;          /* horizontally center relative to the short */
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+/* Remove the special-case margin overrides for the first duo */
+.vo__psychDuo:first-child .vo__psychShort .vo__linkWrap {
+  margin: 0;
+}
+
+/* Short video itself remains exactly where it is */
+.vo__psychShort .media,
+.vo__psychShort .media.media--short {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  background: #000;
+  overflow: hidden;
+}
+
+.vo__shortVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Short link: small centered label above the short, solid underline */
+.vo__shortLink {
+  position: static;           /* inside the absolutely-positioned linkWrap */
+  display: inline-block;
+  font-size: 8px;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--au-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--au-rule);
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+.vo__shortLink:hover {
+  opacity: 0.75;
+}
+
+.vo__shortLink:visited {
+  color: var(--au-ink);
+}
+
+/* ===== Technology & Vlogs common video grid ===== */
+.vo__videoGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--au-gap);
+  justify-content: center;       /* center both rows */
+  align-items: flex-start;
+  margin-top: clamp(12px, 1.6vw, 18px);
+}
+
+/* Each card: roughly 1/3 width on desktop */
+.vo__videoCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 0 1 calc((100% - 2 * var(--au-gap)) / 3);
+  max-width: calc((100% - 2 * var(--au-gap)) / 3);
+}
+
+/* Larger card size, 16:9 */
+.vo__videoCard .media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  background: #000;
+}
+
+/* Mini link under each card (same as AU/Blaze link style) */
+.vo__videoCard .vo__link--mini {
+  display: inline-block;
+  margin-top: clamp(6px, 0.8vw, 10px);
+  font-size: clamp(11px, 1vw, 13px);
+  font-weight: 500;
+  color: var(--au-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--au-rule);
+}
+
+.vo__videoCard .vo__link--mini:hover {
+  opacity: 0.75;
+}
+
+.vo__videoCard .vo__link--mini:visited {
+  color: var(--au-ink);
+}
+
+/* Move Technology subhead toward the right */
+.vo__technology .vo__subhead {
+  align-items: flex-end;
+  text-align: right;
+}
+
+/* ===== Other Favorites — right-aligned label ===== */
+.vo__favorites .vo__subhead {
+  align-items: flex-end;
+  text-align: right;
+}
+
+@media (max-width: 980px) {
+  .vo__psychGrid {
+    grid-template-columns: 1fr;
+  }
+
+  /* On mobile, keep the short attached but a bit tighter */
+  .vo__psychShort {
+    top: clamp(-10px, -1vw, -6px);
+    right: clamp(6px, 2vw, 14px);
+    width: clamp(90px, 32vw, 140px);
+  }
+
+  .vo__shortLink {
+    font-size: 7px;
+  }
+}
+
+/* On smaller screens, stack the videos */
+@media (max-width: 900px) {
+  .vo__videoGrid {
+    justify-content: center;
+  }
+
+  .vo__videoCard {
+    flex: 0 1 100%;
+    max-width: 100%;
+  }
+}
+

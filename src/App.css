@@ -1,0 +1,332 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html, #root, .App {
+  height: 100%;
+  min-height: 100vh;
+}
+
+body {
+  font-family: 'IBM Plex Mono', 'Fira Mono', 'Menlo', 'Consolas', 'Courier New', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Layout variables */
+:root {
+  /* left brand/nav reserved width */
+  --brand-col: clamp(260px, 28vw, 360px);
+  /* gutter between brand and content */
+  --content-gutter: clamp(16px, 3vw, 40px);
+  /* top offset so content begins BELOW the thin rule under the big title */
+  --content-top: clamp(80px, 11vw, 150px);
+  /* Rule fade styling */
+  --rule-ink: #1a1a1a;
+  --rule-opacity: 0.2;
+}
+
+/* Fade towards the RIGHT (for left-aligned rules) */
+.ruleFade--right {
+  background: linear-gradient(to right, var(--rule-ink) 0%, transparent 100%);
+  opacity: var(--rule-opacity);
+}
+
+/* Fade towards the LEFT (for right-aligned rules) */
+.ruleFade--left {
+  background: linear-gradient(to left, var(--rule-ink) 0%, transparent 100%);
+  opacity: var(--rule-opacity);
+}
+
+.App {
+  display: flex;
+  height: 100vh;
+  background: #fff;
+  position: relative;
+}
+
+/* Layer 1: fine grain */
+.App::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.14;
+  mix-blend-mode: multiply;
+  background-size: 220px 220px;
+  background-image: url("data:image/svg+xml;utf8,\
+  <svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'>\
+    <filter id='n1'>\
+      <feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' seed='7' stitchTiles='stitch'/>\
+    </filter>\
+    <rect width='100%%' height='100%%' filter='url(#n1)'/>\
+  </svg>");
+}
+
+/* Layer 2: micro-variation to break repetition */
+.App::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.10;
+  mix-blend-mode: multiply;
+  background-size: 340px 340px;
+  background-image: url("data:image/svg+xml;utf8,\
+  <svg xmlns='http://www.w3.org/2000/svg' width='340' height='340'>\
+    <filter id='n2'>\
+      <feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='1' seed='19' stitchTiles='stitch'/>\
+    </filter>\
+    <rect width='100%%' height='100%%' filter='url(#n2)'/>\
+  </svg>");
+}
+
+/* Header block - top-left positioned */
+.vp-brand {
+  position: fixed;
+  top: 48px;
+  left: 48px;
+  z-index: 10;
+  width: var(--brand-col);
+  animation: fadeIn 1.5s ease-in;
+}
+
+.vp-logo {
+  font-family: 'IBM Plex Serif', 'Georgia', 'Times New Roman', serif;
+  font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+  font-weight: 300;
+  color: #1a1a1a;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  animation: fadeInUp 1.5s ease-out 0.3s both;
+  position: relative;
+  white-space: nowrap;
+  overflow: visible;
+}
+
+/* Subtle text grain effect */
+.vp-logo::before {
+  content: 'Vonix Productions';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 1px 1px, rgba(0,0,0,0.1) 1px, transparent 0);
+  background-size: 8px 8px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.vp-rule {
+  display: block;
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(to right, #1a1a1a 0%, transparent 100%);
+  opacity: 0.2;
+  margin-bottom: 24px;
+}
+
+/* Navigation */
+.vp-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nav-link {
+  font-family: 'IBM Plex Mono', 'Fira Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: opacity 0.3s ease;
+  position: relative;
+  padding-left: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+/* Active dot indicator */
+.nav-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) scale(0.5);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  opacity: 0;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+/* Show dot on hovered item */
+.nav-link:hover::before {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+/* Keyboard focus also shows the dot */
+.nav-link:focus-visible::before {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+/* Active item shows dot when the nav is NOT hovered */
+.vp-nav:not(:hover) .nav-link.active::before {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+/* When the nav IS hovered, hide the active dot by default... */
+.vp-nav:hover .nav-link.active::before {
+  opacity: 0;
+  transform: translateY(-50%) scale(0.5);
+}
+
+/* ...but if the hovered item IS the active item, keep the dot visible */
+.vp-nav .nav-link.active:hover::before,
+.vp-nav .nav-link.active:focus-visible::before {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+.nav-link:hover {
+  opacity: 0.6;
+}
+
+/* Main content area */
+.App > main.vp-main {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+  z-index: 2;
+  padding-left: calc(var(--brand-col) + var(--content-gutter));
+  padding-top: var(--content-top);
+}
+
+/* HOME: remove the giant top "header gap" and disable scroll */
+.App > main.vp-main--home {
+  overflow: hidden;               /* Home cannot scroll */
+  padding-top: clamp(56px, 8vh, 110px);
+}
+
+/* OTHER CHANNELS: disable scrolling in the main container */
+.App > main.vp-main--other {
+  overflow: hidden;
+}
+
+/* ABOUT ME: disable scrolling in main container */
+.App > main.vp-main--about {
+  overflow: hidden;
+}
+
+/* CONTACT: disable scrolling in main container */
+.App > main.vp-main--contact {
+  overflow: hidden;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 980px) {
+  :root {
+    --brand-col: clamp(180px, 40vw, 240px);
+    --content-top: clamp(80px, 12vw, 140px);
+  }
+}
+
+@media (max-width: 900px) {
+  .vp-brand {
+    top: 24px;
+    left: 24px;
+  }
+  
+  .vp-logo {
+    font-size: clamp(1.2rem, 4.8vw, 2rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .vp-brand {
+    top: 24px;
+    left: 24px;
+  }
+  
+  .nav-link {
+    font-size: 0.95rem;
+  }
+  
+  .vp-nav {
+    gap: 10px;
+  }
+}
+
+/* Make all media wrappers positioning context for overlays */
+.media.media--video,
+.media.media--short {
+  position: relative;
+}
+
+/* Make playable wrappers clicking zone */
+.is-playable {
+  position: relative;
+  cursor: pointer;
+}
+
+/* Center overlay */
+.playOverlay {
+  position: absolute;
+  inset: 0; /* fills container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* invisible to clicks */
+}
+
+/* PLAY ICON (only visible while paused) */
+.playOverlay__icon {
+  width: 0;
+  height: 0;
+  border-left: 20px solid rgba(255, 255, 255, 0.9);
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.8));
+}
+
+/* PAUSE bars are created dynamically — but now we decide:
+   Pause indicator DISAPPEARS COMPLETELY during playback
+   so no styling needed for pause state. */

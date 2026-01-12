@@ -1,0 +1,373 @@
+@import url('./austin.css');
+
+/* Nudge Blaze section upward to align with AU + MA */
+.bl {
+  color: var(--au-ink);
+  position: relative;
+  margin-top: -28px
+  ;  /* move Blaze UP slightly */
+}
+
+@media (max-width: 980px) {
+  .bl {
+    margin-top: 0;   /* let mobile breathe */
+  }
+}
+
+/* Hero layout */
+.bl__row1 {
+  display: grid;
+  grid-template-columns: 0.56fr 0.44fr;
+  align-items: start;
+  gap: var(--au-gap);
+  margin-bottom: clamp(16px, 3vw, 28px);
+}
+
+/* Hero video container */
+.bl__heroMedia {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  background: #000;
+  overflow: hidden;
+  position: relative;
+}
+
+.bl__heroVideo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.bl__videoBlock {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1vw, 12px);
+}
+
+.bl__desc {
+  margin: 0;
+  margin-top: clamp(6px, 0.8vw, 10px);
+  color: var(--au-muted);
+  max-width: 62ch;
+  font-size: clamp(20px, 2.6vw, 24px);
+  line-height: 1.55;
+}
+
+/* Heading / roles / logo (match Marketing Alliance + AU) */
+.bl__heading {
+  display: grid;
+  justify-items: end;
+  gap: 10px;
+}
+
+.bl__title {
+  margin: 0;
+  font-family: 'IBM Plex Serif', 'Georgia', 'Times New Roman', serif;
+  font-size: clamp(28px, 4.6vw, 44px);
+  line-height: 1.1;
+}
+
+/* Base Blaze rule */
+.bl__rule {
+  display: inline-block;
+  height: 1px;
+}
+
+/* You can keep widths you already set or standardize them: */
+.bl__rule--main {
+  width: clamp(54px, 7.2vw, 96px); /* 40% shorter than before */
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 15%,
+    rgba(0, 0, 0, 0.2) 100%
+  ); /* fade from white on left to gray on right */
+}
+
+.bl__rule--shorts {
+  width: clamp(60px, 6vw, 100px);
+  background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 15%,
+    rgba(0, 0, 0, 0.2) 100%
+  ); /* fade from white on right to gray on left */
+}
+
+.bl__rule--long {
+  width: clamp(60px, 6vw, 100px);
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 15%,
+    rgba(0, 0, 0, 0.2) 100%
+  ); /* fade from white on left to gray on right */
+}
+
+.bl__roles {
+  text-align: right;
+  color: var(--au-ink);
+  font-size: clamp(15px, 2vw, 20px);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* Logo same as Marketing Alliance logo size/position */
+.bl__logoWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(18px, 2vw, 26px);
+  position: relative;
+  left: 65px;   /* move further RIGHT */
+  top: 60px;    /* move further DOWN */
+}
+
+.bl__logo {
+  width: clamp(220px, 28vw, 340px);
+  height: auto;
+  display: block;
+  object-fit: contain;
+  box-shadow: none !important;
+  border: none !important;
+  background: none !important;
+}
+
+/* Subhead + folds (Shorts/Videos) */
+.bl__fold {
+  margin-top: clamp(18px, 2.6vw, 28px);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: calc(var(--au-gap) * 1.25);
+}
+
+/* Lower the Shorts section slightly */
+.bl__shortsSection {
+  position: relative;
+  margin-top: 32px;  /* move Shorts downward slightly */
+  margin-bottom: 40px;  /* consistent gap between sections */
+}
+
+/* Lower the Videos section further */
+.bl__videosSection {
+  position: relative;
+  margin-top: clamp(64px, 7vw, 96px);  /* moved down even more */
+}
+
+.bl__subhead {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bl__subhead h3 {
+  margin: 0;
+  font-size: clamp(18px, 3vw, 28px);
+  font-family: 'IBM Plex Serif', 'Georgia', 'Times New Roman', serif;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.bl__subhead--left {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.bl__subhead--right {
+  align-items: flex-end;
+  text-align: right;
+}
+
+
+/* Shared link styling (match Austin Underground) */
+.bl__linkWrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: clamp(6px, 0.6vw, 8px);
+  width: max-content;
+}
+
+.bl__link {
+  display: inline-block;               /* critical: link width = text width */
+  margin: 0;
+  color: var(--au-ink);
+  text-decoration: none;
+  font-size: clamp(12px, 1vw, 14px);  /* keep same font size-style as current design */
+  font-weight: 500;
+}
+
+.bl__link:hover {
+  opacity: 0.8;
+}
+
+.bl__linkRule {
+  display: block;
+  height: 1px;
+  width: 100%; /* match the full width of the link text within the flex container */
+  align-self: stretch; /* ensure it stretches to match link width */
+  background: rgba(0, 0, 0, 0.3) !important; /* solid gray, no fade, no gradient */
+  background-image: none !important; /* prevent any gradients */
+  opacity: 1 !important; /* ensure no opacity inheritance */
+  margin-top: 2px;
+}
+
+/* Blaze hero link - match Austin Underground hero link exactly */
+.bl__videoBlock .bl__linkWrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 10px;
+  width: max-content;
+}
+
+.bl__videoBlock .bl__link {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  color: var(--au-ink);
+  text-decoration: none;
+  font-size: clamp(14px, 1.1vw, 16px);
+}
+
+.bl__videoBlock .bl__link:hover {
+  opacity: 0.75;
+}
+
+.bl__videoBlock .bl__linkRule {
+  display: block;
+  height: 1px;
+  width: 100%; /* match the full width of the link text within the flex container */
+  align-self: stretch; /* ensure it stretches to match link width */
+  background: rgba(0, 0, 0, 0.3) !important; /* solid gray, no fade, no gradient */
+  background-image: none !important; /* prevent any gradients */
+  opacity: 1 !important; /* ensure no opacity inheritance */
+  margin-top: 2px;
+}
+
+/* Smaller font size for links under Shorts only */
+.bl__shortCard .bl__link {
+  font-size: 0.70rem;     /* slightly smaller */
+  line-height: 0.98rem;   /* keeps underline tight and clean */
+}
+
+/* Shorts grid with staircase effect */
+.bl__shortsGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(140px, 200px)); /* 5 per row */
+  gap: clamp(14px, 2vw, 22px);
+  justify-content: center;
+}
+
+.bl__shortCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.bl__shortMedia {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  background: #000;
+  overflow: hidden;
+}
+
+.bl__shortVideo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Staircase offsets: repeat every 5 items */
+.bl__shortCard:nth-child(5n + 1) {
+  transform: translateY(0);
+}
+.bl__shortCard:nth-child(5n + 2) {
+  transform: translateY(8px);
+}
+.bl__shortCard:nth-child(5n + 3) {
+  transform: translateY(16px);
+}
+.bl__shortCard:nth-child(5n + 4) {
+  transform: translateY(24px);
+}
+.bl__shortCard:nth-child(5n + 5) {
+  transform: translateY(32px);
+}
+
+/* Videos grid (copy AU Interviews layout) */
+.bl__videoGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--au-gap);
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: clamp(12px, 1.8vw, 18px);
+}
+
+.bl__videoBox {
+  flex: 0 1 calc((100% - 2 * var(--au-gap)) / 3);
+  max-width: calc((100% - 2 * var(--au-gap)) / 3);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.bl__videoMedia {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  background: #000;
+  overflow: hidden;
+}
+
+.bl__videoPlayer {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Second row center (v25, v26) naturally centered via flex */
+
+/* Remove video play icon/overlay */
+.bl .media--video::before,
+.bl .media--video::after,
+.bl .media__play {
+  display: none !important;
+  content: none !important;
+  pointer-events: none !important;
+}
+
+@media (max-width: 900px) {
+  .bl__videoBox {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+
+  .bl__shortsGrid {
+    grid-template-columns: repeat(3, minmax(140px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .bl__shortsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .bl__row1 {
+    grid-template-columns: 1fr;
+  }
+
+  .bl__heading {
+    justify-items: start;
+  }
+}
+
