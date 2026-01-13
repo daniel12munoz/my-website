@@ -1,5 +1,6 @@
 import React from "react";
 import "./austin.css";
+import HlsVideo from "../components/HlsVideo";
 
 export default function AustinUnderground() {
   return (
@@ -8,8 +9,8 @@ export default function AustinUnderground() {
       <div className="au__row1">
         <div className="au__videoBlock">
           <div className="media media--video au__heroMedia">
-            <video
-              src="/au-video.webm"
+            <HlsVideo
+              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/c224997c12da891e39f3e1eb203f3e2b/manifest/video.m3u8"
               autoPlay
               muted
               loop
@@ -73,8 +74,8 @@ export default function AustinUnderground() {
             {/* Video 2 */}
             <div className="au__videoBox">
               <div className="au__videoContainer">
-                <video
-                  src="/au-video2.webm"
+                <HlsVideo
+                  src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/b69208204f5aad4bf156ce9e1b5242ae/manifest/video.m3u8"
                   autoPlay
                   loop
                   muted
@@ -99,8 +100,8 @@ export default function AustinUnderground() {
             {/* Video 3 */}
             <div className="au__videoBox">
               <div className="au__videoContainer">
-                <video
-                  src="/au-video3.webm"
+                <HlsVideo
+                  src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/8cffa70ef37255d753103ea9ede9e85e/manifest/video.m3u8"
                   autoPlay
                   loop
                   muted
@@ -125,8 +126,8 @@ export default function AustinUnderground() {
             {/* Video 4 */}
             <div className="au__videoBox">
               <div className="au__videoContainer">
-                <video
-                  src="/au-video4.webm"
+                <HlsVideo
+                  src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/e6f17cafa3adf74d90e397cf269f9b4e/manifest/video.m3u8"
                   autoPlay
                   loop
                   muted
@@ -151,8 +152,8 @@ export default function AustinUnderground() {
             {/* Video 5 */}
             <div className="au__videoBox au__videoBox--v5">
               <div className="au__videoContainer">
-                <video
-                  src="/au-video5.webm"
+                <HlsVideo
+                  src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/4a19306ce523fe2dd6b1a5c5cddcb4a2/manifest/video.m3u8"
                   autoPlay
                   loop
                   muted
@@ -177,8 +178,8 @@ export default function AustinUnderground() {
             {/* Video 6 */}
             <div className="au__videoBox au__videoBox--v6">
               <div className="au__videoContainer">
-                <video
-                  src="/au-video6.webm"
+                <HlsVideo
+                  src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/3dada1f38800be1d616737973de66c39/manifest/video.m3u8"
                   autoPlay
                   loop
                   muted
