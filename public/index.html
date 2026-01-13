@@ -21,6 +21,7 @@
   
     <!-- Social preview: Discord / iMessage / Facebook (Open Graph) -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Vonix Productions" />
     <meta property="og:title" content="Vonix Productions" />
     <meta
       property="og:description"
@@ -40,9 +41,21 @@
     />
     <meta name="twitter:image" content="https://vonixproductions.com/vonix-preview.jpg" />
   
+    <!-- Structured data (Google / SEO boost) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Vonix Productions",
+        "url": "https://vonixproductions.com/",
+        "logo": "https://vonixproductions.com/vonix-favicon.png",
+        "description": "Vonix Productions is a creator-led production company focused on original media and visual storytelling."
+      }
+    </script>
+  
     <!-- PWA manifest (keep) -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  </head>
+  </head>  
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
