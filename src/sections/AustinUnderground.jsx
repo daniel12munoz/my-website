@@ -72,15 +72,17 @@ export default function AustinUnderground() {
           <div className="au__videoGrid">
             {/* Video 2 */}
             <div className="au__videoBox">
-              <video
-                src="/au-video2.webm"
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="auto"
-                className="au__videoPlayer"
-              />
+              <div className="au__videoContainer">
+                <video
+                  src="/au-video2.webm"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  className="au__videoPlayer"
+                />
+              </div>
               <div className="au__linkWrap">
                 <a
                   className="au__link"
@@ -96,15 +98,17 @@ export default function AustinUnderground() {
 
             {/* Video 3 */}
             <div className="au__videoBox">
-              <video
-                src="/au-video3.webm"
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="auto"
-                className="au__videoPlayer"
-              />
+              <div className="au__videoContainer">
+                <video
+                  src="/au-video3.webm"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  className="au__videoPlayer"
+                />
+              </div>
               <div className="au__linkWrap">
                 <a
                   className="au__link"
@@ -120,15 +124,17 @@ export default function AustinUnderground() {
 
             {/* Video 4 */}
             <div className="au__videoBox">
-              <video
-                src="/au-video4.webm"
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="auto"
-                className="au__videoPlayer"
-              />
+              <div className="au__videoContainer">
+                <video
+                  src="/au-video4.webm"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  className="au__videoPlayer"
+                />
+              </div>
               <div className="au__linkWrap">
                 <a
                   className="au__link"
@@ -144,15 +150,17 @@ export default function AustinUnderground() {
 
             {/* Video 5 */}
             <div className="au__videoBox au__videoBox--v5">
-              <video
-                src="/au-video5.webm"
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="auto"
-                className="au__videoPlayer"
-              />
+              <div className="au__videoContainer">
+                <video
+                  src="/au-video5.webm"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  className="au__videoPlayer"
+                />
+              </div>
               <div className="au__linkWrap">
                 <a
                   className="au__link"
@@ -168,15 +176,17 @@ export default function AustinUnderground() {
 
             {/* Video 6 */}
             <div className="au__videoBox au__videoBox--v6">
-              <video
-                src="/au-video6.webm"
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="auto"
-                className="au__videoPlayer"
-              />
+              <div className="au__videoContainer">
+                <video
+                  src="/au-video6.webm"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  className="au__videoPlayer"
+                />
+              </div>
               <div className="au__linkWrap">
                 <a
                   className="au__link"

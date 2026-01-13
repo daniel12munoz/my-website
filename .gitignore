@@ -22,8 +22,17 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Large media (don't commit)
-public/**/*.mp4
-public/**/*.webm
-public/**/*.mov
-public/**/*.m4v
+# Large media (keep ignored)
+*.mp4
+*.webm
+*.mov
+*.m4v
+
+# --- Allow only the small clips we want to deploy ---
+!public/au-video.webm
+!public/au-video2.webm
+!public/au-video3.webm
+!public/au-video4.webm
+!public/au-video5.webm
+!public/au-video6.webm
+
