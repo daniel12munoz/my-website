@@ -1,9 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 import Hls from 'hls.js';
 
-function HlsVideo({ src, ...props }) {
+const HlsVideo = forwardRef(function HlsVideo({ src, ...props }, ref) {
   const videoRef = useRef(null);
   const hlsRef = useRef(null);
+
+  // Expose the video element ref to parent components
+  useImperativeHandle(ref, () => videoRef.current, []);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -44,6 +47,6 @@ function HlsVideo({ src, ...props }) {
   }, [src]);
 
   return <video ref={videoRef} {...props} />;
-}
+});
 
 export default HlsVideo;

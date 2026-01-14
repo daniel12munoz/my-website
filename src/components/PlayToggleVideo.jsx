@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import Hls from 'hls.js';
+import HlsVideo from './HlsVideo';
 
 export default function PlayToggleVideo({
   src,
@@ -15,54 +15,7 @@ export default function PlayToggleVideo({
   ...rest
 }) {
   const videoRef = useRef(null);
-  const hlsRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
-
-  // Set up HLS if src is an HLS URL (.m3u8)
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video || !src) return;
-
-    const isHLS = src.endsWith('.m3u8');
-    
-    if (!isHLS) {
-      // For non-HLS sources, the existing source tag will handle it
-      return;
-    }
-
-    // Clean up previous HLS instance if it exists
-    if (hlsRef.current) {
-      hlsRef.current.destroy();
-      hlsRef.current = null;
-    }
-
-    // Check if native HLS is supported (Safari)
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    const canPlayHLS = video.canPlayType('application/vnd.apple.mpegurl');
-
-    if (canPlayHLS || isSafari) {
-      // Safari and other browsers with native HLS support
-      video.src = src;
-    } else if (Hls.isSupported()) {
-      // Use hls.js for browsers that don't support native HLS
-      const hls = new Hls({ enableWorker: true });
-      hlsRef.current = hls;
-      
-      hls.attachMedia(video);
-      hls.loadSource(src);
-    } else {
-      // Fallback: try setting src directly (might work in some cases)
-      video.src = src;
-    }
-
-    // Cleanup function
-    return () => {
-      if (hlsRef.current) {
-        hlsRef.current.destroy();
-        hlsRef.current = null;
-      }
-    };
-  }, [src]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -81,7 +34,7 @@ export default function PlayToggleVideo({
       video.removeEventListener('pause', handlePause);
       video.removeEventListener('ended', handleEnded);
     };
-  }, []);
+  }, [src]); // Re-attach listeners when src changes
 
   useEffect(() => {
     if (!forcePause) return;
@@ -145,25 +98,34 @@ export default function PlayToggleVideo({
 
   const isHLS = src && src.endsWith('.m3u8');
 
+  const videoProps = {
+    ref: videoRef,
+    loop,
+    muted,
+    playsInline: true,
+    preload,
+    controls: false,
+    className: videoClassName,
+    onError: handleError,
+    onLoadedData: handleLoadedData,
+    ...rest,
+  };
+
   return (
     <div
       className={`${wrapperClassName} is-playable`.trim()}
       onClick={handleToggle}
     >
-      <video
-        ref={videoRef}
-        loop={loop}
-        muted={muted}
-        playsInline
-        preload={preload}
-        controls={false}
-        className={videoClassName}
-        onError={handleError}
-        onLoadedData={handleLoadedData}
-        {...rest}
-      >
-        {!isHLS && <source src={src} type={getVideoType(src)} />}
-      </video>
+      {isHLS ? (
+        <HlsVideo
+          src={src}
+          {...videoProps}
+        />
+      ) : (
+        <video {...videoProps}>
+          <source src={src} type={getVideoType(src)} />
+        </video>
+      )}
       {!isPlaying && (
         <div className="playOverlay">
           <span className="playOverlay__icon" />

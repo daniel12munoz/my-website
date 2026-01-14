@@ -114,9 +114,9 @@ export default function Vonix() {
           </article>
 
           {/* Duo 2 - Right side */}
-          <article className="vo__psychDuo" key="/vo-video3again.mp4">
+          <article className="vo__psychDuo" key="/vo-video3againagain.mp4">
             <PlayToggleVideo
-              src="/vo-video3again.mp4"
+              src="/vo-video3againagain.mp4"
               wrapperClassName="media media--video vo__psychMain"
               videoClassName="vo__videoEl"
               muted={false}
@@ -173,9 +173,9 @@ export default function Vonix() {
 
         <div className="vo__videoGrid vo__videoGrid--tech">
           {/* Top row: 3 videos */}
-          <article className="vo__videoCard" key="/vo-video4again.mp4">
+          <article className="vo__videoCard" key="/vo-video4againagain.mp4">
             <PlayToggleVideo
-              src="/vo-video4again.mp4"
+              src="/vo-video4againagain.mp4"
               wrapperClassName="media media--video"
               videoClassName="vo__videoEl"
               muted={false}
@@ -197,9 +197,9 @@ export default function Vonix() {
             </div>
           </article>
 
-          <article className="vo__videoCard" key="/vo-video5again.mp4">
+          <article className="vo__videoCard" key="/vo-video5againagain.mp4">
             <PlayToggleVideo
-              src="/vo-video5again.mp4"
+              src="/vo-video5againagain.mp4"
               wrapperClassName="media media--video"
               videoClassName="vo__videoEl"
               muted={false}
@@ -221,9 +221,9 @@ export default function Vonix() {
             </div>
           </article>
 
-          <article className="vo__videoCard" key="/vo-video6again.mp4">
+          <article className="vo__videoCard" key="/vo-video6againagain.mp4">
             <PlayToggleVideo
-              src="/vo-video6again.mp4"
+              src="/vo-video6againagain.mp4"
               wrapperClassName="media media--video"
               videoClassName="vo__videoEl"
               muted={false}
@@ -246,9 +246,9 @@ export default function Vonix() {
           </article>
 
           {/* Bottom row: 2 centered videos */}
-          <article className="vo__videoCard vo__videoCard--bottom" key="/vo-video7again.mp4">
+          <article className="vo__videoCard vo__videoCard--bottom" key="/vo-video7againagain.mp4">
             <PlayToggleVideo
-              src="/vo-video7again.mp4"
+              src="/vo-video7againagain.mp4"
               wrapperClassName="media media--video"
               videoClassName="vo__videoEl"
               muted={false}
@@ -270,9 +270,9 @@ export default function Vonix() {
             </div>
           </article>
 
-          <article className="vo__videoCard vo__videoCard--bottom" key="/vo-video8again.mp4">
+          <article className="vo__videoCard vo__videoCard--bottom" key="/vo-video8againagain.mp4">
             <PlayToggleVideo
-              src="/vo-video8again.mp4"
+              src="/vo-video8againagain.mp4"
               wrapperClassName="media media--video"
               videoClassName="vo__videoEl"
               muted={false}
@@ -305,9 +305,9 @@ export default function Vonix() {
 
         <div className="vo__videoGrid vo__videoGrid--vlogs">
           {/* Top row: 3 videos */}
-          <article className="vo__videoCard" key="/vo-video9again.mp4">
+          <article className="vo__videoCard" key="/vo-video9againagain.mp4">
             <PlayToggleVideo
-              src="/vo-video9again.mp4"
+              src="/vo-video9againagain.mp4"
               wrapperClassName="media media--video"
               videoClassName="vo__videoEl"
               muted={false}
@@ -329,9 +329,9 @@ export default function Vonix() {
             </div>
           </article>
 
-          <article className="vo__videoCard" key="/vo-video10again.mp4">
+          <article className="vo__videoCard" key="/vo-video10againagain.mp4">
             <PlayToggleVideo
-              src="/vo-video10again.mp4"
+              src="/vo-video10againagain.mp4"
               wrapperClassName="media media--video"
               videoClassName="vo__videoEl"
               muted={false}
@@ -353,9 +353,9 @@ export default function Vonix() {
             </div>
           </article>
 
-          <article className="vo__videoCard" key="/vo-video11again.mp4">
+          <article className="vo__videoCard" key="/vo-video11againagain.mp4">
             <PlayToggleVideo
-              src="/vo-video11again.mp4"
+              src="/vo-video11againagain.mp4"
               wrapperClassName="media media--video"
               videoClassName="vo__videoEl"
               muted={false}
@@ -378,9 +378,9 @@ export default function Vonix() {
           </article>
 
           {/* Bottom row: 2 centered videos */}
-          <article className="vo__videoCard vo__videoCard--bottom" key="/vo-video12again.mp4">
+          <article className="vo__videoCard vo__videoCard--bottom" key="/vo-video12againagain.mp4">
             <PlayToggleVideo
-              src="/vo-video12again.mp4"
+              src="/vo-video12againagain.mp4"
               wrapperClassName="media media--video"
               videoClassName="vo__videoEl"
               muted={false}
@@ -402,9 +402,9 @@ export default function Vonix() {
             </div>
           </article>
 
-          <article className="vo__videoCard vo__videoCard--bottom" key="/vo-video13again.mp4">
+          <article className="vo__videoCard vo__videoCard--bottom" key="/vo-video13againagain.mp4">
             <PlayToggleVideo
-              src="/vo-video13again.mp4"
+              src="/vo-video13againagain.mp4"
               wrapperClassName="media media--video"
               videoClassName="vo__videoEl"
               muted={false}
@@ -437,9 +437,9 @@ export default function Vonix() {
 
         <div className="vo__videoGrid vo__videoGrid--favorites">
           {/* Video 14 */}
-          <article className="vo__videoCard" key="/vo-video14again.mp4">
+          <article className="vo__videoCard" key="/vo-video14againagain.mp4">
             <PlayToggleVideo
-              src="/vo-video14again.mp4"
+              src="/vo-video14againagain.mp4"
               wrapperClassName="media media--video"
               videoClassName="vo__videoEl"
               muted={false}
@@ -462,9 +462,9 @@ export default function Vonix() {
           </article>
 
           {/* Video 15 */}
-          <article className="vo__videoCard" key="/vo-video15again.mp4">
+          <article className="vo__videoCard" key="/vo-video15againagain.mp4">
             <PlayToggleVideo
-              src="/vo-video15again.mp4"
+              src="/vo-video15againagain.mp4"
               wrapperClassName="media media--video"
               videoClassName="vo__videoEl"
               muted={false}
@@ -487,9 +487,9 @@ export default function Vonix() {
           </article>
 
           {/* Video 16 */}
-          <article className="vo__videoCard" key="/vo-video16again.mp4">
+          <article className="vo__videoCard" key="/vo-video16againagain.mp4">
             <PlayToggleVideo
-              src="/vo-video16again.mp4"
+              src="/vo-video16againagain.mp4"
               wrapperClassName="media media--video"
               videoClassName="vo__videoEl"
               muted={false}
@@ -512,9 +512,9 @@ export default function Vonix() {
           </article>
 
           {/* Video 17 */}
-          <article className="vo__videoCard" key="/vo-video17again.mp4">
+          <article className="vo__videoCard" key="/vo-video17againagain.mp4">
             <PlayToggleVideo
-              src="/vo-video17again.mp4"
+              src="/vo-video17againagain.mp4"
               wrapperClassName="media media--video"
               videoClassName="vo__videoEl"
               muted={false}
@@ -537,9 +537,9 @@ export default function Vonix() {
           </article>
 
           {/* Video 18 */}
-          <article className="vo__videoCard" key="/vo-video18again.mp4">
+          <article className="vo__videoCard" key="/vo-video18againagain.mp4">
             <PlayToggleVideo
-              src="/vo-video18again.mp4"
+              src="/vo-video18againagain.mp4"
               wrapperClassName="media media--video"
               videoClassName="vo__videoEl"
               muted={false}
