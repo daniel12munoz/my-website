@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './marketing.css';
 import PlayToggleVideo from '../components/PlayToggleVideo';
+import HlsVideo from '../components/HlsVideo';
 
 const Vid = ({ src, className = '' }) => (
   <div className={`media media--video ${className}`.trim()}>
-    <video
+    <HlsVideo
       className="ma__video ma__videoEl"
       src={src}
       autoPlay
@@ -29,9 +30,9 @@ export default function MarketingAlliance() {
       {/* ROW 1 — Video left, Heading/Role + Circular Logo right */}
       <div className="ma__row1">
         <div className="ma__videoBlock">
-          <video
+          <HlsVideo
             className="media media--video ma__heroVideo"
-            src="/ma-video1.webm"
+            src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/48362b7a9b36ffaa142a49bb33ecd0ce/manifest/video.m3u8"
             autoPlay
             loop
             muted
@@ -83,10 +84,10 @@ export default function MarketingAlliance() {
         </div>
 
         <div className="ma__videoGrid ma__videoGrid--quad">
-          <div className="ma__videoBox"><Vid src="/ma-video2.webm" /></div>
-          <div className="ma__videoBox"><Vid src="/ma-video3.webm" /></div>
-          <div className="ma__videoBox"><Vid src="/ma-video4.webm" /></div>
-          <div className="ma__videoBox"><Vid src="/ma-video5.webm" /></div>
+          <div className="ma__videoBox"><Vid src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/4a3192f46de64a4520d1016df1cb7f5d/manifest/video.m3u8" /></div>
+          <div className="ma__videoBox"><Vid src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/8d37b772e30474a2732049adce0b06e5/manifest/video.m3u8" /></div>
+          <div className="ma__videoBox"><Vid src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/2f8e29eac63ca9da416929175435e274/manifest/video.m3u8" /></div>
+          <div className="ma__videoBox"><Vid src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/5ea790e9fb658a9365ea6c755577ffdd/manifest/video.m3u8" /></div>
         </div>
       </div>
 
@@ -124,7 +125,7 @@ export default function MarketingAlliance() {
         <div className="ma__testimonialsGrid">
           <div className="ma__videoCard ma__testimonial ma__testimonial--v6">
             <PlayToggleVideo
-              src="/ma-video6.mp4"
+              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/3f27d4b270ed0b1d66058691bcbddaca/manifest/video.m3u8"
               wrapperClassName="media media--video"
               videoClassName="ma__video ma__videoEl"
               loop={true}
@@ -135,7 +136,7 @@ export default function MarketingAlliance() {
           </div>
           <div className="ma__videoCard ma__testimonial ma__testimonial--v7">
             <PlayToggleVideo
-              src="/ma-video7.mp4"
+              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/8d1954f73f3a307cfb0e49446e2b05be/manifest/video.m3u8"
               wrapperClassName="media media--video"
               videoClassName="ma__video ma__videoEl"
               loop={true}
@@ -146,7 +147,7 @@ export default function MarketingAlliance() {
           </div>
           <div className="ma__videoCard ma__testimonial ma__testimonial--v8">
             <PlayToggleVideo
-              src="/ma-video8.mp4"
+              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/58c6309a3d0282d2b8e468d177d3d3a5/manifest/video.m3u8"
               wrapperClassName="media media--video"
               videoClassName="ma__video ma__videoEl"
               loop={true}
@@ -157,7 +158,7 @@ export default function MarketingAlliance() {
           </div>
           <div className="ma__videoCard ma__testimonial ma__testimonial--v9">
             <PlayToggleVideo
-              src="/ma-video9.mp4"
+              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/b2f5bf4ade64aac387b2e7e986cc74bd/manifest/video.m3u8"
               wrapperClassName="media media--video"
               videoClassName="ma__video ma__videoEl"
               loop={true}
@@ -180,7 +181,7 @@ export default function MarketingAlliance() {
           <div className="ma__shortsGrid">
             <div className="ma__shortCard ma__shortCard--v10">
               <PlayToggleVideo
-                src="/ma-video10.mp4"
+                src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/2f320453f80ec991033c4a329754774c/manifest/video.m3u8"
                 wrapperClassName="media media--short ma__shortMedia"
                 videoClassName="ma__shortVideo"
                 loop={true}
@@ -191,7 +192,7 @@ export default function MarketingAlliance() {
             </div>
             <div className="ma__shortCard ma__shortCard--v11">
               <PlayToggleVideo
-                src="/ma-video11.mp4"
+                src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/0d603ba86d8a7b549e5e464724045ecb/manifest/video.m3u8"
                 wrapperClassName="media media--short ma__shortMedia"
                 videoClassName="ma__shortVideo"
                 loop={true}
@@ -202,7 +203,7 @@ export default function MarketingAlliance() {
             </div>
             <div className="ma__shortCard ma__shortCard--v12">
               <PlayToggleVideo
-                src="/ma-video12.mp4"
+                src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/f37981c80a7928ff6446ee52a43e9ece/manifest/video.m3u8"
                 wrapperClassName="media media--short ma__shortMedia"
                 videoClassName="ma__shortVideo"
                 loop={true}
