@@ -1,5 +1,6 @@
 import React from 'react';
 import './home.css';
+import HlsVideo from '../components/HlsVideo';
 
 export default function Home() {
 
@@ -19,9 +20,9 @@ export default function Home() {
       <main className="home__center">
         <figure className="home__heroArt" aria-label="Home hero illustration">
           <div className="home__heroComposite">
-            <video
+            <HlsVideo
               className="home__tvStatic"
-              src={`/box-static-2.mp4?v=${Date.now()}`}
+              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/ec00cd5eef23481e587f6bd15263546b/manifest/video.m3u8"
               autoPlay
               loop
               muted
