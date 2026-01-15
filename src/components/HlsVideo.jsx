@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 import Hls from 'hls.js';
 
-const HlsVideo = forwardRef(function HlsVideo({ src, ...props }, ref) {
+const HlsVideo = forwardRef(function HlsVideo({ src, autoPlay, ...props }, ref) {
   const videoRef = useRef(null);
   const hlsRef = useRef(null);
 
@@ -18,23 +18,43 @@ const HlsVideo = forwardRef(function HlsVideo({ src, ...props }, ref) {
       hlsRef.current = null;
     }
 
-    // Check if native HLS is supported (Safari)
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    const canPlayHLS = video.canPlayType('application/vnd.apple.mpegurl');
+    // Check if native HLS is supported
+    const canPlayHLS = video.canPlayType('application/vnd.apple.mpegurl') === 'maybe' || 
+                       video.canPlayType('application/vnd.apple.mpegurl') === 'probably';
 
-    if (canPlayHLS || isSafari) {
-      // Safari and other browsers with native HLS support
+    if (canPlayHLS) {
+      // Native HLS support (Safari, iOS Safari)
       video.src = src;
+      // Try to autoplay if requested
+      if (autoPlay && video.muted) {
+        video.play().catch(() => {
+          // Autoplay failed, ignore
+        });
+      }
     } else if (Hls.isSupported()) {
-      // Use hls.js for browsers that don't support native HLS
+      // Use hls.js for browsers that don't support native HLS (Chrome, Firefox, etc.)
       const hls = new Hls({ enableWorker: true });
       hlsRef.current = hls;
       
       hls.attachMedia(video);
       hls.loadSource(src);
+      
+      // Try to autoplay if requested
+      if (autoPlay && video.muted) {
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          video.play().catch(() => {
+            // Autoplay failed, ignore
+          });
+        });
+      }
     } else {
       // Fallback: try setting src directly (might work in some cases)
       video.src = src;
+      if (autoPlay && video.muted) {
+        video.play().catch(() => {
+          // Autoplay failed, ignore
+        });
+      }
     }
 
     // Cleanup function
@@ -44,9 +64,9 @@ const HlsVideo = forwardRef(function HlsVideo({ src, ...props }, ref) {
         hlsRef.current = null;
       }
     };
-  }, [src]);
+  }, [src, autoPlay]);
 
-  return <video ref={videoRef} {...props} />;
+  return <video ref={videoRef} autoPlay={autoPlay} {...props} />;
 });
 
 export default HlsVideo;

@@ -223,4 +223,132 @@ oad) */
   }
 }
 
+/* Mobile-only fixes (<= 600px) */
+@media (max-width: 600px) {
+  /* A) Vertically center the home content in the viewport and nudge up slightly */
+  .home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 56px;
+    padding-bottom: 24px;
+    overflow: visible;  /* Allow shadow to render naturally (was hidden) */
+    transform: translateY(-40px);  /* Nudge content up to reduce top whitespace */
+  }
+
+  /* Push headline down more on mobile */
+  .home__top {
+    margin-top: 0;
+  }
+
+  /* Ensure hero composite doesn't clip shadows - add horizontal padding */
+  .home__heroArt {
+    padding-inline: 20px;
+    width: min(360px, 100%);
+  }
+
+  /* Make hero media responsive and centered */
+  .home__heroComposite {
+    max-width: 360px;
+    margin: 0 auto;
+    position: relative;  /* Ensure relative positioning for TV screen */
+  }
+
+  /* Hide desktop static video on mobile */
+  .home__tvStatic {
+    display: none !important;
+  }
+
+  /* B) TV screen clipping window - mobile only */
+  .home__tvScreen {
+    display: block;
+    position: absolute;
+    top: 12%;
+    left: 36%;
+    width: 28%;
+    height: 44%;
+    overflow: hidden;
+    border-radius: 6px;
+    z-index: 2;
+  }
+
+  /* Mobile static video inside screen window */
+  .home__tvScreen video,
+  .home__tvStaticScreen {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Ensure TV image sits above the screen */
+  .home__heroComposite .home__heroImg {
+    position: relative;
+    z-index: 3;
+  }
+
+  /* Fix paragraph text margins and readability */
+  .home__bottom {
+    padding-inline: 20px;
+  }
+
+  .home__copy {
+    max-width: 40ch;
+    padding-inline: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ===========================
+   MOBILE TV STATIC LOCK (FINAL)
+   Ensures the static NEVER disappears on mobile
+   =========================== */
+.home__tvScreen { display: none; } /* default desktop: tvScreen hidden */
+
+@media (max-width: 600px) {
+  /* Hide desktop static ONLY on mobile */
+  .home__tvStatic {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+
+  /* Force tvScreen ON */
+  .home__tvScreen {
+    display: block !important;
+    position: absolute !important;
+    top: 12% !important;
+    left: 36% !important;
+    width: 28% !important;
+    height: 44% !important;
+    overflow: hidden !important;
+    border-radius: 6px !important;
+    z-index: 2 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Force mobile static video visible and sized */
+  .home__tvScreen video,
+  .home__tvStaticScreen {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+}
+
 
