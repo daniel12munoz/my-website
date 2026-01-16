@@ -235,7 +235,7 @@ oad) */
     padding-top: 56px;
     padding-bottom: 24px;
     overflow: visible;  /* Allow shadow to render naturally (was hidden) */
-    transform: translateY(-40px);  /* Nudge content up to reduce top whitespace */
+    transform: translate(-8px, -60px);  /* Subtle left shift 4px, strong upward shift 60px */
   }
 
   /* Push headline down more on mobile */
