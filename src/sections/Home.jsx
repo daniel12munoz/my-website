@@ -1,8 +1,62 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './home.css';
 import HlsVideo from '../components/HlsVideo';
 
 export default function Home() {
+  // Lock scrolling on mobile (real iPhones) using position:fixed technique
+  // This prevents scroll WITHOUT clipping the spotlight blur shadow
+  const scrollYRef = useRef(0);
+
+  useEffect(() => {
+    // Only apply on mobile (max-width: 600px)
+    const mediaQuery = window.matchMedia('(max-width: 600px)');
+    
+    const lockScroll = () => {
+      if (!mediaQuery.matches) return; // Desktop: do nothing
+
+      // Save current scroll position
+      scrollYRef.current = window.scrollY;
+
+      // Freeze the page using position:fixed
+      document.documentElement.style.height = '100%';
+      document.body.style.height = '100%';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollYRef.current}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+      document.body.style.overscrollBehavior = 'none';
+    };
+
+    const unlockScroll = () => {
+      // Clear all styles
+      document.documentElement.style.height = '';
+      document.body.style.height = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      document.body.style.touchAction = '';
+      document.body.style.overscrollBehavior = '';
+
+      // Restore scroll position
+      window.scrollTo(0, scrollYRef.current);
+    };
+
+    // Lock on mount if mobile
+    lockScroll();
+
+    // Cleanup on unmount
+    return () => {
+      unlockScroll();
+    };
+  }, []);
 
   return (
     <section
