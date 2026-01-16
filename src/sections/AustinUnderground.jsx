@@ -52,9 +52,9 @@ export default function AustinUnderground() {
         </div>
         <div className="au__colImages">
           <div className="au__sideImages">
-            <img src="/au-image1.jpg" alt="Austin Underground image 1" className="media img1" />
-            <img src="/au-image2.jpg" alt="Austin Underground image 2" className="media img2" />
-            <img src="/au-image3.jpg" alt="Austin Underground image 3" className="media img3" />
+            <img src="/au-image1.jpg" alt="Austin Underground 1" className="media img1" />
+            <img src="/au-image2.jpg" alt="Austin Underground 2" className="media img2" />
+            <img src="/au-image3.jpg" alt="Austin Underground 3" className="media img3" />
           </div>
         </div>
       </div>
@@ -212,20 +212,20 @@ export default function AustinUnderground() {
 
           {/* Row 1: images 4–8 (centered) */}
           <div className="au__photoStrip" role="list">
-            <img className="media" src="/au-image4.jpg" alt="Concert photo 4" role="listitem" />
-            <img className="media" src="/au-image5.jpg" alt="Concert photo 5" role="listitem" />
-            <img className="media" src="/au-image6.jpg" alt="Concert photo 6" role="listitem" />
-            <img className="media" src="/au-image7.jpg" alt="Concert photo 7" role="listitem" />
-            <img className="media" src="/au-image8.jpg" alt="Concert photo 8" role="listitem" />
+            <img className="media" src="/au-image4.jpg" alt="Concert 4" role="listitem" />
+            <img className="media" src="/au-image5.jpg" alt="Concert 5" role="listitem" />
+            <img className="media" src="/au-image6.jpg" alt="Concert 6" role="listitem" />
+            <img className="media" src="/au-image7.jpg" alt="Concert 7" role="listitem" />
+            <img className="media" src="/au-image8.jpg" alt="Concert 8" role="listitem" />
           </div>
 
           {/* Row 2: images 9–13 (identical behavior) */}
           <div className="au__photoStrip au__photoStrip--lower" role="list">
-            <img className="media" src="/au-image9.jpg" alt="Concert photo 9" role="listitem" />
-            <img className="media" src="/au-image10.jpg" alt="Concert photo 10" role="listitem" />
-            <img className="media" src="/au-image11.jpg" alt="Concert photo 11" role="listitem" />
-            <img className="media" src="/au-image12.jpg" alt="Concert photo 12" role="listitem" />
-            <img className="media" src="/au-image13.jpg" alt="Concert photo 13" role="listitem" />
+            <img className="media" src="/au-image9.jpg" alt="Concert 9" role="listitem" />
+            <img className="media" src="/au-image10.jpg" alt="Concert 10" role="listitem" />
+            <img className="media" src="/au-image11.jpg" alt="Concert 11" role="listitem" />
+            <img className="media" src="/au-image12.jpg" alt="Concert 12" role="listitem" />
+            <img className="media" src="/au-image13.jpg" alt="Concert 13" role="listitem" />
           </div>
         </div>
       </section>
