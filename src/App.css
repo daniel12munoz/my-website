@@ -4,9 +4,25 @@
   box-sizing: border-box;
 }
 
+/* Cross-OS stability: force consistent scrollbar gutter */
+html {
+  overflow-y: scroll; /* force consistent scrollbar gutter cross-OS */
+  scrollbar-gutter: stable;
+  width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body, html, #root, .App {
   height: 100%;
   min-height: 100vh;
+}
+
+#root, .App {
+  width: 100%;
 }
 
 body {
@@ -215,13 +231,17 @@ body {
   overflow-y: auto;
   position: relative;
   z-index: 2;
-  padding-left: calc(var(--brand-col) + var(--content-gutter));
+  width: 100%;
+  max-width: none;
+  --main-x-nudge: 0px;
+  padding-left: calc(var(--brand-col) + var(--content-gutter) + var(--main-x-nudge));
   padding-top: var(--content-top);
 }
 
 /* HOME: remove the giant top "header gap" and disable scroll */
 .App > main.vp-main--home {
   overflow: hidden;               /* Home cannot scroll */
+  width: 100%;
   padding-top: clamp(56px, 8vh, 110px);
 }
 
@@ -266,6 +286,18 @@ body {
   :root {
     --brand-col: clamp(180px, 40vw, 240px);
     --content-top: clamp(80px, 12vw, 140px);
+  }
+}
+
+/* Mac/Retina desktop: shift Home main content slightly left */
+@media (min-width: 980px) and (-webkit-min-device-pixel-ratio: 2) {
+  .App > main.vp-main--home {
+    --main-x-nudge: -100px;
+  }
+  
+  /* Explicitly ensure non-home pages stay un-nudged */
+  .App > main.vp-main:not(.vp-main--home) {
+    --main-x-nudge: 0px;
   }
 }
 

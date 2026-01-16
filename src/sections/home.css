@@ -21,6 +21,7 @@
   /* FINAL GLOBAL NUDGE: move entire Home content up 25px */
   transform: translateY(-25px);
   will-change: transform;
+  justify-items: center;
 }
 
 /* If the outer app wrapper adds extra padding/margins, DO NOT change it globally.
@@ -48,6 +49,11 @@
 .home__bottom {
   position: relative;
   z-index: 1;
+  /* Desktop: center the Home content column inside the available main area */
+  width: 100%;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* HEADLINE placement */
@@ -95,7 +101,8 @@
 
 .home__heroArt {
   margin: 0;
-  width: min(920px, 86vw);
+  width: 100%;
+  max-width: 920px;
   display: grid;
   place-items: center;
 }
@@ -351,4 +358,21 @@ oad) */
   }
 }
 
+/* ===========================
+   MID-DESKTOP BALANCE (Mac ~1173px)
+   Make Home column slightly narrower so it doesn't feel shoved right
+   =========================== */
+@media (min-width: 980px) and (max-width: 1250px) {
+  /* Narrow the overall Home content column a bit */
+  section#home.home.au .home__top,
+  section#home.home.au .home__center,
+  section#home.home.au .home__bottom {
+    max-width: 980px !important;
+  }
+
+  /* Narrow the hero artwork so it doesn't fill the whole main area */
+  section#home.home.au .home__heroArt {
+    max-width: 860px !important;
+  }
+}
 
