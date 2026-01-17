@@ -167,6 +167,19 @@
   max-width: 1280px;
 }
 
+/* =========================
+   WINDOWS / NON-MAC: widen content ONLY for these 4 pages
+   ========================= */
+:not(.os-mac) #vonix.au,
+:not(.os-mac) #blaze.au,
+:not(.os-mac) #marketing-alliance.au,
+:not(.os-mac) #austin-underground.au,
+:not(.os-mac) section.au.au__section {
+  /* remove the limiting max-width so content fills more horizontal space */
+  max-width: none !important;
+  width: 93% !important;
+}
+
 .au__section {
   position: relative;
   margin-top: -30px;

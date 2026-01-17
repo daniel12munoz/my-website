@@ -375,7 +375,7 @@
 .ma__logoWrap {
   justify-content: flex-start !important;
   margin-left: clamp(60px, 4vw, 80px) !important;
-  margin-top: clamp(8px, 1vw, 14px) !important;
+  margin-top: clamp(8px, 1vw, 25px) !important;
 }
 
 .ma__logo {
@@ -863,4 +863,46 @@
 
 .os-mac #marketing-alliance .ma__logo {
   transform: translateY(20px);
+}
+
+/* =========================
+   DESKTOP (Windows + Mac) — Marketing Alliance fixes
+   ========================= */
+@media (min-width: 981px) {
+  /* Description paragraph: move DOWN ~10px (both Mac + Windows) */
+  #marketing-alliance .ma__row2 .ma__colText .ma__desc {
+    margin-top: 20px;
+  }
+
+  /* Logo: move DOWN ~5px (both Mac + Windows) */
+  #marketing-alliance .ma__logoWrap {
+    margin-top: calc(clamp(10px, 1.6vw, 46px) + 10px);
+  }
+}
+
+/* =========================
+   WINDOWS ONLY — Marketing Alliance fixes
+   ========================= */
+@media (min-width: 981px) {
+  /* Stop horizontal scrolling */
+  :not(.os-mac) section#marketing-alliance,
+  :not(.os-mac) #marketing-alliance.ma {
+    overflow-x: clip;
+  }
+
+  :not(.os-mac) #marketing-alliance * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  :not(.os-mac) #marketing-alliance img,
+  :not(.os-mac) #marketing-alliance video,
+  :not(.os-mac) #marketing-alliance .media {
+    max-width: 100%;
+  }
+
+  /* Logo: move RIGHT ~90px (combine with desktop margin-top above) */
+  :not(.os-mac) #marketing-alliance .ma__logoWrap {
+    transform: translateX(90px);
+  }
 }

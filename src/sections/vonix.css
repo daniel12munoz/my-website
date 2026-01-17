@@ -872,7 +872,7 @@
 @media (max-width: 600px) {
   /* Shift the entire Vonix section slightly left WITHOUT changing sizing/layout */
   section#vonix.vo {
-    transform: translateX(-8px) !important;
+    transform: translateX(6px) !important;
   }
 
   /* Keep the internal centered layout, just moved left as a unit */
@@ -891,17 +891,16 @@
 
 /* Vonix MOBILE plaque + profile image adjustment */
 @media (max-width: 600px) {
-  /* PLAQUE: move 10px right and 10px down */
+  /* PLAQUE: move left 30px, down 10px, scale 10% smaller */
   section#vonix.vo .vonix__plaque {
-    transform: translate(195px, 40px) rotate(4deg) !important;
-    /* was (-44px, -10px) → now +10px right, +10px down */
+    transform: translate(181px, 35px) rotate(4deg) scale(0.9) !important;
   }
 
   /* PROFILE IMAGE (Vonix face/logo):
      - Make 20% smaller
      - Move 10px left and 10px up */
   section#vonix.vo .vo__logo {
-    transform: translate(-70px, -90px) scale(0.8) !important;
+    transform: translate(-60px, -90px) scale(0.8) !important;
     transform-origin: center center;
   }
 
@@ -1095,7 +1094,7 @@
 .os-mac #vonix .vo__logoWrap,
 .os-mac #vonix .vonix__topRight {
   position: relative;
-  left: -50px;
+  left: 50px;
 }
 
 /* Description paragraph spacing */
@@ -1144,4 +1143,30 @@
 
   /* ensure no other Mac transforms override the base */
   transform: translate(var(--plaq-x), var(--plaq-y)) rotate(4deg) !important;
+}
+
+/* =========================
+   WINDOWS ONLY — Vonix fixes
+   ========================= */
+@media (min-width: 981px) {
+  /* Description paragraph: move DOWN ~20px */
+  :not(.os-mac) #vonix .vo__rowDesc {
+    margin-top: 80px;
+  }
+
+  /* Profile picture + plaque group: move LEFT ~60px */
+  :not(.os-mac) #vonix .vo__logoWrap,
+  :not(.os-mac) #vonix .vonix__topRight {
+    transform: translateX(-60px);
+  }
+}
+
+/* ===========================
+   Mac desktop — Vonix logo+plaque move UP 20px
+   (Windows + mobile unchanged)
+   =========================== */
+@media (min-width: 981px) {
+  .os-mac #vonix .vo__logoWrap {
+    top: -60px;
+  }
 }
