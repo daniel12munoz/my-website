@@ -32,7 +32,7 @@ export default function MarketingAlliance() {
         <div className="ma__videoBlock">
           <HlsVideo
             className="media media--video ma__heroVideo"
-            src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/48362b7a9b36ffaa142a49bb33ecd0ce/manifest/video.m3u8"
+            src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/d3150c03f0e7e76e07ca1ec249c7aee9/manifest/video.m3u8"
             autoPlay
             loop
             muted
