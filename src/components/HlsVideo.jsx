@@ -66,7 +66,17 @@ const HlsVideo = forwardRef(function HlsVideo({ src, autoPlay, ...props }, ref) 
     };
   }, [src, autoPlay]);
 
-  return <video ref={videoRef} autoPlay={autoPlay} {...props} />;
+  return (
+    <video
+      ref={videoRef}
+      autoPlay={autoPlay}
+      controls={false}
+      disableRemotePlayback
+      disablePictureInPicture
+      controlsList="nodownload noplaybackrate noremoteplayback"
+      {...props}
+    />
+  );
 });
 
 export default HlsVideo;

@@ -13,7 +13,6 @@ export default function Vonix() {
         <div className="vo__videoBlock">
           <div className="media media--video vo__heroMedia">
             <HlsVideo
-              className="vo__heroVideo"
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/3ffc6149f2297685fd705994d854415c/manifest/video.m3u8"
               autoPlay
               muted
@@ -21,6 +20,7 @@ export default function Vonix() {
               playsInline
               preload="metadata"
               controls={false}
+              className="vo__heroVideo"
             />
           </div>
 
