@@ -1,6 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
 import HlsVideo from './HlsVideo';
 
+// Helper to detect Safari (not Chrome on iOS/macOS)
+const isSafari = () => {
+  const ua = navigator.userAgent;
+  return /Safari/.test(ua) && !/Chrome|Chromium|Android/.test(ua);
+};
+
 export default function PlayToggleVideo({
   src,
   wrapperClassName = 'media media--video',
@@ -16,6 +22,8 @@ export default function PlayToggleVideo({
 }) {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const warmedUpSrcRef = useRef(null);
+  const warmingRef = useRef(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -45,6 +53,72 @@ export default function PlayToggleVideo({
     }
     setIsPlaying(false);
   }, [forcePause]);
+
+  // Safari-only warmup: show preview frame without autoplaying
+  // Runs only once per src, before user plays
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !src) return;
+    if (!isSafari()) return;
+
+    // Only warm up once per src
+    if (warmedUpSrcRef.current === src) return;
+    warmedUpSrcRef.current = src;
+
+    // Prevent double warmups
+    if (warmingRef.current) return;
+    warmingRef.current = true;
+
+    const originalMuted = video.muted;
+    const originalVolume = video.volume;
+
+    // Safari preview-frame trick:
+    // play very briefly while muted so Safari decodes & paints a frame
+    const cleanupWarmup = () => {
+      warmingRef.current = false;
+      // restore original settings (muted prop might be false for normal playback)
+      video.muted = originalMuted;
+      video.volume = originalVolume;
+    };
+
+    const onCanPlay = async () => {
+      try {
+        // Ensure autoplay is allowed for warmup
+        video.muted = true;
+        video.volume = 0;
+
+        // Seek slightly forward so we don't sit at a black 0-frame for HLS
+        try { video.currentTime = 0.05; } catch {}
+
+        // Start playback briefly to force a decoded frame
+        await video.play();
+
+        // Pause ASAP after a tick so at least one frame is painted
+        setTimeout(() => {
+          try { video.pause(); } catch {}
+          cleanupWarmup();
+        }, 120);
+      } catch {
+        cleanupWarmup();
+      }
+    };
+
+    // We need canplay (or loadeddata) so Safari has enough buffered to render
+    video.addEventListener('canplay', onCanPlay, { once: true });
+
+    // Force load/metadata
+    try {
+      video.preload = 'auto';
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+      video.load();
+    } catch {}
+
+    return () => {
+      try { video.removeEventListener('canplay', onCanPlay); } catch {}
+      cleanupWarmup();
+    };
+  }, [src]);
 
   const handleToggle = () => {
     const video = videoRef.current;
