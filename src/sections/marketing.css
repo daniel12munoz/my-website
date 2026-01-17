@@ -862,7 +862,7 @@
 }
 
 .os-mac #marketing-alliance .ma__logo {
-  transform: translateY(20px);
+  transform: translateY(-10px);
 }
 
 /* =========================
@@ -903,6 +903,31 @@
 
   /* Logo: move RIGHT ~90px (combine with desktop margin-top above) */
   :not(.os-mac) #marketing-alliance .ma__logoWrap {
-    transform: translateX(90px);
+    transform: translateX(95px);
+  }
+}
+
+/* =========================================================
+   FINAL: Marketing Alliance spacing fixes (desktop only)
+   - Logo down 40px on Mac + Windows
+   - Windows-only: paragraph + everything below row1 down 40px
+   ========================================================= */
+@media (min-width: 981px) {
+  /* 1) LOGO down 40px on BOTH Mac + Windows */
+  #marketing-alliance .ma__logoWrap {
+    position: relative;
+    top: 75px;
+  }
+
+  /* 2) Windows-only: push paragraph + all sections below row1 down 40px */
+  :not(.os-mac) #marketing-alliance .ma__belowRow1 {
+    position: relative;
+    top: 25px;
+  }
+
+  /* 3) Mac-only: move paragraph + all sections below row1 UP by 10px */
+  .os-mac #marketing-alliance .ma__belowRow1 {
+    position: relative;
+    transform: translateY(-25px);
   }
 }

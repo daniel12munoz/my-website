@@ -35,7 +35,7 @@
   height: 100%;
   display: grid;
   grid-template-rows: 1fr auto;
-  transform: translate(-106px, -220px);
+  transform: translate(-77px, -220px);
   will-change: transform;
   position: relative;
   z-index: 1;
@@ -125,7 +125,7 @@
    MAC ONLY — OTHER CHANNELS PAGE NUDGE
    ========================= */
 .os-mac .otherChannels {
-  transform: translateX(25px);
+  transform: translateX(2px);
 }
 
 /* Safety: never allow sideways scroll */

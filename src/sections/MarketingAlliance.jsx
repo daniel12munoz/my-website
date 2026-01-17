@@ -65,6 +65,7 @@ export default function MarketingAlliance() {
         </div>
       </div>
 
+      <div className="ma__belowRow1">
       {/* ROW 2 — Paragraph under the video (left column width) */}
       <div className="ma__row2 au-grid">
         <div className="ma__colText">
@@ -226,6 +227,7 @@ export default function MarketingAlliance() {
             <Img src="/ma-image13.jpg" className="shot shot--13" alt="Marketing Alliance headshot 2" />
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

@@ -14,9 +14,43 @@ function App() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const mainRef = useRef(null);
 
-  useEffect(() => {
-    if (mainRef.current) mainRef.current.scrollTop = 0;
+  // Helper functions for mobile scroll reset
+  const clearScrollLock = () => {
+    document.documentElement.classList.remove('menu-open', 'no-scroll');
+    document.body.classList.remove('menu-open', 'no-scroll', 'nav-open');
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+  };
+
+  const scrollToTopNow = () => {
+    // covers Safari/Chrome quirks
     window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    if (mainRef.current) {
+      mainRef.current.scrollTop = 0;
+    }
+  };
+
+  // Mobile-only: scroll to top and clear scroll lock on route change
+  useEffect(() => {
+    const isMobile =
+      window.matchMedia('(max-width: 600px)').matches ||
+      window.matchMedia('(pointer: coarse)').matches;
+
+    if (!isMobile) return;
+
+    clearScrollLock();
+
+    // Defer to allow route paint, prevents weird "stuck" bottom scroll
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        scrollToTopNow();
+      });
+    });
   }, [activeItem]);
 
   // Handle body scroll lock when mobile nav is open
@@ -49,8 +83,22 @@ function App() {
   }, []);
 
   const handleNavClick = (item) => {
-    setActiveItem(item);
     setMobileNavOpen(false);
+
+    const isMobile =
+      window.matchMedia('(max-width: 600px)').matches ||
+      window.matchMedia('(pointer: coarse)').matches;
+
+    if (isMobile) {
+      clearScrollLock();
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          scrollToTopNow();
+        });
+      });
+    }
+
+    setActiveItem(item);
   };
 
   return (
