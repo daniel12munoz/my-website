@@ -35,16 +35,19 @@ function App() {
     }
   };
 
-  // Mobile-only: scroll to top and clear scroll lock on route change
+  // Scroll to top on ALL devices when route changes
+  // Mobile-only: also clear scroll lock
   useEffect(() => {
     const isMobile =
       window.matchMedia('(max-width: 600px)').matches ||
       window.matchMedia('(pointer: coarse)').matches;
 
-    if (!isMobile) return;
+    // Mobile-only: clear scroll lock (hamburger menu bug fix)
+    if (isMobile) {
+      clearScrollLock();
+    }
 
-    clearScrollLock();
-
+    // ALL devices: scroll to top on route change
     // Defer to allow route paint, prevents weird "stuck" bottom scroll
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
@@ -89,14 +92,17 @@ function App() {
       window.matchMedia('(max-width: 600px)').matches ||
       window.matchMedia('(pointer: coarse)').matches;
 
+    // Mobile-only: clear scroll lock (hamburger menu bug fix)
     if (isMobile) {
       clearScrollLock();
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          scrollToTopNow();
-        });
-      });
     }
+
+    // ALL devices: scroll to top when navigating
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        scrollToTopNow();
+      });
+    });
 
     setActiveItem(item);
   };
