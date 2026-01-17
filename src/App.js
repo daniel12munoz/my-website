@@ -14,7 +14,7 @@ function App() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const mainRef = useRef(null);
 
-  // Helper functions for mobile scroll reset
+  // Helper function: completely clear all scroll-lock styles
   const clearScrollLock = () => {
     document.documentElement.classList.remove('menu-open', 'no-scroll');
     document.body.classList.remove('menu-open', 'no-scroll', 'nav-open');
@@ -23,6 +23,15 @@ function App() {
     document.body.style.position = '';
     document.body.style.top = '';
     document.body.style.width = '';
+  };
+
+  // Helper function: lock scroll (for mobile Home page)
+  const lockScroll = () => {
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.top = '0';
   };
 
   const scrollToTopNow = () => {
@@ -36,14 +45,26 @@ function App() {
   };
 
   // Scroll to top on ALL devices when route changes
-  // Mobile-only: also clear scroll lock
+  // Mobile-only: close menu, clear scroll lock, and lock Home page
   useEffect(() => {
     const isMobile =
       window.matchMedia('(max-width: 600px)').matches ||
       window.matchMedia('(pointer: coarse)').matches;
 
-    // Mobile-only: clear scroll lock (hamburger menu bug fix)
+    // Mobile-only: force close menu and clear scroll lock on route change
     if (isMobile) {
+      setMobileNavOpen(false);
+      clearScrollLock();
+    }
+
+    // Mobile-only: lock scroll on Home page
+    if (isMobile && activeItem === 'home') {
+      // Lock scroll for Home page
+      lockScroll();
+      // Force scroll to top
+      scrollToTopNow();
+    } else if (isMobile) {
+      // Not Home: ensure scroll is unlocked
       clearScrollLock();
     }
 
@@ -57,16 +78,34 @@ function App() {
   }, [activeItem]);
 
   // Handle body scroll lock when mobile nav is open
+  // Note: This works alongside the Home page scroll lock
   useEffect(() => {
+    const isMobile =
+      window.matchMedia('(max-width: 600px)').matches ||
+      window.matchMedia('(pointer: coarse)').matches;
+
+    if (!isMobile) return;
+
     if (mobileNavOpen) {
+      // Menu open: add nav-open class (CSS handles overflow: hidden)
       document.body.classList.add('nav-open');
     } else {
+      // Menu closed: remove nav-open class only
       document.body.classList.remove('nav-open');
+      // If on Home, ensure Home scroll lock is applied (don't clear it)
+      if (activeItem === 'home') {
+        requestAnimationFrame(() => {
+          lockScroll();
+        });
+      } else {
+        // Not on Home: clear any leftover scroll lock styles
+        clearScrollLock();
+      }
     }
     return () => {
       document.body.classList.remove('nav-open');
     };
-  }, [mobileNavOpen]);
+  }, [mobileNavOpen, activeItem]);
 
   // Detect macOS desktop and add class to html element
   useEffect(() => {
@@ -86,16 +125,20 @@ function App() {
   }, []);
 
   const handleNavClick = (item) => {
-    setMobileNavOpen(false);
-
     const isMobile =
       window.matchMedia('(max-width: 600px)').matches ||
       window.matchMedia('(pointer: coarse)').matches;
 
-    // Mobile-only: clear scroll lock (hamburger menu bug fix)
+    // ALWAYS close menu first (before navigation)
+    setMobileNavOpen(false);
+
+    // Mobile-only: clear scroll lock immediately (hamburger menu bug fix)
     if (isMobile) {
       clearScrollLock();
     }
+
+    // Navigate to new page
+    setActiveItem(item);
 
     // ALL devices: scroll to top when navigating
     requestAnimationFrame(() => {
@@ -103,8 +146,6 @@ function App() {
         scrollToTopNow();
       });
     });
-
-    setActiveItem(item);
   };
 
   return (
@@ -123,7 +164,10 @@ function App() {
       {mobileNavOpen && (
         <div
           className="vp-mobile-overlay"
-          onClick={() => setMobileNavOpen(false)}
+          onClick={() => {
+            // Just close menu - the useEffect will handle scroll lock
+            setMobileNavOpen(false);
+          }}
           aria-hidden="true"
         />
       )}
