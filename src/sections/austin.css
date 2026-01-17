@@ -1013,3 +1013,26 @@
 .os-mac .au__section .au__interviews .au__videoBox .au__linkWrap {
   margin-top: 30px;
 }
+
+/* ===========================
+   MAC ONLY — Fix interview video scaling
+   =========================== */
+
+.os-mac #austin-underground .au__videoPlayer,
+.os-mac .au__videoPlayer,
+.os-mac .au__videoContainer video {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+
+  object-fit: cover !important;
+
+  transform: none !important;
+  scale: 1 !important;
+}
+
+/* Ensure container clips correctly */
+.os-mac .au__videoContainer {
+  overflow: hidden !important;
+}
