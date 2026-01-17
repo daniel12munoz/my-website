@@ -7,6 +7,7 @@
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 50%;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.22));
 }
 @import url('./austin.css');
 
@@ -821,4 +822,45 @@
     height: auto;
     display: block;
   }
+}
+
+/* ===========================
+   Mac desktop: add right gutter (whitespace) without shifting left
+   =========================== */
+
+.os-mac body {
+  overflow-x: hidden;
+}
+
+/* ---- Marketing Alliance ---- */
+.os-mac #marketing-alliance {
+  overflow-x: hidden;
+}
+
+.os-mac #marketing-alliance .ma__row1,
+.os-mac #marketing-alliance .ma__row2,
+.os-mac #marketing-alliance .ma__fold,
+.os-mac #marketing-alliance .ma__videoGrid,
+.os-mac #marketing-alliance .ma__photoStrip,
+.os-mac #marketing-alliance .ma__content {
+  box-sizing: border-box;
+  padding-right: clamp(18px, 2.5vw, 38px);
+  padding-left: 0;
+  max-width: 100%;
+}
+
+.os-mac #marketing-alliance img,
+.os-mac #marketing-alliance video,
+.os-mac #marketing-alliance iframe {
+  max-width: 100%;
+}
+
+/* Mac-only Marketing Alliance logo nudge */
+.os-mac #marketing-alliance .ma__logoWrap {
+  position: relative;
+  left: -32px;
+}
+
+.os-mac #marketing-alliance .ma__logo {
+  transform: translateY(20px);
 }

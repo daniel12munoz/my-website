@@ -134,6 +134,7 @@
   box-shadow: none !important;
   border: none !important;
   background: none !important;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.25));
 }
 
 /* Subhead + folds (Shorts/Videos) */
@@ -402,4 +403,41 @@
     height: auto;
     display: block;
   }
+}
+
+/* ===========================
+   Mac desktop: add right gutter (whitespace) without shifting left
+   =========================== */
+
+.os-mac body {
+  overflow-x: hidden;
+}
+
+/* ---- Blaze ---- */
+.os-mac #blaze {
+  overflow-x: hidden;
+}
+
+.os-mac #blaze .bl__row1,
+.os-mac #blaze .bl__fold,
+.os-mac #blaze .bl__videoGrid,
+.os-mac #blaze .bl__shortGrid,
+.os-mac #blaze .bl__content {
+  box-sizing: border-box;
+  padding-right: clamp(18px, 2.5vw, 38px);
+  padding-left: 0;
+  max-width: 100%;
+}
+
+/* Safety: inner media/grids respect the new width */
+.os-mac #blaze img,
+.os-mac #blaze video,
+.os-mac #blaze iframe {
+  max-width: 100%;
+}
+
+/* Mac-only Blaze logo nudge */
+.os-mac #blaze .bl__logoWrap {
+  position: relative;
+  left: 25px;
 }

@@ -31,6 +31,23 @@ function App() {
     };
   }, [mobileNavOpen]);
 
+  // Detect macOS desktop and add class to html element
+  useEffect(() => {
+    const platform = navigator.platform || '';
+    const ua = navigator.userAgent || '';
+    const isIOS = /iPhone|iPad|iPod/i.test(ua);
+    const isMac = !isIOS && (/Macintosh|MacIntel|MacPPC|Mac68K/i.test(platform) || /Mac OS X/i.test(ua));
+    const isDesktopPointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+
+    if (isMac && isDesktopPointer) {
+      document.documentElement.classList.add('os-mac');
+    } else {
+      document.documentElement.classList.remove('os-mac');
+    }
+
+    return () => document.documentElement.classList.remove('os-mac');
+  }, []);
+
   const handleNavClick = (item) => {
     setActiveItem(item);
     setMobileNavOpen(false);

@@ -1032,3 +1032,116 @@
     margin-top: calc(clamp(32px, 4vw, 48px) - 40px) !important;
   }
 }
+
+/* ===========================
+   Mac desktop-only Vonix shrink + no horizontal scroll
+   =========================== */
+.os-mac .vp-main {
+  overflow-x: hidden !important;
+}
+
+.os-mac body {
+  overflow-x: hidden !important;
+}
+
+.os-mac #vonix.vo,
+.os-mac section#vonix.vo,
+.os-mac .vo {
+  max-width: 100%;
+  /* Shrink Vonix ~10% ONLY on macOS desktop */
+  zoom: 0.9;
+}
+
+/* Fallback if zoom is not supported */
+@supports not (zoom: 1) {
+  .os-mac #vonix.vo,
+  .os-mac section#vonix.vo,
+  .os-mac .vo {
+    transform: scale(0.9);
+    transform-origin: top left;
+    width: calc(100% / 0.9);
+  }
+}
+
+/* Extra safety: never allow child media to exceed container width */
+.os-mac .vo img,
+.os-mac .vo video,
+.os-mac .vo iframe {
+  max-width: 100% !important;
+}
+
+/* Mac-only Vonix label tweak */
+.os-mac #vonix .vo__heading {
+  transform: translateX(-20px) scale(1.1);
+  transform-origin: top right;
+}
+
+/* Mac-only: profile image only (do NOT touch plaque transform) */
+.os-mac #vonix .vo__logoWrap .vo__logo {
+  transform: scale(0.96);
+  transform-origin: top right;
+}
+
+/* ===========================
+   Mac desktop fine-tuning — Vonix only
+   =========================== */
+
+.os-mac #vonix .vo__heading {
+  position: relative;
+  left: -70px;
+}
+
+/* Profile image + plaque group */
+.os-mac #vonix .vo__logoWrap,
+.os-mac #vonix .vonix__topRight {
+  position: relative;
+  left: -50px;
+}
+
+/* Description paragraph spacing */
+.os-mac #vonix .vo__rowDesc {
+  margin-top: 100px;
+}
+
+/* Safety: prevent these nudges from causing overflow */
+.os-mac #vonix {
+  overflow-x: hidden;
+}
+
+/* ===========================
+   Mac desktop: add right gutter to Vonix LOWER sections
+   (keeps left X pinned, creates right whitespace, shrinks cards)
+   =========================== */
+
+.os-mac #vonix {
+  overflow-x: hidden;
+}
+
+/* Only affect the folds below the description */
+.os-mac #vonix .vo__fold {
+  box-sizing: border-box;
+  padding-right: clamp(48px, 6vw, 96px); /* the "white space" on the right */
+  padding-left: 0;                      /* keep left X exactly the same */
+  max-width: 100%;
+}
+
+/* Make sure the main grids respect the new available width */
+.os-mac #vonix .vo__psychGrid,
+.os-mac #vonix .vo__videoGrid,
+.os-mac #vonix .vo__psychDuo,
+.os-mac #vonix .vo__videoCard {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* ===========================
+   Mac-only: plaque position nudge (NO scaling)
+   =========================== */
+.os-mac #vonix .vonix__plaque {
+  /* move right (+) and down (+) by adjusting variables */
+  --plaq-x: 95px;  /* was 100px */
+  --plaq-y: 275px;  /* was 280px */
+
+  /* ensure no other Mac transforms override the base */
+  transform: translate(var(--plaq-x), var(--plaq-y)) rotate(4deg) !important;
+}

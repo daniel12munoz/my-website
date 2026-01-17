@@ -167,3 +167,10 @@
     max-width: 56ch;
   }
 }
+
+/* =========================
+   MAC ONLY — ABOUT ME RIGHT COLUMN NUDGE
+   ========================= */
+.os-mac .aboutMe__right {
+  transform: translateX(70px);
+}

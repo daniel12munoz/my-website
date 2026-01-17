@@ -120,3 +120,15 @@
     font-size: clamp(15px, 3.8vw, 18px);
   }
 }
+
+/* =========================
+   MAC ONLY — OTHER CHANNELS PAGE NUDGE
+   ========================= */
+.os-mac .otherChannels {
+  transform: translateX(25px);
+}
+
+/* Safety: never allow sideways scroll */
+.os-mac body {
+  overflow-x: hidden !important;
+}

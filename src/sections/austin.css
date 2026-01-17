@@ -956,3 +956,60 @@
     display: block;
   }
 }
+
+/* ===========================
+   Mac desktop: add right gutter (whitespace) without shifting left
+   =========================== */
+
+.os-mac body {
+  overflow-x: hidden;
+}
+
+/* ---- Austin Underground ---- */
+.os-mac .au__section,
+.os-mac .au.au__section {
+  overflow-x: hidden;
+}
+
+/* Apply gutter to Austin's major rows/folds/grids */
+.os-mac .au__section .au__row1,
+.os-mac .au__section .au__row2,
+.os-mac .au__section .au__fold2,
+.os-mac .au__section .au__interviews,
+.os-mac .au__section .au__videoGrid,
+.os-mac .au__section .au__videoBox,
+.os-mac .au__section .au-grid {
+  box-sizing: border-box;
+  padding-right: clamp(18px, 2.5vw, 38px);
+  padding-left: 0;
+  max-width: 100%;
+}
+
+.os-mac .au__section img,
+.os-mac .au__section video,
+.os-mac .au__section iframe {
+  max-width: 100%;
+}
+
+/* Mac-only Austin side images down nudge */
+.os-mac .au__section .au__sideImages {
+  position: relative;
+  top: 25px;
+}
+
+/* Mac-only: enlarge ONLY the Interviews videos (not headings/labels/photos) */
+.os-mac .au__section .au__interviews .au__videoGrid .au__videoBox .au__videoContainer,
+.os-mac .au__section .au__interviews .au__videoGrid .au__videoBox .au__videoPlayer {
+  transform: scale(1.1);
+  transform-origin: top left;   /* keep left pinned */
+}
+
+/* Prevent the scaled interview videos from causing horizontal overflow */
+.os-mac .au__section .au__interviews {
+  overflow-x: hidden;
+}
+
+/* Mac-only: nudge interview links down slightly (avoid overlap) */
+.os-mac .au__section .au__interviews .au__videoBox .au__linkWrap {
+  margin-top: 30px;
+}

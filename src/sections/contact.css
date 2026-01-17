@@ -69,3 +69,15 @@
 .contact__igHandle {
   letter-spacing: 0.04em;
 }
+
+/* =========================
+   MAC ONLY — CONTACT PAGE NUDGE
+   ========================= */
+.os-mac .contact {
+  transform: translateX(40px);
+}
+
+/* Safety: prevent sideways scrolling */
+.os-mac body {
+  overflow-x: hidden !important;
+}
