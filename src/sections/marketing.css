@@ -788,3 +788,37 @@
   margin-top: 2px;
 }
 
+/* Mobile-only: prevent horizontal scroll */
+@media (max-width: 600px) {
+  /* Global-ish safety (mobile only): prevents any section from enabling sideways swipe */
+  html, body {
+    overflow-x: hidden;
+  }
+
+  /* App wrappers (these exist in your DOM: .App and vp-main) */
+  .App,
+  .vp-main,
+  main {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  /* Section locks (cover BOTH id + class cases so it works even if your ids differ) */
+  section#marketing-alliance,
+  .ma,
+  .marketing {
+    overflow-x: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
+    touch-action: pan-y;
+  }
+
+  /* Media safety inside those sections */
+  section#marketing-alliance img, section#marketing-alliance video, section#marketing-alliance iframe,
+  .ma img, .ma video, .ma iframe,
+  .marketing img, .marketing video, .marketing iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+}

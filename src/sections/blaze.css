@@ -371,3 +371,35 @@
   }
 }
 
+/* Mobile-only: prevent horizontal scroll */
+@media (max-width: 600px) {
+  /* Global-ish safety (mobile only): prevents any section from enabling sideways swipe */
+  html, body {
+    overflow-x: hidden;
+  }
+
+  /* App wrappers (these exist in your DOM: .App and vp-main) */
+  .App,
+  .vp-main,
+  main {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  /* Section locks (cover BOTH id + class cases so it works even if your ids differ) */
+  section#blaze,
+  .blaze {
+    overflow-x: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
+    touch-action: pan-y;
+  }
+
+  /* Media safety inside those sections */
+  section#blaze img, section#blaze video, section#blaze iframe,
+  .blaze img, .blaze video, .blaze iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+}

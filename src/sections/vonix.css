@@ -589,3 +589,446 @@
   }
 }
 
+/* DEBUG: Uncomment to find overflow elements */
+/* .vo * { outline: 1px solid rgba(255,0,0,0.15); } */
+
+/* Mobile-only fixes (<= 600px) */
+@media (max-width: 600px) {
+  /* A) Hard stop horizontal overflow on Vonix page ONLY */
+  .vo,
+  section#vonix {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    box-sizing: border-box;
+    touch-action: pan-y;
+  }
+
+  /* B) IMPORTANT: remove section padding so shadows/plaque aren't clipped by a "white border" */
+  section#vonix.vo {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* 2) Ensure all children cannot exceed viewport width */
+  .vo * {
+    box-sizing: border-box;
+  }
+
+  /* Safe rule for media elements inside Vonix */
+  .vo img,
+  .vo video,
+  .vo iframe,
+  .vo canvas,
+  .vo svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* C) Put padding on the inner content blocks instead (keeps equal whitespace L/R) */
+  .vo__row1,
+  .vo__rowDesc,
+  .vo__fold {
+    width: 100%;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
+  }
+
+  /* D) Center hero media and grids so they don't drift right */
+  .vo__videoBlock,
+  .vo__heroMedia,
+  .vo__videoGrid,
+  .vo__videoCard {
+    width: 100%;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+  }
+
+  /* Hero row: ensure single column */
+  .vo__row1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .vo__heroVideo {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Heading block constrained */
+  .vo__heading {
+    width: 100%;
+    max-width: 100%;
+    justify-items: start;
+  }
+
+  /* Logo wrap - remove transforms that cause overflow */
+  .vo__logoWrap {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transform: none !important;
+    justify-content: flex-start;
+  }
+
+  .vo__logo {
+    width: 100%;
+    max-width: min(280px, 80vw);
+    height: auto;
+  }
+
+  /* =========================
+     MOBILE — PSYCHOLOGY OVERLAY (desktop-style)
+     Main video shrinks to make room, short overlays top-right
+     ========================= */
+  .vo {
+    --vo-psych-short-w: min(118px, 34vw);
+    --vo-psych-gap: 14px;
+  }
+
+  /* Keep Psychology section single-column, but each duo has overlay behavior */
+  .vo__psychGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Each duo becomes the positioning context */
+  .vo__psychDuo {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+    padding-top: 10px;
+  }
+
+  /* Main horizontal video: leave space on the right for the short */
+  .vo__psychMain {
+    width: calc(100% - var(--vo-psych-short-w) - var(--vo-psych-gap));
+    max-width: calc(100% - var(--vo-psych-short-w) - var(--vo-psych-gap));
+    margin-left: 0;
+    margin-right: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+  }
+
+  /* Ensure the link under the main video doesn't force overflow */
+  .vo__psychDuo > .vo__linkWrap {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Short: overlay top-right of the duo (like desktop) */
+  .vo__psychShort {
+    position: absolute !important;
+    top: -10px !important;
+    right: 0 !important;
+    width: var(--vo-psych-short-w) !important;
+    max-width: var(--vo-psych-short-w) !important;
+    margin: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    overflow: visible;
+  }
+
+  /* Short media box */
+  .vo__psychShort .media,
+  .vo__psychShort .media.media--short,
+  .vo__psychShortMedia {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  /* Put the short link ABOVE the short, centered (same idea as desktop) */
+  .vo__psychShort .vo__linkWrap {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: 90vw;
+    margin: 0 0 6px 0;
+    align-items: center;
+  }
+
+  /* Make the short caption readable but tiny */
+  .vo__shortLink {
+    font-size: 8px;
+    line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
+    max-width: 90vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Safety: ensure nothing in Psychology can exceed the viewport width */
+  .vo__psychGrid,
+  .vo__psychDuo,
+  .vo__psychMain,
+  .vo__psychShort {
+    max-width: 100%;
+  }
+
+  /* D) Video grid: single column, centered, max-width 520px */
+  .vo__videoGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    width: 100%;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+  }
+
+  .vo__videoCard {
+    width: 100%;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    flex: none;
+    align-items: stretch;
+  }
+
+  /* Make the actual media inside cards smaller-looking while still responsive */
+  .vo__videoCard .media,
+  .vo__heroMedia {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  /* Description row - ensure no negative margin causes overflow */
+  .vo__rowDesc {
+    width: 100%;
+    max-width: 520px;
+  }
+
+  .vo__desc {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* G) Ensure links can't force sideways overflow */
+  .vo__linkWrap {
+    width: 100%;
+    max-width: 100%;
+  }
+  .vo__link,
+  .vo__shortLink {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* E) Plaque/Logo clipping fix: Force overflow visible to prevent shadow/plaque clipping */
+  .vonix__topRight,
+  .vo__logoWrap {
+    overflow: visible !important;
+  }
+
+  /* Keep logoWrap from causing overflow via transforms */
+  .vo__logoWrap {
+    transform: none !important;
+  }
+
+  /* F) Plaque: smaller + safely positioned (no off-screen, no clipping) */
+  .vonix__plaque {
+    width: min(190px, 52vw) !important;
+    height: auto !important;
+    top: 8px !important;
+    left: 8px !important;
+    right: auto !important;
+    transform: translate(-30px, -10px) rotate(4deg) !important;
+    transform-origin: top left !important;
+  }
+
+  /* Ensure no element uses negative margins that expand viewport */
+  .vo * {
+    min-width: 0;
+  }
+
+}
+
+/* Shift entire Vonix section left on mobile */
+@media (max-width: 600px) {
+  /* Shift the entire Vonix section slightly left WITHOUT changing sizing/layout */
+  section#vonix.vo {
+    transform: translateX(-8px) !important;
+  }
+
+  /* Keep the internal centered layout, just moved left as a unit */
+  section#vonix.vo .vo__row1,
+  section#vonix.vo .vo__rowDesc,
+  section#vonix.vo .vo__fold {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Plaque: nudge left a bit more so it never kisses the edge */
+  section#vonix.vo .vonix__plaque {
+    transform: translate(-44px, -10px) rotate(4deg) !important;
+  }
+}
+
+/* Vonix MOBILE plaque + profile image adjustment */
+@media (max-width: 600px) {
+  /* PLAQUE: move 10px right and 10px down */
+  section#vonix.vo .vonix__plaque {
+    transform: translate(195px, 40px) rotate(4deg) !important;
+    /* was (-44px, -10px) → now +10px right, +10px down */
+  }
+
+  /* PROFILE IMAGE (Vonix face/logo):
+     - Make 20% smaller
+     - Move 10px left and 10px up */
+  section#vonix.vo .vo__logo {
+    transform: translate(-70px, -90px) scale(0.8) !important;
+    transform-origin: center center;
+  }
+
+  /* Pull description + everything below it UP by ~50px */
+  section#vonix.vo .vo__rowDesc {
+    margin-top: -90px !important;
+  }
+}
+
+/* =========================================================
+   VONIX — MOBILE PSYCHOLOGY RATIO TUNING (ONLY)
+   Goal:
+   - main horizontal videos ~20% bigger
+   - shorts ~15% smaller
+   - keep the short "hanging" top-right
+   - keep NO horizontal scrolling
+   ========================================================= */
+@media (max-width: 600px) {
+  /* Keep overflow locked */
+  section#vonix,
+  .vo {
+    overflow-x: clip !important;
+  }
+
+  /* Psychology grid stays 1 column */
+  .vo__psychGrid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Each duo: allow the short to overlap */
+  .vo__psychDuo {
+    position: relative !important;
+    overflow: visible !important;
+    padding-top: 0 !important;
+  }
+
+  /* === MAIN (horizontal) videos: ~20% bigger ===
+     Previously you likely reduced these to create room.
+     Bring them back up but keep some breathing room for the short.
+  */
+  .vo__psychMain {
+    width: 92% !important;       /* bigger than before */
+    max-width: 92% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* === SHORT container: ~15% smaller + anchored top-right === */
+  .vo__psychShort {
+    position: absolute !important;
+    top: -14px !important;
+    right: 10px !important;
+
+    /* ~15% smaller than the typical mobile short size */
+    width: min(118px, 30vw) !important;
+
+    margin: 0 !important;
+    z-index: 5 !important;
+  }
+
+  /* Keep the short link above the short, centered */
+  .vo__psychShort .vo__linkWrap {
+    position: absolute !important;
+    bottom: 100% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: max-content !important;
+    max-width: 90vw !important;
+    align-items: center !important;
+  }
+
+  /* Short media itself */
+  .vo__psychShort .media,
+  .vo__psychShort .media.media--short,
+  .vo__psychShortMedia {
+    width: 100% !important;
+    aspect-ratio: 9 / 16 !important;
+    overflow: hidden !important;
+  }
+
+  /* Give a little extra bottom spacing so the next section
+     (Technology header) doesn't collide with the short */
+  .vo__psychology {
+    padding-bottom: 18px !important;
+  }
+}
+
+/* =========================================================
+   VONIX — MOBILE PSYCHOLOGY SHORT SHRINK (FINAL TUNE)
+   Goal:
+   - Keep SAME top position (Y)
+   - Make BOTH shorts ~20% smaller vertically + horizontally
+   ========================================================= */
+@media (max-width: 600px) {
+  /* Shrink the short container itself */
+  .vo__psychShort {
+    width: min(94px, 24vw) !important;  /* ~20% smaller than previous */
+  }
+
+  /* Ensure the video inside scales with container */
+  .vo__psychShort .media,
+  .vo__psychShort .media.media--short,
+  .vo__psychShortMedia {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 9 / 16 !important;
+  }
+}
+
+/* =========================================================
+   VONIX — MOBILE PSYCHOLOGY
+   Move SECOND (bottom) duo down by 50px ONLY
+   ========================================================= */
+@media (max-width: 600px) {
+  /* Push entire second psychology pair downward */
+  .vo__psychGrid .vo__psychDuo:nth-child(2) {
+    margin-top: 15px !important;
+  }
+}
+
+/* =========================================================
+   VONIX — MOBILE
+   Pull Technology + everything below Psychology UP by 25px
+   ========================================================= */
+@media (max-width: 600px) {
+  /* Move Technology section upward (everything after follows naturally) */
+  .vo__technology {
+    margin-top: calc(clamp(32px, 4vw, 48px) - 40px) !important;
+  }
+}
