@@ -457,6 +457,11 @@
     width: 100%;
   }
 
+  /* Blaze mobile: SHORTS link text ~15% smaller (shorts only, not long-form) */
+  #blaze .bl__shortsGrid .bl__shortCard .bl__link {
+    font-size: 0.595rem !important; /* 0.70rem * 0.85 ≈ 0.595rem */
+  }
+
   /* (4) Bottom whitespace like Vonix */
   #blaze {
     padding-bottom: 210px !important; /* ~50% more than 140 */
