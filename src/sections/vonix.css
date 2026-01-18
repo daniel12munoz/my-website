@@ -1170,3 +1170,17 @@
     top: -60px;
   }
 }
+
+@media (max-width: 600px) {
+  /* Vonix mobile: add bottom breathing room to prevent iOS overscroll edge-case */
+  section#vonix.vo {
+    padding-bottom: max(90px, env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* Extra "real" spacer at the end of Vonix content */
+  section#vonix.vo::after {
+    content: "";
+    display: block;
+    height: max(70px, env(safe-area-inset-bottom, 0px));
+  }
+}
