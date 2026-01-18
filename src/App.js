@@ -13,25 +13,48 @@ function App() {
   const [activeItem, setActiveItem] = useState('home');
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const mainRef = useRef(null);
+  const scrollYRef = useRef(0);
 
-  // Helper function: completely clear all scroll-lock styles
+  // Helper function: completely clear all scroll-lock styles and restore scroll position
   const clearScrollLock = () => {
     document.documentElement.classList.remove('menu-open', 'no-scroll');
     document.body.classList.remove('menu-open', 'no-scroll', 'nav-open');
+
+    const wasFixed = document.body.style.position === 'fixed';
+    const top = document.body.style.top;
+
     document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
     document.body.style.position = '';
     document.body.style.top = '';
     document.body.style.width = '';
+
+    // Restore scroll position after unlocking fixed-body scroll lock
+    if (wasFixed) {
+      const y = scrollYRef.current || 0;
+      // If top was set (e.g. "-123px"), prefer that value
+      if (top) {
+        const parsed = parseInt(top, 10);
+        if (!Number.isNaN(parsed)) {
+          window.scrollTo(0, Math.abs(parsed));
+          return;
+        }
+      }
+      window.scrollTo(0, y);
+    }
   };
 
-  // Helper function: lock scroll (for mobile Home page)
+  // Helper function: lock scroll (for mobile Home page and menu)
+  // Saves current scroll position and applies fixed body with negative top offset
   const lockScroll = () => {
+    const y = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    scrollYRef.current = y;
+
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
     document.body.style.position = 'fixed';
     document.body.style.width = '100%';
-    document.body.style.top = '0';
+    document.body.style.top = `-${y}px`;
   };
 
   const scrollToTopNow = () => {
@@ -57,22 +80,20 @@ function App() {
       clearScrollLock();
     }
 
-    // Mobile-only: lock scroll on Home page
-    if (isMobile && activeItem === 'home') {
-      // Lock scroll for Home page
-      lockScroll();
-      // Force scroll to top
-      scrollToTopNow();
-    } else if (isMobile) {
-      // Not Home: ensure scroll is unlocked
-      clearScrollLock();
-    }
-
     // ALL devices: scroll to top on route change
     // Defer to allow route paint, prevents weird "stuck" bottom scroll
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         scrollToTopNow();
+        // Mobile-only: lock scroll on Home page at position 0
+        if (isMobile && activeItem === 'home') {
+          // Ensure we lock at position 0
+          scrollYRef.current = 0;
+          lockScroll();
+        } else if (isMobile) {
+          // Not Home: ensure scroll is unlocked
+          clearScrollLock();
+        }
       });
     });
   }, [activeItem]);
@@ -87,10 +108,14 @@ function App() {
     if (!isMobile) return;
 
     if (mobileNavOpen) {
-      // Menu open: add nav-open class (CSS handles overflow: hidden)
+      // Menu open: add nav-open class and lock scroll (stabilizes iOS)
       document.body.classList.add('nav-open');
+      // Lock scroll unless Home is already locked
+      if (activeItem !== 'home') {
+        lockScroll();
+      }
     } else {
-      // Menu closed: remove nav-open class only
+      // Menu closed: remove nav-open class
       document.body.classList.remove('nav-open');
       // If on Home, ensure Home scroll lock is applied (don't clear it)
       if (activeItem === 'home') {
@@ -98,7 +123,7 @@ function App() {
           lockScroll();
         });
       } else {
-        // Not on Home: clear any leftover scroll lock styles
+        // Not on Home: restore scroll (clear lock and restore position)
         clearScrollLock();
       }
     }
