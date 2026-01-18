@@ -360,7 +360,9 @@
 
 @media (max-width: 600px) {
   .bl__shortsGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+    justify-content: center;
   }
 
   .bl__row1 {
@@ -402,6 +404,62 @@
     max-width: 100%;
     height: auto;
     display: block;
+  }
+
+  /* (1) Shift Blaze content RIGHT ~20px without breaking layout */
+  #blaze.bl {
+    padding-left: 14px !important; /* was 20px; net shift LEFT by ~4px */
+    padding-right: 0 !important;
+    overflow-x: clip !important;
+  }
+
+  /* Make sure inner grids don't create sideways overflow */
+  #blaze * {
+    box-sizing: border-box;
+    min-width: 0;
+  }
+
+  /* (2) Logo position fix on mobile:
+     currently .bl__logoWrap has left:65px and top:60px (desktop rule).
+     On mobile we want ~50px left and ~50px up from current. */
+  #blaze .bl__logoWrap {
+    left: -1px !important;  /* 65px -> 15px (moves LEFT ~50px) */
+    top: -2px !important;   /* 60px -> 10px (moves UP ~50px) */
+  }
+
+  /* Keep logo responsive and prevent overflow */
+  #blaze .bl__logo {
+    max-width: min(280px, 80vw);
+  }
+
+  /* (3) Mobile stair-step: right column slightly lower */
+  /* Optional safety: prevent any leftover transform from earlier rules */
+  #blaze .bl__shortCard {
+    transform: none !important;
+  }
+
+  /* Mobile staircase: push right column down */
+  #blaze .bl__shortCard:nth-child(2n) {
+    margin-top: 10px !important;
+  }
+
+  /* Remove the old 5-column staircase transforms from desktop so they don't interfere on mobile */
+  #blaze .bl__shortCard:nth-child(5n + 1),
+  #blaze .bl__shortCard:nth-child(5n + 2),
+  #blaze .bl__shortCard:nth-child(5n + 3),
+  #blaze .bl__shortCard:nth-child(5n + 4),
+  #blaze .bl__shortCard:nth-child(5n + 5) {
+    transform: none !important;
+  }
+
+  /* Ensure each short fills its grid cell and looks centered */
+  #blaze .bl__shortMedia {
+    width: 100%;
+  }
+
+  /* (4) Bottom whitespace like Vonix */
+  #blaze {
+    padding-bottom: 210px !important; /* ~50% more than 140 */
   }
 }
 
