@@ -9,6 +9,7 @@ const isSafari = () => {
 
 export default function PlayToggleVideo({
   src,
+  allowAutoplay = false,
   wrapperClassName = 'media media--video',
   videoClassName = '',
   loop = true,
@@ -24,42 +25,100 @@ export default function PlayToggleVideo({
   const [isPlaying, setIsPlaying] = useState(false);
   const warmedUpSrcRef = useRef(null);
   const warmingRef = useRef(false);
+  const userInitiatedRef = useRef(false);
+
+  // Initialize video: always start paused unless allowAutoplay is true
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !src) return;
+
+    // Always disable autoplay and pause first
+    video.autoplay = false;
+    video.pause();
+
+    // If allowAutoplay is true, set up for autoplay after src is attached
+    if (allowAutoplay) {
+      // Ensure muted and loop for autoplay compatibility (default to true if not explicitly false)
+      if (muted !== false) {
+        video.muted = true;
+      }
+      if (loop !== false) {
+        video.loop = true;
+      }
+      
+      // Set playsInline for mobile
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+      
+      // Attempt autoplay only when muted (browser requirement)
+      const attemptAutoplay = () => {
+        if (video.muted) {
+          video.play().catch(() => {
+            // Autoplay blocked - that's ok, user can click to play
+          });
+        }
+      };
+      
+      // Try autoplay after metadata loads
+      const onCanPlayAutoplay = () => {
+        attemptAutoplay();
+      };
+      
+      video.addEventListener('canplay', onCanPlayAutoplay, { once: true });
+      
+      return () => {
+        video.removeEventListener('canplay', onCanPlayAutoplay);
+      };
+    }
+  }, [src, allowAutoplay, muted, loop]);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    const handlePlay = () => setIsPlaying(true);
+    const handlePlay = () => {
+      // Safety net: prevent unintended playback when allowAutoplay is false
+      if (!allowAutoplay && !userInitiatedRef.current) {
+        video.pause();
+        return;
+      }
+      setIsPlaying(true);
+    };
     const handlePause = () => setIsPlaying(false);
     const handleEnded = () => setIsPlaying(false);
 
-    video.addEventListener('play', handlePlay);
+    video.addEventListener('play', handlePlay, true); // Use capture phase for safety net
     video.addEventListener('pause', handlePause);
     video.addEventListener('ended', handleEnded);
 
     return () => {
-      video.removeEventListener('play', handlePlay);
+      video.removeEventListener('play', handlePlay, true);
       video.removeEventListener('pause', handlePause);
       video.removeEventListener('ended', handleEnded);
     };
-  }, [src]); // Re-attach listeners when src changes
+  }, [src, allowAutoplay]); // Re-attach listeners when src changes
 
   useEffect(() => {
-    if (!forcePause) return;
+    // Never force-pause autoplay videos
+    if (!forcePause || allowAutoplay) return;
 
     const video = videoRef.current;
     if (video && !video.paused) {
       video.pause();
     }
     setIsPlaying(false);
-  }, [forcePause]);
+    userInitiatedRef.current = false;
+  }, [forcePause, allowAutoplay]);
 
   // Safari-only warmup: show preview frame without autoplaying
   // Runs only once per src, before user plays
+  // Skip if allowAutoplay is true (those videos will autoplay anyway)
   useEffect(() => {
     const video = videoRef.current;
     if (!video || !src) return;
     if (!isSafari()) return;
+    // Don't warmup autoplay videos - they'll play on their own
+    if (allowAutoplay) return;
 
     // Only warm up once per src
     if (warmedUpSrcRef.current === src) return;
@@ -82,6 +141,12 @@ export default function PlayToggleVideo({
     };
 
     const onCanPlay = async () => {
+      // Only warmup if user hasn't initiated play yet
+      if (userInitiatedRef.current) {
+        cleanupWarmup();
+        return;
+      }
+
       try {
         // Ensure autoplay is allowed for warmup
         video.muted = true;
@@ -108,7 +173,7 @@ export default function PlayToggleVideo({
 
     // Force load/metadata
     try {
-      video.preload = 'auto';
+      video.preload = 'metadata'; // Use metadata, not auto, to prevent aggressive loading
       video.setAttribute('playsinline', '');
       video.setAttribute('webkit-playsinline', '');
       video.load();
@@ -118,13 +183,18 @@ export default function PlayToggleVideo({
       try { video.removeEventListener('canplay', onCanPlay); } catch {}
       cleanupWarmup();
     };
-  }, [src]);
+  }, [src, allowAutoplay]);
 
   const handleToggle = () => {
     const video = videoRef.current;
     if (!video) return;
 
     if (video.paused || video.ended) {
+      // Mark as user-initiated before playing
+      if (!allowAutoplay) {
+        userInitiatedRef.current = true;
+      }
+      
       // Inform parent that THIS instance is about to play
       if (onRequestPlay) {
         onRequestPlay();
@@ -138,10 +208,17 @@ export default function PlayToggleVideo({
         .catch(() => {
           // If play fails (e.g. browser restriction), keep paused
           setIsPlaying(false);
+          if (!allowAutoplay) {
+            userInitiatedRef.current = false;
+          }
         });
     } else {
-      video.pause();
-      setIsPlaying(false);
+      // Only allow pause if not autoplay (autoplay videos should keep looping)
+      if (!allowAutoplay) {
+        video.pause();
+        setIsPlaying(false);
+        userInitiatedRef.current = false;
+      }
     }
   };
 
@@ -172,12 +249,16 @@ export default function PlayToggleVideo({
 
   const isHLS = src && src.endsWith('.m3u8');
 
+  // Extract autoplay from rest if present, but we control it via allowAutoplay
+  const { autoplay: restAutoplay, ...restWithoutAutoplay } = rest;
+
   const videoProps = {
     ref: videoRef,
-    loop,
-    muted,
+    autoplay: allowAutoplay, // Explicitly set based on allowAutoplay prop
+    loop: allowAutoplay ? (loop !== false ? true : loop) : loop,
+    muted: allowAutoplay ? (muted !== false ? true : muted) : muted,
     playsInline: true,
-    preload,
+    preload: allowAutoplay ? (preload || 'metadata') : preload,
     controls: false,
     disableRemotePlayback: true,
     disablePictureInPicture: true,
@@ -185,7 +266,7 @@ export default function PlayToggleVideo({
     className: videoClassName,
     onError: handleError,
     onLoadedData: handleLoadedData,
-    ...rest,
+    ...restWithoutAutoplay,
   };
 
   return (

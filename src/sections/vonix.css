@@ -1183,4 +1183,14 @@
     display: block;
     height: max(70px, env(safe-area-inset-bottom, 0px));
   }
+
+  /* Vonix mobile: Vlogs LAST video crop fix (content sits too high) */
+  #vonix .vo__videoGrid--vlogs .vo__videoCard:nth-child(5) video,
+  #vonix .vo__videoGrid--vlogs .vo__videoCard:nth-child(5) .vo__videoEl {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: 50% 70% !important; /* pushes video DOWN inside frame */
+    display: block !important;
+  }
 }
