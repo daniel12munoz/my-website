@@ -76,6 +76,19 @@
   transform: translate(-140px, -66px) scale(1.38);
   transform-origin: top right;
   will-change: transform;
+  /* Desktop: name on one line with proper spacing */
+  display: block;           /* not flex on desktop */
+  white-space: nowrap;      /* keep it on one line */
+}
+
+.aboutMe__first,
+.aboutMe__last {
+  display: inline;
+}
+
+/* Insert a real space between the inline spans */
+.aboutMe__first::after {
+  content: " ";
 }
 
 /* Photo collage sits under name, slightly left from the edge */
