@@ -149,8 +149,9 @@
   }
 
   /* Root cause fix: stop the desktop negative translate on mobile */
+  /* Shift entire layout up 50px and left 50px */
   .otherChannels__frame {
-    transform: none !important;
+    transform: translate(-75px, -320px) !important;
     height: 100%;
     min-height: 100%;
   }
@@ -162,7 +163,7 @@
 
   /* Medium hero sizing (remove the crazy scale) */
   .otherChannels__stats {
-    transform: translateY(0) scale(1.0) !important; /* was 1.8 — too huge */
+    transform: translateY(170px) scale(1.0) !important; /* move down 60px, was 1.8 — too huge */
   }
 
   .otherChannels__heroLine1,
@@ -173,6 +174,12 @@
     margin: 0 !important;
     max-width: 100%;
     word-break: keep-all;
+  }
+
+  /* Slightly increase top stats text size on mobile */
+  .otherChannels__heroLine1,
+  .otherChannels__heroLine2 {
+    font-size: 210% !important;
   }
 
   .otherChannels__heroLine1 {

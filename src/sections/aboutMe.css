@@ -174,3 +174,78 @@
 .os-mac .aboutMe__right {
   transform: translateX(70px);
 }
+
+/* =========================
+   MOBILE ONLY — ABOUT ME LAYOUT FIX
+   ========================= */
+@media (max-width: 600px) {
+  /* A) HARD LOCK SCROLL (no vertical or horizontal scrolling anywhere) */
+  html, body {
+    overflow: hidden !important;
+    height: 100% !important;
+  }
+
+  .App, #root {
+    height: 100% !important;
+  }
+
+  .App > main.vp-main--about {
+    overflow: hidden !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    overscroll-behavior: none !important;
+    touch-action: none !important;
+  }
+
+  .aboutMe {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    overflow: hidden !important;
+  }
+
+  /* B) MOVE NAME: split into two lines, slightly larger to fill whitespace */
+  .aboutMe__name {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    line-height: 0.90;
+    transform-origin: top right !important;
+    transform: translate(-60px, 20px) scale(1.70) !important;
+  }
+
+  .aboutMe__first,
+  .aboutMe__last {
+    display: block;
+  }
+
+  /* Reduce spacing between Daniel / Muñoz by ~50% */
+  .aboutMe__last {
+    margin-top: 5px;
+  }
+
+  /* C) MOVE ALL 3 PHOTOS RIGHT ~60px (collage container) */
+  .aboutMe__photos {
+    transform: translateX(60px) !important;
+  }
+
+  /* D) IMAGE 1 (photo--a) move UP 30px and RIGHT 40px */
+  .aboutMe__photo--a {
+    transform: translate(30px, -105px) rotate(-3deg) !important;
+  }
+
+  /* E) IMAGE 2 (photo--b) move UP 30px */
+  .aboutMe__photo--b {
+    transform: translate(18px, -110px) rotate(0.5deg) !important;
+  }
+
+  /* F) IMAGE 3 (photo--c) move UP 30px and RIGHT 40px */
+  .aboutMe__photo--c {
+    transform: translate(25px, -72px) rotate(3deg) !important;
+  }
+
+  /* G) PARAGRAPH: decrease size by ~20%, move LEFT 10px and UP 10px (moved down 50px) */
+  .aboutMe__copy {
+    font-size: 80% !important;
+    transform: translate(-10px, -45px) !important;
+  }
+}

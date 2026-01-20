@@ -15,7 +15,10 @@ export default function AboutMe() {
 
       {/* Right visual column */}
       <div className="aboutMe__right">
-        <h1 className="aboutMe__name">Daniel Muñoz</h1>
+        <h1 className="aboutMe__name">
+          <span className="aboutMe__first">Daniel</span>
+          <span className="aboutMe__last">Muñoz</span>
+        </h1>
 
         <div className="aboutMe__photos" aria-label="Photo collage">
           <img 
