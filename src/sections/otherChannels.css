@@ -132,3 +132,72 @@
 .os-mac body {
   overflow-x: hidden !important;
 }
+
+/* =========================
+   MOBILE ONLY — OTHER CHANNELS LAYOUT FIX
+   ========================= */
+@media (max-width: 600px) {
+  /* Keep no scrolling */
+  .otherChannels {
+    overflow: hidden !important;
+    height: 100vh !important;
+    padding-top: 40px !important;
+    padding-right: 16px !important;
+    padding-bottom: 24px !important;
+    padding-left: 76px !important; /* right shift, but not insane */
+    box-sizing: border-box;
+  }
+
+  /* Root cause fix: stop the desktop negative translate on mobile */
+  .otherChannels__frame {
+    transform: none !important;
+    height: 100%;
+    min-height: 100%;
+  }
+
+  /* Make hero block fit inside viewport */
+  .otherChannels__hero {
+    padding: 0 10px;
+  }
+
+  /* Medium hero sizing (remove the crazy scale) */
+  .otherChannels__stats {
+    transform: translateY(0) scale(1.0) !important; /* was 1.8 — too huge */
+  }
+
+  .otherChannels__heroLine1,
+  .otherChannels__heroLine2 {
+    font-size: clamp(28px, 7.2vw, 40px) !important; /* medium */
+    line-height: 1.12 !important;
+    letter-spacing: 0.005em !important;
+    margin: 0 !important;
+    max-width: 100%;
+    word-break: keep-all;
+  }
+
+  .otherChannels__heroLine1 {
+    margin-bottom: 10px !important;
+  }
+
+  /* Widen the paragraph so it isn't skinny/tall */
+  .otherChannels__bottom {
+    padding-bottom: 12px !important;
+    transform: none !important;
+  }
+
+  .otherChannels__copy {
+    max-width: 52ch !important;      /* wider than before */
+    width: min(92vw, 52ch) !important;
+    margin: 0 auto !important;
+    text-align: center;
+    font-size: 15px !important;      /* keep readable but compact */
+    line-height: 1.5 !important;
+  }
+
+  /* Safety: nothing spills sideways */
+  .otherChannels,
+  .otherChannels * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}

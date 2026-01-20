@@ -85,13 +85,13 @@ function App() {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         scrollToTopNow();
-        // Mobile-only: lock scroll on Home page at position 0
-        if (isMobile && activeItem === 'home') {
+        // Mobile-only: lock scroll on Home page and Contact page at position 0
+        if (isMobile && (activeItem === 'home' || activeItem === 'contact')) {
           // Ensure we lock at position 0
           scrollYRef.current = 0;
           lockScroll();
         } else if (isMobile) {
-          // Not Home: ensure scroll is unlocked
+          // Not Home or Contact: ensure scroll is unlocked
           clearScrollLock();
         }
       });
@@ -110,20 +110,20 @@ function App() {
     if (mobileNavOpen) {
       // Menu open: add nav-open class and lock scroll (stabilizes iOS)
       document.body.classList.add('nav-open');
-      // Lock scroll unless Home is already locked
-      if (activeItem !== 'home') {
+      // Lock scroll unless Home or Contact is already locked
+      if (activeItem !== 'home' && activeItem !== 'contact') {
         lockScroll();
       }
     } else {
       // Menu closed: remove nav-open class
       document.body.classList.remove('nav-open');
-      // If on Home, ensure Home scroll lock is applied (don't clear it)
-      if (activeItem === 'home') {
+      // If on Home or Contact, ensure scroll lock is applied (don't clear it)
+      if (activeItem === 'home' || activeItem === 'contact') {
         requestAnimationFrame(() => {
           lockScroll();
         });
       } else {
-        // Not on Home: restore scroll (clear lock and restore position)
+        // Not on Home or Contact: restore scroll (clear lock and restore position)
         clearScrollLock();
       }
     }

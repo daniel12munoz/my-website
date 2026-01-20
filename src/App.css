@@ -448,3 +448,31 @@ body.nav-open {
 /* PAUSE bars are created dynamically — but now we decide:
    Pause indicator DISAPPEARS COMPLETELY during playback
    so no styling needed for pause state. */
+
+@media (max-width: 600px) {
+  /* CONTACT page ONLY: no scrolling at all */
+  .vp-main.vp-main--contact {
+    overflow: hidden !important;      /* kills vertical + horizontal scroll */
+    height: 100vh !important;         /* lock viewport height */
+    max-height: 100vh !important;
+    overscroll-behavior: none !important;
+    touch-action: none !important;    /* prevent swipe scrolling on mobile */
+    position: relative;
+    transform: none !important;       /* remove bad mobile translate */
+  }
+
+  /* extra safety: nothing inside can create horizontal overflow */
+  .vp-main.vp-main--contact * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* OTHER CHANNELS page ONLY: no scrolling at all */
+  .vp-main.vp-main--other {
+    overflow: hidden !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    overscroll-behavior: none !important;
+    touch-action: none !important;
+  }
+}
