@@ -92,22 +92,19 @@ export default function MarketingAlliance() {
         </div>
       </div>
 
-      {/* PHOTOGRAPHY — two strips */}
+      {/* PHOTOGRAPHY — grid */}
       <div className="ma__fold ma__photos">
         <div className="ma__subhead ma__subhead--right">
           <h3>Photography</h3>
           <span className="ma__rule ruleFade--left" />
         </div>
 
-        <div className="ma__photoStrip">
+        <div className="ma__photoGrid">
           <Img src="/ma-image2.jpg" alt="Marketing Alliance photo 2" />
           <Img src="/ma-image3.jpg" alt="Marketing Alliance photo 3" />
           <Img src="/ma-image4.jpg" alt="Marketing Alliance photo 4" />
           <Img src="/ma-image5.jpg" alt="Marketing Alliance photo 5" />
           <Img src="/ma-image6.jpg" alt="Marketing Alliance photo 6" />
-        </div>
-
-        <div className="ma__photoStrip ma__photoStrip--lower">
           <Img src="/ma-image7.jpg" alt="Marketing Alliance photo 7" />
           <Img src="/ma-image8.jpg" alt="Marketing Alliance photo 8" />
           <Img src="/ma-image9.jpg" alt="Marketing Alliance photo 9" />

@@ -175,8 +175,8 @@
   margin-top: clamp(32px, 4vw, 56px); /* move Photography section down */
 }
 
-.ma__photoStrip,
-.ma__photoStrip--lower {
+/* Desktop: photoGrid displays as overlapping strips (preserves old layout) */
+.ma__photoGrid {
   display: inline-flex;
   justify-content: center;
   align-items: flex-start;
@@ -184,29 +184,36 @@
   left: 50%;
   transform: translateX(-50%);
   gap: clamp(10px, 1.4vw, 18px);
+  flex-wrap: wrap;
+  margin-top: clamp(8px, 1vw, 12px);
 }
 
-.ma__photoStrip img,
-.ma__photoStrip--lower img {
+.ma__photoGrid img {
   width: clamp(160px, 18vw, 220px);
   aspect-ratio: 4 / 5;
   border-radius: 10px;
   object-fit: cover;
+  position: relative;
 }
 
-.ma__photoStrip img + img,
-.ma__photoStrip--lower img + img {
-  margin-left: -10px;
-}
-
-.ma__photoStrip {
-  margin-top: clamp(8px, 1vw, 12px);
+/* Recreate overlapping effect: images 2-6 on top row, 7-11 on bottom row */
+.ma__photoGrid img:nth-child(n+2):nth-child(-n+6) {
   z-index: 1;
 }
 
-.ma__photoStrip--lower {
+.ma__photoGrid img:nth-child(n+7) {
   margin-top: clamp(-18px, -1.6vw, -26px);
   z-index: 0;
+}
+
+.ma__photoGrid img + img {
+  margin-left: -10px;
+}
+
+/* Legacy support: hide old strips if they still exist */
+.ma__photoStrip,
+.ma__photoStrip--lower {
+  display: none;
 }
 
 .ma__videoPyramid {
@@ -929,5 +936,137 @@
   .os-mac #marketing-alliance .ma__belowRow1 {
     position: relative;
     transform: translateY(-25px);
+  }
+}
+
+/* ===== MOBILE ONLY: Marketing Alliance layout fixes ===== */
+@media (max-width: 600px) {
+  html, body { 
+    overflow-x: hidden; 
+  }
+
+  #marketing-alliance,
+  #marketing-alliance * {
+    box-sizing: border-box;
+  }
+
+  #marketing-alliance {
+    overflow-x: hidden;
+    --ma-shorts-scale: 0.72;        /* made a bit bigger */
+    --ma-shorts-translate-x: 17px;  /* control shorts left/right (negative = left) */
+    --ma-headshots-scale: 1.03;     /* increased by 50% */
+    --ma-headshots-translate-x: -10px; /* control headshots left/right */
+    --ma-headshots-translate-y: -55px; /* control headshots up/down */
+    --ma-logo-scale: 0.8;           /* decreased by 20% */
+    --ma-safe-gutter: 10px;
+    --ma-bottom-gutter: 150px;      /* fat white space at bottom for scrolling */
+    padding-left: var(--ma-safe-gutter);
+    padding-right: var(--ma-safe-gutter);
+    padding-bottom: var(--ma-bottom-gutter);
+  }
+
+  /* Roles text */
+  #marketing-alliance .ma__roles {
+    font-size: calc(clamp(15px, 2vw, 20px) * 0.95);
+    line-height: 1.25;
+  }
+
+  /* Logo positioning and scale */
+  #marketing-alliance .ma__logoWrap {
+    transform: translate(41px, 1px) !important; /* moved 50px to the right */
+  }
+  #marketing-alliance .ma__logo {
+    transform: scale(var(--ma-logo-scale));
+    transform-origin: top left;
+    display: block;
+  }
+
+  /* Photography: 2-column grid */
+  #marketing-alliance .ma__photoGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    transform: none;
+  }
+  #marketing-alliance .ma__photoGrid img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    margin: 0 !important;
+  }
+  #marketing-alliance .ma__photoStrip,
+  #marketing-alliance .ma__photoStrip--lower {
+    display: none;
+  }
+
+  /* Testimonials: 2-column grid with 16:9 black boxes */
+  #marketing-alliance .ma__testimonialsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    justify-items: stretch !important;
+    margin-top: 10px !important;
+  }
+  #marketing-alliance .ma__testimonialsGrid .ma__videoCard {
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: none !important;
+  }
+  #marketing-alliance .ma__testimonialsGrid .media {
+    width: 100% !important;
+    aspect-ratio: 16 / 9 !important;
+    background: #000 !important;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  #marketing-alliance .ma__testimonialsGrid video,
+  #marketing-alliance .ma__testimonialsGrid .ma__videoEl {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    background: #000 !important;
+  }
+
+  /* Shorts: scaled down with adjustable left/right positioning */
+  #marketing-alliance .ma__shortsGrid {
+    transform: translateX(var(--ma-shorts-translate-x)) scale(var(--ma-shorts-scale));
+    transform-origin: top left;
+    width: calc(100% / var(--ma-shorts-scale));
+    max-width: none;
+  }
+  #marketing-alliance .ma__shortsColumn {
+    padding-left: 2px;
+    overflow-x: hidden;
+  }
+
+  /* Headshots: label positioning */
+  #marketing-alliance .ma__headshotsColumn .ma__subhead--headshots {
+    transform: translateX(var(--ma-headshots-translate-x)) translateY(var(--ma-headshots-translate-y));
+  }
+  #marketing-alliance .ma__headshotsColumn {
+    align-items: flex-end;
+    overflow: visible;
+    max-width: 100%;
+  }
+  /* Headshots images: scaled and positioned */
+  #marketing-alliance .ma__headshotPile {
+    transform: translateX(var(--ma-headshots-translate-x)) translateY(var(--ma-headshots-translate-y)) scale(var(--ma-headshots-scale));
+    transform-origin: top right;
+  }
+
+  /* Responsive safety */
+  #marketing-alliance img,
+  #marketing-alliance video,
+  #marketing-alliance iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
   }
 }
