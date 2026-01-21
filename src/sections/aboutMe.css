@@ -213,7 +213,15 @@
   .aboutMe {
     height: 100vh !important;
     min-height: 100vh !important;
-    overflow: hidden !important;
+    overflow: visible !important; /* allow photos to move up without clipping */
+  }
+
+  /* Remove clipping / white gutter container */
+  .about,
+  #about,
+  .about-me,
+  #about-me {
+    overflow: visible !important;
   }
 
   /* B) MOVE NAME: split into two lines, slightly larger to fill whitespace */
@@ -236,9 +244,12 @@
     margin-top: 5px;
   }
 
-  /* C) MOVE ALL 3 PHOTOS RIGHT ~60px (collage container) */
+  /* C) MOVE ALL 3 PHOTOS RIGHT ~60px and UP 50px (collage container) */
   .aboutMe__photos {
-    transform: translateX(60px) !important;
+    position: relative;
+    transform: translateX(60px) translateY(-20px) !important;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   /* D) IMAGE 1 (photo--a) move UP 30px and RIGHT 40px */

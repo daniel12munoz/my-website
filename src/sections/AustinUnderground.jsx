@@ -4,7 +4,7 @@ import HlsVideo from "../components/HlsVideo";
 
 export default function AustinUnderground() {
   return (
-    <section className="au au__section">
+    <section id="austin-underground" className="au au__section">
       {/* Row 1: Video (left) + Heading/Roles (right) */}
       <div className="au__row1">
         <div className="au__videoBlock">
@@ -43,19 +43,46 @@ export default function AustinUnderground() {
         </div>
       </div>
 
-      {/* ROW 2 (Paragraph + Two Small Images) */}
-      <div className="au__row2 au-grid">
+      {/* ROW 2 — DESKTOP/TABLET layout (paragraph left, collage right) */}
+      <div className="au__row2 au-grid au__row2--desktop">
         <div className="au__colText">
           <p className="au__desc">
-          Austin Underground is an FCC-licensed television show and journalistic publication that focuses on the music culture within Austin. Produced by a team of over 25 members, the show covers local artists, events, and the city’s evolving music scene.
+          Austin Underground is an FCC-licensed television show and journalistic publication that focuses on the music culture within Austin. Produced by a team of over 25 members, the show covers local artists, events, and the city's evolving music scene.
           </p>
         </div>
         <div className="au__colImages">
-          <div className="au__sideImages">
-            <img src="/au-image1.jpg" alt="Austin Underground 1" className="media img1" />
-            <img src="/au-image2.jpg" alt="Austin Underground 2" className="media img2" />
-            <img src="/au-image3.jpg" alt="Austin Underground 3" className="media img3" />
+          <div className="au__collageUnit">
+            <img
+              src="/austin-underground-full-logo.png"
+              alt="Austin Underground full logo"
+              className="au__fullLogo"
+            />
+
+            <div className="au__sideImages">
+              <img src="/au-image1.jpg" alt="Austin Underground 1" className="media img1" />
+              <img src="/au-image2.jpg" alt="Austin Underground 2" className="media img2" />
+              <img src="/au-image3.jpg" alt="Austin Underground 3" className="media img3" />
+            </div>
           </div>
+        </div>
+      </div>
+
+      {/* MOBILE ORDERED BLOCK (logo → paragraph → photos) */}
+      <div className="au__row2Mobile au__row2--mobile">
+        <img
+          src="/austin-underground-full-logo.png"
+          alt="Austin Underground full logo"
+          className="au__fullLogo au__fullLogo--mobile"
+        />
+
+        <p className="au__desc au__desc--mobile">
+          Austin Underground is an FCC-licensed television show and journalistic publication that focuses on the music culture within Austin. Produced by a team of over 25 members, the show covers local artists, events, and the city's evolving music scene.
+        </p>
+
+        <div className="au__mobilePhotos">
+          <img src="/au-image1.jpg" alt="Austin Underground 1" className="media au__mImg au__mImg1" />
+          <img src="/au-image2.jpg" alt="Austin Underground 2" className="media au__mImg au__mImg2" />
+          <img src="/au-image3.jpg" alt="Austin Underground 3" className="media au__mImg au__mImg3" />
         </div>
       </div>
 
@@ -210,17 +237,13 @@ export default function AustinUnderground() {
             <span className="au__rule au__rule--concert" />
           </div>
 
-          {/* Row 1: images 4–8 (centered) */}
-          <div className="au__photoStrip" role="list">
+          {/* Concert Photography: single grid container for mobile 2-column layout */}
+          <div className="au__concertGrid" role="list">
             <img className="media" src="/au-image4.jpg" alt="Concert 4" role="listitem" />
             <img className="media" src="/au-image5.jpg" alt="Concert 5" role="listitem" />
             <img className="media" src="/au-image6.jpg" alt="Concert 6" role="listitem" />
             <img className="media" src="/au-image7.jpg" alt="Concert 7" role="listitem" />
             <img className="media" src="/au-image8.jpg" alt="Concert 8" role="listitem" />
-          </div>
-
-          {/* Row 2: images 9–13 (identical behavior) */}
-          <div className="au__photoStrip au__photoStrip--lower" role="list">
             <img className="media" src="/au-image9.jpg" alt="Concert 9" role="listitem" />
             <img className="media" src="/au-image10.jpg" alt="Concert 10" role="listitem" />
             <img className="media" src="/au-image11.jpg" alt="Concert 11" role="listitem" />

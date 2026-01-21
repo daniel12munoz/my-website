@@ -5,6 +5,28 @@
   --au-ink: rgba(0, 0, 0, 0.86);
   --au-muted: rgba(0, 0, 0, 0.64);
   --shadow: 0 6px 18px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+
+  /* Austin Underground collage controls (DESKTOP: Windows + Mac) */
+  --au-collage-scale: 0.8;     /* 20% smaller */
+  --au-collage-x: -40px;       /* move left 10 */
+  --au-collage-y: -10px;       /* move up 10 */
+
+  /* Full logo offset from collage origin (DESKTOP) */
+  --au-fullLogo-x: 100px;      /* right 100 */
+  --au-fullLogo-y: 100px;      /* down 100 */
+
+  /* Desktop AU collage/logo tuning (Mac + Windows) */
+  --au-collage-shift-x: -70px;   /* move collage left away from logo */
+  --au-collage-shift-y: -335px;   /* move collage up 100px */
+  --au-logo-shift-x: 60px;        /* existing behavior */
+  --au-logo-shift-y: 0px;         /* add Y control */
+  --au-full-logo-shift-x: -45px;  /* left 30 */
+  --au-full-logo-shift-y: 150px;   /* down 40 */
+
+  /* Mobile AU photo scale + spacing */
+  --au-mobile-photo-scale: 0.5;   /* 50% size */
+  --au-mobile-img3-nudge-y: -200px; /* move img3 up 10px */
+  --au-mobile-logo-shift-y: -30px;  /* move logo down 20px */
 }
 
 /* ===== AFTER-SCROLL LAYOUT ===== */
@@ -687,6 +709,74 @@
   }
 }
 
+/* Base: hide mobile-ordered block by default (desktop-first) */
+#austin-underground .au__row2--mobile {
+  display: none;
+}
+
+/* Desktop collage unit wrapper */
+@media (min-width: 981px) {
+  /* Ensure right column can overlap layers cleanly */
+  #austin-underground .au__collageUnit {
+    position: relative;
+    width: 100%;
+  }
+
+  /* Full logo is top layer; position it over the collage zone */
+  #austin-underground .au__fullLogo {
+    position: relative;
+    z-index: 5; /* ABOVE photos */
+    display: block;
+    width: clamp(180px, 18vw, 280px);
+    height: auto;
+    margin: 0 0 0 auto; /* keep right-column feel */
+    transform: translateX(calc(var(--au-logo-shift-x) + var(--au-full-logo-shift-x))) translateY(calc(var(--au-logo-shift-y) + var(--au-full-logo-shift-y)));
+    filter: drop-shadow(0 6px 14px rgba(0,0,0,0.18));
+    pointer-events: none;
+    user-select: none;
+    will-change: transform;
+  }
+
+  /* Push collage left away from logo (as a single unit) */
+  #austin-underground .au__sideImages {
+    position: relative;
+    z-index: 1;
+    transform: translateX(var(--au-collage-shift-x)) translateY(var(--au-collage-shift-y));
+    will-change: transform;
+  }
+}
+
+/* Mac-only: shift logo + collage 40px right (desktop only) */
+@media (min-width: 981px) {
+  .os-mac #austin-underground {
+    --au-mac-shift-x: 15px;
+  }
+
+  /* Collage wrapper (keeps its existing Y-lift) */
+  .os-mac #austin-underground .au__colImages {
+    transform: translateX(var(--au-mac-shift-x)) translateY(clamp(-260px, -18vw, -160px)) !important;
+  }
+
+  /* Full logo (adds Mac shift to existing logo transform) */
+  .os-mac #austin-underground .au__fullLogo {
+    transform: translateX(calc(var(--au-logo-shift-x) + var(--au-full-logo-shift-x) + var(--au-mac-shift-x))) translateY(calc(var(--au-logo-shift-y) + var(--au-full-logo-shift-y))) !important;
+  }
+
+  /* Also shift the sideImages (collage) to match */
+  .os-mac #austin-underground .au__sideImages {
+    transform: translateX(calc(var(--au-collage-shift-x) + var(--au-mac-shift-x))) translateY(var(--au-collage-shift-y)) !important;
+  }
+}
+
+/* Windows + Mac: pull Interviews + Concert Photography up 150px (desktop only) */
+@media (min-width: 981px) {
+  #austin-underground .au__fold2 {
+    position: relative;
+    top: -150px;
+    will-change: transform;
+  }
+}
+
 /* ===== INTERVIEWS + CONCERT PHOTOGRAPHY LIFT ===== */
 
 /* Pull the whole second fold up a lot to remove the big white gap */
@@ -776,6 +866,7 @@
 }
 
 /* ===== Centered concert strips (row 1 & 2 identical) ===== */
+/* Desktop: Concert Photography - overlapping strips layout */
 .au__photoStrip,
 .au__photoStrip--lower {
   display: inline-flex;
@@ -821,6 +912,90 @@
 .au__photoStrip--lower {
   margin-top: clamp(-18px, -1.6vw, -26px);
   z-index: 0;
+}
+
+/* Desktop: Make au__concertGrid display as overlapping strips (restore desktop layout) */
+@media (min-width: 601px) {
+  .au__concertGrid {
+    display: grid;
+    grid-template-columns: repeat(5, clamp(160px, 18vw, 220px));
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: clamp(10px, 1.4vw, 18px);
+    margin-top: clamp(8px, 1vw, 12px);
+    z-index: 1;
+  }
+
+  .au__concertGrid .media {
+    width: clamp(160px, 18vw, 220px);
+    aspect-ratio: 4 / 5;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    object-fit: cover;
+    background: #f4f4f4;
+    position: relative;
+  }
+
+  .au__concertGrid .media + .media {
+    margin-left: -10px;
+  }
+
+  /* First 5 images (top strip) - move down 10px */
+  .au__concertGrid .media:nth-child(1) { 
+    transform: rotate(-1.2deg); 
+    margin-top: 20px;
+    z-index: 1; 
+  }
+  .au__concertGrid .media:nth-child(2) { 
+    transform: rotate(0.6deg); 
+    margin-top: 20px;
+    z-index: 1; 
+  }
+  .au__concertGrid .media:nth-child(3) { 
+    transform: rotate(-0.8deg); 
+    margin-top: 20px;
+    z-index: 1; 
+  }
+  .au__concertGrid .media:nth-child(4) { 
+    transform: rotate(1deg); 
+    margin-top: 20px;
+    z-index: 1; 
+  }
+  .au__concertGrid .media:nth-child(5) { 
+    transform: rotate(-0.6deg); 
+    margin-top: 20px;
+    z-index: 1; 
+  }
+
+  /* Next 5 images (lower strip) - move down 60px total */
+  .au__concertGrid .media:nth-child(6) { 
+    transform: rotate(-1.2deg); 
+    margin-top: 0px;
+    z-index: 0;
+  }
+  .au__concertGrid .media:nth-child(7) { 
+    transform: rotate(0.6deg); 
+    margin-top: 0px;
+    z-index: 0;
+  }
+  .au__concertGrid .media:nth-child(8) { 
+    transform: rotate(-0.8deg); 
+    margin-top: 0px;
+    z-index: 0;
+  }
+  .au__concertGrid .media:nth-child(9) { 
+    transform: rotate(1deg); 
+    margin-top: 00px;
+    z-index: 0;
+  }
+  .au__concertGrid .media:nth-child(10) { 
+    transform: rotate(-0.6deg); 
+    margin-top: 0px;
+    z-index: 0;
+  }
 }
 
 /* ===== Add comfortable white space at the very bottom of the page ===== */
@@ -951,6 +1126,7 @@
   }
 
   /* Section locks (cover BOTH id + class cases so it works even if your ids differ) */
+  #austin-underground,
   section#austinUnderground,
   .austin,
   .au {
@@ -961,12 +1137,166 @@
   }
 
   /* Media safety inside those sections */
+  #austin-underground img, #austin-underground video, #austin-underground iframe,
   section#austinUnderground img, section#austinUnderground video, section#austinUnderground iframe,
   .austin img, .austin video, .austin iframe,
   .au img, .au video, .au iframe {
     max-width: 100%;
     height: auto;
     display: block;
+  }
+
+  /* ===== AUSTIN UNDERGROUND MOBILE FIXES ===== */
+
+  /* Swap: hide desktop row2 grid, show mobile ordered block */
+  #austin-underground .au__row2--desktop {
+    display: none !important;
+  }
+  #austin-underground .au__row2--mobile {
+    display: flex !important;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  /* Mobile logo: push down 20px */
+  #austin-underground .au__fullLogo--mobile {
+    width: min(180px, 50vw); /* roughly half-ish */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0 6px 14px rgba(0,0,0,0.18));
+    transform: translateY(var(--au-mobile-logo-shift-y));
+  }
+
+  /* Mobile paragraph spacing */
+  #austin-underground .au__desc--mobile {
+    margin: 0;
+  }
+
+  /* New mobile photos layout: 2 on top, 1 centered below */
+  #austin-underground .au__mobilePhotos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 12px;
+    align-items: start;
+    justify-items: center;
+    overflow: visible;
+  }
+
+  /* Ensures consistent card sizing */
+  #austin-underground .au__mobilePhotos img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  /* All mobile images: scale down ~50% but keep them crisp */
+  #austin-underground .au__mImg {
+    /* 50% scale anchored top-left so they shrink consistently */
+    transform: scale(var(--au-mobile-photo-scale));
+    transform-origin: top left;
+  }
+
+  /* Place img1 + img2 in the first row automatically */
+  #austin-underground .au__mImg1 { grid-column: 1; }
+  #austin-underground .au__mImg2 { grid-column: 2; }
+
+  /* Make img3 span the row BUT NOT be wider than a single column */
+  #austin-underground .au__mImg3 {
+    grid-column: 1 / -1;          /* stays on its own row */
+    justify-self: center;         /* centered */
+    width: calc((100% - 12px) / 2); /* same width as one column (gap = 12px) */
+    max-width: calc((100% - 12px) / 2);
+    transform: translateY(var(--au-mobile-img3-nudge-y)) scale(var(--au-mobile-photo-scale));
+    transform-origin: top center;
+  }
+
+  /* Safety: prevent horizontal scroll */
+  #austin-underground {
+    overflow-x: hidden;
+  }
+
+  /* 1) Nudge entire page 8px right */
+  #austin-underground.au.au__section {
+    padding-left: 8px;
+    padding-right: 0;
+  }
+
+  /* 2) Force heading cluster to stay right-aligned on mobile */
+  #austin-underground .au__heading {
+    justify-items: end !important;
+    text-align: right !important;
+    width: 100%;
+  }
+  #austin-underground .au__title,
+  #austin-underground .au__roles {
+    text-align: right !important;
+  }
+  #austin-underground .au__rule--main {
+    margin-left: auto; /* keep the underline line pushed to the right */
+  }
+
+  /* 3) Reduce roles font size ~20% on mobile */
+  #austin-underground .au__roles {
+    font-size: 0.88em !important;   /* ~20% down from 1.20em desktop intent */
+    line-height: 1.25 !important;
+  }
+
+  /* 4) Fix the 3 images on mobile into a triangle and stop absolute positioning */
+  #austin-underground .au__colImages {
+    transform: none !important; /* kill any previous desktop lifts on mobile */
+  }
+
+  #austin-underground .au__sideImages {
+    position: static !important;
+    min-height: 0 !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "img1 img2"
+      "img3 img2";
+    gap: 12px;
+    align-items: start;
+  }
+
+  #austin-underground .au__sideImages .media {
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 5;
+    border-radius: 10px;
+    object-fit: cover;
+    transform: none !important;
+    margin: 0 !important;
+  }
+
+  #austin-underground .au__sideImages .img1 { grid-area: img1; }
+  #austin-underground .au__sideImages .img2 { grid-area: img2; }
+  #austin-underground .au__sideImages .img3 { grid-area: img3; }
+
+  /* 5) Concert Photography: 2-column grid on mobile */
+  #austin-underground .au__concertGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  #austin-underground .au__concertGrid .media {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    box-shadow: var(--shadow);
   }
 }
 
@@ -1048,4 +1378,85 @@
 /* Ensure container clips correctly */
 .os-mac .au__videoContainer {
   overflow: hidden !important;
+}
+
+/* ===== AUSTIN UNDERGROUND DESKTOP TUNING ===== */
+@media (min-width: 981px) {
+  /* Austin Underground tuning vars */
+  #austin-underground {
+    --au-collage-extra-y: 15px;     /* Mac will override to 10px */
+    --au-fold2-lift: 250px;        /* raise Interviews + Concert Photography */
+  }
+
+  /* 1) Close the big gap (Windows + Mac) */
+  #austin-underground .au__row2.au-grid {
+    margin-bottom: calc(0px - var(--au-fold2-lift)) !important;
+  }
+
+  /* 2) Also pull the next fold up (extra insurance) */
+  #austin-underground .au__fold2 {
+    margin-top: calc(0px - var(--au-fold2-lift)) !important;
+  }
+
+  /* 3) Apply the extra-Y nudge to collage in an additive way */
+  #austin-underground .au__colImages {
+    transform: translateY(calc(clamp(-260px, -18vw, -160px) + var(--au-collage-extra-y))) !important;
+    will-change: transform;
+  }
+
+  /* 4) If full logo exists, nudge it too (additive - preserves existing X/Y + adds extra Y) */
+  #austin-underground .au__fullLogoWrap,
+  #austin-underground .au__fullLogo {
+    transform: translateX(calc(var(--au-logo-shift-x, 0px) + var(--au-full-logo-shift-x, 0px) + var(--au-mac-shift-x, 0px))) 
+               translateY(calc(var(--au-logo-shift-y, 0px) + var(--au-full-logo-shift-y, 0px) + var(--au-collage-extra-y))) !important;
+    will-change: transform;
+  }
+
+  /* Mac-only: extra +10px down */
+  .os-mac #austin-underground {
+    --au-collage-extra-y: 10px;
+  }
+}
+
+/* =========================
+   FINAL Austin Underground spacing polish
+   ========================= */
+
+/* Desktop only */
+@media (min-width: 981px) {
+
+  /* 1) Reduce bottom gutter by ~50% (Windows + Mac) */
+  #austin-underground.au {
+    padding-bottom: clamp(40px, 4vw, 70px) !important;
+  }
+
+  /* 2) Mac-only: move collage + logo DOWN 20px */
+  .os-mac #austin-underground {
+    --au-collage-extra-y: 30px;
+  }
+
+  /* Apply Mac-only Y shift to collage */
+  .os-mac #austin-underground .au__colImages {
+    transform: translateY(calc(clamp(-260px, -18vw, -160px) + var(--au-collage-extra-y))) !important;
+  }
+
+  /* Apply Mac-only Y shift to logo (safe even if selector is missing) */
+  .os-mac #austin-underground .au__fullLogoWrap,
+  .os-mac #austin-underground .au__fullLogo {
+    transform: translateY(var(--au-collage-extra-y)) !important;
+  }
+
+}
+
+/* =========================
+   FINAL Mac-only Austin logo nudge
+   ========================= */
+
+@media (min-width: 981px) {
+
+  .os-mac #austin-underground .au__fullLogoWrap,
+  .os-mac #austin-underground .au__fullLogo {
+    transform: translate(30px, 170px) !important;
+  }
+
 }
