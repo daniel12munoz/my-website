@@ -154,28 +154,29 @@ export default function Blaze() {
             <span className="bl__linkRule" />
           </div>
 
+          {/* Mobile order: title + rule + roles + logo + paragraph */}
+          <div className="bl__heading">
+            <h2 className="bl__title">Blaze</h2>
+            <span className="bl__rule bl__rule--main" aria-hidden="true" />
+            <div className="bl__roles">
+              Content Creator • Nov 2023 – Jul 2024
+            </div>
+
+            <div className="bl__logoWrap">
+              <img
+                src="/bl-logo1.png"
+                alt="Blaze logo"
+                className="bl__logo"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
           <p className="bl__desc">
             Blaze is an AI-powered marketing platform that helps entrepreneurs,
             freelancers, and small businesses grow faster online by creating
             consistent, on-brand content.
           </p>
-        </div>
-
-        <div className="bl__heading">
-          <h2 className="bl__title">Blaze</h2>
-          <span className="bl__rule bl__rule--main" aria-hidden="true" />
-          <div className="bl__roles">
-            Content Creator • Nov 2023 – Jul 2024
-          </div>
-
-          <div className="bl__logoWrap">
-            <img
-              src="/bl-logo1.png"
-              alt="Blaze logo"
-              className="bl__logo"
-              loading="lazy"
-            />
-          </div>
         </div>
       </div>
 

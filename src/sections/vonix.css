@@ -667,7 +667,19 @@
   .vo__heading {
     width: 100%;
     max-width: 100%;
-    justify-items: start;
+    justify-items: end;
+    text-align: right;
+    align-items: flex-end;
+  }
+
+  /* Right-align title, rule, and roles on mobile */
+  .vo__title,
+  .vo__roles {
+    text-align: right;
+  }
+
+  .vo__rule {
+    align-self: flex-end;
   }
 
   /* Logo wrap - remove transforms that cause overflow */

@@ -1279,8 +1279,13 @@
   #austin-underground .au__sideImages .img2 { grid-area: img2; }
   #austin-underground .au__sideImages .img3 { grid-area: img3; }
 
-  /* 5) Concert Photography: 2-column grid on mobile */
+  /* 5) Concert Photography: hide desktop grid on mobile, show mobile grid */
   #austin-underground .au__concertGrid {
+    display: none !important;
+  }
+
+  /* Mobile-only Concert Photography grid (reordered) */
+  #austin-underground .au__concertMobileGrid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
@@ -1289,7 +1294,7 @@
     margin: 0;
     padding: 0;
   }
-  #austin-underground .au__concertGrid .media {
+  #austin-underground .au__concertMobileGrid .media {
     width: 100%;
     height: auto;
     aspect-ratio: 4 / 5;
@@ -1297,6 +1302,124 @@
     border-radius: 10px;
     display: block;
     box-shadow: var(--shadow);
+  }
+
+  /* Mobile AU — nudge concert photos down slightly */
+  #austin-underground .au__concertMobileGrid {
+    margin-top: 20px;
+  }
+
+  /* =========================
+     NEW MOBILE COLLAGE (layered logo + images)
+     ========================= */
+
+  /* Hide old mobile Row2 images to avoid duplicates */
+  #austin-underground .au__row2--mobile {
+    display: none !important;
+  }
+
+  /* Hide desktop Row2 images on mobile */
+  #austin-underground .au__row2--desktop .au__colImages {
+    display: none;
+  }
+
+  /* CSS Variables for mobile collage control */
+  #austin-underground {
+    --au-m-collage-x: 0px;
+    --au-m-collage-y: 0px;
+    --au-m-collage-scale: 1;
+    --au-m-logo-x: 220px;
+    --au-m-logo-y: 135px;
+    --au-m-logo-scale: 1.15;
+    --au-m-img1-x: -75px;
+    --au-m-img1-y: -155px;
+    --au-m-img1-scale: .32;
+    --au-m-img2-x: 40px;
+    --au-m-img2-y: -152px;
+    --au-m-img2-scale: .32;
+    --au-m-img3-x: -15px;
+    --au-m-img3-y: -16px;
+    --au-m-img3-scale: .32;
+    --au-m-collage-height: clamp(300px, 60vw, 450px);
+  }
+
+  /* Mobile collage container */
+  #austin-underground .au__mobileCollage {
+    position: relative;
+    width: 100%;
+    height: var(--au-m-collage-height);
+    margin: 20px 0;
+    transform: translateX(var(--au-m-collage-x)) translateY(var(--au-m-collage-y)) scale(var(--au-m-collage-scale));
+    transform-origin: center top;
+    overflow: hidden;
+  }
+
+  /* Mobile logo - topmost layer */
+  #austin-underground .au__mobileLogo {
+    position: absolute;
+    z-index: 10;
+    width: clamp(120px, 30vw, 180px);
+    height: auto;
+    transform: translateX(var(--au-m-logo-x)) translateY(var(--au-m-logo-y)) scale(var(--au-m-logo-scale));
+    filter: drop-shadow(0 6px 14px rgba(0,0,0,0.18));
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* Mobile photos container */
+  #austin-underground .au__mobileCollage .au__mobilePhotos {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Individual mobile images - layered */
+  #austin-underground .au__mobileImg {
+    position: absolute;
+    width: clamp(120px, 35vw, 180px);
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    display: block;
+  }
+
+  /* Image 1 - second layer */
+  #austin-underground .au__mobileImg--1 {
+    z-index: 3;
+    transform: translateX(var(--au-m-img1-x)) translateY(var(--au-m-img1-y)) scale(var(--au-m-img1-scale)) rotate(-1deg);
+    transform-origin: center center;
+  }
+
+  /* Image 2 - third layer */
+  #austin-underground .au__mobileImg--2 {
+    z-index: 2;
+    transform: translateX(var(--au-m-img2-x)) translateY(var(--au-m-img2-y)) scale(var(--au-m-img2-scale)) rotate(-0.5deg);
+    transform-origin: center center;
+  }
+
+  /* Image 3 - bottom layer */
+  #austin-underground .au__mobileImg--3 {
+    z-index: 1;
+    transform: translateX(var(--au-m-img3-x)) translateY(var(--au-m-img3-y)) scale(var(--au-m-img3-scale)) rotate(1deg);
+    transform-origin: center center;
+  }
+
+  /* Ensure no horizontal scroll */
+  #austin-underground .au__mobileCollage {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Large bottom gutter for Austin Underground page on mobile */
+  #austin-underground {
+    --au-m-bottom-gutter: 180px;
+  }
+  #austin-underground.au.au__section {
+    padding-bottom: var(--au-m-bottom-gutter) !important;
   }
 }
 

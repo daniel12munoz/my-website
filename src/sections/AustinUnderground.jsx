@@ -3,6 +3,9 @@ import "./austin.css";
 import HlsVideo from "../components/HlsVideo";
 
 export default function AustinUnderground() {
+  // Concert Photography image order for mobile
+  const auConcertOrderMobile = [4, 5, 8, 6, 7, 12, 10, 11, 9, 13];
+
   return (
     <section id="austin-underground" className="au au__section">
       {/* Row 1: Video (left) + Heading/Roles (right) */}
@@ -40,6 +43,20 @@ export default function AustinUnderground() {
             <div>Master Control Manager • Jan 2022 – Jul 2022</div>
             <div>Executive Producer • Aug 2022 – Dec 2023</div>
           </div>
+        </div>
+      </div>
+
+      {/* MOBILE COLLAGE (layered logo + images) */}
+      <div className="au__mobileCollage" aria-hidden="true">
+        <img
+          src="/austin-underground-full-logo.png"
+          alt="Austin Underground full logo"
+          className="au__mobileLogo"
+        />
+        <div className="au__mobilePhotos">
+          <img src="/au-image1.jpg" alt="Austin Underground 1" className="au__mobileImg au__mobileImg--1" />
+          <img src="/au-image2.jpg" alt="Austin Underground 2" className="au__mobileImg au__mobileImg--2" />
+          <img src="/au-image3.jpg" alt="Austin Underground 3" className="au__mobileImg au__mobileImg--3" />
         </div>
       </div>
 
@@ -237,7 +254,7 @@ export default function AustinUnderground() {
             <span className="au__rule au__rule--concert" />
           </div>
 
-          {/* Concert Photography: single grid container for mobile 2-column layout */}
+          {/* Concert Photography: desktop grid (original order 4-13) */}
           <div className="au__concertGrid" role="list">
             <img className="media" src="/au-image4.jpg" alt="Concert 4" role="listitem" />
             <img className="media" src="/au-image5.jpg" alt="Concert 5" role="listitem" />
@@ -249,6 +266,19 @@ export default function AustinUnderground() {
             <img className="media" src="/au-image11.jpg" alt="Concert 11" role="listitem" />
             <img className="media" src="/au-image12.jpg" alt="Concert 12" role="listitem" />
             <img className="media" src="/au-image13.jpg" alt="Concert 13" role="listitem" />
+          </div>
+
+          {/* Concert Photography: mobile-only grid (reordered) */}
+          <div className="au__concertMobileGrid" role="list">
+            {auConcertOrderMobile.map((n) => (
+              <img
+                key={n}
+                className="media"
+                src={`/au-image${n}.jpg`}
+                alt={`Concert ${n}`}
+                role="listitem"
+              />
+            ))}
           </div>
         </div>
       </section>

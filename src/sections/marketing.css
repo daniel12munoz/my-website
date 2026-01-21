@@ -1069,4 +1069,25 @@
     height: auto;
     display: block;
   }
+
+  /* Right-align heading cluster (title + rule + roles) */
+  #marketing-alliance .ma__heading {
+    text-align: right;
+    justify-items: end;
+    align-items: end;
+  }
+
+  #marketing-alliance .ma__rule {
+    justify-self: end;
+  }
+
+  #marketing-alliance .ma__roles {
+    text-align: right;
+  }
+
+  /* Move paragraph down 10px */
+  #marketing-alliance .ma__desc {
+    position: relative;
+    top: 10px;
+  }
 }

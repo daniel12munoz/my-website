@@ -369,8 +369,34 @@
     grid-template-columns: 1fr;
   }
 
+  /* Mobile: right-align title, rule, and roles */
   .bl__heading {
-    justify-items: start;
+    justify-items: end;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .bl__title,
+  .bl__roles {
+    text-align: right;
+  }
+
+  /* Ensure paragraph remains left-aligned */
+  .bl__desc {
+    text-align: left;
+  }
+
+  /* Scale logo smaller on mobile without affecting layout */
+  #blaze {
+    --blaze-logo-scale: 0.95;
+  }
+
+  #blaze .bl__logo {
+    transform: scale(var(--blaze-logo-scale));
+    transform-origin: top center;
+    display: block;
   }
 }
 
