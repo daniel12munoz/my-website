@@ -175,39 +175,65 @@
   margin-top: clamp(32px, 4vw, 56px); /* move Photography section down */
 }
 
-/* Desktop: photoGrid displays as overlapping strips (preserves old layout) */
-.ma__photoGrid {
-  display: inline-flex;
-  justify-content: center;
-  align-items: flex-start;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  gap: clamp(10px, 1.4vw, 18px);
-  flex-wrap: wrap;
-  margin-top: clamp(8px, 1vw, 12px);
+/* =========================
+   Marketing Alliance — Photography (DESKTOP) — single source of truth
+   2 rows of 5, tight overlap, consistent bottom-row height on Mac + Windows
+   ========================= */
+@media (min-width: 601px) {
+  #marketing-alliance .ma__photoGrid {
+    /* deterministic 5×2 layout */
+    display: grid;
+    grid-template-columns: repeat(5, clamp(160px, 18vw, 220px));
+    justify-content: center;
+    align-content: start;
+    gap: 0; /* we control spacing via margins to preserve the current tight look */
+
+    /* remove old centering hacks from inline-flex version */
+    position: static;
+    left: auto;
+    transform: none;
+
+    margin-top: clamp(8px, 1vw, 12px);
+  }
+
+  #marketing-alliance .ma__photoGrid img {
+    width: clamp(160px, 18vw, 220px);
+    aspect-ratio: 4 / 5;
+    border-radius: 10px;
+    object-fit: cover;
+    display: block;
+
+    /* keep the "tight" look (horizontal overlap) */
+    margin-left: -10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* first image in each row (1,6) should not pull left */
+  #marketing-alliance .ma__photoGrid img:nth-child(5n + 1) {
+    margin-left: 0;
+  }
+
+  /* TOP ROW (1–5): above */
+  #marketing-alliance .ma__photoGrid img:nth-child(-n + 5) {
+    z-index: 2;
+  }
+
+  /* BOTTOM ROW (6–10): ONE uniform offset so every image lands same height */
+  #marketing-alliance .ma__photoGrid img:nth-child(n + 6) {
+    margin-top: -18px;   /* <- adjust ONLY this number if you want more/less overlap */
+    z-index: 1;
+  }
 }
 
-.ma__photoGrid img {
-  width: clamp(160px, 18vw, 220px);
-  aspect-ratio: 4 / 5;
-  border-radius: 10px;
-  object-fit: cover;
-  position: relative;
-}
+/* =========================================================
+   Marketing Alliance — Photography GLOBAL SCALE (Mac + Windows)
+   Shrink ALL photography images to 95% size
+   ========================================================= */
 
-/* Recreate overlapping effect: images 2-6 on top row, 7-11 on bottom row */
-.ma__photoGrid img:nth-child(n+2):nth-child(-n+6) {
-  z-index: 1;
-}
-
-.ma__photoGrid img:nth-child(n+7) {
-  margin-top: clamp(-18px, -1.6vw, -26px);
-  z-index: 0;
-}
-
-.ma__photoGrid img + img {
-  margin-left: -10px;
+#marketing-alliance .ma__photoGrid img {
+  transform: scale(0.91) !important;
+  transform-origin: center center !important;
 }
 
 /* Legacy support: hide old strips if they still exist */
@@ -1091,3 +1117,4 @@
     top: 10px;
   }
 }
+
