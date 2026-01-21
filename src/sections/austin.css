@@ -768,11 +768,11 @@
   }
 }
 
-/* Windows + Mac: pull Interviews + Concert Photography up 150px (desktop only) */
+/* Windows + Mac: pull Interviews + Concert Photography up 160px (desktop only) */
 @media (min-width: 981px) {
   #austin-underground .au__fold2 {
     position: relative;
-    top: -150px;
+    top: -165px;
     will-change: transform;
   }
 }
@@ -1572,6 +1572,38 @@
 }
 
 /* =========================
+   Desktop: hide mobile-only Austin Underground elements
+   ========================= */
+
+@media (min-width: 601px) {
+  /* Desktop/tablet: hide mobile-only Austin collage block */
+  #austin-underground .au__mobileCollage {
+    display: none !important;
+  }
+
+  /* Desktop/tablet: hide mobile-only concert reorder grid */
+  #austin-underground .au__concertMobileGrid {
+    display: none !important;
+  }
+
+  /* Safety: ensure the mobile ordered block never shows on desktop */
+  #austin-underground .au__row2--mobile,
+  #austin-underground .au__row2Mobile {
+    display: none !important;
+  }
+
+  /* Desktop should keep the desktop grid visible */
+  #austin-underground .au__row2--desktop {
+    display: grid !important;
+  }
+
+  /* Desktop should keep the desktop concert grid visible */
+  #austin-underground .au__concertGrid {
+    display: grid !important;
+  }
+}
+
+/* =========================
    FINAL Mac-only Austin logo nudge
    ========================= */
 
@@ -1582,4 +1614,23 @@
     transform: translate(30px, 170px) !important;
   }
 
+}
+
+/* Desktop: add small bottom padding to Austin Underground */
+@media (min-width: 601px) {
+  #austin-underground {
+    padding-bottom: 20px;
+  }
+}
+
+/* =========================
+   Austin Underground (DESKTOP/TABLET ONLY): reduce bottom gutter under Concert Photography
+   Windows + Mac; DO NOT affect mobile
+   ========================= */
+@media (min-width: 601px) {
+  #austin-underground.au,
+  #austin-underground.au.au__section,
+  #austin-underground {
+    padding-bottom: 0px !important; /* ~20px less than the prior 32px min; predictable single value */
+  }
 }

@@ -56,6 +56,12 @@
   line-height: 1.55;
 }
 
+@media (min-width: 601px) {
+  #blaze .bl__desc {
+    margin-top: calc(clamp(6px, 0.8vw, 10px) - 440px);
+  }
+}
+
 /* Heading / roles / logo (match Marketing Alliance + AU) */
 .bl__heading {
   display: grid;
@@ -152,10 +158,22 @@
   margin-bottom: 40px;  /* consistent gap between sections */
 }
 
+@media (min-width: 601px) {
+  #blaze .bl__shortsSection {
+    margin-top: calc(32px - 300px);
+  }
+}
+
 /* Lower the Videos section further */
 .bl__videosSection {
   position: relative;
   margin-top: clamp(64px, 7vw, 96px);  /* moved down even more */
+}
+
+@media (min-width: 601px) {
+  #blaze .bl__videosSection {
+    margin-top: calc(clamp(64px, 7vw, 96px) + -10px);
+  }
 }
 
 .bl__subhead {
@@ -529,4 +547,129 @@
 .os-mac #blaze .bl__logoWrap {
   position: relative;
   left: 25px;
+}
+
+/* =========================
+   Desktop: restore Blaze heading cluster to top-right
+   ========================= */
+
+@media (min-width: 601px) {
+  /* Ensure Blaze desktop layout is 2-column: video left, heading right */
+  #blaze .bl__row1 {
+    display: grid !important;
+    grid-template-columns: 0.56fr 0.44fr !important;
+    align-items: start !important;
+    gap: var(--au-gap) !important;
+  }
+
+  /* Make videoBlock's children direct grid children of row1 */
+  #blaze .bl__videoBlock {
+    display: contents !important;
+  }
+
+  /* Left column: video, link, paragraph */
+  #blaze .bl__heroMedia {
+    grid-column: 1;
+    margin-bottom: clamp(8px, 1vw, 12px);
+  }
+
+  #blaze .bl__linkWrap {
+    grid-column: 1;
+    margin-bottom: clamp(6px, 0.8vw, 10px);
+  }
+
+  #blaze .bl__desc {
+    grid-column: 1;
+  }
+
+  /* Right column: heading cluster */
+  #blaze .bl__heading {
+    grid-column: 2;
+    display: grid !important;
+    justify-items: end !important;
+    align-items: start !important;
+    text-align: right !important;
+    margin-top: 0 !important;
+    align-self: start !important;
+    gap: 10px !important;
+  }
+
+  /* Keep underline and role right-aligned */
+  #blaze .bl__rule {
+    justify-self: end !important;
+  }
+
+  #blaze .bl__roles {
+    text-align: right !important;
+  }
+
+  /* If the logo is part of the heading cluster, keep it right aligned too */
+  #blaze .bl__logoWrap {
+    justify-self: end !important;
+    margin-left: auto !important;
+  }
+}
+
+/* =========================
+   Desktop: Move Blaze heading cluster upward
+   ========================= */
+
+@media (min-width: 601px) {
+  /* Move Blaze heading cluster upward as one unit */
+  #blaze .bl__heading {
+    transform: translateY(-465px) !important;
+    will-change: transform;
+  }
+}
+
+/* Mac-only: adjust Blaze heading cluster vertical position */
+@media (min-width: 601px) {
+  .os-mac #blaze .bl__heading {
+    transform: translateY(-407px) !important; /* -465 + 200 */
+  }
+}
+
+/* =========================
+   Blaze Desktop: Clean flow below paragraph
+   (Mac + Windows)
+   ========================= */
+@media (min-width: 601px) {
+  #blaze {
+    --bl-gap-after-paragraph: 28px;  /* white space between paragraph and Shorts */
+    --bl-gap-between-sections: 26px; /* white space between Shorts and Long-form Videos */
+    --bl-bottom-gutter: 60px;        /* small white space at very bottom */
+  }
+
+  /* Ensure normal flow (no transforms) */
+  #blaze .bl__fold,
+  #blaze .bl__shortsSection,
+  #blaze .bl__videosSection,
+  #blaze .bl__videoGrid {
+    transform: none !important;
+    top: auto !important;
+    bottom: auto !important;
+  }
+
+  /* Paragraph stays exactly where it is; we only add space AFTER it by spacing the next section */
+  /* Note: margin-top for .bl__shortsSection is handled by desktop override above */
+  #blaze .bl__shortsSection {
+    margin-bottom: 0 !important;
+  }
+
+  /* Note: margin-top for .bl__videosSection is handled by desktop override above */
+
+  /* Reduce huge bottom whitespace safely */
+  #blaze.bl {
+    padding-bottom: var(--bl-bottom-gutter) !important;
+  }
+}
+
+/* =========================
+   Blaze: add ~20px breathing room under LONG-FORM (desktop only)
+   Mac + Windows (no mobile)
+   ========================= */
+@media (min-width: 601px) {
+  #blaze .bl__videosSection {
+    margin-bottom: 40px !important;
+  }
 }

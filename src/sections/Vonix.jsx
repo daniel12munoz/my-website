@@ -13,7 +13,7 @@ export default function Vonix() {
         <div className="vo__videoBlock">
           <div className="media media--video vo__heroMedia">
             <HlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/7023f794e85ec32ffba0784616b63fbe/manifest/video.m3u8"
+              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/40a3790cf47de71bbfae2cb1b81b45bb/manifest/video.m3u8"
               autoPlay
               muted
               loop
