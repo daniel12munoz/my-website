@@ -83,6 +83,7 @@ export default function Home() {
               muted
               playsInline
               preload="auto"
+              priority
             />
 
             {/* Mobile static clipped to TV screen */}
@@ -95,6 +96,7 @@ export default function Home() {
                 muted
                 playsInline
                 preload="auto"
+                priority
               />
             </div>
 

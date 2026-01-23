@@ -137,7 +137,8 @@ export default function Blaze() {
               muted
               loop
               playsInline
-              preload="metadata"
+              preload="auto"
+              priority
               controls={false}
             />
           </div>

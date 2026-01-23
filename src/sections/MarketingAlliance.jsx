@@ -37,7 +37,8 @@ export default function MarketingAlliance() {
             loop
             muted
             playsInline
-            preload="metadata"
+            preload="auto"
+            priority
             controls={false}
             aria-hidden="true"
           />

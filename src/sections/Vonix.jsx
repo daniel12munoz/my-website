@@ -18,7 +18,8 @@ export default function Vonix() {
               muted
               loop
               playsInline
-              preload="metadata"
+              preload="auto"
+              priority
               controls={false}
               className="vo__heroVideo"
             />

@@ -7,6 +7,12 @@ const isSafari = () => {
   return /Safari/.test(ua) && !/Chrome|Chromium|Android/.test(ua);
 };
 
+// Helper to detect mobile (coarse pointer device)
+const isMobile = () => {
+  return window.matchMedia('(pointer: coarse)').matches || 
+         /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+};
+
 export default function PlayToggleVideo({
   src,
   allowAutoplay = false,
@@ -19,13 +25,45 @@ export default function PlayToggleVideo({
   preload = 'metadata', // Allow override, defaults to 'metadata' for backward compatibility
   onError,
   onLoadedData,
+  lazy = true, // Lazy load by default
+  poster: posterProp,
+  preferHd = true,
   ...rest
 }) {
   const videoRef = useRef(null);
+  const wrapperRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(!lazy); // Load immediately if not lazy
+  const [hasPaintedFrame, setHasPaintedFrame] = useState(false); // Track first frame painted
+  const [isStarting, setIsStarting] = useState(false); // Track when play is initiated
+  const hasEverPlayedRef = useRef(false); // Track if video has ever played (prevents poster flash on resume)
   const warmedUpSrcRef = useRef(null);
   const warmingRef = useRef(false);
+  const isWarmingRef = useRef(false); // Track if warmup is active (prevents UI state changes during warmup)
   const userInitiatedRef = useRef(false);
+  const frameCallbackRef = useRef(null);
+  const didPrimeRef = useRef(false); // Track if we've primed loading on pointerdown
+
+  // Lazy loading with IntersectionObserver
+  useEffect(() => {
+    if (!lazy) return;
+    const el = wrapperRef.current || videoRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" }
+    );
+
+    observer.observe(el);
+
+    return () => observer.disconnect();
+  }, [lazy]);
 
   // Initialize video: always start paused unless allowAutoplay is true
   useEffect(() => {
@@ -72,20 +110,99 @@ export default function PlayToggleVideo({
     }
   }, [src, allowAutoplay, muted, loop]);
 
+  // Track first frame painted to hide poster overlay (ONLY on first play, NOT warmup)
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !isStarting || hasEverPlayedRef.current) return; // Skip if already played
+    if (isWarmingRef.current) return; // Skip during warmup
+    if (!userInitiatedRef.current) return; // Only track real user-initiated playback
+
+    // Use requestVideoFrameCallback when available (modern browsers)
+    if (video.requestVideoFrameCallback) {
+      const callback = (now, metadata) => {
+        // Only mark as ever played if this was a real user click, not warmup
+        if (metadata.mediaTime > 0 && userInitiatedRef.current && !isWarmingRef.current) {
+          setHasPaintedFrame(true);
+          setIsStarting(false);
+          hasEverPlayedRef.current = true; // Mark as ever played
+          if (frameCallbackRef.current) {
+            frameCallbackRef.current = null;
+          }
+        } else if (isStarting && !hasEverPlayedRef.current && userInitiatedRef.current) {
+          // Continue waiting for first frame
+          frameCallbackRef.current = video.requestVideoFrameCallback(callback);
+        }
+      };
+      frameCallbackRef.current = video.requestVideoFrameCallback(callback);
+      
+      return () => {
+        if (frameCallbackRef.current) {
+          try {
+            video.cancelVideoFrameCallback(frameCallbackRef.current);
+          } catch {}
+          frameCallbackRef.current = null;
+        }
+      };
+    } else {
+      // Fallback: use timeupdate or playing event
+      const onTimeUpdate = () => {
+        if (video.currentTime > 0 && !hasEverPlayedRef.current && userInitiatedRef.current && !isWarmingRef.current) {
+          setHasPaintedFrame(true);
+          setIsStarting(false);
+          hasEverPlayedRef.current = true; // Mark as ever played
+        }
+      };
+      const onPlaying = () => {
+        if (video.currentTime > 0 && !hasEverPlayedRef.current && userInitiatedRef.current && !isWarmingRef.current) {
+          setHasPaintedFrame(true);
+          setIsStarting(false);
+          hasEverPlayedRef.current = true; // Mark as ever played
+        }
+      };
+      
+      video.addEventListener('timeupdate', onTimeUpdate, { once: true });
+      video.addEventListener('playing', onPlaying, { once: true });
+      
+      return () => {
+        video.removeEventListener('timeupdate', onTimeUpdate);
+        video.removeEventListener('playing', onPlaying);
+      };
+    }
+  }, [isStarting]);
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     const handlePlay = () => {
+      // Skip UI state changes during warmup (warmup controls its own pause timing)
+      if (isWarmingRef.current) {
+        return;
+      }
+      
       // Safety net: prevent unintended playback when allowAutoplay is false
       if (!allowAutoplay && !userInitiatedRef.current) {
         video.pause();
         return;
       }
       setIsPlaying(true);
+      // Only track starting/frame painted on FIRST play
+      if (!hasEverPlayedRef.current) {
+        setIsStarting(true);
+        setHasPaintedFrame(false);
+      }
     };
-    const handlePause = () => setIsPlaying(false);
-    const handleEnded = () => setIsPlaying(false);
+    const handlePause = () => {
+      setIsPlaying(false);
+      // Don't reset starting state on pause - we've already played
+      if (!hasEverPlayedRef.current) {
+        setIsStarting(false);
+      }
+    };
+    const handleEnded = () => {
+      setIsPlaying(false);
+      setIsStarting(false);
+    };
 
     video.addEventListener('play', handlePlay, true); // Use capture phase for safety net
     video.addEventListener('pause', handlePause);
@@ -110,15 +227,20 @@ export default function PlayToggleVideo({
     userInitiatedRef.current = false;
   }, [forcePause, allowAutoplay]);
 
-  // Safari-only warmup: show preview frame without autoplaying
-  // Runs only once per src, before user plays
+  // Warm-frame: show preview frame without autoplaying (prevents black flash on mobile tap)
+  // Runs on mobile (Safari + Chrome) and desktop Safari
+  // Only runs after shouldLoad becomes true (lazy loading gate)
   // Skip if allowAutoplay is true (those videos will autoplay anyway)
+  // Skip if user has already played (no need to warmup again)
   useEffect(() => {
     const video = videoRef.current;
     if (!video || !src) return;
-    if (!isSafari()) return;
+    if (!shouldLoad) return; // Wait for lazy loading to trigger
+    if (hasEverPlayedRef.current) return; // Don't warmup after first play
     // Don't warmup autoplay videos - they'll play on their own
     if (allowAutoplay) return;
+    // Only warm on mobile or Safari (where black flash is common)
+    if (!isMobile() && !isSafari()) return;
 
     // Only warm up once per src
     if (warmedUpSrcRef.current === src) return;
@@ -148,6 +270,9 @@ export default function PlayToggleVideo({
       }
 
       try {
+        // Mark warmup as active to prevent UI state changes
+        isWarmingRef.current = true;
+        
         // Ensure autoplay is allowed for warmup
         video.muted = true;
         video.volume = 0;
@@ -158,17 +283,24 @@ export default function PlayToggleVideo({
         // Start playback briefly to force a decoded frame
         await video.play();
 
-        // Pause ASAP after a tick so at least one frame is painted
+        // Pause ASAP after a tick so at least one frame is painted (<=150ms as requested)
         setTimeout(() => {
           try { video.pause(); } catch {}
+          isWarmingRef.current = false; // Clear warmup flag before cleanup
           cleanupWarmup();
         }, 120);
       } catch {
+        isWarmingRef.current = false; // Clear warmup flag on error
         cleanupWarmup();
       }
     };
 
-    // We need canplay (or loadeddata) so Safari has enough buffered to render
+    // Use loadeddata or canplay - loadeddata is more reliable for first frame
+    const onLoadedDataWarmup = () => {
+      onCanPlay();
+    };
+    
+    video.addEventListener('loadeddata', onLoadedDataWarmup, { once: true });
     video.addEventListener('canplay', onCanPlay, { once: true });
 
     // Force load/metadata
@@ -180,10 +312,29 @@ export default function PlayToggleVideo({
     } catch {}
 
     return () => {
-      try { video.removeEventListener('canplay', onCanPlay); } catch {}
+      try { 
+        video.removeEventListener('loadeddata', onLoadedDataWarmup); 
+        video.removeEventListener('canplay', onCanPlay); 
+      } catch {}
       cleanupWarmup();
     };
-  }, [src, allowAutoplay]);
+  }, [src, allowAutoplay, shouldLoad]);
+
+  // Prime loading on pointerdown/touchstart for faster mobile response (NO playback)
+  const handlePrime = () => {
+    const video = videoRef.current;
+    if (!video || didPrimeRef.current) return;
+    
+    // For HLS/hls.js, preload metadata often isn't enough. Prime with auto for THIS one.
+    try {
+      if (video.preload !== 'auto') {
+        video.preload = 'auto';
+        video.load();
+      }
+    } catch {}
+    
+    didPrimeRef.current = true;
+  };
 
   const handleToggle = () => {
     const video = videoRef.current;
@@ -193,6 +344,12 @@ export default function PlayToggleVideo({
       // Mark as user-initiated before playing
       if (!allowAutoplay) {
         userInitiatedRef.current = true;
+      }
+      
+      // Only reset frame painted state on FIRST play (never after hasEverPlayedRef is true)
+      if (!hasEverPlayedRef.current) {
+        setHasPaintedFrame(false);
+        setIsStarting(true);
       }
       
       // Inform parent that THIS instance is about to play
@@ -208,6 +365,9 @@ export default function PlayToggleVideo({
         .catch(() => {
           // If play fails (e.g. browser restriction), keep paused
           setIsPlaying(false);
+          if (!hasEverPlayedRef.current) {
+            setIsStarting(false);
+          }
           if (!allowAutoplay) {
             userInitiatedRef.current = false;
           }
@@ -217,6 +377,7 @@ export default function PlayToggleVideo({
       if (!allowAutoplay) {
         video.pause();
         setIsPlaying(false);
+        // Don't reset starting state or hasPaintedFrame - video has already played
         userInitiatedRef.current = false;
       }
     }
@@ -231,9 +392,9 @@ export default function PlayToggleVideo({
     }
   };
 
-  const handleLoadedData = () => {
+  const handleLoadedData = (e) => {
     if (onLoadedData) {
-      onLoadedData();
+      onLoadedData(e);
     } else if (src && src.includes('vo-video')) {
       // Optional dev logging for Vonix videos
       console.log('Vonix video loaded', src);
@@ -252,39 +413,102 @@ export default function PlayToggleVideo({
   // Extract autoplay from rest if present, but we control it via allowAutoplay
   const { autoplay: restAutoplay, ...restWithoutAutoplay } = rest;
 
+  // Get Cloudflare poster for placeholder (if not provided)
+  const getCloudflarePoster = (videoSrc) => {
+    if (!videoSrc) return null;
+    const match = videoSrc.match(/cloudflarestream\.com\/([^/]+)\//);
+    if (!match) return null;
+    const id = match[1];
+    const customerMatch = videoSrc.match(/customer-([^/]+)\.cloudflarestream\.com/);
+    const customerId = customerMatch ? customerMatch[1] : 'j47qk7l1wwcd8bxv';
+    return `https://customer-${customerId}.cloudflarestream.com/${id}/thumbnails/thumbnail.jpg?time=0s`;
+  };
+
+  const poster = posterProp || (src && src.endsWith('.m3u8') ? getCloudflarePoster(src) : null);
+
+  // Ensure playsinline attributes are set for mobile inline playback
+  // Must be declared before any conditional returns (Rules of Hooks)
+  useEffect(() => {
+    if (!shouldLoad) return; // Only set attributes when video should load
+    const video = videoRef.current;
+    if (!video) return;
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+  }, [shouldLoad]);
+
+  // If lazy loading and not yet visible, render placeholder
+  if (!shouldLoad) {
+    return (
+      <div
+        ref={wrapperRef}
+        className={`${wrapperClassName} is-playable`.trim()}
+        style={{
+          backgroundImage: poster ? `url(${poster})` : "none",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundColor: "#000",
+          aspectRatio: "16/9"
+        }}
+      />
+    );
+  }
+
+  // Combine videoClassName with shared stable class
+  const finalVideoClassName = `vp-videoEl ${videoClassName || ''}`.trim();
+
   const videoProps = {
     ref: videoRef,
-    autoplay: allowAutoplay, // Explicitly set based on allowAutoplay prop
+    autoPlay: allowAutoplay, // Use camelCase autoPlay (React standard)
     loop: allowAutoplay ? (loop !== false ? true : loop) : loop,
     muted: allowAutoplay ? (muted !== false ? true : muted) : muted,
     playsInline: true,
-    preload: allowAutoplay ? (preload || 'metadata') : preload,
+    preload: shouldLoad ? (allowAutoplay ? (preload || 'metadata') : preload) : 'none',
     controls: false,
     disableRemotePlayback: true,
     disablePictureInPicture: true,
     controlsList: "nodownload noplaybackrate noremoteplayback",
-    className: videoClassName,
+    className: finalVideoClassName,
     onError: handleError,
     onLoadedData: handleLoadedData,
+    poster: poster,
     ...restWithoutAutoplay,
   };
 
+  // Show poster overlay ONLY on first play startup, never on resume
+  const showPosterOverlay = poster && !hasEverPlayedRef.current && (!hasPaintedFrame || isStarting);
+
   return (
     <div
+      ref={wrapperRef}
       className={`${wrapperClassName} is-playable`.trim()}
       onClick={handleToggle}
+      onPointerDown={handlePrime}
+      onTouchStart={handlePrime}
     >
       {isHLS ? (
         <HlsVideo
-          src={src}
+          src={shouldLoad ? src : undefined}
+          lazy={lazy}
+          preferHd={preferHd}
+          poster={poster}
           {...videoProps}
         />
       ) : (
         <video {...videoProps}>
-          <source src={src} type={getVideoType(src)} />
+          {shouldLoad && <source src={src} type={getVideoType(src)} />}
         </video>
       )}
-      {!isPlaying && (
+      {/* Poster overlay - hides after first frame is painted */}
+      {showPosterOverlay && (
+        <div
+          className={`vp-posterOverlay ${hasPaintedFrame ? 'vp-posterOverlay--hidden' : ''}`}
+          style={{
+            backgroundImage: poster ? `url(${poster})` : 'none',
+          }}
+        />
+      )}
+      {/* Play icon - show when paused, hide when playing (but only after first frame on first play) */}
+      {(!isPlaying || (!hasEverPlayedRef.current && !hasPaintedFrame)) && (
         <div className="playOverlay">
           <span className="playOverlay__icon" />
         </div>

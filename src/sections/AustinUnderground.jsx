@@ -18,7 +18,8 @@ export default function AustinUnderground() {
               muted
               loop
               playsInline
-              preload="metadata"
+              preload="auto"
+              priority
               controls={false}
               className="au__video"
             />

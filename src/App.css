@@ -425,6 +425,39 @@ body.nav-open {
   cursor: pointer;
 }
 
+/* Shared stable video element class - prevents resize/reflow on mobile */
+.vp-videoEl {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  object-fit: cover !important;
+  background: #000 !important;
+  transform: translateZ(0); /* GPU acceleration + reduces paint jank on mobile */
+  -webkit-transform: translateZ(0);
+  /* Prevent brightness/opacity changes that cause Mac brightness pop */
+  filter: none !important;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Poster overlay - stays visible until first frame is painted */
+.vp-posterOverlay {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #000;
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.15s ease-out;
+}
+
+.vp-posterOverlay.vp-posterOverlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* Center overlay */
 .playOverlay {
   position: absolute;
@@ -433,6 +466,7 @@ body.nav-open {
   align-items: center;
   justify-content: center;
   pointer-events: none; /* invisible to clicks */
+  z-index: 3; /* Above poster overlay */
 }
 
 /* PLAY ICON (only visible while paused) */
