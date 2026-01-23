@@ -21,12 +21,25 @@ const HlsVideo = forwardRef(function HlsVideo({
   poster: posterProp,
   lazy = true,
   preferHd = true,
+  preload,
   ...props 
 }, ref) {
   const videoRef = useRef(null);
   const hlsRef = useRef(null);
   const abrReenableTimeoutRef = useRef(null);
   const [shouldLoad, setShouldLoad] = useState(!lazy);
+  
+  // Use refs to capture latest values for async callbacks without triggering effect re-runs
+  const autoPlayRef = useRef(autoPlay);
+  const priorityRef = useRef(priority);
+  const preloadRef = useRef(preload);
+  
+  // Keep refs in sync with latest prop values
+  useEffect(() => {
+    autoPlayRef.current = autoPlay;
+    priorityRef.current = priority;
+    preloadRef.current = preload;
+  }, [autoPlay, priority, preload]);
 
   // Expose the video element ref to parent components
   useImperativeHandle(ref, () => videoRef.current, []);
@@ -70,8 +83,8 @@ const HlsVideo = forwardRef(function HlsVideo({
     if (canPlayHLS) {
       // Native HLS support (Safari, iOS Safari)
       video.src = src;
-      // Try to autoplay if requested
-      if (autoPlay && video.muted) {
+      // Try to autoplay if requested (use ref to get latest value)
+      if (autoPlayRef.current && video.muted) {
         video.play().catch(() => {
           // Autoplay failed, ignore
         });
@@ -105,9 +118,9 @@ const HlsVideo = forwardRef(function HlsVideo({
         if (preferHd) {
           const levels = hls.levels;
           if (levels && levels.length > 0) {
-            // Capture props values before rAF
-            const currentPreload = props.preload || 'metadata';
-            const isPriority = priority === true;
+            // Capture latest values from refs (for async callback)
+            const currentPreload = preloadRef.current || 'metadata';
+            const isPriority = priorityRef.current === true;
             
             // Wait one animation frame so clientHeight is correct (layout is final)
             requestAnimationFrame(() => {
@@ -184,8 +197,8 @@ const HlsVideo = forwardRef(function HlsVideo({
           }
         }
         
-        // Try to autoplay if requested
-        if (autoPlay && video.muted) {
+        // Try to autoplay if requested (use ref to get latest value)
+        if (autoPlayRef.current && video.muted) {
           video.play().catch(() => {
             // Autoplay failed, ignore
           });
@@ -194,7 +207,7 @@ const HlsVideo = forwardRef(function HlsVideo({
     } else {
       // Fallback: try setting src directly (might work in some cases)
       video.src = src;
-      if (autoPlay && video.muted) {
+      if (autoPlayRef.current && video.muted) {
         video.play().catch(() => {
           // Autoplay failed, ignore
         });
@@ -245,7 +258,7 @@ const HlsVideo = forwardRef(function HlsVideo({
       controlsList="nodownload noplaybackrate noremoteplayback"
       poster={poster}
       playsInline={true}
-      preload={shouldLoad ? (props.preload || 'metadata') : 'none'}
+      preload={shouldLoad ? (preload || 'metadata') : 'none'}
       className={finalClassName}
       style={{ backgroundColor: "#000", ...restProps.style }}
       {...restProps}
