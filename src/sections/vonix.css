@@ -1055,23 +1055,9 @@
   overflow-x: hidden !important;
 }
 
-.os-mac #vonix.vo,
-.os-mac section#vonix.vo,
-.os-mac .vo {
+.os-mac #vonix {
   max-width: 100%;
-  /* Shrink Vonix ~10% ONLY on macOS desktop */
-  zoom: 0.9;
-}
-
-/* Fallback if zoom is not supported */
-@supports not (zoom: 1) {
-  .os-mac #vonix.vo,
-  .os-mac section#vonix.vo,
-  .os-mac .vo {
-    transform: scale(0.9);
-    transform-origin: top left;
-    width: calc(100% / 0.9);
-  }
+  overflow-x: hidden;
 }
 
 /* Extra safety: never allow child media to exceed container width */
@@ -1205,4 +1191,120 @@
     object-position: 50% 70% !important; /* pushes video DOWN inside frame */
     display: block !important;
   }
+
+  /* Force Psychology + Vlogs subhead underline to left align on mobile */
+  #vonix .vo__psychology .vo__subhead,
+  #vonix .vo__vlogs .vo__subhead {
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+
+  #vonix .vo__psychology .vo__subhead .vo__rule,
+  #vonix .vo__vlogs .vo__subhead .vo__rule {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    align-self: flex-start !important;
+  }
 }
+
+/* ===========================
+   Mac desktop-only: Vonix hero video size adjustment
+   ========================= */
+@media (min-width: 981px) {
+  html.os-mac #vonix .vo__heroMedia {
+    /* Nudge hero container to match the other pages on Mac */
+    width: 100%;
+    max-width: 100%;
+    /* subtle scale-down to match Blaze/MA/AU hero sizing */
+    transform: scale(0.965);
+    transform-origin: top left;
+  }
+
+  html.os-mac #vonix .vo__heroVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  html.os-mac #vonix .vo__videoBlock {
+    overflow: hidden;
+  }
+}
+
+/* ===========================
+   Desktop-only: Psychology duo overlay stacking fix
+   ========================= */
+@media (min-width: 601px) {
+  /* STEP 1: Duo is the stacking context anchor */
+  #vonix .vo__psychDuo {
+    position: relative;
+    isolation: isolate; /* creates clean stacking context so z-index works predictably */
+  }
+
+  /* STEP 2: Main horizontal video should be below */
+  #vonix .vo__psychDuo .vo__psychMain {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* STEP 2: Overlay short must be above */
+  #vonix .vo__psychDuo .vo__psychShort {
+    position: absolute;   /* keep existing overlay positioning */
+    z-index: 5;
+  }
+
+  /* STEP 2: The short's media box also above (extra safety) */
+  #vonix .vo__psychDuo .vo__psychShortMedia,
+  #vonix .vo__psychDuo .vo__psychShort .media {
+    position: relative;
+    z-index: 6;
+  }
+
+  /* STEP 2: The short link above everything (optional but safe) */
+  #vonix .vo__psychDuo .vo__psychShort .vo__linkWrap {
+    position: absolute; /* already positioned */
+    z-index: 7;
+  }
+
+  /* STEP 3: Prevent "video element on top" issues (desktop only safety) */
+  #vonix .vo__psychMain video,
+  #vonix .vo__psychMain .vo__videoEl {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* ===========================
+   Windows desktop-only: Vonix content lift (5px up)
+   ========================= */
+@media (min-width: 601px) {
+  /* Define Windows-only lift variable */
+  html.os-win #vonix,
+  html.os-other #vonix {
+    --vo-win-lift: -7px;
+  }
+
+  /* Apply lift to everything EXCEPT hero media and heading cluster */
+  html.os-win #vonix .vo__linkWrap.heroLinkWrap,
+  html.os-other #vonix .vo__linkWrap.heroLinkWrap,
+  html.os-win #vonix .vo__rowDesc,
+  html.os-other #vonix .vo__rowDesc,
+  html.os-win #vonix .vo__desc,
+  html.os-other #vonix .vo__desc,
+  html.os-win #vonix .vo__fold,
+  html.os-other #vonix .vo__fold {
+    position: relative;
+    top: var(--vo-win-lift);
+  }
+
+  /* Ensure hero media and heading never get moved */
+  html.os-win #vonix .vo__heroMedia,
+  html.os-other #vonix .vo__heroMedia,
+  html.os-win #vonix .vo__videoBlock,
+  html.os-other #vonix .vo__videoBlock,
+  html.os-win #vonix .vo__heading,
+  html.os-other #vonix .vo__heading {
+    top: auto !important;
+  }
+}
+

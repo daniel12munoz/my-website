@@ -42,6 +42,8 @@ body {
   /* Rule fade styling */
   --rule-ink: #1a1a1a;
   --rule-opacity: 0.2;
+  /* Universal link underline color (matches Vonix) */
+  --vp-link-underline: rgba(0, 0, 0, 0.3);
 }
 
 /* Fade towards the RIGHT (for left-aligned rules) */
@@ -529,4 +531,69 @@ body.nav-open {
     overscroll-behavior: none !important;
     touch-action: none !important;
   }
+}
+
+/* =========================
+   HERO LINK FONT SIZE STANDARDIZATION
+   ========================= */
+
+/* MAC DESKTOP ONLY: Page-specific hero link sizing */
+@media (min-width: 601px) {
+  html.os-mac #vonix .vpHeroLink .vpHeroLink__a { 
+    font-size: 16.5px !important; 
+    line-height: 1.2 !important; 
+  }
+  html.os-mac #blaze .vpHeroLink .vpHeroLink__a { 
+    font-size: 15px !important; 
+    line-height: 1.2 !important; 
+  }
+  html.os-mac #marketing-alliance .vpHeroLink .vpHeroLink__a { 
+    font-size: 15px !important; 
+    line-height: 1.2 !important; 
+  }
+  html.os-mac #austin-underground .vpHeroLink .vpHeroLink__a { 
+    font-size: 15px !important; 
+    line-height: 1.2 !important; 
+  }
+}
+
+/* MOBILE ONLY: Make Vonix hero link match other pages */
+@media (max-width: 600px) {
+  #vonix .vpHeroLink .vpHeroLink__a {
+    font-size: clamp(14px, 3.5vw, 16px) !important;
+    line-height: 1.2 !important;
+  }
+}
+
+/* ===================================================================
+   UNIVERSAL LINK UNDERLINE COLOR SYSTEM
+   Ensures all link underlines across the site match Vonix's color
+   =================================================================== */
+
+/* 1) Fake underline bars used throughout the site */
+.vo__linkRule,
+.bl__linkRule,
+.ma__linkRule,
+.au__linkRule,
+[class$="__linkRule"],
+[class*="__linkRule"] {
+  background: var(--vp-link-underline) !important;
+  background-image: none !important;
+  opacity: 1 !important;
+}
+
+/* 2) If any underline is done via border-bottom instead of a span */
+.heroLink,
+.vo__link,
+.bl__link,
+.ma__link,
+.au__link,
+[class$="__link"],
+[class*="__link"] {
+  border-bottom-color: var(--vp-link-underline) !important;
+}
+
+/* 3) If any link is using text-decoration underline (rare on this site) */
+a {
+  text-decoration-color: var(--vp-link-underline);
 }

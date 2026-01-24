@@ -24,9 +24,9 @@ export default function AustinUnderground() {
               className="au__video"
             />
           </div>
-          <div className="au__linkWrap">
+          <div className="au__linkWrap heroLinkWrap vpHeroLink">
             <a
-              className="au__link"
+              className="au__link heroLink vpHeroLink__a"
               href="https://youtube.com/AustinUnderground"
               target="_blank"
               rel="noopener noreferrer"

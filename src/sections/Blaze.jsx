@@ -143,9 +143,9 @@ export default function Blaze() {
         </div>
 
         <div className="bl__heroLink">
-          <div className="bl__linkWrap">
+          <div className="bl__linkWrap heroLinkWrap vpHeroLink">
             <a
-              className="bl__link"
+              className="bl__link heroLink vpHeroLink__a"
               href={BLAZE_HERO_LINK.href}
               target="_blank"
               rel="noopener noreferrer"

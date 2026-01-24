@@ -26,9 +26,9 @@ export default function Vonix() {
           </div>
 
           {/* Hero link under the video */}
-          <div className="vo__linkWrap">
+          <div className="vo__linkWrap heroLinkWrap vpHeroLink">
             <a
-              className="vo__link"
+              className="vo__link heroLink vpHeroLink__a"
               href="https://youtube.com/Vonix"
               target="_blank"
               rel="noopener noreferrer"

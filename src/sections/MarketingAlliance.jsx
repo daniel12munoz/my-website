@@ -42,14 +42,16 @@ export default function MarketingAlliance() {
             controls={false}
             aria-hidden="true"
           />
-          <a
-            className="ma__link"
-            href="https://www.marketingallianceinc.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            marketingallianceinc.com
-          </a>
+          <div className="ma__linkWrap heroLinkWrap vpHeroLink">
+            <a
+              className="ma__link heroLink vpHeroLink__a"
+              href="https://www.marketingallianceinc.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              marketingallianceinc.com
+            </a>
+          </div>
           <span className="ma__linkRule" />
         </div>
 
