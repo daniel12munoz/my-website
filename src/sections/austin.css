@@ -1569,6 +1569,18 @@
     transform: translateY(var(--au-collage-extra-y)) !important;
   }
 
+  /* 3) Windows-only: move Interview section UP 10px */
+  .os-win #austin-underground .au__interviews {
+    position: relative;
+    top: -30px;
+  }
+
+  /* 4) Mac-only: move Concert Photography section DOWN 20px */
+  .os-mac #austin-underground .au__concertPhotography {
+    position: relative;
+    top: 30px;
+  }
+
 }
 
 /* =========================

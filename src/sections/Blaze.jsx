@@ -4,8 +4,8 @@ import PlayToggleVideo from '../components/PlayToggleVideo';
 import HlsVideo from '../components/HlsVideo';
 
 const BLAZE_HERO_LINK = {
-  href: 'https://youtube.com/@DanielMunozBusiness/',
-  label: 'youtube.com/@DanielMunozBusiness/',
+  href: 'https://youtube.com/@DanielMunozBusiness',
+  label: 'youtube.com/@DanielMunozBusiness',
 };
 
 const BLAZE_SHORT_LINKS = [
@@ -126,23 +126,23 @@ export default function Blaze() {
 
   return (
     <section id="blaze" className="bl au">
-      {/* HERO ROW */}
+      {/* HERO ROW — direct grid children for stable layout (no display:contents / transform hacks) */}
       <div className="bl__row1">
-        <div className="bl__videoBlock">
-          <div className="media media--video bl__heroMedia">
-            <HlsVideo
-              className="bl__heroVideo"
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/eb7c470c81bbd956afe1e07e21f77d8e/manifest/video.m3u8"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
-              priority
-              controls={false}
-            />
-          </div>
+        <div className="media media--video bl__heroMedia">
+          <HlsVideo
+            className="bl__heroVideo"
+            src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/eb7c470c81bbd956afe1e07e21f77d8e/manifest/video.m3u8"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            priority
+            controls={false}
+          />
+        </div>
 
+        <div className="bl__heroLink">
           <div className="bl__linkWrap">
             <a
               className="bl__link"
@@ -154,31 +154,29 @@ export default function Blaze() {
             </a>
             <span className="bl__linkRule" />
           </div>
-
-          {/* Mobile order: title + rule + roles + logo + paragraph */}
-          <div className="bl__heading">
-            <h2 className="bl__title">Blaze</h2>
-            <span className="bl__rule bl__rule--main" aria-hidden="true" />
-            <div className="bl__roles">
-              Content Creator • Nov 2023 – Jul 2024
-            </div>
-
-            <div className="bl__logoWrap">
-              <img
-                src="/bl-logo1.png"
-                alt="Blaze logo"
-                className="bl__logo"
-                loading="lazy"
-              />
-            </div>
-          </div>
-
-          <p className="bl__desc">
-            Blaze is an AI-powered marketing platform that helps entrepreneurs,
-            freelancers, and small businesses grow faster online by creating
-            consistent, on-brand content.
-          </p>
         </div>
+
+        <div className="bl__heading">
+          <h2 className="bl__title">Blaze</h2>
+          <span className="bl__rule bl__rule--main" aria-hidden="true" />
+          <div className="bl__roles">
+            Content Creator • Nov 2023 – Jul 2024
+          </div>
+          <div className="bl__logoWrap">
+            <img
+              src="/bl-logo1.png"
+              alt="Blaze logo"
+              className="bl__logo"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <p className="bl__desc">
+          Blaze is an AI-powered marketing platform that helps entrepreneurs,
+          freelancers, and small businesses grow faster online by creating
+          consistent, on-brand content.
+        </p>
       </div>
 
       {/* SHORTS SECTION */}

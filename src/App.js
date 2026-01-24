@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
+import './sections/austin.css';
+import './sections/blaze.css';
 import Home from './sections/Home';
 import AustinUnderground from './sections/AustinUnderground';
 import MarketingAlliance from './sections/MarketingAlliance';
@@ -132,21 +134,28 @@ function App() {
     };
   }, [mobileNavOpen, activeItem]);
 
-  // Detect macOS desktop and add class to html element
+  // Detect macOS / Windows desktop and add OS class to html element
   useEffect(() => {
     const platform = navigator.platform || '';
     const ua = navigator.userAgent || '';
     const isIOS = /iPhone|iPad|iPod/i.test(ua);
     const isMac = !isIOS && (/Macintosh|MacIntel|MacPPC|Mac68K/i.test(platform) || /Mac OS X/i.test(ua));
+    const isWin = /Win/i.test(platform) || /Windows/i.test(ua);
     const isDesktopPointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
 
     if (isMac && isDesktopPointer) {
       document.documentElement.classList.add('os-mac');
-    } else {
+      document.documentElement.classList.remove('os-win');
+    } else if (isWin && isDesktopPointer) {
+      document.documentElement.classList.add('os-win');
       document.documentElement.classList.remove('os-mac');
+    } else {
+      document.documentElement.classList.remove('os-mac', 'os-win');
     }
 
-    return () => document.documentElement.classList.remove('os-mac');
+    return () => {
+      document.documentElement.classList.remove('os-mac', 'os-win');
+    };
   }, []);
 
   const handleNavClick = (item) => {

@@ -32,7 +32,7 @@ export default function MarketingAlliance() {
         <div className="ma__videoBlock">
           <HlsVideo
             className="media media--video ma__heroVideo"
-            src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/d3150c03f0e7e76e07ca1ec249c7aee9/manifest/video.m3u8"
+            src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/f33e2bc3aed778a80d5050985fda79cc/manifest/video.m3u8"
             autoPlay
             loop
             muted
@@ -44,11 +44,11 @@ export default function MarketingAlliance() {
           />
           <a
             className="ma__link"
-            href="https://www.marketingallianceinc.com/"
+            href="https://www.marketingallianceinc.com"
             target="_blank"
             rel="noopener noreferrer"
           >
-            marketingallianceinc.com/
+            marketingallianceinc.com
           </a>
           <span className="ma__linkRule" />
         </div>

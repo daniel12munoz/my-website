@@ -112,7 +112,7 @@ export default function Home() {
       </main>
 
       <footer className="home__bottom">
-        <p className="home__copy">
+        <p className="home__copy home__description">
           <span className="home__copyLine">
             <strong>Vonix Productions</strong> is a creator-led production company focused on original media and visual storytelling.
           </span>

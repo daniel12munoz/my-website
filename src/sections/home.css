@@ -1,5 +1,10 @@
 @import url('./austin.css');
 
+:root {
+  --home-nudge: 45px;
+  --home-mobile-desc-scale: 0.85;
+}
+
 .home {
   position: relative;
   min-height: 100vh;
@@ -18,8 +23,8 @@
   padding-bottom: clamp(18px, 3vw, 34px);
   padding-left: clamp(18px, 4vw, 46px);
 
-  /* FINAL GLOBAL NUDGE: move entire Home content up 25px and right 5px */
-  transform: translate(22px, -25px);
+  /* FINAL GLOBAL NUDGE: move entire Home content up 25px and right 5px; + --home-nudge to restore vertical position */
+  transform: translate(13px, calc(-50px - var(--home-nudge)));
   will-change: transform;
   justify-items: center;
 }
@@ -242,7 +247,9 @@ oad) */
     padding-top: 56px;
     padding-bottom: 24px;
     overflow: visible;  /* Allow shadow to render naturally (was hidden) */
-    transform: translate(-8px, -60px);  /* Subtle left shift 4px, strong upward shift 60px */
+    overflow-x: hidden; /* Prevent horizontal overflow from scale(1.05) */
+    transform: translate(-8px, calc(-173px - var(--home-nudge))) scale(1.20);
+    transform-origin: top center;
   }
 
   /* Push headline down more on mobile */
@@ -318,6 +325,12 @@ oad) */
     padding-inline: 0;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  /* Description paragraph: slightly smaller on mobile (tune via --home-mobile-desc-scale) */
+  #home.home .home__description {
+    font-size: calc(1em * var(--home-mobile-desc-scale));
+    line-height: 1.5;
   }
 }
 

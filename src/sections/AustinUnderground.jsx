@@ -13,7 +13,7 @@ export default function AustinUnderground() {
         <div className="au__videoBlock">
           <div className="media media--video au__heroMedia">
             <HlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/725099ad328b81460f79ffe935d2c8e2/manifest/video.m3u8"
+              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/5403e21c3a5fdc02ce600c8e351d7fd5/manifest/video.m3u8"
               autoPlay
               muted
               loop
