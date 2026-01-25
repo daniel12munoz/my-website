@@ -53,6 +53,9 @@ const HlsVideoInner = forwardRef(function HlsVideoInner({
   const loopRef = useRef(loop);
   const mutedRef = useRef(muted);
   const preferHdRef = useRef(preferHd);
+  const heroRef = useRef(hero);
+  const debugRef = useRef(debug);
+  const lazyRef = useRef(lazy);
   
   // Keep refs in sync with latest prop values
   useEffect(() => {
@@ -62,7 +65,10 @@ const HlsVideoInner = forwardRef(function HlsVideoInner({
     loopRef.current = loop;
     mutedRef.current = muted;
     preferHdRef.current = preferHd;
-  }, [autoPlay, priority, preload, loop, muted, preferHd]);
+    heroRef.current = hero;
+    debugRef.current = debug;
+    lazyRef.current = lazy;
+  }, [autoPlay, priority, preload, loop, muted, preferHd, hero, debug, lazy]);
 
   // Expose the video element ref to parent components
   useImperativeHandle(ref, () => videoRef.current, []);
@@ -95,8 +101,8 @@ const HlsVideoInner = forwardRef(function HlsVideoInner({
     const video = videoRef.current;
     if (!video || !src || !shouldLoad) return;
 
-    const isHero = !!hero;
-    const shouldDebug = debug || isHero;
+    const isHero = !!heroRef.current;
+    const shouldDebug = !!debugRef.current || isHero;
     
     // Compute heroLike from refs
     const heroLike = isHero || !!priorityRef.current || preloadRef.current === 'auto';
@@ -110,7 +116,7 @@ const HlsVideoInner = forwardRef(function HlsVideoInner({
         preload: preloadRef.current || 'metadata',
         priority: priorityRef.current,
         preferHd: preferHdRef.current,
-        lazy
+        lazy: lazyRef.current
       });
     }
 

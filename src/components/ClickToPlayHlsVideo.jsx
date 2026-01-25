@@ -41,7 +41,6 @@ export default function ClickToPlayHlsVideo({
   const clickTimeRef = useRef(null); // Track click time for performance measurement
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [hasStartedPlaying, setHasStartedPlaying] = useState(false);
   const [hasFirstFrame, setHasFirstFrame] = useState(false);
   const [isStarting, setIsStarting] = useState(false);
   // Use 1280px width for click-to-play videos (non-hero)
@@ -262,7 +261,6 @@ export default function ClickToPlayHlsVideo({
 
     const handlePlay = () => {
       setIsPlaying(true);
-      setHasStartedPlaying(true);
       currentlyPlayingVideo = video;
       
       // Log playing event for Vonix cards (to measure click -> playing time)
