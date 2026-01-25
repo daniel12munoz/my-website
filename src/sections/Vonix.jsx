@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './vonix.css';
-import PlayToggleVideo from '../components/PlayToggleVideo';
 import HlsVideo from '../components/HlsVideo';
+import ClickToPlayHlsVideo from '../components/ClickToPlayHlsVideo';
 
 export default function Vonix() {
   const [activeVonixClipId, setActiveVonixClipId] = useState(null);
@@ -20,7 +20,9 @@ export default function Vonix() {
               playsInline
               preload="auto"
               priority
-              controls={false}
+              hero
+              lazy={false}
+              remountLoop
               className="vo__heroVideo"
             />
           </div>
@@ -117,15 +119,17 @@ export default function Vonix() {
 
           {/* Duo 2 - Right side */}
           <article className="vo__psychDuo" key="/vo-video3againagain.mp4">
-            <PlayToggleVideo
+            <ClickToPlayHlsVideo
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/cfa5c80d23b7f2e4ac671c94d67cfe1f/manifest/video.m3u8"
+              videoId="vo-clip-3"
               wrapperClassName="media media--video vo__psychMain"
-              videoClassName="vo__videoEl"
+              className="vo__videoEl"
               muted={false}
               loop={true}
-              preload="auto"
+              startQuality="high"
+              debugTag="VONIX PTV"
               onRequestPlay={() => setActiveVonixClipId('vo-clip-3')}
-              forcePause={activeVonixClipId !== 'vo-clip-3'}
+              forcePause={activeVonixClipId !== null && activeVonixClipId !== 'vo-clip-3'}
             />
             <div className="vo__linkWrap">
               <a
@@ -140,15 +144,17 @@ export default function Vonix() {
             </div>
 
             <div className="vo__psychShort" key="/vo-short2.mp4">
-              <PlayToggleVideo
+              <ClickToPlayHlsVideo
                 src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/6f53b55acfdc162ff0772c1b8c58bd93/manifest/video.m3u8"
+                videoId="vo-clip-short-2"
                 wrapperClassName="media media--short vo__psychShortMedia"
-                videoClassName="vo__shortVideo"
+                className="vo__shortVideo"
                 muted={false}
                 loop={true}
-                preload="auto"
+                startQuality="high"
+                debugTag="VONIX PTV"
                 onRequestPlay={() => setActiveVonixClipId('vo-clip-short-2')}
-                forcePause={activeVonixClipId !== 'vo-clip-short-2'}
+                forcePause={activeVonixClipId !== null && activeVonixClipId !== 'vo-clip-short-2'}
               />
               <div className="vo__linkWrap">
                 <a
@@ -176,15 +182,17 @@ export default function Vonix() {
         <div className="vo__videoGrid vo__videoGrid--tech">
           {/* Top row: 3 videos */}
           <article className="vo__videoCard" key="/vo-video4againagain.mp4">
-            <PlayToggleVideo
+            <ClickToPlayHlsVideo
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/46766f3b28684d293686ecc81cc2bd4c/manifest/video.m3u8"
+              videoId="vo-clip-4"
               wrapperClassName="media media--video"
-              videoClassName="vo__videoEl"
+              className="vo__videoEl"
               muted={false}
               loop={true}
-              preload="auto"
+              startQuality="high"
+              debugTag="VONIX PTV"
               onRequestPlay={() => setActiveVonixClipId('vo-clip-4')}
-              forcePause={activeVonixClipId !== 'vo-clip-4'}
+              forcePause={activeVonixClipId !== null && activeVonixClipId !== 'vo-clip-4'}
             />
             <div className="vo__linkWrap">
               <a
@@ -200,15 +208,17 @@ export default function Vonix() {
           </article>
 
           <article className="vo__videoCard" key="/vo-video5againagain.mp4">
-            <PlayToggleVideo
+            <ClickToPlayHlsVideo
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/be7c3244f5eae13a7920232603a2c3a1/manifest/video.m3u8"
+              videoId="vo-clip-5"
               wrapperClassName="media media--video"
-              videoClassName="vo__videoEl"
+              className="vo__videoEl"
               muted={false}
               loop={true}
-              preload="auto"
+              startQuality="high"
+              debugTag="VONIX PTV"
               onRequestPlay={() => setActiveVonixClipId('vo-clip-5')}
-              forcePause={activeVonixClipId !== 'vo-clip-5'}
+              forcePause={activeVonixClipId !== null && activeVonixClipId !== 'vo-clip-5'}
             />
             <div className="vo__linkWrap">
               <a
@@ -224,15 +234,17 @@ export default function Vonix() {
           </article>
 
           <article className="vo__videoCard" key="/vo-video6againagain.mp4">
-            <PlayToggleVideo
+            <ClickToPlayHlsVideo
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/53da8db5d5f4ece4a1791a53037fc06c/manifest/video.m3u8"
+              videoId="vo-clip-6"
               wrapperClassName="media media--video"
-              videoClassName="vo__videoEl"
+              className="vo__videoEl"
               muted={false}
               loop={true}
-              preload="auto"
+              startQuality="high"
+              debugTag="VONIX PTV"
               onRequestPlay={() => setActiveVonixClipId('vo-clip-6')}
-              forcePause={activeVonixClipId !== 'vo-clip-6'}
+              forcePause={activeVonixClipId !== null && activeVonixClipId !== 'vo-clip-6'}
             />
             <div className="vo__linkWrap">
               <a
@@ -249,15 +261,17 @@ export default function Vonix() {
 
           {/* Bottom row: 2 centered videos */}
           <article className="vo__videoCard vo__videoCard--bottom" key="/vo-video7againagain.mp4">
-            <PlayToggleVideo
+            <ClickToPlayHlsVideo
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/f08db30369dc64985bf08f0ed045cef7/manifest/video.m3u8"
+              videoId="vo-clip-7"
               wrapperClassName="media media--video"
-              videoClassName="vo__videoEl"
+              className="vo__videoEl"
               muted={false}
               loop={true}
-              preload="auto"
+              startQuality="high"
+              debugTag="VONIX PTV"
               onRequestPlay={() => setActiveVonixClipId('vo-clip-7')}
-              forcePause={activeVonixClipId !== 'vo-clip-7'}
+              forcePause={activeVonixClipId !== null && activeVonixClipId !== 'vo-clip-7'}
             />
             <div className="vo__linkWrap">
               <a
@@ -273,15 +287,17 @@ export default function Vonix() {
           </article>
 
           <article className="vo__videoCard vo__videoCard--bottom" key="/vo-video8againagain.mp4">
-            <PlayToggleVideo
+            <ClickToPlayHlsVideo
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/37f00028853e15b8aa71aec035d77c80/manifest/video.m3u8"
+              videoId="vo-clip-8"
               wrapperClassName="media media--video"
-              videoClassName="vo__videoEl"
+              className="vo__videoEl"
               muted={false}
               loop={true}
-              preload="auto"
+              startQuality="high"
+              debugTag="VONIX PTV"
               onRequestPlay={() => setActiveVonixClipId('vo-clip-8')}
-              forcePause={activeVonixClipId !== 'vo-clip-8'}
+              forcePause={activeVonixClipId !== null && activeVonixClipId !== 'vo-clip-8'}
             />
             <div className="vo__linkWrap">
               <a
@@ -308,15 +324,17 @@ export default function Vonix() {
         <div className="vo__videoGrid vo__videoGrid--vlogs">
           {/* Top row: 3 videos */}
           <article className="vo__videoCard" key="/vo-video9againagain.mp4">
-            <PlayToggleVideo
+            <ClickToPlayHlsVideo
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/9bbfffd245d9c5286645f7b767ec2993/manifest/video.m3u8"
+              videoId="vo-clip-9"
               wrapperClassName="media media--video"
-              videoClassName="vo__videoEl"
+              className="vo__videoEl"
               muted={false}
               loop={true}
-              preload="auto"
+              startQuality="high"
+              debugTag="VONIX PTV"
               onRequestPlay={() => setActiveVonixClipId('vo-clip-9')}
-              forcePause={activeVonixClipId !== 'vo-clip-9'}
+              forcePause={activeVonixClipId !== null && activeVonixClipId !== 'vo-clip-9'}
             />
             <div className="vo__linkWrap">
               <a
@@ -332,15 +350,17 @@ export default function Vonix() {
           </article>
 
           <article className="vo__videoCard" key="/vo-video10againagain.mp4">
-            <PlayToggleVideo
+            <ClickToPlayHlsVideo
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/31358e5c87201ba65239f5afede0d7e7/manifest/video.m3u8"
+              videoId="vo-clip-10"
               wrapperClassName="media media--video"
-              videoClassName="vo__videoEl"
+              className="vo__videoEl"
               muted={false}
               loop={true}
-              preload="auto"
+              startQuality="high"
+              debugTag="VONIX PTV"
               onRequestPlay={() => setActiveVonixClipId('vo-clip-10')}
-              forcePause={activeVonixClipId !== 'vo-clip-10'}
+              forcePause={activeVonixClipId !== null && activeVonixClipId !== 'vo-clip-10'}
             />
             <div className="vo__linkWrap">
               <a
@@ -356,15 +376,17 @@ export default function Vonix() {
           </article>
 
           <article className="vo__videoCard" key="/vo-video11againagain.mp4">
-            <PlayToggleVideo
+            <ClickToPlayHlsVideo
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/6450925208e4b8a51d27b0a48f201fec/manifest/video.m3u8"
+              videoId="vo-clip-11"
               wrapperClassName="media media--video"
-              videoClassName="vo__videoEl"
+              className="vo__videoEl"
               muted={false}
               loop={true}
-              preload="auto"
+              startQuality="high"
+              debugTag="VONIX PTV"
               onRequestPlay={() => setActiveVonixClipId('vo-clip-11')}
-              forcePause={activeVonixClipId !== 'vo-clip-11'}
+              forcePause={activeVonixClipId !== null && activeVonixClipId !== 'vo-clip-11'}
             />
             <div className="vo__linkWrap">
               <a
@@ -381,15 +403,17 @@ export default function Vonix() {
 
           {/* Bottom row: 2 centered videos */}
           <article className="vo__videoCard vo__videoCard--bottom" key="/vo-video12againagain.mp4">
-            <PlayToggleVideo
+            <ClickToPlayHlsVideo
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/142b13ec93fb2adf6b764a7d2d4262bf/manifest/video.m3u8"
+              videoId="vo-clip-12"
               wrapperClassName="media media--video"
-              videoClassName="vo__videoEl"
+              className="vo__videoEl"
               muted={false}
               loop={true}
-              preload="auto"
+              startQuality="high"
+              debugTag="VONIX PTV"
               onRequestPlay={() => setActiveVonixClipId('vo-clip-12')}
-              forcePause={activeVonixClipId !== 'vo-clip-12'}
+              forcePause={activeVonixClipId !== null && activeVonixClipId !== 'vo-clip-12'}
             />
             <div className="vo__linkWrap">
               <a
@@ -405,15 +429,17 @@ export default function Vonix() {
           </article>
 
           <article className="vo__videoCard vo__videoCard--bottom" key="/vo-video13againagain.mp4">
-            <PlayToggleVideo
+            <ClickToPlayHlsVideo
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/cdeba6393a83ff080b70bbddcc6d4024/manifest/video.m3u8"
+              videoId="vo-clip-13"
               wrapperClassName="media media--video"
-              videoClassName="vo__videoEl"
+              className="vo__videoEl"
               muted={false}
               loop={true}
-              preload="auto"
+              startQuality="high"
+              debugTag="VONIX PTV"
               onRequestPlay={() => setActiveVonixClipId('vo-clip-13')}
-              forcePause={activeVonixClipId !== 'vo-clip-13'}
+              forcePause={activeVonixClipId !== null && activeVonixClipId !== 'vo-clip-13'}
             />
             <div className="vo__linkWrap">
               <a
@@ -440,15 +466,17 @@ export default function Vonix() {
         <div className="vo__videoGrid vo__videoGrid--favorites">
           {/* Video 14 */}
           <article className="vo__videoCard" key="/vo-video14againagain.mp4">
-            <PlayToggleVideo
+            <ClickToPlayHlsVideo
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/f2ebd06a38d2a4d871fd528e771750f8/manifest/video.m3u8"
+              videoId="vo-clip-14"
               wrapperClassName="media media--video"
-              videoClassName="vo__videoEl"
+              className="vo__videoEl"
               muted={false}
               loop={true}
-              preload="auto"
+              startQuality="high"
+              debugTag="VONIX PTV"
               onRequestPlay={() => setActiveVonixClipId('vo-clip-14')}
-              forcePause={activeVonixClipId !== 'vo-clip-14'}
+              forcePause={activeVonixClipId !== null && activeVonixClipId !== 'vo-clip-14'}
             />
             <div className="vo__linkWrap">
               <a
@@ -465,15 +493,17 @@ export default function Vonix() {
 
           {/* Video 15 */}
           <article className="vo__videoCard" key="/vo-video15againagainagain.mp4">
-            <PlayToggleVideo
+            <ClickToPlayHlsVideo
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/6b01fbe3a77e639bf9298eb813ff356e/manifest/video.m3u8"
+              videoId="vo-clip-15"
               wrapperClassName="media media--video"
-              videoClassName="vo__videoEl"
+              className="vo__videoEl"
               muted={false}
               loop={true}
-              preload="auto"
+              startQuality="high"
+              debugTag="VONIX PTV"
               onRequestPlay={() => setActiveVonixClipId('vo-clip-15')}
-              forcePause={activeVonixClipId !== 'vo-clip-15'}
+              forcePause={activeVonixClipId !== null && activeVonixClipId !== 'vo-clip-15'}
             />
             <div className="vo__linkWrap">
               <a
@@ -490,15 +520,17 @@ export default function Vonix() {
 
           {/* Video 16 */}
           <article className="vo__videoCard" key="/vo-video16againagain.mp4">
-            <PlayToggleVideo
+            <ClickToPlayHlsVideo
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/956c523692f9793d1862421d4b5b9009/manifest/video.m3u8"
+              videoId="vo-clip-16"
               wrapperClassName="media media--video"
-              videoClassName="vo__videoEl"
+              className="vo__videoEl"
               muted={false}
               loop={true}
-              preload="auto"
+              startQuality="high"
+              debugTag="VONIX PTV"
               onRequestPlay={() => setActiveVonixClipId('vo-clip-16')}
-              forcePause={activeVonixClipId !== 'vo-clip-16'}
+              forcePause={activeVonixClipId !== null && activeVonixClipId !== 'vo-clip-16'}
             />
             <div className="vo__linkWrap">
               <a
@@ -515,15 +547,17 @@ export default function Vonix() {
 
           {/* Video 17 */}
           <article className="vo__videoCard" key="/vo-video17againagain.mp4">
-            <PlayToggleVideo
+            <ClickToPlayHlsVideo
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/da5102ebe7634b16880f18ba9b4ebb0b/manifest/video.m3u8"
+              videoId="vo-clip-17"
               wrapperClassName="media media--video"
-              videoClassName="vo__videoEl"
+              className="vo__videoEl"
               muted={false}
               loop={true}
-              preload="auto"
+              startQuality="high"
+              debugTag="VONIX PTV"
               onRequestPlay={() => setActiveVonixClipId('vo-clip-17')}
-              forcePause={activeVonixClipId !== 'vo-clip-17'}
+              forcePause={activeVonixClipId !== null && activeVonixClipId !== 'vo-clip-17'}
             />
             <div className="vo__linkWrap">
               <a
@@ -540,15 +574,17 @@ export default function Vonix() {
 
           {/* Video 18 */}
           <article className="vo__videoCard" key="/vo-video18againagain.mp4">
-            <PlayToggleVideo
+            <ClickToPlayHlsVideo
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/c00e1bd44b221b15d2fd9e9b8707f9ba/manifest/video.m3u8"
+              videoId="vo-clip-18"
               wrapperClassName="media media--video"
-              videoClassName="vo__videoEl"
+              className="vo__videoEl"
               muted={false}
               loop={true}
-              preload="auto"
+              startQuality="high"
+              debugTag="VONIX PTV"
               onRequestPlay={() => setActiveVonixClipId('vo-clip-18')}
-              forcePause={activeVonixClipId !== 'vo-clip-18'}
+              forcePause={activeVonixClipId !== null && activeVonixClipId !== 'vo-clip-18'}
             />
             <div className="vo__linkWrap">
               <a

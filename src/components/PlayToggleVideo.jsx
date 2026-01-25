@@ -1,5 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import HlsVideo from './HlsVideo';
+import { cloudflareThumbnail } from '../utils/cloudflareThumb';
+
+// Module-level variable to track currently playing user-initiated video
+let currentlyPlayingUserVideo = null;
 
 // Helper to detect Safari (not Chrome on iOS/macOS)
 const isSafari = () => {
@@ -16,6 +20,7 @@ const isMobile = () => {
 export default function PlayToggleVideo({
   src,
   allowAutoplay = false,
+  clickToToggle = true, // New prop - allow disabling clicks for autoplay headers
   wrapperClassName = 'media media--video',
   videoClassName = '',
   loop = true,
@@ -28,12 +33,17 @@ export default function PlayToggleVideo({
   lazy = true, // Lazy load by default
   poster: posterProp,
   preferHd = true,
+  hero = false, // Hero mode: force high quality immediately
   ...rest
 }) {
+  // Hero mode overrides: force immediate load and high quality
+  const effectiveLazy = hero ? false : lazy;
+  const effectivePreload = hero ? 'auto' : preload;
+  const effectivePreferHd = hero ? true : preferHd;
   const videoRef = useRef(null);
   const wrapperRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [shouldLoad, setShouldLoad] = useState(!lazy); // Load immediately if not lazy
+  const [shouldLoad, setShouldLoad] = useState(!effectiveLazy); // Load immediately if not lazy
   const [hasPaintedFrame, setHasPaintedFrame] = useState(false); // Track first frame painted
   const [isStarting, setIsStarting] = useState(false); // Track when play is initiated
   const hasEverPlayedRef = useRef(false); // Track if video has ever played (prevents poster flash on resume)
@@ -46,7 +56,7 @@ export default function PlayToggleVideo({
 
   // Lazy loading with IntersectionObserver
   useEffect(() => {
-    if (!lazy) return;
+    if (!effectiveLazy) return;
     const el = wrapperRef.current || videoRef.current;
     if (!el) return;
 
@@ -63,7 +73,7 @@ export default function PlayToggleVideo({
     observer.observe(el);
 
     return () => observer.disconnect();
-  }, [lazy]);
+  }, [effectiveLazy]);
 
   // Initialize video: always start paused unless allowAutoplay is true
   useEffect(() => {
@@ -185,6 +195,17 @@ export default function PlayToggleVideo({
         video.pause();
         return;
       }
+      
+      // One-at-a-time: pause other user-initiated videos
+      if (!allowAutoplay) {
+        if (currentlyPlayingUserVideo && currentlyPlayingUserVideo !== video) {
+          try {
+            currentlyPlayingUserVideo.pause();
+          } catch {}
+        }
+        currentlyPlayingUserVideo = video;
+      }
+      
       setIsPlaying(true);
       // Only track starting/frame painted on FIRST play
       if (!hasEverPlayedRef.current) {
@@ -193,6 +214,11 @@ export default function PlayToggleVideo({
       }
     };
     const handlePause = () => {
+      // Clear currently playing tracker
+      if (!allowAutoplay && currentlyPlayingUserVideo === video) {
+        currentlyPlayingUserVideo = null;
+      }
+      
       setIsPlaying(false);
       // Don't reset starting state on pause - we've already played
       if (!hasEverPlayedRef.current) {
@@ -200,6 +226,11 @@ export default function PlayToggleVideo({
       }
     };
     const handleEnded = () => {
+      // Clear currently playing tracker
+      if (!allowAutoplay && currentlyPlayingUserVideo === video) {
+        currentlyPlayingUserVideo = null;
+      }
+      
       setIsPlaying(false);
       setIsStarting(false);
     };
@@ -214,6 +245,39 @@ export default function PlayToggleVideo({
       video.removeEventListener('ended', handleEnded);
     };
   }, [src, allowAutoplay]); // Re-attach listeners when src changes
+
+  // Autoplay reliability: ensure autoplay videos start immediately
+  useEffect(() => {
+    if (!allowAutoplay || !shouldLoad) return;
+    
+    const video = videoRef.current;
+    if (!video) return;
+    
+    // Ensure lazy loading is disabled for autoplay
+    ensureLoaded();
+    
+    // Force attributes for autoplay reliability
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    
+    // Try to play on canplay
+    const handleCanPlay = () => {
+      if (video.paused) {
+        video.play().catch(() => {
+          // Autoplay failed, ignore
+        });
+      }
+    };
+    
+    video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener('loadedmetadata', handleCanPlay);
+    
+    return () => {
+      video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener('loadedmetadata', handleCanPlay);
+    };
+  }, [allowAutoplay, shouldLoad, src]);
 
   useEffect(() => {
     // Never force-pause autoplay videos
@@ -322,6 +386,8 @@ export default function PlayToggleVideo({
 
   // Prime loading on pointerdown/touchstart for faster mobile response (NO playback)
   const handlePrime = () => {
+    ensureLoaded(); // Force load if lazy
+    
     const video = videoRef.current;
     if (!video || didPrimeRef.current) return;
     
@@ -332,13 +398,52 @@ export default function PlayToggleVideo({
         video.load();
       }
     } catch {}
-    
+
     didPrimeRef.current = true;
   };
 
   const handleToggle = () => {
     const video = videoRef.current;
     if (!video) return;
+    
+    // Debug log for click-to-play videos
+    if (!allowAutoplay) {
+      console.log('[PlayToggleVideo] toggle', { 
+        src: src?.substring(0, 60) + '...', 
+        paused: video.paused, 
+        readyState: video.readyState,
+        shouldLoad 
+      });
+    }
+    
+    // If not loaded yet, force load and queue play for click-to-play videos
+    if (!shouldLoad) {
+      setShouldLoad(true);
+      
+      // Only queue play for user-initiated (non-autoplay) videos
+      if (!allowAutoplay) {
+        userInitiatedRef.current = true;
+        
+        // Inform parent that THIS instance is about to play
+        if (onRequestPlay) {
+          onRequestPlay();
+        }
+        
+        // Queue play after video mounts
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            const v = videoRef.current;
+            if (v) {
+              v.play().catch(() => {
+                // Play failed, reset state
+                userInitiatedRef.current = false;
+              });
+            }
+          }, 100);
+        });
+      }
+      return;
+    }
 
     if (video.paused || video.ended) {
       // Mark as user-initiated before playing
@@ -414,17 +519,8 @@ export default function PlayToggleVideo({
   const { autoplay: restAutoplay, ...restWithoutAutoplay } = rest;
 
   // Get Cloudflare poster for placeholder (if not provided)
-  const getCloudflarePoster = (videoSrc) => {
-    if (!videoSrc) return null;
-    const match = videoSrc.match(/cloudflarestream\.com\/([^/]+)\//);
-    if (!match) return null;
-    const id = match[1];
-    const customerMatch = videoSrc.match(/customer-([^/]+)\.cloudflarestream\.com/);
-    const customerId = customerMatch ? customerMatch[1] : 'j47qk7l1wwcd8bxv';
-    return `https://customer-${customerId}.cloudflarestream.com/${id}/thumbnails/thumbnail.jpg?time=0s`;
-  };
-
-  const poster = posterProp || (src && src.endsWith('.m3u8') ? getCloudflarePoster(src) : null);
+  // Use 1280px width for non-hero videos (card videos)
+  const poster = posterProp || (src && src.endsWith('.m3u8') ? cloudflareThumbnail(src, { time: "0s", width: 1280 }) : null);
 
   // Ensure playsinline attributes are set for mobile inline playback
   // Must be declared before any conditional returns (Rules of Hooks)
@@ -436,33 +532,23 @@ export default function PlayToggleVideo({
     video.setAttribute('webkit-playsinline', '');
   }, [shouldLoad]);
 
-  // If lazy loading and not yet visible, render placeholder
-  if (!shouldLoad) {
-    return (
-      <div
-        ref={wrapperRef}
-        className={`${wrapperClassName} is-playable`.trim()}
-        style={{
-          backgroundImage: poster ? `url(${poster})` : "none",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundColor: "#000",
-          aspectRatio: "16/9"
-        }}
-      />
-    );
-  }
+  // Helper to force-load lazy videos
+  const ensureLoaded = useCallback(() => {
+    if (!shouldLoad) {
+      setShouldLoad(true);
+    }
+  }, [shouldLoad]);
 
   // Combine videoClassName with shared stable class
   const finalVideoClassName = `vp-videoEl ${videoClassName || ''}`.trim();
 
   const videoProps = {
-    ref: videoRef,
+    // DO NOT include ref here - it doesn't reliably attach to components via spread
     autoPlay: allowAutoplay, // Use camelCase autoPlay (React standard)
     loop: allowAutoplay ? (loop !== false ? true : loop) : loop,
     muted: allowAutoplay ? (muted !== false ? true : muted) : muted,
     playsInline: true,
-    preload: shouldLoad ? (allowAutoplay ? (preload || 'metadata') : preload) : 'none',
+    preload: shouldLoad ? (allowAutoplay ? (effectivePreload || 'metadata') : effectivePreload) : 'none',
     controls: false,
     disableRemotePlayback: true,
     disablePictureInPicture: true,
@@ -481,20 +567,25 @@ export default function PlayToggleVideo({
     <div
       ref={wrapperRef}
       className={`${wrapperClassName} is-playable`.trim()}
-      onClick={handleToggle}
-      onPointerDown={handlePrime}
-      onTouchStart={handlePrime}
+      onClick={clickToToggle && !allowAutoplay ? handleToggle : undefined}
+      onPointerDown={clickToToggle && !allowAutoplay ? handlePrime : undefined}
+      onTouchStart={clickToToggle && !allowAutoplay ? handlePrime : undefined}
+      style={allowAutoplay || !clickToToggle ? { pointerEvents: 'none' } : undefined}
     >
       {isHLS ? (
         <HlsVideo
+          ref={videoRef}
           src={shouldLoad ? src : undefined}
-          lazy={lazy}
-          preferHd={preferHd}
+          lazy={effectiveLazy}
+          preferHd={effectivePreferHd}
+          hero={hero}
+          debug={hero}
+          priority={hero ? true : rest.priority}
           poster={poster}
           {...videoProps}
         />
       ) : (
-        <video {...videoProps}>
+        <video ref={videoRef} {...videoProps}>
           {shouldLoad && <source src={src} type={getVideoType(src)} />}
         </video>
       )}

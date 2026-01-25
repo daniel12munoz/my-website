@@ -20,6 +20,9 @@ export default function AustinUnderground() {
               playsInline
               preload="auto"
               priority
+              hero
+              lazy={false}
+              remountLoop
               controls={false}
               className="au__video"
             />
@@ -125,7 +128,9 @@ export default function AustinUnderground() {
                   loop
                   muted
                   playsInline
-                  preload="metadata"
+                  preload="auto"
+                  priority
+                  lazy={false}
                   className="au__videoPlayer"
                 />
               </div>
@@ -151,7 +156,9 @@ export default function AustinUnderground() {
                   loop
                   muted
                   playsInline
-                  preload="metadata"
+                  preload="auto"
+                  priority
+                  lazy={false}
                   className="au__videoPlayer"
                 />
               </div>
@@ -177,7 +184,9 @@ export default function AustinUnderground() {
                   loop
                   muted
                   playsInline
-                  preload="metadata"
+                  preload="auto"
+                  priority
+                  lazy={false}
                   className="au__videoPlayer"
                 />
               </div>
@@ -203,7 +212,9 @@ export default function AustinUnderground() {
                   loop
                   muted
                   playsInline
-                  preload="metadata"
+                  preload="auto"
+                  priority
+                  lazy={false}
                   className="au__videoPlayer"
                 />
               </div>
@@ -229,7 +240,9 @@ export default function AustinUnderground() {
                   loop
                   muted
                   playsInline
-                  preload="metadata"
+                  preload="auto"
+                  priority
+                  lazy={false}
                   className="au__videoPlayer"
                 />
               </div>

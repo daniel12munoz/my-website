@@ -532,6 +532,20 @@
   overflow: hidden;
 }
 
+/* Marketing Alliance hero frame (new structure) */
+/* .ma__heroFrame inherits styles from .ma .media (rounded, shadow, overflow hidden) */
+
+#marketing-alliance .ma__heroVideoEl {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  background: #000;
+}
+
+/* Marketing Alliance hero mobile: REMOVED - replaced with .ma__heroFrame solution below */
+/* Previous rules targeting .ma__videoBlock > div were too broad and caused layout breakage */
+
 /* =================== 2) Lower entire Marketing Alliance page =================== */
 /* overrides replaced below */
 
@@ -1115,6 +1129,41 @@
   #marketing-alliance .ma__desc {
     position: relative;
     top: 10px;
+  }
+}
+
+/* Marketing Alliance HERO — MOBILE ONLY: lock frame height + prevent linkWrap black box */
+@media (max-width: 600px) {
+  #marketing-alliance .ma__heroFrame {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #000;
+    transform: translateZ(0);
+  }
+
+  /* Fill the frame — target the actual <video> that HlsVideo renders, plus common helper classes */
+  #marketing-alliance .ma__heroFrame video,
+  #marketing-alliance .ma__heroFrame .vp-videoEl,
+  #marketing-alliance .ma__heroFrame .hls-video,
+  #marketing-alliance .ma__heroFrame .ma__heroVideoEl {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: cover !important;
+  }
+
+  /* Critical: ensure linkWrap cannot become the giant black box */
+  #marketing-alliance .ma__linkWrap {
+    height: auto !important;
+    min-height: 0 !important;
+    background: transparent !important;
+    position: relative !important;
+    z-index: 2 !important;
+    overflow: visible !important;
   }
 }
 

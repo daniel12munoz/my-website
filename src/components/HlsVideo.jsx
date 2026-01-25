@@ -1,52 +1,77 @@
-import React, { useEffect, useRef, forwardRef, useImperativeHandle, useState } from 'react';
+import React, { useEffect, useRef, forwardRef, useImperativeHandle, useState, useCallback } from 'react';
 import Hls from 'hls.js';
+import { cloudflareThumbnail } from '../utils/cloudflareThumb';
 
-// Helper to get Cloudflare Stream poster thumbnail from manifest URL
-function getCloudflarePoster(src) {
-  if (!src) return null;
-  // Match: https://customer-XXXX.cloudflarestream.com/<VIDEO_ID>/manifest/video.m3u8
-  const match = src.match(/cloudflarestream\.com\/([^/]+)\//);
-  if (!match) return null;
-  const id = match[1];
-  // Extract customer ID from src
-  const customerMatch = src.match(/customer-([^/]+)\.cloudflarestream\.com/);
-  const customerId = customerMatch ? customerMatch[1] : 'j47qk7l1wwcd8bxv'; // fallback
-  return `https://customer-${customerId}.cloudflarestream.com/${id}/thumbnails/thumbnail.jpg?time=0s`;
+// Platform detection: iOS/iPadOS only
+function isIOSorIPadOS() {
+  return (
+    /iP(hone|od|ad)/.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+  );
 }
 
-const HlsVideo = forwardRef(function HlsVideo({ 
+// Safari detection (not Chrome/Chromium/Edge/etc)
+function isSafari() {
+  const ua = navigator.userAgent;
+  return /Safari/.test(ua) && !/Chrome|Chromium|Edg|OPR|Brave|Android/.test(ua);
+}
+
+// Helper to detect mobile (coarse pointer device)
+function isMobile() {
+  return window.matchMedia('(pointer: coarse)').matches || 
+         /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+}
+
+const HlsVideoInner = forwardRef(function HlsVideoInner({ 
   src, 
   autoPlay, 
   priority, 
   poster: posterProp,
   lazy = true,
   preferHd = true,
+  hero = false,
+  debug = false,
   preload,
+  loop = false,
+  muted = false,
+  posterWidth,
   ...props 
 }, ref) {
   const videoRef = useRef(null);
   const hlsRef = useRef(null);
-  const abrReenableTimeoutRef = useRef(null);
-  const [shouldLoad, setShouldLoad] = useState(!lazy);
+  const hasFirstFrameRef = useRef(false); // For mobile hero poster overlay - persists across pause/resume
+  
+  // Compute heroLike once at mount for shouldLoad init
+  const heroLikeInitial = hero || priority === true || preload === 'auto';
+  const [shouldLoad, setShouldLoad] = useState(!lazy || heroLikeInitial);
+  const [hasFirstFrame, setHasFirstFrame] = useState(false); // For mobile hero poster overlay
   
   // Use refs to capture latest values for async callbacks without triggering effect re-runs
   const autoPlayRef = useRef(autoPlay);
   const priorityRef = useRef(priority);
   const preloadRef = useRef(preload);
+  const loopRef = useRef(loop);
+  const mutedRef = useRef(muted);
+  const preferHdRef = useRef(preferHd);
   
   // Keep refs in sync with latest prop values
   useEffect(() => {
     autoPlayRef.current = autoPlay;
     priorityRef.current = priority;
     preloadRef.current = preload;
-  }, [autoPlay, priority, preload]);
+    loopRef.current = loop;
+    mutedRef.current = muted;
+    preferHdRef.current = preferHd;
+  }, [autoPlay, priority, preload, loop, muted, preferHd]);
 
   // Expose the video element ref to parent components
   useImperativeHandle(ref, () => videoRef.current, []);
 
   // Lazy loading with IntersectionObserver
   useEffect(() => {
-    if (!lazy) return;
+    // Hero videos skip lazy loading entirely
+    if (heroLikeInitial || !lazy) return;
+    
     const video = videoRef.current;
     if (!video) return;
 
@@ -63,12 +88,77 @@ const HlsVideo = forwardRef(function HlsVideo({
     observer.observe(video);
 
     return () => observer.disconnect();
-  }, [lazy]);
+  }, [lazy, heroLikeInitial]);
 
   // Initialize HLS/native video
   useEffect(() => {
     const video = videoRef.current;
     if (!video || !src || !shouldLoad) return;
+
+    const isHero = !!hero;
+    const shouldDebug = debug || isHero;
+    
+    // Compute heroLike from refs
+    const heroLike = isHero || !!priorityRef.current || preloadRef.current === 'auto';
+
+    // HERO: Always log initial state (only once per mount)
+    if (shouldDebug) {
+      console.log('[HERO HLS] Init:', {
+        src,
+        hero: isHero,
+        heroLike,
+        preload: preloadRef.current || 'metadata',
+        priority: priorityRef.current,
+        preferHd: preferHdRef.current,
+        lazy
+      });
+    }
+
+    // ---- FORCE LOOPING (desktop-safe) ----
+    video.loop = !!loopRef.current;
+    video.muted = !!mutedRef.current;
+    
+    // HERO: Force preload='auto' and fetchPriority='high' for immediate loading
+    if (heroLike) {
+      video.preload = 'auto';
+      if ('fetchPriority' in video) {
+        video.fetchPriority = 'high';
+      }
+    }
+
+    // Restart function used by both ended + failsafe
+    const restart = () => {
+      if (!loopRef.current) return;
+
+      try { video.pause(); } catch {}
+      try { video.currentTime = 0; } catch {}
+
+      // If hls.js is being used, restart loading from the beginning too
+      if (hlsRef.current) {
+        try { hlsRef.current.startLoad(0); } catch {}
+      }
+
+      // Kick play again
+      video.play().catch(() => {});
+    };
+
+    // 1) Normal loop path: ended event
+    const onEnded = () => restart();
+
+    // 2) Failsafe: some desktop HLS paths don't fire ended reliably
+    const onTimeUpdate = () => {
+      if (!loopRef.current) return;
+      const d = video.duration;
+      if (!Number.isFinite(d) || d <= 0) return;
+      if (video.currentTime >= d - 0.25) {
+        restart();
+      }
+    };
+
+    if (loopRef.current) {
+      video.addEventListener('ended', onEnded);
+      video.addEventListener('timeupdate', onTimeUpdate);
+    }
 
     // Clean up previous HLS instance if it exists
     if (hlsRef.current) {
@@ -76,136 +166,281 @@ const HlsVideo = forwardRef(function HlsVideo({
       hlsRef.current = null;
     }
 
+    // Platform detection for path selection
+    const isiOS = isIOSorIPadOS();
+    const safari = isSafari();
+    const allowNativeHls = isiOS && safari; // ONLY iOS/iPadOS Safari
+    
     // Check if native HLS is supported
     const canPlayHLS = video.canPlayType('application/vnd.apple.mpegurl') === 'maybe' || 
                        video.canPlayType('application/vnd.apple.mpegurl') === 'probably';
 
-    if (canPlayHLS) {
-      // Native HLS support (Safari, iOS Safari)
-      video.src = src;
-      // Try to autoplay if requested (use ref to get latest value)
-      if (autoPlayRef.current && video.muted) {
-        video.play().catch(() => {
-          // Autoplay failed, ignore
-        });
-      }
-    } else if (Hls.isSupported()) {
-      // Use hls.js for browsers that don't support native HLS (Chrome, Firefox, etc.)
-      const hls = new Hls({
-        enableWorker: true,
-        lowLatencyMode: false, // Disable for VOD (not live streams)
-        startFragPrefetch: true,
-        capLevelToPlayerSize: true,
-        maxBufferLength: 12,
-        backBufferLength: 3,
-        maxStarvationDelay: 2, // Small delay before switching down
-        // Much higher initial bandwidth estimate to avoid starting at 180p
-        abrEwmaDefaultEstimate: 10000000, // 10 Mbps default estimate
-        abrBandWidthFactor: 1.2, // Slightly > 1 for faster ramp
-        abrBandWidthUpFactor: 1.3, // > 1 for aggressive up-ramp
-        startLevel: -1 // Let us set it after manifest
+    if (shouldDebug) {
+      console.log('[HERO HLS] Path:', { 
+        allowNativeHls, 
+        isiOS, 
+        safari, 
+        hlsJsSupported: Hls.isSupported(), 
+        canPlayHLS 
       });
+    }
+
+    // PATH SELECTION: Force hls.js on desktop, only allow native HLS on iOS Safari
+    if (!allowNativeHls && Hls.isSupported()) {
+      // DESKTOP PATH: Always use hls.js
+      if (shouldDebug) {
+        console.log('[HERO HLS] Using HLS.JS path (desktop)');
+      }
+      
+      // Hero mode: aggressive config for high startup quality
+      const hlsConfig = {
+        enableWorker: true,
+        lowLatencyMode: false,
+        startFragPrefetch: true,
+        maxStarvationDelay: 2,
+        startLevel: -1 // We'll set this after manifest
+      };
+      
+      if (heroLike) {
+        // HERO: Aggressive buffering and bandwidth config
+        hlsConfig.abrEwmaDefaultEstimate = 20000000; // 20 Mbps
+        hlsConfig.abrBandWidthFactor = 1.3;
+        hlsConfig.abrBandWidthUpFactor = 1.4;
+        hlsConfig.maxBufferLength = 20;
+        hlsConfig.backBufferLength = 5;
+        hlsConfig.capLevelToPlayerSize = false; // Don't cap based on element size
+      } else {
+        // Non-hero: conservative config
+        hlsConfig.abrEwmaDefaultEstimate = 10000000; // 10 Mbps
+        hlsConfig.abrBandWidthFactor = 1.2;
+        hlsConfig.abrBandWidthUpFactor = 1.3;
+        hlsConfig.maxBufferLength = 12;
+        hlsConfig.backBufferLength = 3;
+        hlsConfig.capLevelToPlayerSize = true;
+      }
+      
+      const hls = new Hls(hlsConfig);
       hlsRef.current = hls;
       
       hls.attachMedia(video);
       hls.loadSource(src);
       
-      // Select optimal level after manifest is parsed based on player size
-      let fragBufferedCount = 0;
-      let fragBufferedHandler = null;
+      // Helper: calculate buffer ahead of current time
+      const bufferAhead = (vid) => {
+        if (!vid.buffered || vid.buffered.length === 0) return 0;
+        const end = vid.buffered.end(vid.buffered.length - 1);
+        return Math.max(0, end - vid.currentTime);
+      };
       
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        if (preferHd) {
-          const levels = hls.levels;
-          if (levels && levels.length > 0) {
-            // Capture latest values from refs (for async callback)
-            const currentPreload = preloadRef.current || 'metadata';
-            const isPriority = priorityRef.current === true;
+        const levels = hls.levels;
+        
+        if (shouldDebug) {
+          console.log('[HERO HLS] MANIFEST_PARSED - Available levels:', 
+            levels.map((level, i) => ({
+              index: i,
+              height: level.height,
+              bitrate: level.bitrate,
+              width: level.width
+            }))
+          );
+        }
+        
+        if (preferHdRef.current && levels && levels.length > 0) {
+          // Wait one frame for layout
+          requestAnimationFrame(() => {
+            const rect = video.getBoundingClientRect();
+            const playerHeight = Math.round(rect.height || video.clientHeight || video.offsetHeight || 0);
             
-            // Wait one animation frame so clientHeight is correct (layout is final)
-            requestAnimationFrame(() => {
-              // Get actual player height (use multiple methods for accuracy)
-              const rect = video.getBoundingClientRect();
-              const playerHeight = Math.round(rect.height || video.clientHeight || video.offsetHeight || 0);
-              
-              // Hero-only minimum 720p logic (not all videos)
-              // Hero videos: priority === true OR preload === 'auto' AND large player height
-              const isHeroLike = isPriority || (currentPreload === 'auto' && playerHeight >= 420);
-              const targetHeight = isHeroLike 
-                ? Math.max(playerHeight, 720)  // Hero: minimum 720p
-                : Math.max(playerHeight, 360);  // Small cards: minimum 360p
-              
-              // Find the highest level whose height is >= targetHeight (or closest above)
-              let preferredStartLevel = -1;
-              let bestMatch = levels.length - 1; // Default to highest quality
-              
+            let chosenLevel = -1;
+            
+            if (heroLike) {
+              // HERO: Find highest level >= 720p, else use highest available
               for (let i = levels.length - 1; i >= 0; i--) {
-                const level = levels[i];
-                if (level.height >= targetHeight) {
-                  preferredStartLevel = i;
+                const h = levels[i].height;
+                if (h >= 720) {
+                  chosenLevel = i;
                   break;
-                }
-                // Track best match (highest quality available)
-                if (level.height > (levels[bestMatch]?.height || 0) || bestMatch === levels.length - 1) {
-                  bestMatch = i;
                 }
               }
               
-              // Use preferred level if found, otherwise use best match
-              const chosenLevel = preferredStartLevel !== -1 ? preferredStartLevel : bestMatch;
+              // If no level >= 720p, use highest available
+              if (chosenLevel === -1) {
+                chosenLevel = levels.length - 1;
+              }
+            } else {
+              // Non-hero: match player height or 360p minimum
+              const targetHeight = Math.max(playerHeight, 360);
               
-              // FORCE startup at chosen level by temporarily disabling ABR
-              hls.autoLevelEnabled = false;
-              hls.nextLoadLevel = chosenLevel; // Force next load
-              hls.loadLevel = chosenLevel;
+              for (let i = levels.length - 1; i >= 0; i--) {
+                if (levels[i].height >= targetHeight) {
+                  chosenLevel = i;
+                  break;
+                }
+              }
+              
+              if (chosenLevel === -1) {
+                chosenLevel = levels.length - 1;
+              }
+            }
+            
+            if (shouldDebug) {
+              console.log('[HERO HLS] Chosen startupLevel:', {
+                index: chosenLevel,
+                height: levels[chosenLevel]?.height,
+                bitrate: levels[chosenLevel]?.bitrate,
+                playerHeight,
+                heroLike
+              });
+            }
+            
+            // Set startup level (do NOT set currentLevel to avoid mid-play switches)
+            try {
               hls.startLevel = chosenLevel;
-              hls.currentLevel = chosenLevel;
+              hls.nextLoadLevel = chosenLevel;
+              hls.loadLevel = chosenLevel;
+            } catch (e) {
+              if (shouldDebug) {
+                console.warn('[HERO HLS] Failed to set levels:', e);
+              }
+            }
+            
+            // Start loading at chosen level (only once)
+            hls.startLoad(0);
+            
+            // HERO: Safe ABR release after buffering
+            if (heroLike) {
+              let released = false;
+              let fragCount = 0;
+              let fragBufferedHandler = null;
+              let releaseTimeoutId = null;
               
-              // Explicitly restart loading at the chosen level
-              hls.startLoad(0);
-              
-              // Track fragments to re-enable ABR after startup
-              fragBufferedCount = 0;
-              fragBufferedHandler = () => {
-                fragBufferedCount++;
-                // Re-enable ABR after 2 fragments are buffered AND we're at/near chosen level
-                if (fragBufferedCount >= 2 && hls.autoLevelEnabled === false) {
-                  const currentLevel = hls.currentLevel !== -1 ? hls.currentLevel : hls.loadLevel;
-                  // Only re-enable if we're actually at the chosen level (or close)
-                  if (currentLevel >= chosenLevel - 1) {
+              const releaseAbrSafely = () => {
+                if (released) return;
+                released = true;
+                
+                // Safe release: set autoLevelEnabled and nextAutoLevel (no currentLevel change)
+                try {
+                  if ('autoLevelEnabled' in hls) {
                     hls.autoLevelEnabled = true;
-                    if (fragBufferedHandler) {
-                      hls.off(Hls.Events.FRAG_BUFFERED, fragBufferedHandler);
-                      fragBufferedHandler = null;
-                    }
                   }
+                  if ('nextAutoLevel' in hls) {
+                    hls.nextAutoLevel = chosenLevel;
+                  }
+                } catch (e) {
+                  // Ignore
+                }
+                
+                // Clean up
+                if (fragBufferedHandler) {
+                  hls.off(Hls.Events.FRAG_BUFFERED, fragBufferedHandler);
+                  fragBufferedHandler = null;
+                }
+                if (releaseTimeoutId) {
+                  clearTimeout(releaseTimeoutId);
+                  releaseTimeoutId = null;
                 }
               };
+              
+              // Wait for buffer safety: 2 fragments + 1.5s buffered
+              fragBufferedHandler = () => {
+                fragCount++;
+                
+                const buffered = bufferAhead(video);
+                
+                if (!released && fragCount >= 2 && buffered >= 1.5) {
+                  releaseAbrSafely();
+                }
+              };
+              
               hls.on(Hls.Events.FRAG_BUFFERED, fragBufferedHandler);
               
-              // Fallback: re-enable ABR after 2.5 seconds even if fragments aren't counted
-              abrReenableTimeoutRef.current = setTimeout(() => {
-                if (hls && hls.autoLevelEnabled === false) {
-                  hls.autoLevelEnabled = true;
-                  if (fragBufferedHandler) {
-                    hls.off(Hls.Events.FRAG_BUFFERED, fragBufferedHandler);
-                    fragBufferedHandler = null;
-                  }
-                }
-              }, 2500);
-            });
-          }
+              // Fallback: release after 6s if buffer conditions not met
+              releaseTimeoutId = setTimeout(() => {
+                releaseAbrSafely();
+              }, 6000);
+            }
+          });
         }
         
-        // Try to autoplay if requested (use ref to get latest value)
+        // Try to autoplay if requested
         if (autoPlayRef.current && video.muted) {
           video.play().catch(() => {
             // Autoplay failed, ignore
           });
         }
       });
+      
+      // HERO: Log level switches
+      if (shouldDebug) {
+        hls.on(Hls.Events.LEVEL_SWITCHED, (event, data) => {
+          const newLevel = data.level;
+          const levelInfo = hls.levels[newLevel];
+          console.log('[HERO HLS] LEVEL_SWITCHED:', {
+            newLevelIndex: newLevel,
+            height: levelInfo?.height,
+            bitrate: levelInfo?.bitrate
+          });
+        });
+      }
+      
+      // HERO: Log errors
+      if (shouldDebug) {
+        hls.on(Hls.Events.ERROR, (event, data) => {
+          console.error('[HERO HLS] ERROR:', {
+            type: data.type,
+            details: data.details,
+            fatal: data.fatal
+          });
+        });
+      }
+    } else if (allowNativeHls && canPlayHLS) {
+      // IOS SAFARI PATH: Use native HLS
+      if (shouldDebug) {
+        console.log('[HERO HLS] Using NATIVE HLS path (iOS Safari - cannot force rendition)');
+      }
+      
+      video.src = src;
+      if (autoPlayRef.current && video.muted) {
+        video.play().catch(() => {
+          // Autoplay failed, ignore
+        });
+      }
+    } else if (Hls.isSupported()) {
+      // FALLBACK: hls.js if native not allowed but hls.js is available
+      if (shouldDebug) {
+        console.log('[HERO HLS] Using HLS.JS path (fallback)');
+      }
+      
+      const hls = new Hls({
+        enableWorker: true,
+        lowLatencyMode: false,
+        startFragPrefetch: true,
+        maxStarvationDelay: 2,
+        abrEwmaDefaultEstimate: 10000000,
+        abrBandWidthFactor: 1.2,
+        abrBandWidthUpFactor: 1.3,
+        maxBufferLength: 12,
+        backBufferLength: 3,
+        capLevelToPlayerSize: true,
+        startLevel: -1
+      });
+      hlsRef.current = hls;
+      
+      hls.attachMedia(video);
+      hls.loadSource(src);
+      
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        if (autoPlayRef.current && video.muted) {
+          video.play().catch(() => {});
+        }
+      });
     } else {
-      // Fallback: try setting src directly (might work in some cases)
+      // FINAL FALLBACK: Direct src assignment
+      if (shouldDebug) {
+        console.log('[HERO HLS] Using direct src (no HLS support)');
+      }
+      
       video.src = src;
       if (autoPlayRef.current && video.muted) {
         video.play().catch(() => {
@@ -216,25 +451,90 @@ const HlsVideo = forwardRef(function HlsVideo({
 
     // Cleanup function
     return () => {
-      // Clean up ABR re-enable timeout
-      if (abrReenableTimeoutRef.current) {
-        clearTimeout(abrReenableTimeoutRef.current);
-        abrReenableTimeoutRef.current = null;
-      }
+      // Clean up ended event listeners
+      try { video.removeEventListener('ended', onEnded); } catch {}
+      try { video.removeEventListener('timeupdate', onTimeUpdate); } catch {}
+      
       if (hlsRef.current) {
-        // Clean up any pending ABR re-enable timeout
+        // Clean up HLS instance
         const hls = hlsRef.current;
-        if (hls.autoLevelEnabled === false) {
-          hls.autoLevelEnabled = true; // Re-enable before destroy
+        try {
+          // Re-enable auto quality before destroy (safe fallback)
+          if (typeof hls.currentLevel === "number" || "currentLevel" in hls) {
+            hls.currentLevel = -1;
+          }
+        } catch (e) {
+          // Swallow to prevent runtime crash
         }
         hlsRef.current.destroy();
         hlsRef.current = null;
       }
     };
-  }, [src, shouldLoad, preferHd]); // Removed autoPlay from deps to prevent recreation on play/pause
+  }, [src, shouldLoad]); // Only depend on stable values: src and shouldLoad
+
+  // Compute poster width: hero/priority/auto -> 1920px, else 1280px
+  const computedPosterWidth =
+    typeof posterWidth === "number"
+      ? posterWidth
+      : (hero || priority || preload === "auto")
+        ? 1920
+        : 1280;
 
   // Auto-generate poster if not provided and src is HLS
-  const poster = posterProp || (src && src.endsWith('.m3u8') ? getCloudflarePoster(src) : null);
+  const poster =
+    posterProp ||
+    (src && src.endsWith(".m3u8")
+      ? (cloudflareThumbnail(src, { time: "0s", width: computedPosterWidth }) || null)
+      : null);
+
+  // Reset first frame tracking when src changes (for mobile hero poster)
+  useEffect(() => {
+    if (hero && isMobile()) {
+      hasFirstFrameRef.current = false;
+      setHasFirstFrame(false);
+    }
+  }, [src, hero]);
+
+  // Detect first frame for mobile hero videos (to hide poster overlay)
+  useEffect(() => {
+    if (!hero || !isMobile() || !poster) return;
+    
+    const video = videoRef.current;
+    if (!video) return;
+
+    const markFirstFrameReady = () => {
+      if (!hasFirstFrameRef.current) {
+        hasFirstFrameRef.current = true;
+        setHasFirstFrame(true);
+      }
+    };
+
+    const handleLoadedData = () => {
+      if (video.readyState >= 2) {
+        markFirstFrameReady();
+      }
+    };
+
+    const handleCanPlay = () => {
+      if (video.readyState >= 2) {
+        markFirstFrameReady();
+      }
+    };
+
+    const handlePlaying = () => {
+      markFirstFrameReady();
+    };
+
+    video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener('playing', handlePlaying);
+
+    return () => {
+      video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener('playing', handlePlaying);
+    };
+  }, [hero, poster, src]);
 
   // Set playsinline attributes for mobile inline playback
   useEffect(() => {
@@ -248,10 +548,61 @@ const HlsVideo = forwardRef(function HlsVideo({
   const { className: propsClassName, ...restProps } = props;
   const finalClassName = `vp-videoEl ${propsClassName || ''}`.trim();
 
+  // Mobile hero: show poster overlay until first frame
+  const isMobileHero = hero && isMobile() && poster;
+  const showMobileHeroPoster = isMobileHero && !hasFirstFrame;
+
+  // If mobile hero, wrap in container for overlay positioning
+  if (isMobileHero) {
+    return (
+      <div style={{ position: 'relative', display: 'block', width: '100%', height: '100%' }}>
+        <video
+          ref={videoRef}
+          autoPlay={autoPlay}
+          loop={loop}
+          muted={muted}
+          controls={false}
+          disableRemotePlayback
+          disablePictureInPicture
+          controlsList="nodownload noplaybackrate noremoteplayback"
+          poster={poster}
+          playsInline={true}
+          preload={shouldLoad ? (preload || 'metadata') : 'none'}
+          className={finalClassName}
+          style={{ backgroundColor: "#000", ...restProps.style }}
+          {...restProps}
+        />
+        {/* Mobile hero poster overlay - shows until first frame, then never again */}
+        {showMobileHeroPoster && (
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              backgroundImage: `url(${poster})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundColor: '#fff',
+              pointerEvents: 'none',
+              zIndex: 1,
+              opacity: 1,
+              transition: 'opacity 0.15s ease-out',
+            }}
+          />
+        )}
+      </div>
+    );
+  }
+
+  // Non-mobile hero: render video directly (no wrapper)
   return (
     <video
       ref={videoRef}
       autoPlay={autoPlay}
+      loop={loop}
+      muted={muted}
       controls={false}
       disableRemotePlayback
       disablePictureInPicture
@@ -266,4 +617,73 @@ const HlsVideo = forwardRef(function HlsVideo({
   );
 });
 
-export default HlsVideo;
+// Wrapper component that optionally remounts HlsVideoInner for guaranteed looping
+function HlsVideo(props, ref) {
+  const { remountLoop = false, remountLoopThreshold = 0.35, ...rest } = props;
+
+  // ALWAYS call hooks (never conditional)
+  const [loopKey, setLoopKey] = useState(0);
+  const videoRef = useRef(null);
+  const rafRef = useRef(null);
+  const triggeredRef = useRef(false);
+
+  // Expose the actual <video> element
+  useImperativeHandle(ref, () => videoRef.current, []);
+
+  const startWatch = useCallback(() => {
+    // Only actually watch if remountLoop is enabled
+    if (!remountLoop) return;
+
+    // Clear any existing loop
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+
+    const tick = () => {
+      const v = videoRef.current;
+
+      if (v) {
+        const d = v.duration;
+        const t = v.currentTime;
+
+        // Only operate when duration is known and we've actually played a bit
+        if (Number.isFinite(d) && d > 0 && t > 0) {
+          // When near end, remount the entire HLS pipeline
+          if (!triggeredRef.current && t >= d - remountLoopThreshold) {
+            triggeredRef.current = true;
+            console.log("[HLS remountLoop] REMOUNT LOOP", { t, d });
+
+            setLoopKey(k => k + 1);
+            return; // stop this tick; effect below will restart watcher
+          }
+        }
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+  }, [remountLoop, remountLoopThreshold]);
+
+  // Restart watcher every time we remount
+  useEffect(() => {
+    triggeredRef.current = false;
+    startWatch();
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    };
+  }, [loopKey, startWatch]);
+
+  // Use loopKey only if remountLoop is enabled, otherwise always use 0 (no remounting)
+  const effectiveKey = remountLoop ? loopKey : 0;
+
+  return (
+    <HlsVideoInner
+      key={effectiveKey}
+      ref={videoRef}
+      {...rest}
+    />
+  );
+}
+
+export default forwardRef(HlsVideo);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './blaze.css';
-import PlayToggleVideo from '../components/PlayToggleVideo';
 import HlsVideo from '../components/HlsVideo';
+import ClickToPlayHlsVideo from '../components/ClickToPlayHlsVideo';
 
 const BLAZE_HERO_LINK = {
   href: 'https://youtube.com/@DanielMunozBusiness',
@@ -73,14 +73,18 @@ const BLAZE_LONG_VIDEO_MAP = {
 
 const BlazeShort = ({ src, href, label, clipId, activeBlazeClipId, setActiveBlazeClipId }) => (
   <div className="bl__shortCard">
-    <PlayToggleVideo
-        src={src}
+    <ClickToPlayHlsVideo
+      src={src}
+      videoId={clipId}
       wrapperClassName="media media--short bl__shortMedia"
-      videoClassName="bl__shortVideo"
+      className="bl__shortVideo"
       loop={true}
       muted={false}
-      onRequestPlay={() => setActiveBlazeClipId(clipId)}
-      forcePause={activeBlazeClipId !== clipId}
+      startQuality="high"
+      onRequestPlay={() => {
+        setActiveBlazeClipId(clipId);
+      }}
+      forcePause={activeBlazeClipId !== null && activeBlazeClipId !== clipId}
     />
     <div className="bl__linkWrap">
       <a
@@ -98,14 +102,18 @@ const BlazeShort = ({ src, href, label, clipId, activeBlazeClipId, setActiveBlaz
 
 const BlazeVideo = ({ src, href, label, clipId, activeBlazeClipId, setActiveBlazeClipId }) => (
   <div className="bl__videoBox">
-    <PlayToggleVideo
-        src={src}
+    <ClickToPlayHlsVideo
+      src={src}
+      videoId={clipId}
       wrapperClassName="media media--video bl__videoMedia"
-      videoClassName="bl__videoPlayer"
+      className="bl__videoPlayer"
       loop={true}
       muted={false}
-      onRequestPlay={() => setActiveBlazeClipId(clipId)}
-      forcePause={activeBlazeClipId !== clipId}
+      startQuality="high"
+      onRequestPlay={() => {
+        setActiveBlazeClipId(clipId);
+      }}
+      forcePause={activeBlazeClipId !== null && activeBlazeClipId !== clipId}
     />
     <div className="bl__linkWrap">
       <a
@@ -138,6 +146,8 @@ export default function Blaze() {
             playsInline
             preload="auto"
             priority
+            hero
+            lazy={false}
             controls={false}
           />
         </div>

@@ -84,6 +84,8 @@ export default function Home() {
               playsInline
               preload="auto"
               priority
+              hero
+              lazy={false}
             />
 
             {/* Mobile static clipped to TV screen */}
@@ -97,6 +99,8 @@ export default function Home() {
                 playsInline
                 preload="auto"
                 priority
+                hero
+                lazy={false}
               />
             </div>
 
