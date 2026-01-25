@@ -39,6 +39,7 @@ export default function ClickToPlayHlsVideo({
   const frameCallbackRef = useRef(null);
   const frameTimeoutRef = useRef(null);
   const clickTimeRef = useRef(null); // Track click time for performance measurement
+  const debugTagRef = useRef(debugTag);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [hasFirstFrame, setHasFirstFrame] = useState(false);
@@ -66,6 +67,11 @@ export default function ClickToPlayHlsVideo({
       frameTimeoutRef.current = null;
     }
   }, [src]);
+
+  // Keep debugTagRef in sync
+  useEffect(() => {
+    debugTagRef.current = debugTag;
+  }, [debugTag]);
 
   // Initialize HLS or native HLS
   useEffect(() => {
@@ -264,10 +270,10 @@ export default function ClickToPlayHlsVideo({
       currentlyPlayingVideo = video;
       
       // Log playing event for Vonix cards (to measure click -> playing time)
-      if (debugTag && clickTimeRef.current) {
+      if (debugTagRef.current && clickTimeRef.current) {
         const playingTime = performance.now();
         const delta = playingTime - clickTimeRef.current;
-        console.log(`[${debugTag}] playing event`, {
+        console.log(`[${debugTagRef.current}] playing event`, {
           videoId,
           currentTime: video.currentTime,
           clickToPlayingMs: delta.toFixed(2),
