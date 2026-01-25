@@ -597,3 +597,23 @@ body.nav-open {
 a {
   text-decoration-color: var(--vp-link-underline);
 }
+
+/* ===================================================================
+   MARKETING ALLIANCE SECTION: Desktop-only spacing override
+   Final cascade override to nudge section down by 5px on desktop
+   =================================================================== */
+@media (min-width: 1024px) {
+  #marketing-alliance {
+    margin-top: -28px !important;
+  }
+}
+
+/* ===================================================================
+   AUSTIN UNDERGROUND SECTION: Desktop-only spacing override
+   Final cascade override to nudge section down by 2px on desktop
+   =================================================================== */
+@media (min-width: 1024px) {
+  #austin-underground {
+    margin-top: -28px !important;
+  }
+}
