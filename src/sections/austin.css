@@ -558,6 +558,27 @@
   position: relative;
   transform: translateY(clamp(-260px, -18vw, -160px)); /* lift all three images higher */
   will-change: transform;
+  /* Reserve stable height to prevent CLS on first paint */
+  min-height: clamp(220px, 26vw, 320px);
+  height: clamp(220px, 26vw, 320px);
+}
+
+/* Stable collage frame wrapper - reserves space before images load */
+#austin-underground .au__collageFrame {
+  position: relative;
+  width: 100%;
+  min-height: clamp(220px, 26vw, 320px);
+  height: clamp(220px, 26vw, 320px);
+  overflow: visible;
+}
+
+#austin-underground .au__collageInner {
+  position: absolute;
+  inset: 0;
+}
+
+#austin-underground .au__collageInner img {
+  display: block;
 }
 
 /* Paragraph stays where it is (don't touch) */
@@ -573,6 +594,7 @@
 .au__sideImages {
   position: relative;
   min-height: clamp(220px, 26vw, 320px); /* enough to see both cards */
+  height: clamp(220px, 26vw, 320px); /* stable height from first paint */
   overflow: visible;
 }
 
@@ -686,6 +708,9 @@
 .au__row2.au-grid .au__colImages {
   transform: translateY(clamp(-260px, -18vw, -160px)); /* lift all three images higher */
   will-change: transform;
+  /* Reserve stable height to prevent CLS on first paint */
+  min-height: clamp(220px, 26vw, 320px);
+  height: clamp(220px, 26vw, 320px);
 }
 
 /* Mobile: stack neatly */
@@ -783,6 +808,8 @@
 .au__fold2 {
   margin-top: clamp(-120px, -12vw, -200px);
   gap: clamp(14px, 2vw, 24px);
+  /* Reserve stable height to prevent CLS - Interviews section needs space */
+  min-height: clamp(400px, 50vw, 600px);
 }
 
 /* Bring the Concert Photography subhead closer to interviews */
@@ -1644,5 +1671,119 @@
   #austin-underground.au.au__section,
   #austin-underground {
     padding-bottom: 0px !important; /* ~20px less than the prior 32px min; predictable single value */
+  }
+}
+
+/* =========================
+   Austin Underground: Move Interviews + Concert Photography DOWN 100px on desktop
+   Prevents layout shift and fixes positioning
+   ========================= */
+@media (min-width: 1024px) {
+  #austin-underground .au__interviews {
+    margin-top: 362px !important;
+  }
+  
+  #austin-underground .au__concertPhotography {
+    margin-top: 0px !important;
+  }
+}
+
+/* ===================================================================
+   AUSTIN UNDERGROUND COLLAGE: Desktop-only stable layout + true XY controls
+   - No JS, no load-state snapping
+   - Offsets applied from first paint via CSS variables
+   =================================================================== */
+@media (min-width: 1024px) {
+  /* === Controls (edit these freely) === */
+  #austin-underground {
+    /* Collage box height is reserved immediately (prevents flash) */
+    --au-collage-h: clamp(220px, 26vw, 320px);
+
+    /* Tile size reserved immediately (prevents flash) */
+    --au-tile-w: clamp(150px, 18.5vw, 205px);
+    --au-tile-ar: 4 / 5;
+
+    /* IMAGE 1 base position (top/right) + adjustable offsets (dx/dy) */
+    --au1-top: clamp(-400px, -30vw, -280px);
+    --au1-right: clamp(210px, 13vw, 250px);
+    --au1-dx: 0px;
+    --au1-dy: 680px; /* requested: move down 100px */
+
+    /* IMAGE 2 */
+    --au2-top: clamp(-100px, -9vw, -70px);
+    --au2-right: clamp(48px, 2.4vw, 64px);
+    --au2-dx: 0px;
+    --au2-dy: 380px; /* requested: move down 30px */
+
+    /* IMAGE 3 */
+    --au3-top: clamp(162px, 13.8vw, 202px);
+    --au3-right: clamp(144px, 7.2vw, 164px);
+    --au3-dx: 0px;
+    --au3-dy: 310px;
+
+    /* LOGO (adjust these as needed) */
+    --aulogo-size: clamp(180px, 18vw, 280px);
+    --aulogo-top: clamp(210px, 18vw, 260px);
+    --aulogo-right: clamp(10px, 1vw, 20px);
+    --aulogo-dx: 0px;
+    --aulogo-dy: -290px;
+  }
+
+  /* === Reserve collage height immediately (prevents layout snap) === */
+  #austin-underground .au__sideImages {
+    position: relative !important;
+    height: var(--au-collage-h) !important;
+    min-height: var(--au-collage-h) !important;
+    overflow: visible !important;
+  }
+
+  /* === Reserve tile box size immediately (prevents image load changing height) === */
+  #austin-underground .au__sideImages .img1,
+  #austin-underground .au__sideImages .img2,
+  #austin-underground .au__sideImages .img3 {
+    position: absolute !important;
+    width: var(--au-tile-w) !important;
+    aspect-ratio: var(--au-tile-ar) !important;
+    height: auto !important;
+    display: block !important;
+    object-fit: cover !important;
+    border-radius: 0 !important; /* keep 90-degree corners */
+    background: #f1f1f1 !important; /* placeholder prevents "blank" feeling */
+    max-width: none !important;
+  }
+
+  /* === Apply positioning using top/right + calc(vars) for real control === */
+  #austin-underground .au__sideImages .img1 {
+    top: calc(var(--au1-top) + var(--au1-dy)) !important;
+    right: calc(var(--au1-right) + var(--au1-dx)) !important;
+    transform: rotate(-1.6deg) !important;
+    z-index: 3 !important;
+  }
+
+  #austin-underground .au__sideImages .img2 {
+    top: calc(var(--au2-top) + var(--au2-dy)) !important;
+    right: calc(var(--au2-right) + var(--au2-dx)) !important;
+    transform: rotate(0.3deg) !important;
+    z-index: 2 !important;
+  }
+
+  #austin-underground .au__sideImages .img3 {
+    top: calc(var(--au3-top) + var(--au3-dy)) !important;
+    right: calc(var(--au3-right) + var(--au3-dx)) !important;
+    transform: rotate(0.8deg) !important;
+    z-index: 1 !important;
+  }
+
+  /* === Logo: reserve its size + allow XY control === */
+  #austin-underground .au__fullLogo {
+    position: absolute !important;
+    width: var(--aulogo-size) !important;
+    aspect-ratio: 1 / 1 !important;
+    height: auto !important;
+    object-fit: contain !important;
+    top: calc(var(--aulogo-top) + var(--aulogo-dy)) !important;
+    right: calc(var(--aulogo-right) + var(--aulogo-dx)) !important;
+    background: transparent !important;
+    z-index: 4 !important;
   }
 }

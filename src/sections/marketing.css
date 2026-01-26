@@ -1167,3 +1167,13 @@
   }
 }
 
+/* =========================================================
+   MARKETING ALLIANCE: Desktop heading alignment nudge
+   Align top-right label block with Blaze + Austin Underground
+   ========================================================= */
+@media (min-width: 1024px) {
+  #marketing-alliance .ma__heading {
+    margin-top: -18px !important;
+  }
+}
+

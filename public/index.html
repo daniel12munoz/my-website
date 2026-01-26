@@ -56,6 +56,33 @@
   
     <!-- PWA manifest (keep) -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Early OS class detection - must run BEFORE React mounts to prevent FOUC -->
+    <script>
+      (function () {
+        try {
+          var ua = navigator.userAgent || '';
+          var platform = navigator.platform || '';
+          var isIOS = /iPhone|iPad|iPod/i.test(ua);
+          var isMac = !isIOS && (/Macintosh|MacIntel|MacPPC|Mac68K/i.test(platform) || /Mac OS X/i.test(ua));
+          var isWin = /Win/i.test(platform) || /Windows/i.test(ua);
+          var isDesktopPointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+          var root = document.documentElement;
+          
+          if (isMac && isDesktopPointer) {
+            root.classList.add('os-mac');
+            root.classList.remove('os-win');
+          } else if (isWin && isDesktopPointer) {
+            root.classList.add('os-win');
+            root.classList.remove('os-mac');
+          } else {
+            root.classList.remove('os-mac', 'os-win');
+          }
+        } catch (e) {
+          // Silently fail if detection fails
+        }
+      })();
+    </script>
   </head>    
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

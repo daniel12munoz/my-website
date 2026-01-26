@@ -1,5 +1,4 @@
 import React from "react";
-import "./austin.css";
 import HlsVideo from "../components/HlsVideo";
 
 export default function AustinUnderground() {
@@ -72,17 +71,26 @@ export default function AustinUnderground() {
           </p>
         </div>
         <div className="au__colImages">
-          <div className="au__collageUnit">
-            <img
-              src="/austin-underground-full-logo.png"
-              alt="Austin Underground full logo"
-              className="au__fullLogo"
-            />
+          <div className="au__collageFrame">
+            <div className="au__collageInner">
+              <div className="au__collageUnit">
+                <img
+                  src="/austin-underground-full-logo.png"
+                  alt="Austin Underground full logo"
+                  className="au__fullLogo"
+                  width="400"
+                  height="400"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                />
 
-            <div className="au__sideImages">
-              <img src="/au-image1.jpg" alt="Austin Underground 1" className="media img1" />
-              <img src="/au-image2.jpg" alt="Austin Underground 2" className="media img2" />
-              <img src="/au-image3.jpg" alt="Austin Underground 3" className="media img3" />
+                <div className="au__sideImages">
+                  <img src="/au-image1.jpg" alt="Austin Underground 1" className="media img1" width="255" height="319" loading="eager" fetchPriority="high" decoding="async" />
+                  <img src="/au-image2.jpg" alt="Austin Underground 2" className="media img2" width="255" height="319" loading="eager" decoding="async" />
+                  <img src="/au-image3.jpg" alt="Austin Underground 3" className="media img3" width="255" height="319" loading="eager" decoding="async" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
