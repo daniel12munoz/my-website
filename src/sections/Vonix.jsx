@@ -54,13 +54,18 @@ export default function Vonix() {
               src="/vo-logo1.png"
               alt="Vonix logo"
               className="vo__logo"
-              loading="lazy"
+              loading="eager"
+              fetchPriority="high"
+              decoding="sync"
             />
             <img
               className="vonix__plaque"
               src="/100plaque.png"
               alt=""
               aria-hidden="true"
+              loading="eager"
+              fetchPriority="high"
+              decoding="sync"
             />
           </div>
         </div>

@@ -1379,3 +1379,23 @@
     padding-bottom: 0 !important;
   }
 }
+
+/* =========================================================
+   VONIX: Desktop logo + plaque instant loading fix
+   Prevent shadow pop-in and layout shift
+   NOTE: No contain: paint to allow plaque overflow visibility
+   ========================================================= */
+@media (min-width: 601px) {
+  /* Ensure logo wrap and top-right container allow plaque overflow */
+  #vonix .vo__logoWrap,
+  #vonix .vonix__topRight {
+    overflow: visible !important;
+    contain: none !important;
+  }
+
+  /* Ensure logo and plaque render as block elements immediately */
+  #vonix .vo__logo,
+  #vonix .vonix__plaque {
+    display: block;
+  }
+}

@@ -3,8 +3,15 @@ import './marketing.css';
 import HlsVideo from '../components/HlsVideo';
 import ClickToPlayHlsVideo from '../components/ClickToPlayHlsVideo';
 
-const Img = ({ src, className = '', alt = '' }) => (
-  <img className={`media ${className}`.trim()} src={src} alt={alt} loading="lazy" />
+const Img = ({ src, className = '', alt = '', loading = 'lazy', fetchPriority, decoding }) => (
+  <img 
+    className={`media ${className}`.trim()} 
+    src={src} 
+    alt={alt} 
+    loading={loading}
+    fetchPriority={fetchPriority}
+    decoding={decoding}
+  />
 );
 
 export default function MarketingAlliance() {
@@ -52,7 +59,14 @@ export default function MarketingAlliance() {
           </div>
 
           <div className="ma__logoWrap">
-            <Img src="/ma-image1.png" className="ma__logo" alt="Marketing Alliance logo" />
+            <Img 
+              src="/ma-image1.png" 
+              className="ma__logo" 
+              alt="Marketing Alliance logo"
+              loading="eager"
+              fetchPriority="high"
+              decoding="sync"
+            />
           </div>
         </div>
       </div>

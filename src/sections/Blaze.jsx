@@ -177,7 +177,9 @@ export default function Blaze() {
               src="/bl-logo1.png"
               alt="Blaze logo"
               className="bl__logo"
-              loading="lazy"
+              loading="eager"
+              fetchPriority="high"
+              decoding="sync"
             />
           </div>
         </div>

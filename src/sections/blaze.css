@@ -667,3 +667,14 @@
     top: 0px;
   }
 }
+
+/* =========================================================
+   BLAZE: Desktop logo instant loading fix
+   Prevent shadow pop-in and layout shift
+   ========================================================= */
+@media (min-width: 601px) {
+  #blaze .bl__logoWrap,
+  #blaze .bl__logo {
+    display: block;
+  }
+}

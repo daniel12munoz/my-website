@@ -1177,3 +1177,14 @@
   }
 }
 
+/* =========================================================
+   MARKETING ALLIANCE: Desktop logo instant loading fix
+   Prevent shadow pop-in and layout shift
+   ========================================================= */
+@media (min-width: 601px) {
+  #marketing-alliance .ma__logoWrap,
+  #marketing-alliance .ma__logo {
+    display: block;
+  }
+}
+

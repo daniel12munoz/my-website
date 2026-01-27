@@ -109,7 +109,8 @@ export default function Home() {
               src="/vonixproductions-homelogo.png"
               alt="A desk with a TV, camera, and microphone"
               loading="eager"
-              decoding="async"
+              fetchPriority="high"
+              decoding="sync"
             />
           </div>
         </figure>

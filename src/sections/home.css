@@ -419,5 +419,11 @@ oad) */
   #home.home .home__heroComposite .home__tvStatic {
     display: block;
   }
+
+  /* Reserve space and prevent shadow pop-in for hero image */
+  #home.home .home__heroImg {
+    width: 100%;
+    height: auto;
+  }
 }
 
