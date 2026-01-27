@@ -82,13 +82,13 @@ export default function AustinUnderground() {
                   height="400"
                   loading="eager"
                   fetchPriority="high"
-                  decoding="async"
+                  decoding="sync"
                 />
 
                 <div className="au__sideImages">
-                  <img src="/au-image1.jpg" alt="Austin Underground 1" className="media img1" width="255" height="319" loading="eager" fetchPriority="high" decoding="async" />
-                  <img src="/au-image2.jpg" alt="Austin Underground 2" className="media img2" width="255" height="319" loading="eager" decoding="async" />
-                  <img src="/au-image3.jpg" alt="Austin Underground 3" className="media img3" width="255" height="319" loading="eager" decoding="async" />
+                  <img src="/au-image1.jpg" alt="Austin Underground 1" className="media img1" width="255" height="319" loading="eager" fetchPriority="high" decoding="sync" />
+                  <img src="/au-image2.jpg" alt="Austin Underground 2" className="media img2" width="255" height="319" loading="eager" fetchPriority="high" decoding="sync" />
+                  <img src="/au-image3.jpg" alt="Austin Underground 3" className="media img3" width="255" height="319" loading="eager" fetchPriority="high" decoding="sync" />
                 </div>
               </div>
             </div>

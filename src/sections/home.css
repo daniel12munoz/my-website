@@ -396,3 +396,28 @@ oad) */
   }
 }
 
+/* =========================================================
+   HOME PAGE: Desktop hero drop-shadow loading flicker fix
+   Ensure shadow renders immediately and is never clipped
+   ========================================================= */
+@media (min-width: 601px) {
+  /* Ensure hero containers don't clip the drop-shadow */
+  #home.home .home__center,
+  #home.home .home__heroArt,
+  #home.home .home__heroComposite {
+    overflow: visible !important;
+  }
+
+  /* Prevent GPU repaint flicker and ensure stable rendering */
+  #home.home .home__heroComposite {
+    contain: paint;
+    will-change: transform;
+  }
+
+  /* Ensure image and video render as block elements immediately */
+  #home.home .home__heroComposite .home__heroImg,
+  #home.home .home__heroComposite .home__tvStatic {
+    display: block;
+  }
+}
+

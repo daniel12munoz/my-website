@@ -142,7 +142,7 @@
   justify-content: center;
   margin-top: clamp(18px, 2vw, 26px);
   position: relative;
-  left: -35px;    /* was 65px; moved LEFT by 60px to fix Windows baseline */
+  left: -60px;    /* was 65px; moved LEFT by 60px to fix Windows baseline */
   top: 60px;
 }
 
@@ -566,7 +566,7 @@
 /* Mac-only Blaze logo nudge */
 .os-mac #blaze .bl__logoWrap {
   position: relative;
-  left: 25px;
+  left: -5px;
 }
 
 /* Desktop: heading alignment (grid-areas handle placement; no transform) */

@@ -260,21 +260,6 @@ export default function MarketingAlliance() {
                 forcePause={activeMAClipId !== null && activeMAClipId !== 'ma-clip-short-1'}
               />
             </div>
-            <div className="ma__shortCard ma__shortCard--v11">
-              <ClickToPlayHlsVideo
-                src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/0d603ba86d8a7b549e5e464724045ecb/manifest/video.m3u8"
-                videoId="ma-clip-short-2"
-                wrapperClassName="media media--short ma__shortMedia"
-                className="ma__shortVideo"
-                loop={true}
-                muted={false}
-                startQuality="high"
-                onRequestPlay={() => {
-                  setActiveMAClipId('ma-clip-short-2');
-                }}
-                forcePause={activeMAClipId !== null && activeMAClipId !== 'ma-clip-short-2'}
-              />
-            </div>
             <div className="ma__shortCard ma__shortCard--v12">
               <ClickToPlayHlsVideo
                 src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/f37981c80a7928ff6446ee52a43e9ece/manifest/video.m3u8"
@@ -288,6 +273,21 @@ export default function MarketingAlliance() {
                   setActiveMAClipId('ma-clip-short-3');
                 }}
                 forcePause={activeMAClipId !== null && activeMAClipId !== 'ma-clip-short-3'}
+              />
+            </div>
+            <div className="ma__shortCard ma__shortCard--v11">
+              <ClickToPlayHlsVideo
+                src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/0d603ba86d8a7b549e5e464724045ecb/manifest/video.m3u8"
+                videoId="ma-clip-short-2"
+                wrapperClassName="media media--short ma__shortMedia"
+                className="ma__shortVideo"
+                loop={true}
+                muted={false}
+                startQuality="high"
+                onRequestPlay={() => {
+                  setActiveMAClipId('ma-clip-short-2');
+                }}
+                forcePause={activeMAClipId !== null && activeMAClipId !== 'ma-clip-short-2'}
               />
             </div>
           </div>

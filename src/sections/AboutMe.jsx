@@ -24,17 +24,26 @@ export default function AboutMe() {
           <img 
             className="aboutMe__photo aboutMe__photo--a" 
             src="/aboutmepic-1.jpg" 
-            alt="Daniel Muñoz portrait 1" 
+            alt="Daniel Muñoz portrait 1"
+            loading="eager"
+            fetchPriority="high"
+            decoding="sync"
           />
           <img 
             className="aboutMe__photo aboutMe__photo--b" 
             src="/aboutmepic-2.jpg" 
-            alt="Daniel Muñoz portrait 2" 
+            alt="Daniel Muñoz portrait 2"
+            loading="eager"
+            fetchPriority="high"
+            decoding="sync"
           />
           <img 
             className="aboutMe__photo aboutMe__photo--c" 
             src="/aboutmepic-3.jpg" 
-            alt="Daniel Muñoz portrait 3" 
+            alt="Daniel Muñoz portrait 3"
+            loading="eager"
+            fetchPriority="high"
+            decoding="sync"
           />
         </div>
       </div>

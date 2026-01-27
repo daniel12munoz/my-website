@@ -1067,12 +1067,6 @@
   max-width: 100% !important;
 }
 
-/* Mac-only Vonix label tweak */
-.os-mac #vonix .vo__heading {
-  transform: translateX(-20px) scale(1.1);
-  transform-origin: top right;
-}
-
 /* Mac-only: profile image only (do NOT touch plaque transform) */
 .os-mac #vonix .vo__logoWrap .vo__logo {
   transform: scale(0.96);
@@ -1083,16 +1077,12 @@
    Mac desktop fine-tuning — Vonix only
    =========================== */
 
-.os-mac #vonix .vo__heading {
-  position: relative;
-  left: -70px;
-}
-
 /* Profile image + plaque group */
 .os-mac #vonix .vo__logoWrap,
 .os-mac #vonix .vonix__topRight {
   position: relative;
-  left: 50px;
+  left: -80px;
+  top: 50px;
 }
 
 /* Description paragraph spacing */
@@ -1136,7 +1126,7 @@
    =========================== */
 .os-mac #vonix .vonix__plaque {
   /* move right (+) and down (+) by adjusting variables */
-  --plaq-x: 95px;  /* was 100px */
+  --plaq-x: 100px;  /* was 100px */
   --plaq-y: 275px;  /* was 280px */
 
   /* ensure no other Mac transforms override the base */
@@ -1155,7 +1145,7 @@
   /* Profile picture + plaque group: move LEFT ~60px */
   :not(.os-mac) #vonix .vo__logoWrap,
   :not(.os-mac) #vonix .vonix__topRight {
-    transform: translateX(-60px);
+    transform: translate(-85px, -40px);
   }
 }
 
@@ -1166,6 +1156,7 @@
 @media (min-width: 981px) {
   .os-mac #vonix .vo__logoWrap {
     top: -60px;
+    left: -60px;
   }
 }
 
@@ -1216,7 +1207,7 @@
     width: 100%;
     max-width: 100%;
     /* subtle scale-down to match Blaze/MA/AU hero sizing */
-    transform: scale(0.965);
+    transform: scale(0.968);
     transform-origin: top left;
   }
 
@@ -1228,6 +1219,16 @@
 
   html.os-mac #vonix .vo__videoBlock {
     overflow: hidden;
+  }
+
+  html.os-mac #vonix .heroLinkWrap a.vo__link.heroLink.vpHeroLink__a {
+    font-size: 0.95em !important;
+    line-height: 1.15 !important;
+    transform: translateY(-15px);
+  }
+
+  html.os-mac #vonix .heroLinkWrap .vo__linkRule {
+    transform: translateY(-20px);
   }
 }
 
@@ -1308,3 +1309,73 @@
   }
 }
 
+/* =========================================================
+   VONIX: Mac desktop-only heading alignment
+   Align title + rule + roles top-right, move up slightly
+   ========================================================= */
+@media (min-width: 981px) {
+  html.os-mac #vonix .vo__heading {
+    justify-items: end;
+    align-content: start;
+    justify-self: end;
+    align-self: start;
+    margin-top: 0;
+    transform: translateX(-38px) translateY(0px);
+    transform-origin: top right;
+  }
+
+  html.os-mac #vonix .vo__title,
+  html.os-mac #vonix .vo__roles {
+    text-align: right;
+    justify-self: end;
+  }
+
+  html.os-mac #vonix .vo__rule--main {
+    justify-self: end;
+  }
+
+  html.os-mac #vonix .vo__desc {
+    max-width: 55ch;
+  }
+}
+
+/* =========================================================
+   VONIX — Mac desktop: pull paragraph + all lower sections up 50px
+   (do NOT affect hero video/link or heading/logo/plaque)
+   ========================================================= */
+   @media (min-width: 981px) {
+    html.os-mac #vonix .vo__rowDesc,
+    html.os-mac #vonix .vo__fold {
+      position: relative;
+      top: -53px;
+    }
+  }
+
+@media (min-width: 981px) {
+  html.os-mac #vonix .vo__logoWrap {
+    transform: translateY(20px) !important;
+    transform-origin: top right;
+  }
+}
+
+/* FINAL OVERRIDE — Vonix Mac hero link micro-adjust */
+@media (min-width: 981px) {
+  html.os-mac #vonix .heroLinkWrap a.vo__link.heroLink.vpHeroLink__a {
+    transform: translateY(-17px) !important;
+  }
+
+  html.os-mac #vonix .heroLinkWrap .vo__linkRule {
+    transform: translateY(-17px) !important;
+  }
+}
+
+/* =========================================================
+   VONIX — Mac desktop: reduce excessive bottom whitespace
+   Reduce bottom spacing by ~50px on Mac only
+   ========================================================= */
+@media (min-width: 981px) {
+  #vonix .vo__fold:last-of-type {
+    margin-bottom: -70px !important;
+    padding-bottom: 0 !important;
+  }
+}

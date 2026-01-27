@@ -972,54 +972,54 @@
 
   /* First 5 images (top strip) - move down 10px */
   .au__concertGrid .media:nth-child(1) { 
-    transform: rotate(-1.2deg); 
+    transform: rotate(-0.6deg); 
     margin-top: 20px;
     z-index: 1; 
   }
   .au__concertGrid .media:nth-child(2) { 
-    transform: rotate(0.6deg); 
+    transform: rotate(0.3deg); 
     margin-top: 20px;
     z-index: 1; 
   }
   .au__concertGrid .media:nth-child(3) { 
-    transform: rotate(-0.8deg); 
+    transform: rotate(-0.4deg); 
     margin-top: 20px;
     z-index: 1; 
   }
   .au__concertGrid .media:nth-child(4) { 
-    transform: rotate(1deg); 
+    transform: rotate(0.5deg); 
     margin-top: 20px;
     z-index: 1; 
   }
   .au__concertGrid .media:nth-child(5) { 
-    transform: rotate(-0.6deg); 
+    transform: rotate(-0.3deg); 
     margin-top: 20px;
     z-index: 1; 
   }
 
   /* Next 5 images (lower strip) - move down 60px total */
   .au__concertGrid .media:nth-child(6) { 
-    transform: rotate(-1.2deg); 
+    transform: rotate(-0.6deg); 
     margin-top: 0px;
     z-index: 0;
   }
   .au__concertGrid .media:nth-child(7) { 
-    transform: rotate(0.6deg); 
+    transform: rotate(0.3deg); 
     margin-top: 0px;
     z-index: 0;
   }
   .au__concertGrid .media:nth-child(8) { 
-    transform: rotate(-0.8deg); 
+    transform: rotate(-0.4deg); 
     margin-top: 0px;
     z-index: 0;
   }
   .au__concertGrid .media:nth-child(9) { 
-    transform: rotate(1deg); 
+    transform: rotate(0.5deg); 
     margin-top: 00px;
     z-index: 0;
   }
   .au__concertGrid .media:nth-child(10) { 
-    transform: rotate(-0.6deg); 
+    transform: rotate(-0.3deg); 
     margin-top: 0px;
     z-index: 0;
   }
@@ -1585,9 +1585,14 @@
     --au-collage-extra-y: 30px;
   }
 
-  /* Apply Mac-only Y shift to collage */
+  /* Base desktop: shift collage container right by 10px (Windows + Mac) */
+  #austin-underground .au__colImages {
+    transform: translateX(40px) translateY(calc(clamp(-260px, -18vw, -160px) + var(--au-collage-extra-y, 0px))) !important;
+  }
+
+  /* Mac-only: additional 10px shift (total 20px) */
   .os-mac #austin-underground .au__colImages {
-    transform: translateY(calc(clamp(-260px, -18vw, -160px) + var(--au-collage-extra-y))) !important;
+    transform: translateX(45px) translateY(calc(clamp(-260px, -18vw, -160px) + var(--au-collage-extra-y))) !important;
   }
 
   /* Apply Mac-only Y shift to logo (safe even if selector is missing) */
@@ -1786,4 +1791,21 @@
     background: transparent !important;
     z-index: 4 !important;
   }
+}
+
+/* =========================================================
+   AUSTIN UNDERGROUND: Vertical spacing adjustments
+   Move Interviews and Concert Photography sections down
+   Global: 5px down | Mac: 9px down (total)
+   ========================================================= */
+#austin-underground .au__interviews,
+#austin-underground .au__concertPhotography {
+  position: relative;
+  transform: translateY(1px) !important;
+}
+
+/* Mac-only: additional 4px (total 9px down) - fully replaces base transform */
+.os-mac #austin-underground .au__interviews,
+.os-mac #austin-underground .au__concertPhotography {
+  transform: translateY(8px) !important;
 }
