@@ -1809,3 +1809,413 @@
 .os-mac #austin-underground .au__concertPhotography {
   transform: translateY(8px) !important;
 }
+
+/* =========================================================
+   MOBILE — HERO VIDEO FINAL OVERRIDE TUNING LAYER
+   SAFE: transform-only, visual alignment control
+   ========================================================= */
+@media (max-width: 600px) {
+
+  /* Vonix */
+  #vonix .vo__heroMedia {
+    transform: translateX(0px) translateY(1px) scale(1.02) !important;
+    transform-origin: center center;
+  }
+
+  /* Blaze */
+  #blaze .bl__heroMedia {
+    transform: translateX(-1px) translateY(-16px) scale(.97) !important;
+    transform-origin: center center;
+  }
+
+  /* Marketing Alliance + Austin Underground: transform applied to VIDEO inside frame (see block below) to avoid frame clipping */
+
+}
+
+/* =========================================================
+   MOBILE — HERO POSITION TUNING (MA + AU ONLY)
+   Move the WHOLE hero box (frame + shadow), keep inner mask for clipping
+   ========================================================= */
+@media (max-width: 600px) {
+
+  /* ---------- Marketing Alliance ---------- */
+
+  /* OUTER: move the entire hero box */
+  #marketing-alliance .ma__heroFrame {
+    /* tuning knobs */
+    --ma-hero-x: 9px;
+    --ma-hero-y: -12px;
+    --ma-hero-scale: 0.985;
+
+    transform: translate(var(--ma-hero-x), var(--ma-hero-y)) scale(var(--ma-hero-scale)) !important;
+    transform-origin: top left;
+    overflow: visible !important; /* critical: prevent clipping when we move the whole box */
+  }
+
+  /* INNER MASK: direct child clips (rounded corners); .ma__heroMask does not exist in DOM */
+  #marketing-alliance .ma__heroFrame > div,
+  #marketing-alliance .ma__heroFrame > video {
+    border-radius: inherit;
+    overflow: hidden !important;
+  }
+
+  /* VIDEO: stable by default; optional micro-nudge can be added here if needed */
+  #marketing-alliance .ma__heroFrame video,
+  #marketing-alliance .ma__heroFrame .ma__heroVideoEl,
+  #marketing-alliance .ma__heroFrame .ma__heroVideoEl video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    transform: none !important;
+  }
+
+
+  /* ---------- Austin Underground ---------- */
+
+  /* OUTER: move the entire hero box */
+  #austin-underground .au__heroMedia {
+    /* tuning knobs */
+    --au-hero-x: 11px;
+    --au-hero-y: -12px;
+    --au-hero-scale: 0.955;
+
+    transform: translate(var(--au-hero-x), var(--au-hero-y)) scale(var(--au-hero-scale)) !important;
+    transform-origin: top left;
+    overflow: visible !important; /* critical */
+  }
+
+  /* INNER MASK: direct child clips (rounded corners); .au__heroMask does not exist in DOM */
+  #austin-underground .au__heroMedia > div,
+  #austin-underground .au__heroMedia > video {
+    border-radius: inherit;
+    overflow: hidden !important;
+  }
+
+  /* VIDEO: stable by default */
+  #austin-underground .au__heroMedia video,
+  #austin-underground .au__heroMedia .au__video,
+  #austin-underground .au__heroMedia .au__video video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    transform: none !important;
+  }
+
+}
+
+/* =========================================================
+   MOBILE — HERO CLIP-PARENT FIX (MA + AU ONLY)
+   Allow the hero box to translate without being cropped by ancestors
+   ========================================================= */
+@media (max-width: 600px) {
+
+  /* --- Marketing Alliance: stop ancestors from clipping translated hero ---
+     Ancestor chain: #marketing-alliance > .ma__row1 > .ma__videoBlock > .ma__heroFrame
+     No .ma__heroWrap in DOM --- */
+
+  #marketing-alliance,
+  #marketing-alliance.ma,
+  #marketing-alliance .ma__row1,
+  #marketing-alliance .ma__videoBlock {
+    overflow-x: clip !important;     /* prevent horizontal scroll */
+    overflow-y: visible !important; /* allow vertical translation without cropping */
+    contain: none !important;
+    clip-path: none !important;
+  }
+
+  /* OUTER hero box: already has overflow visible in tuning block; ensure it is not clipped by self */
+  #marketing-alliance .ma__heroFrame {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+  }
+
+  /* INNER MASK: direct child clips (rounded corners); .ma__heroMask does not exist */
+  #marketing-alliance .ma__heroFrame > div,
+  #marketing-alliance .ma__heroFrame > video {
+    overflow: hidden !important;
+    border-radius: inherit;
+  }
+
+
+  /* --- Austin Underground: same idea ---
+     Ancestor chain: #austin-underground > .au__row1 > .au__videoBlock > .au__heroMedia
+     No .au__heroWrap in DOM --- */
+
+  #austin-underground,
+  #austin-underground.au,
+  #austin-underground.au__section,
+  #austin-underground .au__row1,
+  #austin-underground .au__videoBlock {
+    overflow-x: clip !important;
+    overflow-y: visible !important;
+    contain: none !important;
+    clip-path: none !important;
+  }
+
+  #austin-underground .au__heroMedia {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+  }
+
+  #austin-underground .au__heroMedia > div,
+  #austin-underground .au__heroMedia > video {
+    overflow: hidden !important;
+    border-radius: inherit;
+  }
+
+}
+
+/* =========================================================
+   MOBILE HERO CONTROLS — Link + Label Knobs (4 pages only)
+   ========================================================= */
+@media (max-width: 600px) {
+
+  /* ---------- VONIX knobs ---------- */
+  #vonix {
+    --hero-link-x: -1px;
+    --hero-link-y: -5px;
+    --hero-link-font: 0.92;
+    --label-x: 0px;
+    --label-y: 0px;
+  }
+
+  #vonix .vo__linkWrap.heroLinkWrap {
+    transform: translate(var(--hero-link-x), var(--hero-link-y)) !important;
+  }
+  #vonix .vo__linkWrap.heroLinkWrap .vo__link {
+    font-size: calc(1em * var(--hero-link-font)) !important;
+  }
+
+  #vonix .vo__heading {
+    transform: translate(var(--label-x), var(--label-y)) !important;
+  }
+
+
+  /* ---------- BLAZE knobs ---------- */
+  #blaze {
+    --hero-link-x: 7px;
+    --hero-link-y: -23px;
+    --hero-link-font: 0.93;
+    --label-x: -10px;
+    --label-y: -28px;
+  }
+
+  #blaze .bl__linkWrap.heroLinkWrap {
+    transform: translate(var(--hero-link-x), var(--hero-link-y)) !important;
+  }
+  #blaze .bl__linkWrap.heroLinkWrap .bl__link {
+    font-size: calc(1em * var(--hero-link-font)) !important;
+  }
+
+  #blaze .bl__heading {
+    transform: translate(var(--label-x), var(--label-y)) !important;
+  }
+
+
+  /* ---------- MARKETING ALLIANCE knobs ---------- */
+  #marketing-alliance {
+    --hero-link-x: 11px;
+    --hero-link-y: -17px;
+    --hero-link-font: 1.01;
+    --label-x: 0px;
+    --label-y: 0px;
+  }
+
+  #marketing-alliance .ma__linkWrap.heroLinkWrap {
+    transform: translate(var(--hero-link-x), var(--hero-link-y)) !important;
+  }
+  #marketing-alliance .ma__linkWrap.heroLinkWrap .ma__link {
+    font-size: calc(1em * var(--hero-link-font)) !important;
+  }
+
+  #marketing-alliance .ma__heading {
+    transform: translate(var(--label-x), var(--label-y)) !important;
+  }
+
+
+  /* ---------- AUSTIN UNDERGROUND knobs ---------- */
+  #austin-underground {
+    --hero-link-x: 13px;
+    --hero-link-y: -33px;
+    --hero-link-font: 0.97;
+    --label-x: -10px;
+    --label-y: -25px;
+  }
+
+  #austin-underground .au__linkWrap.heroLinkWrap {
+    transform: translate(var(--hero-link-x), var(--hero-link-y)) !important;
+  }
+  #austin-underground .au__linkWrap.heroLinkWrap .au__link {
+    font-size: calc(1em * var(--hero-link-font)) !important;
+  }
+
+  #austin-underground .au__heading {
+    transform: translate(var(--label-x), var(--label-y)) !important;
+  }
+
+}
+
+/* =========================================================
+   MOBILE — Blaze logo nudge only
+   ========================================================= */
+@media (max-width: 600px) {
+
+  /* Blaze logo ONLY - combine with existing scale transform */
+  #blaze .bl__logo {
+    transform: scale(var(--blaze-logo-scale, 1)) translateX(9px) !important;
+    transform-origin: top center;
+  }
+
+  /* Fallback selectors in case structure differs */
+  #blaze .bl__logoWrap img {
+    transform: translateX(10px) !important;
+  }
+
+}
+
+/* =========================================================
+   MOBILE — Marketing Alliance label knobs (FIXED)
+   Ensures the MA label X/Y actually move something
+   ========================================================= */
+@media (max-width: 600px) {
+
+  /* 1) Knobs live on the section wrapper */
+  #marketing-alliance {
+    --ma-label-x: 0px; /* ← knob */
+    --ma-label-y: -15px; /* ← knob */
+  }
+
+  /* 2) Apply the knobs to the *actual* label/heading cluster.
+        We target several likely wrappers so it works even if markup differs. */
+
+  /* Most common: heading block */
+  #marketing-alliance .ma__heading,
+  #marketing-alliance .ma__header,
+  #marketing-alliance .ma__label,
+  #marketing-alliance .ma__labelWrap,
+  #marketing-alliance .ma__titleBlock,
+  #marketing-alliance .ma__topRight,
+  #marketing-alliance .ma__meta,
+  #marketing-alliance .ma__heroHeading {
+    transform: translate(var(--ma-label-x), var(--ma-label-y)) !important;
+    transform-origin: top center;
+    will-change: transform;
+  }
+
+  /* If the title + rule + roles are separate nodes, force them too */
+  #marketing-alliance h2,
+  #marketing-alliance .ma__title,
+  #marketing-alliance .ma__roles,
+  #marketing-alliance .ma__rule {
+    transform: translate(var(--ma-label-x), var(--ma-label-y)) !important;
+    transform-origin: top center;
+    will-change: transform;
+  }
+
+}
+
+/* =========================================================
+   MOBILE — Marketing Alliance LOGO position override
+   ========================================================= */
+@media (max-width: 600px) {
+
+  #marketing-alliance .ma__logoWrap,
+  #marketing-alliance .ma__logo,
+  #marketing-alliance .ma__logo img {
+    transform: translate(-21px, -22px) !important;
+    transform-origin: center center;
+    will-change: transform;
+  }
+
+}
+
+/* =========================================================
+   MOBILE — Austin Underground: restore desc + move image cluster up
+   ========================================================= */
+@media (max-width: 600px) {
+
+  /* 1) Move the AU "total logo cluster" (3 photos + logo) UP 15px together
+     We target the mobileCollage wrapper which contains all 4 images.
+     IMPORTANT: This moves the entire wrapper, adding -15px to existing Y transform. */
+  #austin-underground .au__mobileCollage {
+    transform: translateX(var(--au-m-collage-x)) translateY(calc(var(--au-m-collage-y) - 15px)) scale(var(--au-m-collage-scale)) !important;
+    will-change: transform;
+  }
+
+  /* 2) Ensure the AU paragraph is visible on mobile and sits below the cluster */
+  #austin-underground .au__desc--mobile,
+  #austin-underground .au__row2Mobile .au__desc {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    max-height: none !important;
+
+    /* spacing so it clearly sits between the cluster and interviews */
+    margin-top: 10px !important;
+    margin-bottom: 14px !important;
+
+    /* Match the "project description paragraph" sizing used on other mobile pages */
+    font-size: clamp(18px, 4.6vw, 22px) !important;
+    line-height: 1.55 !important;
+
+    /* keep it from running too wide and causing weird overlaps */
+    max-width: 62ch;
+  }
+
+  /* 3) Safety: make sure the interviews section starts AFTER the paragraph */
+  #austin-underground .au__interviews,
+  #austin-underground .au__fold2 {
+    margin-top: 0 !important;
+  }
+
+  /* 4) Ensure au__row2Mobile container is visible and properly ordered */
+  #austin-underground .au__row2Mobile {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    margin-top: 14px !important;
+  }
+
+  /* 5) HIDE duplicate logo and photos from au__row2Mobile (keep only paragraph) */
+  /* The real cluster is au__mobileCollage - hide the duplicates inside au__row2Mobile */
+  #austin-underground .au__row2Mobile .au__fullLogo--mobile,
+  #austin-underground .au__row2Mobile .au__mobilePhotos {
+    display: none !important;
+  }
+
+  /* 6) Ensure the real cluster (au__mobileCollage) remains visible */
+  #austin-underground .au__mobileCollage {
+    display: block !important;
+  }
+
+}
+
+/* =========================================================
+   MOBILE — Blaze: shift content below hero right 5px
+   ========================================================= */
+@media (max-width: 600px) {
+
+  /* Target Blaze section only - move content BELOW hero area right 7px and up 5px */
+
+  /* Paragraph */
+  #blaze .bl__desc {
+    transform: translate(7px, -17px) !important;
+    will-change: transform;
+  }
+
+  /* Short-form videos */
+  #blaze .bl__shortsSection {
+    transform: translate(0px, -17px) !important;
+    will-change: transform;
+  }
+
+  /* Long-form videos */
+  #blaze .bl__videosSection {
+    transform: translate(0px, -17px) !important;
+    will-change: transform;
+  }
+
+}

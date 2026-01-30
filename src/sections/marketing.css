@@ -1188,3 +1188,34 @@
   }
 }
 
+/* =========================================================
+   MOBILE — MA HERO RIGHT-SIDE CLIP FIX
+   Allow hero frame to extend past column; keep page from horizontal scroll
+   ========================================================= */
+@media (max-width: 600px) {
+
+  /* Keep page from horizontal scrolling */
+  html, body {
+    overflow-x: clip !important;
+  }
+
+  /* Allow MA hero wrappers to extend without cutting off the hero on the right */
+  #marketing-alliance .ma__row1,
+  #marketing-alliance .ma__videoBlock {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+  }
+
+  /* Outer frame can extend */
+  #marketing-alliance .ma__heroFrame {
+    overflow: visible !important;
+  }
+
+  /* Inner mask (direct child) stays the clipper for rounded corners; .ma__heroMask does not exist */
+  #marketing-alliance .ma__heroFrame > div,
+  #marketing-alliance .ma__heroFrame > video {
+    overflow: hidden !important;
+    border-radius: inherit;
+  }
+
+}
