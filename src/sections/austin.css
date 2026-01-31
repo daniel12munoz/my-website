@@ -2117,6 +2117,25 @@
 }
 
 /* =========================================================
+   MOBILE — Marketing Alliance divider line correction
+   Cancel label Y-shift for subsection rules only
+   ========================================================= */
+@media (max-width: 600px) {
+
+  /* Target subsection underline rules ONLY */
+  #marketing-alliance .ma__rule,
+  #marketing-alliance .ma__subhead .vo__rule,
+  #marketing-alliance .ma__subhead .ma__rule,
+  #marketing-alliance .ma__sectionRule,
+  #marketing-alliance .ma__divider,
+  #marketing-alliance .ma__line {
+    transform: translateY(0px) !important;
+    will-change: transform;
+  }
+
+}
+
+/* =========================================================
    MOBILE — Marketing Alliance LOGO position override
    ========================================================= */
 @media (max-width: 600px) {
@@ -2126,6 +2145,24 @@
   #marketing-alliance .ma__logo img {
     transform: translate(-21px, -22px) !important;
     transform-origin: center center;
+    will-change: transform;
+  }
+
+}
+
+/* =========================================================
+   MOBILE — Marketing Alliance MAIN header underline correction
+   ========================================================= */
+@media (max-width: 600px) {
+
+  /* Target ONLY the primary header rule under "Marketing Alliance" */
+  #marketing-alliance .ma__row1 .ma__heading .ma__rule,
+  #marketing-alliance > .ma__row1 > .ma__heading .ma__rule,
+  #marketing-alliance > .ma__header .ma__rule,
+  #marketing-alliance > .ma__heading .ma__rule,
+  #marketing-alliance > .ma__titleBlock .ma__rule,
+  #marketing-alliance .ma__heroHeading .ma__rule {
+    transform: translateY(-15px) !important;
     will-change: transform;
   }
 
@@ -2218,4 +2255,86 @@
     will-change: transform;
   }
 
+}
+
+/* =========================================================
+   MOBILE — Marketing Alliance content spacing tuning
+   ========================================================= */
+@media (max-width: 600px) {
+
+  /* ---------- CHANGE #2: Paragraph ONLY ---------- */
+  #marketing-alliance .ma__desc,
+  #marketing-alliance .ma__paragraph {
+    transform: translateX(7px) !important;
+    will-change: transform;
+  }
+
+  /* ---------- CHANGE #1: Everything BELOW paragraph ---------- */
+
+  /* Looping headers */
+  #marketing-alliance .ma__loopingHeaders,
+  #marketing-alliance .ma__loopingSection,
+
+  /* Photography */
+  #marketing-alliance .ma__photography,
+  #marketing-alliance .ma__photoSection,
+
+  /* Testimonials */
+  #marketing-alliance .ma__testimonials,
+  #marketing-alliance .ma__testimonialSection,
+
+  /* Shorts */
+  #marketing-alliance .ma__shorts,
+  #marketing-alliance .ma__shortsSection,
+
+  /* Headshots */
+  #marketing-alliance .ma__headshots,
+  #marketing-alliance .ma__headshotSection,
+
+  /* Generic content folds (safety catch) */
+  #marketing-alliance .ma__fold {
+    transform: translate(7px, -30px) !important;
+    will-change: transform;
+  }
+
+}
+
+/* =========================================================
+   MOBILE — Marketing Alliance Photography IMAGE SCALE KNOB
+   Real markup: section .ma__photos, grid .ma__photoGrid, <img class="media">
+   Global marketing.css sets scale(0.91) on .ma__photoGrid img; we override
+   here so photos appear ~20% larger on mobile only.
+   ========================================================= */
+@media (max-width: 600px) {
+
+  #marketing-alliance {
+    --ma-photo-scale: 1.0007;  /* 1.0 = normal; 1.2 = ~20% larger */
+  }
+
+  /* Target ONLY Photography section images: .ma__photos .ma__photoGrid img
+     (NOT .ma__photography / .ma__photoSection — those classes don't exist in JSX).
+     Images are <img> from Img component with class "media" inside .ma__photoGrid. */
+  #marketing-alliance .ma__photos .ma__photoGrid img,
+  #marketing-alliance .ma__photoGrid img {
+    transform: scale(var(--ma-photo-scale)) !important;
+    transform-origin: center center;
+    will-change: transform;
+  }
+
+}
+
+/* =========================================================
+   MOBILE — Marketing Alliance: nudge ONLY shorts tiles left
+   (POSITION ONLY — DO NOT CHANGE SIZE)
+   Real markup: .ma__shortsHeadshots > .ma__shortsColumn > .ma__shortsGrid
+   holds ONLY the 3 .ma__shortCard tiles (label/underline are in .ma__subhead).
+   ========================================================= */
+@media (max-width: 600px) {
+  #marketing-alliance { --ma-shorts-nudge-x: -6px; }
+
+  /* Container that holds ONLY the 3 short video tiles */
+  #marketing-alliance .ma__shortsGrid {
+    position: relative !important;
+    left: var(--ma-shorts-nudge-x) !important;
+  }
 }
