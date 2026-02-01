@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import './App.css';
 import './sections/austin.css';
 import './sections/blaze.css';
@@ -68,6 +68,50 @@ function App() {
       mainRef.current.scrollTop = 0;
     }
   };
+
+  // Mobile only: scroll the REAL scroll container (main.vp-main) before paint to avoid flash + white screen
+  useLayoutEffect(() => {
+    const isMobile =
+      window.matchMedia('(max-width: 600px)').matches ||
+      window.matchMedia('(pointer: coarse)').matches;
+    if (!isMobile) return;
+
+    const getScrollContainer = () => {
+      const candidates = [
+        mainRef.current,
+        document.querySelector('.vp-main'),
+        document.querySelector('main'),
+        document.querySelector('#root'),
+      ].filter(Boolean);
+      for (const el of candidates) {
+        const style = window.getComputedStyle(el);
+        const overflowY = style.overflowY;
+        if ((overflowY === 'auto' || overflowY === 'scroll') && el.scrollHeight > el.clientHeight) {
+          return el;
+        }
+      }
+      return document.scrollingElement || document.documentElement;
+    };
+
+    const reset = () => {
+      const scroller = getScrollContainer();
+      if (scroller && typeof scroller.scrollTo === 'function') {
+        scroller.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      } else if (scroller) {
+        scroller.scrollTop = 0;
+        scroller.scrollLeft = 0;
+      }
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      window.scrollTo(0, 0);
+    };
+
+    reset();
+    const raf = requestAnimationFrame(() => {
+      reset();
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [activeItem]);
 
   // Scroll to top on ALL devices when route changes
   // Mobile-only: close menu, clear scroll lock, and lock Home page
