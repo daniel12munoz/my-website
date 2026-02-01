@@ -140,6 +140,7 @@ export default function Blaze() {
           <HlsVideo
             className="bl__heroVideo"
             src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/eb7c470c81bbd956afe1e07e21f77d8e/manifest/video.m3u8"
+            posterSrc="/blazethumb.jpg"
             autoPlay
             muted
             loop

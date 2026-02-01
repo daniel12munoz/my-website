@@ -26,6 +26,7 @@ export default function MarketingAlliance() {
             <HlsVideo
               className="ma__heroVideoEl"
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/f33e2bc3aed778a80d5050985fda79cc/manifest/video.m3u8"
+              posterSrc="/marketingalliancethumb.jpg"
               autoPlay
               loop
               muted

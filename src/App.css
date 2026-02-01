@@ -462,6 +462,16 @@ body.nav-open {
   object-fit: cover !important;
 }
 
+/* Desktop hero (Vonix/Blaze/MA/AU): video transparent so poster overlay shows until first frame */
+@media (min-width: 601px) {
+  .vo__heroMedia video,
+  .bl__heroMedia video,
+  .ma__heroFrame video,
+  .au__heroMedia video {
+    background: transparent !important;
+  }
+}
+
 /* Poster overlay - stays visible until first frame is painted */
 .vp-posterOverlay {
   position: absolute;

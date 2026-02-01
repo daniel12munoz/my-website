@@ -27,6 +27,7 @@ const HlsVideoInner = forwardRef(function HlsVideoInner({
   autoPlay, 
   priority, 
   poster: posterProp,
+  posterSrc, // Optional: desktop hero thumbnail URL — overlay shown until first frame (Vonix/Blaze/MA/AU only)
   lazy = true,
   preferHd = true,
   hero = false,
@@ -40,11 +41,13 @@ const HlsVideoInner = forwardRef(function HlsVideoInner({
   const videoRef = useRef(null);
   const hlsRef = useRef(null);
   const hasFirstFrameRef = useRef(false); // For mobile hero poster overlay - persists across pause/resume
+  const desktopPosterHiddenRef = useRef(false); // Desktop hero: hide overlay only once after first frame
   
   // Compute heroLike once at mount for shouldLoad init
   const heroLikeInitial = hero || priority === true || preload === 'auto';
   const [shouldLoad, setShouldLoad] = useState(!lazy || heroLikeInitial);
   const [hasFirstFrame, setHasFirstFrame] = useState(false); // For mobile hero poster overlay
+  const [showPoster, setShowPoster] = useState(true); // Desktop hero only: poster overlay until first frame
   
   // Use refs to capture latest values for async callbacks without triggering effect re-runs
   const autoPlayRef = useRef(autoPlay);
@@ -501,6 +504,49 @@ const HlsVideoInner = forwardRef(function HlsVideoInner({
     }
   }, [src, hero]);
 
+  // Reset desktop poster overlay when src or posterSrc changes
+  useEffect(() => {
+    if (hero && !isMobile() && posterSrc) {
+      desktopPosterHiddenRef.current = false;
+      setShowPoster(true);
+    }
+  }, [src, posterSrc, hero]);
+
+  // Desktop hero only: first frame painted — hide poster overlay (requestVideoFrameCallback > onPlaying > onTimeUpdate)
+  useEffect(() => {
+    if (!hero || isMobile() || !posterSrc || !shouldLoad) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    const hidePoster = () => {
+      if (desktopPosterHiddenRef.current) return;
+      desktopPosterHiddenRef.current = true;
+      setShowPoster(false);
+    };
+
+    let rvfcId = null;
+    if (typeof video.requestVideoFrameCallback === 'function') {
+      rvfcId = video.requestVideoFrameCallback(hidePoster);
+    }
+
+    const onPlaying = () => hidePoster();
+    const onTimeUpdate = () => {
+      if (video.currentTime > 0.05) hidePoster();
+    };
+    video.addEventListener('playing', onPlaying);
+    video.addEventListener('timeupdate', onTimeUpdate);
+
+    return () => {
+      if (rvfcId != null && video.cancelVideoFrameCallback) {
+        try {
+          video.cancelVideoFrameCallback(rvfcId);
+        } catch (_) {}
+      }
+      video.removeEventListener('playing', onPlaying);
+      video.removeEventListener('timeupdate', onTimeUpdate);
+    };
+  }, [hero, posterSrc, shouldLoad]);
+
   // Detect first frame for mobile hero videos (to hide poster overlay)
   useEffect(() => {
     if (!hero || !isMobile() || !poster) return;
@@ -602,7 +648,45 @@ const HlsVideoInner = forwardRef(function HlsVideoInner({
     );
   }
 
-  // Non-mobile hero: render video directly (no wrapper)
+  // Desktop hero with posterSrc (Vonix/Blaze/MA/AU): poster overlay until first frame — no black flash
+  if (hero && !isMobile() && posterSrc) {
+    return (
+      <div style={{ position: 'relative', display: 'block', width: '100%', height: '100%' }}>
+        <video
+          ref={videoRef}
+          autoPlay={autoPlay}
+          loop={loop}
+          muted={muted}
+          controls={false}
+          disableRemotePlayback
+          disablePictureInPicture
+          controlsList="nodownload noplaybackrate noremoteplayback"
+          poster={posterSrc || undefined}
+          playsInline={true}
+          preload={shouldLoad ? (preload || 'metadata') : 'none'}
+          className={finalClassName}
+          style={{ position: 'relative', zIndex: 1, background: 'transparent', ...restProps.style }}
+          {...restProps}
+        />
+        {/* Desktop hero poster overlay — visible until first frame painted */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            zIndex: 2,
+            backgroundImage: posterSrc ? `url(${posterSrc})` : 'none',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            pointerEvents: 'none',
+            opacity: showPoster ? 1 : 0,
+            transition: 'opacity 120ms ease-out',
+          }}
+        />
+      </div>
+    );
+  }
+
+  // Non-mobile hero without posterSrc (e.g. Home), or non-hero: render video directly (no wrapper)
   return (
     <video
       ref={videoRef}

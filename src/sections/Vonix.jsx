@@ -14,6 +14,7 @@ export default function Vonix() {
           <div className="media media--video vo__heroMedia">
             <HlsVideo
               src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/61d67aad31ee537fd8dd0cda7830def7/manifest/video.m3u8"
+              posterSrc="/vonixthumb.jpg"
               autoPlay
               muted
               loop
