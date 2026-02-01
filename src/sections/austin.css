@@ -2338,3 +2338,125 @@
     left: var(--ma-shorts-nudge-x) !important;
   }
 }
+
+/* =========================================================
+   MOBILE — Austin Underground paragraph position tuning
+   ========================================================= */
+@media (max-width: 600px) {
+
+  #austin-underground .au__desc,
+  #austin-underground .au__desc--mobile,
+  #austin-underground .au__row2Mobile .au__desc,
+  #austin-underground .au__paragraph {
+    transform: translate(10px, -12px) !important;
+    will-change: transform;
+  }
+
+}
+
+/* =========================================================
+   MOBILE — Austin Underground: allow lower content to shift right
+   Prevent right-side clipping ("white wall")
+   Real DOM: .au__fold2 is the LOWER CONTENT WRAPPER (Interviews + Concert Photography only).
+   ========================================================= */
+@media (max-width: 600px) {
+
+  /* 0) Austin Underground section must not clip its children */
+  #austin-underground,
+  #austin-underground.au,
+  #austin-underground.au__section {
+    overflow-x: visible !important;
+  }
+
+  /* 1) Lower content wrapper: .au__fold2 wraps ONLY Interviews + Concert Photography
+        (does NOT include hero, link, title, collage, or paragraph) */
+  #austin-underground .au__fold2 {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* 2) Neutralize max-width on lower wrapper so translation doesn't hit a "wall" */
+  #austin-underground .au__fold2 {
+    max-width: none !important;
+  }
+
+  /* 3) Horizontal nudge + move below-paragraph content DOWN 25px (Interviews + Concert Photography) */
+  #austin-underground .au__fold2 {
+    transform: translate(3px, 45px) !important;
+    will-change: transform;
+  }
+
+  /* 4) Concert Photography: additional 10px down (total 35px from top for Concert section) */
+  #austin-underground .au__concertPhotography {
+    transform: translateY(25px) !important;
+    will-change: transform;
+  }
+
+  /* 5) Ensure Interviews and Concert Photography sections don't clip their own content */
+  #austin-underground .au__interviews,
+  #austin-underground .au__concertPhotography {
+    overflow: visible !important;
+    overflow-x: visible !important;
+  }
+
+  /* Paragraph stays controlled by the block above; do not override it here. */
+}
+
+/* =========================================================
+   AU MOBILE — Restore subtle concert-photo tilt (image-only)
+   Real DOM: .au__concertMobileGrid is the mobile grid; direct children are img.media
+   ========================================================= */
+@media (max-width: 600px) {
+
+  #austin-underground .au__concertPhotography .au__concertMobileGrid img,
+  #austin-underground .au__concertMobileGrid .media {
+    transform: rotate(var(--au-tilt, 0deg)) !important;
+    transform-origin: center center;
+    will-change: transform;
+    display: block;
+  }
+
+  /* Slight variation per image (subtle tilt) */
+  #austin-underground .au__concertMobileGrid img:nth-child(1),
+  #austin-underground .au__concertMobileGrid .media:nth-child(1) { --au-tilt: -0.6deg; }
+  #austin-underground .au__concertMobileGrid img:nth-child(2),
+  #austin-underground .au__concertMobileGrid .media:nth-child(2) { --au-tilt:  0.4deg; }
+  #austin-underground .au__concertMobileGrid img:nth-child(3),
+  #austin-underground .au__concertMobileGrid .media:nth-child(3) { --au-tilt: -0.3deg; }
+  #austin-underground .au__concertMobileGrid img:nth-child(4),
+  #austin-underground .au__concertMobileGrid .media:nth-child(4) { --au-tilt:  0.5deg; }
+  #austin-underground .au__concertMobileGrid img:nth-child(5),
+  #austin-underground .au__concertMobileGrid .media:nth-child(5) { --au-tilt: -0.5deg; }
+  #austin-underground .au__concertMobileGrid img:nth-child(6),
+  #austin-underground .au__concertMobileGrid .media:nth-child(6) { --au-tilt:  0.4deg; }
+  #austin-underground .au__concertMobileGrid img:nth-child(7),
+  #austin-underground .au__concertMobileGrid .media:nth-child(7) { --au-tilt: -0.3deg; }
+  #austin-underground .au__concertMobileGrid img:nth-child(8),
+  #austin-underground .au__concertMobileGrid .media:nth-child(8) { --au-tilt:  0.5deg; }
+  #austin-underground .au__concertMobileGrid img:nth-child(9),
+  #austin-underground .au__concertMobileGrid .media:nth-child(9) { --au-tilt: -0.4deg; }
+  #austin-underground .au__concertMobileGrid img:nth-child(10),
+  #austin-underground .au__concertMobileGrid .media:nth-child(10) { --au-tilt:  0.3deg; }
+}
+
+/* =========================================================
+   MOBILE — Austin Underground bottom breathing space
+   ========================================================= */
+@media (max-width: 600px) {
+
+  /* Primary bottom padding on section */
+  #austin-underground {
+    padding-bottom: 100px !important;  /* adjust if you want more/less */
+  }
+
+  /* Safety spacer to guarantee visual breathing room */
+  #austin-underground::after {
+    content: "";
+    display: block;
+    height: 100px;
+    width: 100%;
+  }
+
+}
