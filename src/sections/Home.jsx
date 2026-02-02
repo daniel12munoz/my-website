@@ -1,71 +1,33 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import './home.css';
 import HlsVideo from '../components/HlsVideo';
 
+const MOBILE_BREAKPOINT = '(max-width: 600px)';
+
 export default function Home() {
-  // Lock scrolling on mobile (real iPhones) using position:fixed technique
-  // This prevents scroll WITHOUT clipping the spotlight blur shadow
-  const scrollYRef = useRef(0);
-
   useEffect(() => {
-    // Only apply on mobile (max-width: 600px)
-    const mediaQuery = window.matchMedia('(max-width: 600px)');
-    
-    const lockScroll = () => {
-      if (!mediaQuery.matches) return; // Desktop: do nothing
-
-      // Save current scroll position
-      scrollYRef.current = window.scrollY;
-
-      // Freeze the page using position:fixed
-      document.documentElement.style.height = '100%';
-      document.body.style.height = '100%';
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollYRef.current}px`;
-      document.body.style.left = '0';
-      document.body.style.right = '0';
-      document.body.style.width = '100%';
-      document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
-      document.body.style.touchAction = 'none';
-      document.body.style.overscrollBehavior = 'none';
-    };
-
-    const unlockScroll = () => {
-      // Clear all styles
-      document.documentElement.style.height = '';
-      document.body.style.height = '';
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      document.body.style.width = '';
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-      document.body.style.touchAction = '';
-      document.body.style.overscrollBehavior = '';
-
-      // Restore scroll position
-      window.scrollTo(0, scrollYRef.current);
-    };
-
-    // Lock on mount if mobile
-    lockScroll();
-
-    // Cleanup on unmount
+    const isMobile =
+      typeof window !== 'undefined' && window.matchMedia(MOBILE_BREAKPOINT).matches;
+    if (isMobile) {
+      document.documentElement.classList.add('mobile-home-locked');
+      document.body.classList.add('mobile-home-locked');
+    }
     return () => {
-      unlockScroll();
+      document.documentElement.classList.remove('mobile-home-locked');
+      document.body.classList.remove('mobile-home-locked');
     };
   }, []);
 
   return (
-    <section
-      id="home"
-      className="home au"
-    >
-      <div className="home__spotlight" aria-hidden="true"></div>
+    <div className="mobileHomeViewport">
+      <div className="mobileHomeGroup">
+        <section
+          id="home"
+          className="home au"
+        >
+          <div className="home__spotlight" aria-hidden="true"></div>
 
-      <header className="home__top">
+          <header className="home__top">
         <h1 className="home__headline">
           Let's create <span className="home__it">it</span>.
         </h1>
@@ -127,6 +89,8 @@ export default function Home() {
         </p>
       </footer>
     </section>
+      </div>
+    </div>
   );
 }
 

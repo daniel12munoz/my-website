@@ -393,8 +393,16 @@ body {
     padding-top: 80px;
   }
 
+  /* Home only: non-scrollable poster, no shadow clipping */
   .App > main.vp-main--home {
-    padding-top: 60px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0 !important;
+    padding-bottom: 24px; /* breathing room so hero drop-shadow doesn't clip */
+    overflow: hidden !important;
+    height: 100svh !important;
+    max-height: 100svh !important;
+    overscroll-behavior: none !important;
   }
 }
 
