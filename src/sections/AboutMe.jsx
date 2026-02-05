@@ -19,7 +19,7 @@ export default function AboutMe() {
             <img
               className="aboutMe__photoCombined"
               src="/all-aboutmeimages.png"
-              alt="Daniel Muñoz photo collage"
+              alt="Daniel Muñoz collage"
               loading="eager"
               fetchPriority="high"
               decoding="sync"
@@ -49,7 +49,7 @@ export default function AboutMe() {
           <img
             className="aboutMe__photoCombined"
             src="/all-aboutmeimages.png"
-            alt="Daniel Muñoz photo collage"
+            alt="Daniel Muñoz collage"
             loading="eager"
             fetchPriority="high"
             decoding="sync"
