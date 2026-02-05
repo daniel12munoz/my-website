@@ -549,6 +549,15 @@ body.nav-open {
     overscroll-behavior: none !important;
     touch-action: none !important;
   }
+
+  /* ABOUT page: lock scrolling, prevent overflow */
+  .App > main.vp-main--about {
+    overflow: hidden !important;
+    height: 100svh !important;
+    max-height: 100svh !important;
+    overscroll-behavior: none !important;
+    touch-action: none !important;
+  }
 }
 
 /* =========================
