@@ -137,68 +137,146 @@
    MOBILE ONLY — OTHER CHANNELS LAYOUT FIX
    ========================= */
 @media (max-width: 600px) {
-  /* Keep no scrolling */
+  /* =========================
+     OTHER CHANNELS — MOBILE (UNIFORM, CENTERED, NO SCROLL)
+     ========================= */
+
   .otherChannels {
+    /* Layout: center the whole stack both directions */
+    height: 100svh !important;
+    min-height: 100svh !important;
     overflow: hidden !important;
-    height: 100vh !important;
-    padding-top: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    /* Span full viewport width regardless of parent sizing */
+    width: 100vw !important;
+    max-width: 100vw !important;
+
+    /* Center against viewport even if a parent tries to constrain width */
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+
+    /* Symmetric padding so true horizontal centering is possible */
+    padding-top: max(16px, env(safe-area-inset-top)) !important;
+    padding-bottom: max(16px, env(safe-area-inset-bottom)) !important;
+    padding-left: 16px !important;
     padding-right: 16px !important;
-    padding-bottom: 24px !important;
-    padding-left: 76px !important; /* right shift, but not insane */
+
     box-sizing: border-box;
+
+    /* Simple font size controls */
+    --title1-size: 30px;   /* main number title */
+    --title2-size: 30px;   /* "Across 10 Channels" */
   }
 
-  /* Root cause fix: stop the desktop negative translate on mobile */
-  /* Shift entire layout up 50px and left 50px */
+  /* Handles (adjust these numbers freely) */
+  .otherChannels {
+    --oc-paragraph-size: 14px;
+    --oc-stack-gap: 14px;
+    --oc-max-width: min(92vw, 520px);
+    --oc-y-offset: 0px;  /* Optional vertical micro-tuning handle */
+    --oc-global-y: -1px;  /* Global vertical offset for mobile */
+  }
+
+  /* Remove ALL mobile positioning hacks */
   .otherChannels__frame {
-    transform: translate(-75px, -320px) !important;
-    height: 100%;
-    min-height: 100%;
+    transform: translateY(var(--oc-y-offset)) translateY(var(--oc-global-y)) !important;
+    will-change: auto !important;
+
+    /* Center the content stack within the padded viewport area */
+    width: 100% !important;
+    max-width: var(--oc-max-width) !important;
+    height: auto !important;
+    min-height: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: var(--oc-stack-gap) !important;
+
+    /* Ensures the stack is centered and we get equal top/bottom whitespace */
+    margin: 0 auto !important;
   }
 
-  /* Make hero block fit inside viewport */
   .otherChannels__hero {
-    padding: 0 10px;
+    padding: 0 !important;
+    width: 100% !important;
+    text-align: center !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
-  /* Medium hero sizing (remove the crazy scale) */
   .otherChannels__stats {
-    transform: translateY(170px) scale(1.0) !important; /* move down 60px, was 1.8 — too huge */
+    transform: none !important;
+    transform-origin: center !important;
+    will-change: auto !important;
+    width: 100% !important;
   }
 
   .otherChannels__heroLine1,
   .otherChannels__heroLine2 {
-    font-size: clamp(28px, 7.2vw, 40px) !important; /* medium */
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+
+    font-family: 'IBM Plex Serif', 'Georgia', 'Times New Roman', serif;
+    font-weight: 400;
     line-height: 1.12 !important;
     letter-spacing: 0.005em !important;
-    margin: 0 !important;
-    max-width: 100%;
-    word-break: keep-all;
+
+    /* Prevent weird wrapping behavior */
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+    text-align: center !important;
   }
 
-  /* Slightly increase top stats text size on mobile */
-  .otherChannels__heroLine1,
-  .otherChannels__heroLine2 {
-    font-size: 210% !important;
-  }
-
+  /* Title 1: MUST stay one line */
   .otherChannels__heroLine1 {
-    margin-bottom: 10px !important;
+    font-size: var(--title1-size) !important;
+    white-space: nowrap !important;
+    margin-bottom: 8px !important;
   }
 
-  /* Widen the paragraph so it isn't skinny/tall */
+  /* Title 2 */
+  .otherChannels__heroLine2 {
+    font-size: var(--title2-size) !important;
+    white-space: nowrap !important;
+  }
+
+  .otherChannels__heroLine1 strong,
+  .otherChannels__heroLine2 strong {
+    font-weight: 700 !important;
+  }
+
   .otherChannels__bottom {
-    padding-bottom: 12px !important;
     transform: none !important;
+    will-change: auto !important;
+
+    width: 100% !important;
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .otherChannels__copy {
-    max-width: 52ch !important;      /* wider than before */
-    width: min(92vw, 52ch) !important;
-    margin: 0 auto !important;
-    text-align: center;
-    font-size: 15px !important;      /* keep readable but compact */
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 52ch !important;
+
+    color: rgba(0, 0, 0, 0.64);
+    font-family: 'IBM Plex Mono', 'Fira Mono', 'Menlo', 'Consolas', 'Courier New', monospace;
+
+    font-size: var(--oc-paragraph-size) !important;
     line-height: 1.5 !important;
+    text-align: center !important;
+    font-weight: 400 !important;
   }
 
   /* Safety: nothing spills sideways */

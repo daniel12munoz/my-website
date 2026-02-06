@@ -550,6 +550,18 @@ body.nav-open {
     touch-action: none !important;
   }
 
+  /* MOBILE: Other Channels page must use full viewport, no inherited main padding */
+  .App > main.vp-main.vp-main--other {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+
+    overflow: hidden !important;
+    height: 100svh !important;
+    max-height: 100svh !important;
+  }
+
   /* ABOUT page: lock scrolling, prevent overflow */
   .App > main.vp-main--about {
     overflow: hidden !important;
