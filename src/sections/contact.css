@@ -52,7 +52,8 @@
   font-size: clamp(17px, 1.9vw, 22px);
   font-weight: 500;
 
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.15);
   color: var(--au-ink);
   opacity: 0.85;
 }
