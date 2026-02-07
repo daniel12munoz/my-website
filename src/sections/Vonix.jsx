@@ -52,18 +52,17 @@ export default function Vonix() {
 
           <div className="vo__logoWrap vonix__topRight">
             <img
-              src="/vo-logo1.png"
-              alt="Vonix logo"
-              className="vo__logo"
+              src="/vonix-masterlogo.png"
+              alt="Vonix master logo"
+              className="vo__masterLogo vo__masterLogo--desktop"
               loading="eager"
               fetchPriority="high"
               decoding="sync"
             />
             <img
-              className="vonix__plaque"
-              src="/100plaque.png"
-              alt=""
-              aria-hidden="true"
+              src="/vonix-masterlogomobilesecond.png"
+              alt="Vonix master logo"
+              className="vo__masterLogo vo__masterLogo--mobile"
               loading="eager"
               fetchPriority="high"
               decoding="sync"
@@ -111,7 +110,7 @@ export default function Vonix() {
             <div className="vo__psychShort" key="/vo-short1.mp4">
               <div className="media media--short vo__psychShortMedia">
                 <div className="comingSoonTile comingSoonTile--short" aria-label="Short coming soon">
-                  <div className="comingSoonTile__center">Feb 2026</div>
+                  <div className="comingSoonTile__center">Mar 2026</div>
                 </div>
               </div>
               <div className="vo__linkWrap">

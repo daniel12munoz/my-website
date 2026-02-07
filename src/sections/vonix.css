@@ -218,6 +218,25 @@
   line-height: 1.3;
 }
 
+/* Logo: adjustable handles — desktop (601px+) overridden below; mobile image uses --vonix-m-logo-* */
+#vonix {
+  --vonix-logo-scale: 1.05;
+  --vonix-logo-x: 10px;
+  --vonix-logo-y: -50px;
+  /* Mobile-only image knobs (used when .vo__masterLogo--mobile is shown): +10px right, -10px up, +0.1 scale */
+  --vonix-m-logo-scale: 1.25;
+  --vonix-m-logo-x: 15px;
+  --vonix-m-logo-y: -95px;
+}
+
+@media (min-width: 601px) {
+  #vonix {
+    --vonix-logo-scale: 1.45;
+    --vonix-logo-x: 85px;
+    --vonix-logo-y: 95px;
+  }
+}
+
 /* Logo: pure PNG, no box/border/shadow; position similar to Blaze/MA logos */
 .vo__logoWrap {
   width: 100%;
@@ -229,46 +248,64 @@
   position: relative;
   transform: translateX(18px);               /* nudge logo to the RIGHT */
   will-change: transform;
+  overflow: visible !important;
 }
 
-.vo__logo {
-  width: clamp(280px, 34vw, 440px);                      /* ~30% larger than before */
+/* Merged logo — only one visible per breakpoint; wrapper must not clip */
+#vonix .vo__logoWrap,
+#vonix .vonix__topRight {
+  overflow: visible !important;
+}
+
+/* Shared base for both desktop and mobile logo images */
+#vonix .vo__masterLogo {
+  width: clamp(280px, 34vw, 440px);
   aspect-ratio: 1 / 1;
-  display: block;
+  height: auto;
   object-fit: contain;
+  display: block;
   background: transparent !important;
   border: none !important;
-  box-shadow: none !important;                           /* keep it a clean PNG – user can add shadow later */
+  box-shadow: none !important;
+  filter: none !important;
+  will-change: transform;
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Default (desktop): show desktop image only */
+.vo__masterLogo--mobile {
+  display: none !important;
+}
+.vo__masterLogo--desktop {
+  display: block !important;
+  transform:
+    translateX(var(--vonix-logo-x))
+    translateY(var(--vonix-logo-y))
+    scale(var(--vonix-logo-scale));
+  transform-origin: center center; /* reverted from top right to restore prior desktop placement */
+}
+
+/* Mobile: show mobile image only; desktop image hidden — logo perfectly centered horizontally */
+@media (max-width: 600px) {
+  .vo__masterLogo--desktop {
+    display: none !important;
+  }
+  .vo__masterLogo--mobile {
+    display: block !important;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(var(--vonix-m-logo-y)) scale(var(--vonix-m-logo-scale));
+    transform-origin: center top;
+    will-change: transform;
+  }
 }
 
 /* Anchor container for top-right logo area */
 .vonix__topRight {
-  position: relative; /* enables absolute positioning for plaque */
-}
-
-/* 100 plaque overlay */
-.vonix__plaque {
-  position: absolute;
-  z-index: 50; /* above the face logo */
-  pointer-events: none;
-  user-select: none;
-
-  /* Easy tuning controls */
-  --plaq-x: 100px;   /* move right (+) / left (-) */
-  --plaq-y: 280px;   /* move down (+) / up (-) */
-  --plaq-w: 255px;  /* overall size */
-
-  width: var(--plaq-w);
-  height: auto;
-
-  /* Place it slightly down and right from the logo */
-  top: 0;
-  right: 0;
-  transform: translate(var(--plaq-x), var(--plaq-y)) rotate(4deg);
-  transform-origin: top right;
-
-  /* drop shadow */
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)) drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+  position: relative;
 }
 
 /* Remove video play icon/overlay */
@@ -300,6 +337,13 @@
   opacity: 0.95;
   text-align: center;
   padding: 16px;
+}
+
+/* Mobile only: slightly smaller "Coming very soon" overlay on first psychology video */
+@media (max-width: 600px) {
+  .vo__psychMain .comingSoonTile__center {
+    font-size: 70% !important;
+  }
 }
 
 /* ensure no play overlay appears */
@@ -692,7 +736,7 @@
     justify-content: flex-start;
   }
 
-  .vo__logo {
+  .vo__masterLogo {
     width: 100%;
     max-width: min(280px, 80vw);
     height: auto;
@@ -851,7 +895,7 @@
     word-break: break-word;
   }
 
-  /* E) Plaque/Logo clipping fix: Force overflow visible to prevent shadow/plaque clipping */
+  /* E) Logo clipping fix: Force overflow visible */
   .vonix__topRight,
   .vo__logoWrap {
     overflow: visible !important;
@@ -860,17 +904,6 @@
   /* Keep logoWrap from causing overflow via transforms */
   .vo__logoWrap {
     transform: none !important;
-  }
-
-  /* F) Plaque: smaller + safely positioned (no off-screen, no clipping) */
-  .vonix__plaque {
-    width: min(190px, 52vw) !important;
-    height: auto !important;
-    top: 8px !important;
-    left: 8px !important;
-    right: auto !important;
-    transform: translate(-30px, -10px) rotate(4deg) !important;
-    transform-origin: top left !important;
   }
 
   /* Ensure no element uses negative margins that expand viewport */
@@ -894,28 +927,10 @@
     margin-left: auto !important;
     margin-right: auto !important;
   }
-
-  /* Plaque: nudge left a bit more so it never kisses the edge */
-  section#vonix.vo .vonix__plaque {
-    transform: translate(-44px, -10px) rotate(4deg) !important;
-  }
 }
 
-/* Vonix MOBILE plaque + profile image adjustment */
+/* Vonix MOBILE: description spacing (merged logo has no separate plaque/logo sync) */
 @media (max-width: 600px) {
-  /* PLAQUE: move left 30px, down 10px, scale 10% smaller */
-  section#vonix.vo .vonix__plaque {
-    transform: translate(181px, 35px) rotate(4deg) scale(0.9) !important;
-  }
-
-  /* PROFILE IMAGE (Vonix face/logo):
-     - Make 20% smaller
-     - Move 10px left and 10px up */
-  section#vonix.vo .vo__logo {
-    transform: translate(-60px, -90px) scale(0.8) !important;
-    transform-origin: center center;
-  }
-
   /* Pull description + everything below it UP by ~50px */
   section#vonix.vo .vo__rowDesc {
     margin-top: -90px !important;
@@ -1067,12 +1082,6 @@
   max-width: 100% !important;
 }
 
-/* Mac-only: profile image only (do NOT touch plaque transform) */
-.os-mac #vonix .vo__logoWrap .vo__logo {
-  transform: scale(0.96);
-  transform-origin: top right;
-}
-
 /* ===========================
    Mac desktop fine-tuning — Vonix only
    =========================== */
@@ -1119,18 +1128,6 @@
 .os-mac #vonix .vo__videoCard {
   max-width: 100%;
   box-sizing: border-box;
-}
-
-/* ===========================
-   Mac-only: plaque position nudge (NO scaling)
-   =========================== */
-.os-mac #vonix .vonix__plaque {
-  /* move right (+) and down (+) by adjusting variables */
-  --plaq-x: 100px;  /* was 100px */
-  --plaq-y: 275px;  /* was 280px */
-
-  /* ensure no other Mac transforms override the base */
-  transform: translate(var(--plaq-x), var(--plaq-y)) rotate(4deg) !important;
 }
 
 /* =========================
@@ -1381,21 +1378,19 @@
 }
 
 /* =========================================================
-   VONIX: Desktop logo + plaque instant loading fix
-   Prevent shadow pop-in and layout shift
-   NOTE: No contain: paint to allow plaque overflow visibility
+   VONIX: Desktop logo instant loading fix
+   Prevent layout shift; allow overflow for merged logo
    ========================================================= */
 @media (min-width: 601px) {
-  /* Ensure logo wrap and top-right container allow plaque overflow */
+  /* Ensure logo wrap and top-right container allow overflow */
   #vonix .vo__logoWrap,
   #vonix .vonix__topRight {
     overflow: visible !important;
     contain: none !important;
   }
 
-  /* Ensure logo and plaque render as block elements immediately */
-  #vonix .vo__logo,
-  #vonix .vonix__plaque {
+  /* Ensure desktop merged logo renders as block immediately (mobile img stays hidden) */
+  #vonix .vo__masterLogo--desktop {
     display: block;
   }
 }
