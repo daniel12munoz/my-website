@@ -542,6 +542,16 @@
   #blaze {
     padding-bottom: 210px !important; /* ~50% more than 140 */
   }
+
+  /* =========================================
+     BLAZE — MOBILE ONLY
+     Move long-form videos section UP 15px
+     (does NOT affect desktop)
+  ========================================= */
+  #blaze .bl__videosSection {
+    position: relative !important;
+    top: -20px !important;
+  }
 }
 
 /* ===========================

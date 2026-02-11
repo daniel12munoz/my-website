@@ -167,6 +167,7 @@ export default function Vonix() {
                   href="https://youtube.com/shorts/Lng8cEThQK8"
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-vonix-short2-link="true"
                 >
                   youtube.com/shorts/Lng8cEThQK8
                 </a>
@@ -177,6 +178,7 @@ export default function Vonix() {
         </div>
       </section>
 
+      <div className="vo__belowHeroDesktop" data-vonix-tech-block="true">
       {/* ==================== TECHNOLOGY (5-video 3+2 grid) ==================== */}
       <section className="vo__fold vo__technology">
         <div className="vo__subhead vo__subhead--left">
@@ -605,6 +607,7 @@ export default function Vonix() {
           </article>
         </div>
       </section>
+      </div>
     </section>
   );
 }

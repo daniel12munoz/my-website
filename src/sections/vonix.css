@@ -736,6 +736,12 @@
     justify-content: flex-start;
   }
 
+  /* Vonix mobile only: move the link above Short2 (youtube.com/shorts/Lng8cEThQK8) down 5px */
+  #vonix a[data-vonix-short2-link="true"] {
+    position: relative !important;
+    top: 5px !important;
+  }
+
   .vo__masterLogo {
     width: 100%;
     max-width: min(280px, 80vw);
@@ -1392,5 +1398,36 @@
   /* Ensure desktop merged logo renders as block immediately (mobile img stays hidden) */
   #vonix .vo__masterLogo--desktop {
     display: block;
+  }
+}
+
+/* =========================================
+   VONIX — mobile-only shift for Tech + below
+   (explicitly EXCLUDES Mac/Windows)
+   ========================================= */
+@media (max-width: 600px) {
+  html:not(.os-mac):not(.os-win) #vonix [data-vonix-tech-block="true"] {
+    position: relative !important;
+    top: 20px !important;
+  }
+}
+
+/* Vonix: Desktop-only nudge — Technology + below down 25px.
+   Mobile must remain unchanged. */
+@media (min-width: 601px) {
+  #vonix .vo__belowHeroDesktop {
+    position: relative;
+    top: 70px;
+  }
+}
+
+/* =========================================
+   VONIX — DESKTOP ONLY bottom whitespace
+   Adds clean breathing room at bottom
+   Mobile completely untouched
+========================================= */
+@media (min-width: 601px) {
+  #vonix {
+    padding-bottom: 250px;
   }
 }
