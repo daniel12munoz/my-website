@@ -2324,22 +2324,6 @@
 }
 
 /* =========================================================
-   MOBILE — Marketing Alliance: nudge ONLY shorts tiles left
-   (POSITION ONLY — DO NOT CHANGE SIZE)
-   Real markup: .ma__shortsHeadshots > .ma__shortsColumn > .ma__shortsGrid
-   holds ONLY the 3 .ma__shortCard tiles (label/underline are in .ma__subhead).
-   ========================================================= */
-@media (max-width: 600px) {
-  #marketing-alliance { --ma-shorts-nudge-x: -6px; }
-
-  /* Container that holds ONLY the 3 short video tiles */
-  #marketing-alliance .ma__shortsGrid {
-    position: relative !important;
-    left: var(--ma-shorts-nudge-x) !important;
-  }
-}
-
-/* =========================================================
    MOBILE — Austin Underground paragraph position tuning
    ========================================================= */
 @media (max-width: 600px) {

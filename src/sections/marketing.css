@@ -992,11 +992,16 @@
 
   #marketing-alliance {
     overflow-x: hidden;
-    --ma-shorts-scale: 0.72;        /* made a bit bigger */
-    --ma-shorts-translate-x: 17px;  /* control shorts left/right (negative = left) */
-    --ma-headshots-scale: 1.03;     /* increased by 50% */
-    --ma-headshots-translate-x: -10px; /* control headshots left/right */
-    --ma-headshots-translate-y: -55px; /* control headshots up/down */
+    --ma-shorts-scale: 1.05;        /* tiles ~15% larger; scale cards, not grid */
+    --ma-shorts-y: 12px;
+    /* Headshots mobile knobs: shift down, horizontal nudge */
+    --ma-headshots-shift-y: 40px;
+    --ma-headshots-nudge-x: 0px;
+    --ma-headshots-label-y: 15px;
+    --ma-headshots-photos-y: -25px;
+    --ma-headshots-y-final: 12px;
+    --ma-lower-sections-nudge: -8px;
+    --ma-testimonial-nudge: -8px;
     --ma-logo-scale: 0.8;           /* decreased by 20% */
     --ma-safe-gutter: 10px;
     --ma-bottom-gutter: 150px;      /* fat white space at bottom for scrolling */
@@ -1011,14 +1016,73 @@
     line-height: 1.25;
   }
 
-  /* Logo positioning and scale */
-  #marketing-alliance .ma__logoWrap {
-    transform: translate(41px, 1px) !important; /* moved 50px to the right */
+  /* =========================================================
+     MOBILE — Marketing Alliance logo always perfectly centered
+     Removes old transforms and guarantees center alignment
+     ========================================================= */
+  #marketing-alliance .ma__logoWrap,
+  #marketing-alliance .ma__logo,
+  #marketing-alliance .ma__logo img {
+    transform: none !important;
+    left: auto !important;
+    right: auto !important;
   }
-  #marketing-alliance .ma__logo {
-    transform: scale(var(--ma-logo-scale));
-    transform-origin: top left;
-    display: block;
+
+  /* =========================================================
+     MOBILE — Marketing Alliance logo vertical spacing control
+     Pull logo upward to remove excess white space
+     ========================================================= */
+  #marketing-alliance {
+    --ma-logo-lift: -80px;  /* adjust this number only */
+  }
+
+  /* Full-width centering rail */
+  #marketing-alliance .ma__logoWrap,
+  #marketing-alliance .ma__logoContainer {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    transform: translateY(var(--ma-logo-lift)) !important;
+  }
+
+  /* Size control knob for MA logo on mobile */
+  #marketing-alliance {
+    --ma-logo-scale: 0.65;   /* adjust this number only (0.55–0.75 ideal range) */
+    --ma-logo-nudge-x: 5px;  /* optical centering: nudge right on mobile if still ~5px left */
+  }
+
+  /* Ensure the image itself is centered and unchanged in size */
+  #marketing-alliance .ma__logoWrap img,
+  #marketing-alliance .ma__logo img,
+  #marketing-alliance img.ma__logo {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    height: auto !important;
+    width: auto !important;
+    max-width: 100% !important;
+    transform: scale(var(--ma-logo-scale)) translateX(var(--ma-logo-nudge-x)) !important;
+    transform-origin: center center !important;
+  }
+
+  /* =========================================================
+     MOBILE — Marketing Alliance stack lift (gap under logo)
+     Removes the huge vertical gap below the logo on small phones.
+     Targets .ma__belowRow1 (paragraph + Looping Headers + Photography
+     + Testimonials + Shorts + Headshots — everything after the logo).
+     Uses position + top (not transform) to avoid conflicts with other
+     transform-based nudges (shorts, headshots, etc.).
+     ========================================================= */
+  #marketing-alliance {
+    --ma-stack-lift: -120px;   /* knob: -90 to -120 typically; adjust to taste */
+  }
+
+  #marketing-alliance .ma__belowRow1 {
+    position: relative !important;
+    top: var(--ma-stack-lift) !important;
   }
 
   /* Photography: 2-column grid */
@@ -1046,8 +1110,11 @@
     display: none;
   }
 
+  /* === FINAL lock: lift testimonial videos up 8px only === */
   /* Testimonials: 2-column grid with 16:9 black boxes */
   #marketing-alliance .ma__testimonialsGrid {
+    position: relative;
+    top: var(--ma-testimonial-nudge);
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 12px !important;
     justify-items: stretch !important;
@@ -1074,31 +1141,114 @@
     background: #000 !important;
   }
 
-  /* Shorts: scaled down with adjustable left/right positioning */
-  #marketing-alliance .ma__shortsGrid {
-    transform: translateX(var(--ma-shorts-translate-x)) scale(var(--ma-shorts-scale));
-    transform-origin: top left;
-    width: calc(100% / var(--ma-shorts-scale));
-    max-width: none;
-  }
-  #marketing-alliance .ma__shortsColumn {
-    padding-left: 2px;
-    overflow-x: hidden;
+  /* === FINAL FINAL: lift shorts + headshots only (NOT testimonials) === */
+  /* .ma__shortsHeadshots contains ONLY shorts + headshots; position/top avoids transform conflicts */
+  #marketing-alliance .ma__shortsHeadshots {
+    position: relative;
+    top: var(--ma-lower-sections-nudge);
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
-  /* Headshots: label positioning */
+  /* Shorts tiles grid ONLY — centered, no translate/scale/left hacks */
+  #marketing-alliance .ma__shortsColumn {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+  #marketing-alliance .ma__shortsGrid {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding-inline: 12px !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+    justify-content: center !important;
+    transform: none !important;
+    left: auto !important;
+    position: static !important;
+    overflow: visible !important;
+  }
+  #marketing-alliance .ma__shortsGrid .ma__shortCard {
+    min-width: 0 !important;
+    width: 100% !important;
+    transform: translateY(var(--ma-shorts-y)) scale(var(--ma-shorts-scale));
+    transform-origin: center center;
+  }
+  #marketing-alliance .ma__shortsGrid .ma__shortMedia {
+    min-width: 0 !important;
+  }
+
+  /* Shorts label: right align (label only; do NOT touch tiles) */
+  #marketing-alliance .ma__subhead--shorts {
+    align-items: flex-end !important;
+    text-align: right !important;
+    width: 100%;
+  }
+  /* ===== Shorts underline: slightly shorter ===== */
+  #marketing-alliance .ma__subhead--shorts .ma__rule {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    width: clamp(60px, 7.5vw, 108px) !important;
+    background-image: linear-gradient(
+      to left,
+      rgba(90, 90, 90, 0.85) 0%,
+      rgba(90, 90, 90, 0.75) 55%,
+      rgba(255, 255, 255, 1) 100%
+    ) !important;
+    background-color: transparent !important;
+  }
+
+  /* Headshots: label + underline — left-align (swapped from right), move down 15px */
   #marketing-alliance .ma__headshotsColumn .ma__subhead--headshots {
-    transform: translateX(var(--ma-headshots-translate-x)) translateY(var(--ma-headshots-translate-y));
+    transform: translateY(var(--ma-headshots-label-y));
+    align-items: flex-start !important;
+    text-align: left !important;
+    width: 100%;
+  }
+  /* ===== Headshots underline: slightly shorter, fade begins sooner ===== */
+  #marketing-alliance .ma__headshotsColumn .ma__subhead--headshots .ma__rule {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+    width: clamp(64px, 7.2vw, 96px) !important;
+    background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.55) 55%,
+      rgba(255, 255, 255, 1) 100%
+    ) !important;
+    background-color: transparent !important;
   }
   #marketing-alliance .ma__headshotsColumn {
-    align-items: flex-end;
-    overflow: visible;
+    width: 100%;
     max-width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 12px;
+    box-sizing: border-box;
+    overflow: visible;
+    margin-left: auto;
+    margin-right: auto;
+    transform: translateY(var(--ma-headshots-y-final));
   }
-  /* Headshots images: scaled and positioned */
+  /* Headshots pile: shift + photos nudge, centered, no left cutoff */
   #marketing-alliance .ma__headshotPile {
-    transform: translateX(var(--ma-headshots-translate-x)) translateY(var(--ma-headshots-translate-y)) scale(var(--ma-headshots-scale));
-    transform-origin: top right;
+    transform: translate(var(--ma-headshots-nudge-x), calc(var(--ma-headshots-shift-y) + var(--ma-headshots-photos-y)));
+    transform-origin: center;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    overflow: visible;
+    left: auto;
+  }
+  /* Headshots images: prevent overflow (keep aspect-ratio for stacked layout) */
+  #marketing-alliance .ma__headshotPile .shot {
+    max-width: 100%;
   }
 
   /* Responsive safety */
@@ -1216,6 +1366,21 @@
   #marketing-alliance .ma__heroFrame > video {
     overflow: hidden !important;
     border-radius: inherit;
+  }
+
+  /* =========================================================
+     MOBILE — Marketing Alliance roles font-size knob
+     Fix: roles/date line wraps on small phones (iPhone SE, etc.)
+     ========================================================= */
+  #marketing-alliance {
+    /* Knob: lower this slightly (e.g., 0.90 → 0.89) until it stays on one line */
+    --ma-roles-scale: 0.811;
+  }
+
+  /* Roles line under the title */
+  #marketing-alliance .ma__roles {
+    font-size: calc(1em * var(--ma-roles-scale)) !important;
+    line-height: 1.18 !important;
   }
 
 }
