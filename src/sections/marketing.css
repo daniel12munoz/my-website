@@ -1384,3 +1384,36 @@
   }
 
 }
+
+/* =========================================
+   Marketing Alliance — SMALL PHONE ONLY (<=360px)
+   Narrow phones only; does NOT affect desktop resize
+   ========================================= */
+@media (max-width: 360px) and (pointer: coarse) {
+  /* KNOBS (edit these numbers to taste) */
+  #marketing-alliance {
+    --ma-small-title-size: 26.8px;    /* knob for "Marketing Alliance" title */
+    --ma-small-roles-size: 11.3px;    /* knob for roles/dates text */
+    --ma-small-headshot-width: 132px; /* knob for each headshot width */
+    --ma-small-headshot-gap: 20px;   /* optional knob if there is a gap */
+  }
+
+  /* 1) Main title */
+  #marketing-alliance .ma__title {
+    font-size: var(--ma-small-title-size) !important;
+    line-height: 1.08 !important;
+  }
+
+  /* 2) Roles/dates */
+  #marketing-alliance .ma__roles {
+    font-size: var(--ma-small-roles-size) !important;
+    line-height: 1.22 !important;
+  }
+
+  /* 3) Headshots — two overlapping headshot images at bottom */
+  #marketing-alliance .ma__headshotPile .shot {
+    width: var(--ma-small-headshot-width) !important;
+    max-width: 100% !important;
+    aspect-ratio: 1 / 1 !important;
+  }
+}

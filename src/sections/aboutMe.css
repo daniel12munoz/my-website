@@ -403,3 +403,98 @@
     display: block !important;
   }
 }
+
+/* =========================================
+   ABOUT ME — SMALL PHONE ONLY (<= 360px)
+   Name + Collage scale knobs (MOBILE STACK ONLY)
+   Does NOT affect larger phones or desktop
+   ========================================= */
+@media (max-width: 360px) and (pointer: coarse) {
+
+  /* ===== KNOBS (edit these freely) ===== */
+  .aboutMe.about {
+    --about-name-scale-small: 1.22;     /* was 1.30-ish; slightly smaller */
+    --about-name-font-small: 44px;      /* was 46px; slightly smaller */
+    --about-collage-scale-small: 1.30;  /* was 1.40; slightly smaller */
+  }
+
+  /* Target ONLY the mobile stack name (h1 has both classes) */
+  .aboutMe.about .about__stack .about__topRow .about__name {
+    font-size: var(--about-name-font-small) !important;
+    transform:
+      translateX(var(--about-name-x, -28px))
+      translateY(var(--about-name-y, -25px))
+      scale(var(--about-name-scale-small)) !important;
+    transform-origin: left bottom !important;
+  }
+
+  /* Target ONLY the mobile stack collage wrapper */
+  .aboutMe.about .about__stack .about__topRow .about__collage {
+    transform:
+      translateX(var(--about-collage-x, 38px))
+      scale(var(--about-collage-scale-small)) !important;
+    transform-origin: bottom right !important;
+  }
+}
+
+/* =========================================
+   ABOUT ME — SMALL PHONE MICRO POSITION
+   Only affects ~320px phones
+   ========================================= */
+@media (max-width: 360px) and (pointer: coarse) {
+
+  /* POSITION KNOBS */
+  .aboutMe.about {
+    --about-name-shift-x-small: 12px;     /* move name RIGHT */
+    --about-collage-shift-x-small: -12px; /* move collage LEFT */
+  }
+
+  /* Move name right */
+  .aboutMe.about .about__stack .about__topRow .about__name {
+    transform:
+      translateX(calc(var(--about-name-x, -28px) + var(--about-name-shift-x-small)))
+      translateY(var(--about-name-y, -25px))
+      scale(var(--about-name-scale-small, 1.22)) !important;
+  }
+
+  /* Move collage left */
+  .aboutMe.about .about__stack .about__topRow .about__collage {
+    transform:
+      translateX(calc(var(--about-collage-x, 38px) + var(--about-collage-shift-x-small)))
+      scale(var(--about-collage-scale-small, 1.30)) !important;
+  }
+}
+
+/* =========================================
+   ABOUT ME — Surface Duo (540x720) ONLY
+   Wider paragraph / less side whitespace
+   ========================================= */
+@media (pointer: coarse)
+  and (min-width: 520px) and (max-width: 560px)
+  and (min-height: 680px) and (max-height: 760px) {
+
+  /* Knobs (Surface Duo only) */
+  .aboutMe.about {
+    --about-duo-pad-x: 14px;        /* default mobile is 24px; smaller = wider content */
+    --about-duo-stack-max: 500px;   /* default mobile stack max is 360px; increase */
+    --about-duo-stack-y: 0px;       /* optional micro nudge */
+  }
+
+  /* Expand usable width (reduce side whitespace) */
+  .aboutMe.about {
+    padding-left: var(--about-duo-pad-x) !important;
+    padding-right: var(--about-duo-pad-x) !important;
+  }
+
+  /* Make the content column wider so paragraph expands outward */
+  .aboutMe.about .about__stack {
+    max-width: min(92vw, var(--about-duo-stack-max)) !important;
+    transform: translateY(calc(var(--about-stack-y, 20px) + var(--about-duo-stack-y))) !important;
+  }
+
+  /* Ensure paragraph can actually use the new width */
+  .aboutMe.about .about__bio {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+}

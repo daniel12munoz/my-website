@@ -700,3 +700,21 @@
     display: block;
   }
 }
+
+/* =========================================
+   Blaze — SMALL PHONE ONLY (Mobile S)
+   Narrow phones only; does NOT affect desktop resize
+   ========================================= */
+@media (max-width: 360px) and (pointer: coarse) {
+  /* Roles/date line */
+  #blaze .bl__roles {
+    font-size: 13.2px !important;
+    line-height: 1.22 !important;
+  }
+
+  /* Shorts link labels under Shorts cards only */
+  #blaze .bl__shortsGrid .bl__shortCard .bl__link {
+    font-size: 0.48rem !important;
+    line-height: 0.90rem !important;
+  }
+}

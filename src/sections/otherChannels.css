@@ -286,3 +286,43 @@
     box-sizing: border-box;
   }
 }
+
+/* =========================================
+   OTHER CHANNELS — SMALL PHONE ONLY (320px)
+   Title centering + size knobs
+   Does NOT affect larger phones or desktop
+   ========================================= */
+@media (max-width: 360px) and (pointer: coarse) {
+
+  /* ===== SIZE KNOBS (adjust freely) ===== */
+  .otherChannels {
+    --oc-title1-small: 26px;  /* main number line */
+    --oc-title2-small: 26px;  /* second line */
+  }
+
+  /* Force true horizontal centering */
+  .otherChannels__stats {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Title 1 */
+  .otherChannels__heroLine1 {
+    font-size: var(--oc-title1-small) !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  /* Title 2 */
+  .otherChannels__heroLine2 {
+    font-size: var(--oc-title2-small) !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+}

@@ -1836,3 +1836,48 @@
   }
 
 }
+
+/* =========================================
+   Austin Underground — SMALL PHONE ONLY
+   (narrow phones; does not affect desktop resize)
+   ========================================= */
+@media (max-width: 360px) and (pointer: coarse) {
+  /* Title (unchanged — perfect as-is) */
+  #austin-underground {
+    --au-small-title-size: 24.6px;   /* knob: try 26px, 25px, 24px */
+  }
+  #austin-underground .au__title {
+    font-size: var(--au-small-title-size) !important;
+    line-height: 1.08 !important;
+  }
+}
+
+/* =========================================
+   Austin Underground — SMALL PHONE ONLY
+   FINAL roles sizing knob (title untouched)
+   ========================================= */
+@media (max-width: 360px) and (pointer: coarse) {
+
+  /* ===== ROLES SIZE KNOB =====
+     Adjust ONLY this value to scale roles text
+     Try: 0.72em, 0.75em, 0.78em etc
+  */
+  #austin-underground .au__roles {
+    --au-roles-small: 0.675em;   /* <<< MASTER KNOB */
+  }
+
+  /* Force override of ALL other role sizing rules */
+  #austin-underground.au.au__section .au__row1 .au__heading .au__roles,
+  #austin-underground .au__row1 .au__heading .au__roles,
+  #austin-underground .au__heading .au__roles,
+  #austin-underground .au__roles {
+    font-size: var(--au-roles-small) !important;
+    line-height: 1.24 !important;
+  }
+
+  /* Ensure each line inherits correctly */
+  #austin-underground .au__roles > div {
+    font-size: inherit !important;
+    line-height: inherit !important;
+  }
+}
