@@ -50,20 +50,18 @@ export default function AustinUnderground() {
         </div>
       </div>
 
-      {/* MOBILE COLLAGE (layered logo + images) */}
-      <div className="au__mobileCollage" aria-hidden="true">
+      {/* MOBILE: collage between roles and paragraph */}
+      <div className="au__collageWrap au__collageWrap--mobile" aria-hidden="true">
         <img
-          src="/austin-underground-full-logo.png"
-          alt="Austin Underground full logo"
-          className="au__mobileLogo"
+          src="/AU-collage.png"
+          alt="Austin Underground"
+          className="au__collage"
+          loading="eager"
+          fetchPriority="high"
         />
-        <div className="au__mobilePhotos">
-          <img src="/au-image1.jpg" alt="Austin Underground 1" className="au__mobileImg au__mobileImg--1" />
-          <img src="/au-image2.jpg" alt="Austin Underground 2" className="au__mobileImg au__mobileImg--2" />
-          <img src="/au-image3.jpg" alt="Austin Underground 3" className="au__mobileImg au__mobileImg--3" />
-        </div>
       </div>
 
+      <div className="au__belowCollage">
       {/* ROW 2 — DESKTOP/TABLET layout (paragraph left, collage right) */}
       <div className="au__row2 au-grid au__row2--desktop">
         <div className="au__colText">
@@ -72,47 +70,15 @@ export default function AustinUnderground() {
           </p>
         </div>
         <div className="au__colImages">
-          <div className="au__collageFrame">
-            <div className="au__collageInner">
-              <div className="au__collageUnit">
-                <img
-                  src="/austin-underground-full-logo.png"
-                  alt="Austin Underground full logo"
-                  className="au__fullLogo"
-                  width="400"
-                  height="400"
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="sync"
-                />
-
-                <div className="au__sideImages">
-                  <img src="/au-image1.jpg" alt="Austin Underground 1" className="media img1" width="255" height="319" loading="eager" fetchPriority="high" decoding="sync" />
-                  <img src="/au-image2.jpg" alt="Austin Underground 2" className="media img2" width="255" height="319" loading="eager" fetchPriority="high" decoding="sync" />
-                  <img src="/au-image3.jpg" alt="Austin Underground 3" className="media img3" width="255" height="319" loading="eager" fetchPriority="high" decoding="sync" />
-                </div>
-              </div>
-            </div>
+          <div className="au__collageWrap au__collageWrap--desktop">
+            <img
+              src="/AU-collage.png"
+              alt="Austin Underground"
+              className="au__collage"
+              loading="eager"
+              fetchPriority="high"
+            />
           </div>
-        </div>
-      </div>
-
-      {/* MOBILE ORDERED BLOCK (logo → paragraph → photos) */}
-      <div className="au__row2Mobile au__row2--mobile">
-        <img
-          src="/austin-underground-full-logo.png"
-          alt="Austin Underground full logo"
-          className="au__fullLogo au__fullLogo--mobile"
-        />
-
-        <p className="au__desc au__desc--mobile">
-          Austin Underground is an FCC-licensed television show and journalistic publication that focuses on the music culture within Austin. Produced by a team of over 25 members, the show covers local artists, events, and the city's evolving music scene.
-        </p>
-
-        <div className="au__mobilePhotos">
-          <img src="/au-image1.jpg" alt="Austin Underground 1" className="media au__mImg au__mImg1" />
-          <img src="/au-image2.jpg" alt="Austin Underground 2" className="media au__mImg au__mImg2" />
-          <img src="/au-image3.jpg" alt="Austin Underground 3" className="media au__mImg au__mImg3" />
         </div>
       </div>
 
@@ -305,6 +271,7 @@ export default function AustinUnderground() {
           </div>
         </div>
       </section>
+      </div>
     </section>
   );
 }
