@@ -53,7 +53,7 @@ export default function AustinUnderground() {
       {/* MOBILE: collage between roles and paragraph */}
       <div className="au__collageWrap au__collageWrap--mobile" aria-hidden="true">
         <img
-          src="/AU-collage.png"
+          src="/au-collage.png"
           alt="Austin Underground"
           className="au__collage"
           loading="eager"
@@ -72,7 +72,7 @@ export default function AustinUnderground() {
         <div className="au__colImages">
           <div className="au__collageWrap au__collageWrap--desktop">
             <img
-              src="/AU-collage.png"
+              src="/au-collage.png"
               alt="Austin Underground"
               className="au__collage"
               loading="eager"
