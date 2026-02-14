@@ -45,6 +45,19 @@
     );
 }
 
+#home.home {
+  --home-stage-x: 0px;
+  --home-stage-y: 0px;
+  --home-stage-scale: 1;
+}
+
+#home.home .home__stage {
+  transform: translate(var(--home-stage-x), var(--home-stage-y)) scale(var(--home-stage-scale));
+  transform-origin: top center;
+  will-change: transform;
+  width: 100%;
+}
+
 .home__top,
 .home__center,
 .home__bottom {
@@ -383,7 +396,17 @@ oad) */
   #home.home {
     height: 100vh;
     overflow: hidden;
-    transform: translate(13px, calc(-50px - var(--home-nudge)));
+
+    /* Unified positioning knobs (single source of truth) */
+    --home-unit-x: 0px;
+    --home-unit-y: 0px;
+    --home-unit-scale: 1;
+
+    transform: translate(
+      calc(13px + var(--home-unit-x, 0px)),
+      calc((-50px - var(--home-nudge)) + var(--home-unit-y, 0px))
+    ) scale(var(--home-unit-scale, 1));
+
     will-change: transform;
   }
 
@@ -410,6 +433,256 @@ oad) */
   #home.home .home__heroImg {
     width: 100%;
     height: auto;
+  }
+}
+
+/* =========================================================
+   TABLET (601–768): perfect, do not change
+   ========================================================= */
+@media (min-width: 601px) and (max-width: 768px) {
+  /* Knobs (tune for 768) */
+  #home.home {
+    --home-tv-top: 12%;
+    --home-tv-left: 34%;
+    --home-tv-w: 32%;
+    --home-tv-h: 44%;
+    --home-tv-radius: 6px;
+    /* Shadow bleed: shift content left so shadow can extend under nav */
+    --home-band-shift-x: -44px;    /* 4px left */
+    --home-band-shift-y: 75px;   /* 25px down */
+    --home-headline-shift-x: 0px;
+    --home-headline-shift-y: 0px;
+    --home-hero-shift-x: 0px;
+    --home-hero-shift-y: 0px;
+    --home-copy-shift-x: 0px;
+    --home-copy-shift-y: 0px;
+  }
+
+  /* Shift blocks so shadow can bleed left; overflow visible so no clipping */
+  #home.home .home__top {
+    transform: translate(calc(var(--home-band-shift-x) + var(--home-headline-shift-x)), calc(var(--home-band-shift-y) + var(--home-headline-shift-y))) !important;
+    overflow: visible !important;
+  }
+  #home.home .home__center {
+    transform: translate(calc(var(--home-band-shift-x) + var(--home-hero-shift-x)), calc(var(--home-band-shift-y) + var(--home-hero-shift-y))) !important;
+    overflow: visible !important;
+  }
+  #home.home .home__bottom {
+    transform: translate(calc(var(--home-band-shift-x) + var(--home-copy-shift-x)), calc(var(--home-band-shift-y) + var(--home-copy-shift-y))) !important;
+    overflow: visible !important;
+  }
+
+  /* Hero shadow: allow overflow visible so drop-shadow bleeds */
+  #home.home .home__center,
+  #home.home .home__heroArt,
+  #home.home .home__heroComposite {
+    overflow: visible !important;
+  }
+
+  /* Allow shadow to extend — no clip at section; html/body prevent scroll */
+  #home.home {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+  }
+
+  /* Relax contain:paint so shadow can bleed (override desktop flicker fix here) */
+  #home.home .home__heroComposite {
+    contain: none !important;
+  }
+
+  /* Tablet/Laptop: hide desktop .home__tvStatic in this band, show masked TL instead */
+  #home.home .home__heroComposite .home__tvStatic {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+
+  /* TV screen layer for tablet/laptop — masked video inside screen area */
+  #home.home .home__heroComposite .home__tvScreenTL {
+    display: block !important;
+    position: absolute !important;
+    top: var(--home-tv-top) !important;
+    left: var(--home-tv-left) !important;
+    width: var(--home-tv-w) !important;
+    height: var(--home-tv-h) !important;
+    overflow: hidden !important;
+    border-radius: var(--home-tv-radius) !important;
+    z-index: 2 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  #home.home .home__tvScreenTL video,
+  #home.home .home__tvScreenTL .home__tvStaticScreenTL,
+  #home.home .home__tvScreenTL .vp-videoEl {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* PNG stays on top */
+  #home.home .home__heroComposite .home__heroImg {
+    z-index: 3;
+  }
+}
+
+/* =========================================================
+   LAPTOP (769–1279, includes 1024): scale + x/y knobs
+   ========================================================= */
+@media (min-width: 769px) and (max-width: 1279px) {
+  /* Laptop knobs */
+  #home.home {
+    --home-tv-top: 12%;
+    --home-tv-left: 34%;
+    --home-tv-w: 32%;
+    --home-tv-h: 44%;
+    --home-tv-radius: 6px;
+    --home-stack-scale-laptop: 0.92;
+    --home-stack-x-laptop: 0px;
+    --home-stack-y-laptop: 0px;
+  }
+
+  #home.home .home__top,
+  #home.home .home__center,
+  #home.home .home__bottom {
+    transform: translate(var(--home-stack-x-laptop), var(--home-stack-y-laptop)) scale(var(--home-stack-scale-laptop)) !important;
+    transform-origin: top center !important;
+    overflow: visible !important;
+  }
+
+  #home.home .home__center,
+  #home.home .home__heroArt,
+  #home.home .home__heroComposite {
+    overflow: visible !important;
+  }
+  #home.home {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+  }
+  #home.home .home__heroComposite {
+    contain: none !important;
+  }
+  #home.home .home__heroComposite .home__tvStatic {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+  #home.home .home__heroComposite .home__tvScreenTL {
+    display: block !important;
+    position: absolute !important;
+    top: var(--home-tv-top) !important;
+    left: var(--home-tv-left) !important;
+    width: var(--home-tv-w) !important;
+    height: var(--home-tv-h) !important;
+    overflow: hidden !important;
+    border-radius: var(--home-tv-radius) !important;
+    z-index: 2 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  #home.home .home__tvScreenTL video,
+  #home.home .home__tvScreenTL .home__tvStaticScreenTL,
+  #home.home .home__tvScreenTL .vp-videoEl {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  #home.home .home__heroComposite .home__heroImg {
+    z-index: 3;
+  }
+}
+
+/* =========================================================
+   LAPTOP L (1280–1440): scale + x/y knobs
+   ========================================================= */
+@media (min-width: 1280px) and (max-width: 1440px) {
+  /* Laptop L knobs */
+  #home.home {
+    --home-tv-top: 12%;
+    --home-tv-left: 34%;
+    --home-tv-w: 32%;
+    --home-tv-h: 44%;
+    --home-tv-radius: 6px;
+    --home-stack-scale-laptopL: 0.88;
+    --home-stack-x-laptopL: 0px;
+    --home-stack-y-laptopL: 0px;
+  }
+
+  #home.home .home__top,
+  #home.home .home__center,
+  #home.home .home__bottom {
+    transform: translate(var(--home-stack-x-laptopL), var(--home-stack-y-laptopL)) scale(var(--home-stack-scale-laptopL)) !important;
+    transform-origin: top center !important;
+    overflow: visible !important;
+  }
+
+  #home.home .home__center,
+  #home.home .home__heroArt,
+  #home.home .home__heroComposite {
+    overflow: visible !important;
+  }
+  #home.home {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+  }
+  #home.home .home__heroComposite {
+    contain: none !important;
+  }
+  #home.home .home__heroComposite .home__tvStatic {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+  #home.home .home__heroComposite .home__tvScreenTL {
+    display: block !important;
+    position: absolute !important;
+    top: var(--home-tv-top) !important;
+    left: var(--home-tv-left) !important;
+    width: var(--home-tv-w) !important;
+    height: var(--home-tv-h) !important;
+    overflow: hidden !important;
+    border-radius: var(--home-tv-radius) !important;
+    z-index: 2 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  #home.home .home__tvScreenTL video,
+  #home.home .home__tvScreenTL .home__tvStaticScreenTL,
+  #home.home .home__tvScreenTL .vp-videoEl {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  #home.home .home__heroComposite .home__heroImg {
+    z-index: 3;
+  }
+}
+
+/* Hide tablet/laptop TV screen outside the band (mobile uses .home__tvScreen, desktop uses .home__tvStatic) */
+@media (max-width: 600px), (min-width: 1441px) {
+  .home__tvScreenTL {
+    display: none !important;
   }
 }
 
@@ -456,6 +729,366 @@ body.mobile-home-locked {
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
+  }
+}
+
+/* =========================================================
+   HOME ONLY — tablet/laptop (601–1440): drop-shadow clip fix
+   Kill sideways scroll at document; allow shadow paint chain.
+   ========================================================= */
+@media (min-width: 601px) and (max-width: 1440px) {
+  /* HOME ONLY: kill sideways scroll without clipping shadows (Chrome supports :has) */
+  body:has(#home.home),
+  html:has(#home.home) {
+    overflow-x: hidden !important;
+    overscroll-behavior-x: none !important;
+  }
+
+  /* HOME ONLY: allow the Home page to paint outside its column (prevents the vertical "knife edge") */
+  body:has(#home.home) main,
+  body:has(#home.home) .vp-main,
+  body:has(#home.home) .App,
+  body:has(#home.home) #root {
+    overflow: visible !important;     /* critical: stop clipping the drop-shadow */
+    overflow-x: visible !important;
+    contain: none !important;
+    clip-path: none !important;
+  }
+
+  /* Ensure the hero paint chain itself never clips */
+  body:has(#home.home) #home.home,
+  body:has(#home.home) #home.home .home__center,
+  body:has(#home.home) #home.home .home__heroArt,
+  body:has(#home.home) #home.home .home__heroComposite {
+    overflow: visible !important;
+  }
+
+  /* Optional: keep shadow under nav text if needed (nav likely has higher z-index already) */
+  body:has(#home.home) #home.home .home__heroComposite {
+    z-index: 0;
+  }
+  body:has(#home.home) #home.home .home__top,
+  body:has(#home.home) #home.home .home__bottom {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+/* =========================================================
+   HOME — LAPTOP (1024) ONLY
+   Targets 769px–1279px
+   Tablet (<=768) untouched; Desktop (>1440) untouched
+   ========================================================= */
+@media (min-width: 769px) and (max-width: 1279px) {
+
+  /* Global knobs for ALL 3 main components (title + hero + copy) */
+  #home.home {
+    --home-stack-scale: 0.85;   /* knob (was 1.0) */
+    --home-stack-x: 10px;       /* knob: right */
+    --home-stack-y: 5px;        /* knob: down */
+    --home-copy-lift: -40px;    /* knob: move ONLY the bottom copy up */
+  }
+
+  /* Apply global stack transform to the 3 main sections */
+  #home.home .home__top,
+  #home.home .home__center,
+  #home.home .home__bottom {
+    transform: translate(var(--home-stack-x), var(--home-stack-y))
+               scale(var(--home-stack-scale)) !important;
+    transform-origin: top center;
+    will-change: transform;
+  }
+
+  /* Move ONLY the two-sentence block UP 40px (fix the gap) */
+  #home.home .home__bottom {
+    transform: translate(var(--home-stack-x),
+                         calc(var(--home-stack-y) + var(--home-copy-lift)))
+               scale(var(--home-stack-scale)) !important;
+  }
+
+  /* IMPORTANT: do not touch TV/video rules */
+}
+
+/* =========================================================
+   HOME — LAPTOP L (1440) ONLY
+   Targets 1280px–1440px
+   ========================================================= */
+@media (min-width: 1280px) and (max-width: 1440px) {
+
+  /* Global knobs for ALL 3 main components (title + hero + copy) */
+  #home.home {
+    --home-stack-scale: 0.70;   /* knob (was 1.0) */
+    --home-stack-x: -10px;      /* knob: left */
+    --home-stack-y: 5px;        /* knob: down */
+    --home-copy-lift: -40px;    /* knob: move ONLY the bottom copy up */
+  }
+
+  /* Apply global stack transform to the 3 main sections */
+  #home.home .home__top,
+  #home.home .home__center,
+  #home.home .home__bottom {
+    transform: translate(var(--home-stack-x), var(--home-stack-y))
+               scale(var(--home-stack-scale)) !important;
+    transform-origin: top center;
+    will-change: transform;
+  }
+
+  /* Move ONLY the two-sentence block UP 40px (fix the gap) */
+  #home.home .home__bottom {
+    transform: translate(var(--home-stack-x),
+                         calc(var(--home-stack-y) + var(--home-copy-lift)))
+               scale(var(--home-stack-scale)) !important;
+  }
+
+  /* IMPORTANT: do not touch TV/video rules */
+}
+
+/* =========================================================
+   HOME — TABLET ONLY (601–980px)
+   - Move entire stack DOWN 15px
+   ========================================================= */
+@media (min-width: 601px) and (max-width: 980px) {
+  #home.home {
+    --home-stage-y: 15px; /* knob — change freely */
+  }
+}
+
+/* =========================================================
+   HOME — LAPTOP ONLY (Chrome "Laptop" ~1024)
+   - Real font-size change (NOT transform scale)
+   - Lift bottom copy 10px
+   - Keep "Daniel Muñoz" unbroken so it jumps to next line if needed
+   ========================================================= */
+@media (min-width: 981px) and (max-width: 1279px) {
+  #home.home {
+    --home-stage-x: -16px;
+    --home-stage-y: 48px;
+    --home-copy-lift-laptop: -13px;     /* knob: move the two sentences up/down */
+    --home-copy-font-laptop: 0.93;      /* knob: smaller = wraps earlier */
+  }
+
+  /* Lift ONLY the bottom copy block (do not touch title/TV) */
+  #home.home .home__bottom {
+    position: relative;
+    top: var(--home-copy-lift-laptop);
+  }
+
+  /* Real font-size reduction ONLY for the bottom copy */
+  #home.home .home__copy {
+    font-size: calc(clamp(16px, 2.0vw, 22px) * var(--home-copy-font-laptop));
+  }
+
+  /* Prevent "Daniel" and "Muñoz" splitting across lines */
+  #home.home .home__noBreakName {
+    white-space: nowrap;
+  }
+}
+
+/* =========================================================
+   HOME — LAPTOP LARGE ONLY (Chrome "Laptop L" ~1440)
+   - Lift bottom copy 80px
+   - Do NOT change font-size here (leave it as-is)
+   ========================================================= */
+@media (min-width: 1280px) and (max-width: 1599px) {
+  #home.home {
+    --home-stage-x: -38px;
+    --home-stage-y: 47px;
+    --home-copy-lift-laptopL: -95px;    /* knob: move the two sentences up/down */
+  }
+
+  /* Lift ONLY the bottom copy block */
+  #home.home .home__bottom {
+    position: relative;
+    top: var(--home-copy-lift-laptopL);
+  }
+
+  /* Still prevent name splitting on Laptop-L */
+  #home.home .home__noBreakName {
+    white-space: nowrap;
+  }
+}
+
+/* =========================================================
+   HOME — DEVICE-SPECIFIC OVERRIDES (tight viewport ranges)
+   - Do NOT affect 768x800, 1024x800, 1440x800 baselines
+   ========================================================= */
+
+/* 1) iPad Mini — 768 x 1024 */
+@media (min-width: 760px) and (max-width: 776px) and (min-height: 1000px) and (max-height: 1050px) {
+  #home.home {
+    --home-stage-x: 0px;
+    --home-stage-y: 21px;
+  }
+}
+
+/* 2) iPad Air — 820 x 1180 */
+@media (min-width: 810px) and (max-width: 835px) and (min-height: 1160px) and (max-height: 1205px) {
+  #home.home {
+    --home-stage-x: -38px;
+    --home-stage-y: 106px;
+  }
+}
+
+/* 3) Asus ZenBook Fold — 853 x 1280 */
+@media (min-width: 845px) and (max-width: 865px) and (min-height: 1260px) and (max-height: 1310px) {
+  #home.home {
+    --home-stage-x: -31px;
+    --home-stage-y: 117px;
+  }
+}
+
+/* 4) Surface Pro 7 — 912 x 1368 */
+@media (min-width: 900px) and (max-width: 925px) and (min-height: 1340px) and (max-height: 1395px) {
+  #home.home {
+    --home-stage-x: -22px;
+    --home-stage-y: 93px;
+  }
+}
+
+/* 5) iPad Pro — 1024 x 1366 (avoid 1024x800 via tall height) */
+@media (min-width: 1000px) and (max-width: 1048px) and (min-height: 1320px) and (max-height: 1405px) {
+  #home.home {
+    --home-stage-x: -2px;
+    --home-stage-y: 54px;
+  }
+}
+
+/* 6) Nest Hub — 1024 x 600 (avoid 1024x800 via short height) */
+@media (min-width: 1000px) and (max-width: 1048px) and (min-height: 560px) and (max-height: 660px) {
+  #home.home {
+    --home-stage-x: -2px;
+    --home-stage-y: 48px;
+  }
+}
+
+/* 7) Nest Hub Max — 1280 x 800 */
+@media (min-width: 1240px) and (max-width: 1320px) and (min-height: 760px) and (max-height: 840px) {
+  #home.home {
+    --home-stage-x: 0px;
+    --home-stage-y: 47px;
+  }
+}
+
+/* =========================================================
+   HOME — Exact device viewport corrections (non-mobile only)
+   Applies via the single transform knobs on #home.home
+   Does NOT affect:
+   - 768x800 (Tablet) PERFECT
+   - 1024x800 (Laptop) PERFECT
+   - 1440x800 (Laptop Large) PERFECT
+   - Mobile <=600 PERFECT
+   ========================================================= */
+
+@media (min-width: 601px) {
+
+  /* iPad Mini — 768 x 1024 : Move 24px DOWN */
+  @media (width: 768px) and (height: 1024px) {
+    #home.home { --home-unit-x: -41px; --home-unit-y: 51px; --home-unit-scale: 1.15; }
+  }
+
+  /* iPad Air — 820 x 1180 : Move 96px DOWN, 30px LEFT */
+  @media (width: 820px) and (height: 1180px) {
+    #home.home { --home-unit-x: -47px; --home-unit-y: 130px; --home-unit-scale: 1.30; }
+  }
+
+  /* iPad Pro — 1024 x 1366 : Move 66px DOWN, 5px LEFT */
+  @media (width: 1024px) and (height: 1366px) {
+    #home.home { --home-unit-x: -53px; --home-unit-y: 190px; --home-unit-scale: 1.25; }
+  }
+
+  /* Surface Pro 7 — 912 x 1368 : Move 85px DOWN, 16px LEFT */
+  @media (width: 912px) and (height: 1368px) {
+    #home.home { --home-unit-x: -58px; --home-unit-y: 195px; --home-unit-scale: 1.28; }
+  }
+
+  /* Asus Zenbook Fold — 853 x 1280 : Move 102px DOWN, 23px LEFT */
+  @media (width: 853px) and (height: 1280px) {
+    #home.home { --home-unit-x: -45px; --home-unit-y: 158px; --home-unit-scale: 1.38; }
+  }
+
+  /* Nest Hub — 1024 x 600 : Move 36px DOWN, 2px LEFT */
+  @media (width: 1024px) and (height: 600px) {
+    #home.home { --home-unit-x: -16px; --home-unit-y: -72px; }
+  }
+
+  /* Nest Hub Max — 1280 x 800 : Move 47px DOWN */
+  @media (width: 1280px) and (height: 800px) {
+    #home.home { --home-unit-x: -37px; --home-unit-y: 1px; --home-unit-scale: 1.25; }
+  }
+}
+
+/* =========================================================
+   HOME — Laptop-ish band (1441–1599 wide, ~800 tall)
+   Fix: sentences too high → move DOWN
+   Only affects the bottom copy block (2 sentences).
+   ========================================================= */
+@media (min-width: 1441px) and (max-width: 1599px) and (min-height: 760px) and (max-height: 860px) {
+  /* knob lives on #home so it's easy to tune */
+  #home.home {
+    --home-copy-y-1441-1599: 90px; /* ↓ default requested */
+  }
+
+  /* apply ONLY to the bottom copy container */
+  #home.home .home__bottom {
+    transform: translateY(var(--home-copy-y-1441-1599)) !important;
+    will-change: transform;
+  }
+}
+
+/* =========================================================
+   HOME — 1441–1599 width WITH ~1080 height
+   Fix: sentences sit too high on 1080-tall displays
+   Move them down 60px ONLY here
+   ========================================================= */
+@media (min-width: 1441px) and (max-width: 1599px)
+       and (min-height: 861px) and (max-height: 3000px) {
+
+  .home__bottom {
+    transform: translateY(100px) !important;
+  }
+}
+
+/* =========================================================
+   HOME — iPad-ish portrait tablet shadow unclipping
+   Removes paint containment that clips filter: drop-shadow.
+   Keeps no horizontal scroll via overflow-x: clip at page level.
+   NO layout/transform changes.
+   Targets: iPad Mini/Air/Pro portrait, Surface Pro 7 portrait, ZenBook Fold portrait
+   ========================================================= */
+@media (min-width: 740px) and (max-width: 1024px) and (min-height: 900px) {
+
+  /* Prevent horizontal scroll globally (safe), but DO NOT clip the hero's ancestors */
+  html, body { overflow-x: clip !important; }
+
+  /* 1) The actual bug: contain: paint clips drop-shadow. Disable it here. */
+  #home.home .home__heroComposite {
+    contain: none !important;
+  }
+
+  /* 2) Make sure no nearby wrappers are clipping paint on these viewports. */
+  #home.home,
+  #home.home .home__center,
+  #home.home .home__heroArt,
+  #home.home .home__heroComposite {
+    overflow: visible !important;
+    clip-path: none !important;
+  }
+
+  /* 3) If the app layout wrapper clips, unclip ONLY on Home for this range. */
+  body #root,
+  body .App,
+  body .vp-main,
+  body main {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    clip-path: none !important;
+    contain: none !important;
+  }
+
+  /* 4) Keep GPU stability without paint containment (prevents flicker without clipping) */
+  #home.home .home__heroComposite {
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 }
 

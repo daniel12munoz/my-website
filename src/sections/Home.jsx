@@ -27,6 +27,7 @@ export default function Home() {
         >
           <div className="home__spotlight" aria-hidden="true"></div>
 
+          <div className="home__stage">
           <header className="home__top">
         <h1 className="home__headline">
           Let's create <span className="home__it">it</span>.
@@ -66,6 +67,22 @@ export default function Home() {
               />
             </div>
 
+            {/* Tablet/Laptop masked TV screen (601–1440px only) */}
+            <div className="home__tvScreenTL" aria-hidden="true">
+              <HlsVideo
+                className="home__tvStaticScreenTL"
+                src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/ec00cd5eef23481e587f6bd15263546b/manifest/video.m3u8"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+                priority
+                hero
+                lazy={false}
+              />
+            </div>
+
             <img
               className="home__heroImg"
               src="/vonixproductions-homelogo.png"
@@ -84,10 +101,12 @@ export default function Home() {
             <strong>Vonix Productions</strong> is a creator-led production company focused on original media and visual storytelling.
           </span>
           <span className="home__copyLine">
-            It serves as the professional portfolio and authorship of <strong>Daniel Muñoz</strong>.
+            It serves as the professional portfolio and authorship of{" "}
+            <strong className="home__noBreakName">Daniel Muñoz</strong>.
           </span>
         </p>
       </footer>
+          </div>
     </section>
       </div>
     </div>

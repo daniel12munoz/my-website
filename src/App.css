@@ -314,6 +314,44 @@ body {
   }
 }
 
+/* =========================================================
+   TABLET/LAPTOP BAND (768/1024/1440 only)
+   Sidebar/nav slightly smaller. Home hero shadow bleeds under nav.
+   Does NOT affect mobile or >1440.
+   ========================================================= */
+@media (min-width: 601px) and (max-width: 1440px) {
+  /* Knobs (tune for tablet/laptop) */
+  .vp-brand,
+  .vp-brand-inner {
+    --nav-scale: 0.92;
+    --nav-font-scale: 0.92;
+    --nav-logo-scale: 0.92;
+  }
+
+  /* Scale the entire sidebar from top-left; nav stays above Home shadow (z-index 10 from base) */
+  .vp-brand {
+    transform-origin: top left;
+    transform: scale(var(--nav-scale, 0.92));
+  }
+
+  .vp-brand .vp-logo {
+    font-size: calc(clamp(1.6rem, 3.4vw, 2.6rem) * var(--nav-logo-scale, 0.92));
+  }
+
+  .vp-brand .nav-link {
+    font-size: calc(1.1rem * var(--nav-font-scale, 0.92));
+  }
+
+  /* Home main: allow overflow so hero drop-shadow bleeds left under nav */
+  .App > main.vp-main--home {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: hidden !important;
+    position: relative;
+    z-index: 1;
+  }
+}
+
 @media (max-width: 600px) {
   /* Mobile hamburger button */
   .vp-mobile-menu-toggle {
@@ -655,4 +693,79 @@ a {
   #austin-underground {
     margin-top: -28px !important;
   }
+}
+
+/* =========================================================
+   NAV SIZE BOOST — Large portrait tablets ONLY
+   Overrides the tablet/laptop --nav-scale (0.92) to scale nav UP.
+   Does NOT affect: iPad Mini, Tablet 768x800, Laptop 1024x800,
+   Laptop L 1440x800, Nest Hub, Nest Hub Max, mobile, or desktop.
+   Does NOT touch any Home hero rules.
+   ========================================================= */
+
+/* iPad Air — 820 x 1180 */
+@media (width: 820px) and (height: 1180px) {
+  .vp-brand, .vp-brand-inner {
+    --nav-scale: 1.02;
+    --nav-font-scale: 1.06;
+    --nav-logo-scale: 1.06;
+  }
+  .vp-nav { gap: 14px; }
+}
+
+/* iPad Pro — 1024 x 1366 */
+@media (width: 1024px) and (height: 1366px) {
+  .vp-brand, .vp-brand-inner {
+    --nav-scale: 1.10;
+    --nav-font-scale: 1.07;
+    --nav-logo-scale: 1.07;
+  }
+  .vp-nav { gap: 14px; }
+}
+
+/* Surface Pro 7 — 912 x 1368 */
+@media (width: 912px) and (height: 1368px) {
+  .vp-brand, .vp-brand-inner {
+    --nav-scale: 1.06;
+    --nav-font-scale: 1.07;
+    --nav-logo-scale: 1.07;
+  }
+  .vp-nav { gap: 14px; }
+}
+
+/* Asus ZenBook Fold — 853 x 1280 */
+@media (width: 853px) and (height: 1280px) {
+  .vp-brand, .vp-brand-inner {
+    --nav-scale: 1.05;
+    --nav-font-scale: 1.07;
+    --nav-logo-scale: 1.07;
+  }
+  .vp-nav { gap: 14px; }
+}
+
+/* =========================================================
+   NAV OVERLAP COMPENSATION — Non-Home pages ONLY
+   Adds left + top padding on Vonix/Blaze/Marketing Alliance/
+   Austin Underground to clear the scaled-up nav on large
+   portrait tablets. Does NOT affect Home, mobile, desktop,
+   or other viewports.
+   ========================================================= */
+
+:root {
+  --vp-nav-overlap-comp: 0px;
+  --vp-nav-top-clearance: 0px;
+}
+
+@media (width: 820px) and (height: 1180px)  { :root { --vp-nav-overlap-comp: 10px; } }
+@media (width: 1024px) and (height: 1366px) { :root { --vp-nav-overlap-comp: 68px; --vp-nav-top-clearance: 18px; } }
+@media (width: 912px) and (height: 1368px)  { :root { --vp-nav-overlap-comp: 68px; --vp-nav-top-clearance: 14px; } }
+@media (width: 853px) and (height: 1280px)  { :root { --vp-nav-overlap-comp: 28px; --vp-nav-top-clearance: 10px; } }
+
+#vonix,
+#blaze,
+#marketing-alliance,
+#austin-underground {
+  padding-left: var(--vp-nav-overlap-comp) !important;
+  padding-top: var(--vp-nav-top-clearance) !important;
+  box-sizing: border-box;
 }
