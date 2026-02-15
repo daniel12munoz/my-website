@@ -85,6 +85,238 @@
   overflow-x: hidden !important;
 }
 
+/* =========================================================
+   CONTACT — TABLET/LAPTOP DEVICE KNOBS (MID-RANGE ONLY)
+   Activates ONLY for 601–1599px widths.
+   Desktop (>=1600) keeps original margin offsets.
+   Mobile (<=600) keeps its own block below.
+   ========================================================= */
+@media (min-width: 601px) and (max-width: 1599px) {
+  .contact {
+    --contact-mid-x: 0px;
+    --contact-mid-y: 0px;
+    --contact-mid-scale: 1;
+  }
+
+  .contact__center {
+    margin: 0 !important;
+    transform: translate(var(--contact-mid-x), var(--contact-mid-y)) scale(var(--contact-mid-scale)) !important;
+    transform-origin: center center;
+    will-change: transform;
+  }
+}
+
+/* ── RANGE-BASED BASELINE QUERIES (±tolerance) ────────── */
+
+/* A) Chrome "Tablet" family (~768x800) */
+@media (min-width: 601px) and (max-width: 979px) and (min-height: 100px) and (max-height: 1200px) {
+  .contact { --contact-mid-x: -31px; --contact-mid-y: -95px; --contact-mid-scale: 1; }
+}
+
+/* B) Chrome "Laptop" family (~1024x800) */
+@media (min-width: 980px) and (max-width: 1120px) and (min-height: 740px) and (max-height: 900px) {
+  .contact { --contact-mid-x: -45px; --contact-mid-y: -115px; --contact-mid-scale: 1; }
+}
+
+/* C) Chrome "Laptop L" family (~1440x800) */
+@media (min-width: 1121px) and (max-width: 1599px) and (min-height: 740px) and (max-height: 900px) {
+  .contact { --contact-mid-x: -87px; --contact-mid-y: -154px; --contact-mid-scale: 1; }
+}
+
+/* ── DEVICE-SPECIFIC QUERIES ─────────────────────────── */
+
+/* 4) iPad Mini 768x1024 */
+@media (width: 768px) and (height: 1024px) {
+  .contact { --contact-mid-x: -79px; --contact-mid-y: -94px; --contact-mid-scale: 1.2; }
+}
+
+/* 5) iPad Air 820x1180 */
+@media (width: 820px) and (height: 1180px) {
+  .contact { --contact-mid-x: -69px; --contact-mid-y: -101px; --contact-mid-scale: 1.2; }
+}
+
+/* 6) iPad Pro 1024x1366 */
+@media (width: 1024px) and (height: 1366px) {
+  .contact { --contact-mid-x: -81px; --contact-mid-y: -118px; --contact-mid-scale: 1.25; }
+}
+
+/* 7) Surface Pro 7 912x1368 */
+@media (width: 912px) and (height: 1368px) {
+  .contact { --contact-mid-x: -60px; --contact-mid-y: -112px; --contact-mid-scale: 1.35; }
+}
+
+/* 8) Asus ZenBook Fold 853x1280 */
+@media (width: 853px) and (height: 1280px) {
+  .contact { --contact-mid-x: -62px; --contact-mid-y: -106px; --contact-mid-scale: 1.30; }
+}
+
+/* 9) Nest Hub 1024x600 */
+@media (width: 1024px) and (height: 600px) {
+  .contact { --contact-mid-x: -45px; --contact-mid-y: -115px; --contact-mid-scale: 1; }
+}
+
+/* 10) Nest Hub Max 1280x800 */
+@media (width: 1280px) and (height: 800px) {
+  .contact { --contact-mid-x: -85px; --contact-mid-y: -145px; --contact-mid-scale: 1; }
+}
+
+/* ── iPAD MINI / iPAD AIR — LEFT GUTTER ANTI-CLIP ───── */
+
+/* iPad Mini (~768x1024) */
+@media (min-width: 740px) and (max-width: 820px) and (min-height: 900px) and (max-height: 1100px) {
+  .contact {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    contain: none !important;
+    clip-path: none !important;
+    isolation: isolate;
+    z-index: 2;
+  }
+  .contact__center {
+    position: relative;
+    z-index: 5;
+  }
+  .contact, .contact * {
+    clip-path: none !important;
+  }
+}
+
+/* iPad Air (~820x1180) */
+@media (min-width: 800px) and (max-width: 900px) and (min-height: 1080px) and (max-height: 1250px) {
+  .contact {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    contain: none !important;
+    clip-path: none !important;
+    isolation: isolate;
+    z-index: 2;
+  }
+  .contact__center {
+    position: relative;
+    z-index: 5;
+  }
+  .contact, .contact * {
+    clip-path: none !important;
+  }
+}
+
+/* iPad Pro (~1024x1366) */
+@media (min-width: 980px) and (max-width: 1120px)
+       and (min-height: 1260px) and (max-height: 1450px) {
+
+  /* iPad Pro: FIX LEFT CLIP (paint only) */
+  .contact {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    contain: none !important;
+    clip-path: none !important;
+    isolation: isolate;
+    z-index: 2;
+  }
+
+  .contact__center {
+    position: relative;
+    z-index: 5;
+  }
+
+  .contact, .contact * {
+    clip-path: none !important;
+  }
+
+  /* Unclip parent wrappers (Contact page only) */
+  body:has(.contact) {
+    overflow-x: visible !important;
+  }
+
+  main:has(.contact),
+  .vp-main:has(.contact),
+  .App:has(.contact) {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    contain: none !important;
+    clip-path: none !important;
+  }
+}
+
+/* Surface Pro 7 (~912x1368) */
+@media (min-width: 880px) and (max-width: 980px)
+       and (min-height: 1280px) and (max-height: 1420px) {
+
+  /* Surface Pro 7: FIX LEFT CLIP (paint only) */
+  .contact {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    contain: none !important;
+    clip-path: none !important;
+    isolation: isolate;
+    z-index: 2;
+  }
+
+  .contact__center {
+    position: relative;
+    z-index: 5;
+  }
+
+  .contact,
+  .contact * {
+    clip-path: none !important;
+  }
+
+  body:has(.contact) {
+    overflow-x: visible !important;
+  }
+
+  main:has(.contact),
+  .vp-main:has(.contact),
+  .App:has(.contact) {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    contain: none !important;
+    clip-path: none !important;
+  }
+}
+
+/* Asus ZenBook Fold (~853x1280) */
+@media (min-width: 820px) and (max-width: 900px)
+       and (min-height: 1200px) and (max-height: 1350px) {
+
+  /* Asus ZenBook Fold: FIX LEFT CLIP (paint only) */
+  .contact {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    contain: none !important;
+    clip-path: none !important;
+    isolation: isolate;
+    z-index: 2;
+  }
+
+  .contact__center {
+    position: relative;
+    z-index: 5;
+  }
+
+  .contact,
+  .contact * {
+    clip-path: none !important;
+  }
+
+  body:has(.contact) {
+    overflow-x: visible !important;
+  }
+
+  main:has(.contact),
+  .vp-main:has(.contact),
+  .App:has(.contact) {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    contain: none !important;
+    clip-path: none !important;
+  }
+}
+
 /* =========================
    MOBILE ONLY — CONTACT PAGE ALIGNMENT FIX
    ========================= */
