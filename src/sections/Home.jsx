@@ -1,18 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import './home.css';
 import HlsVideo from '../components/HlsVideo';
 
 const MOBILE_BREAKPOINT = '(max-width: 600px)';
 
 export default function Home() {
-  useEffect(() => {
-    const isMobile =
-      typeof window !== 'undefined' && window.matchMedia(MOBILE_BREAKPOINT).matches;
-    if (isMobile) {
-      document.documentElement.classList.add('mobile-home-locked');
-      document.body.classList.add('mobile-home-locked');
-    }
+  useLayoutEffect(() => {
+    // Run before paint to prevent 1-frame "top aligned" flash
+    const mq = window.matchMedia(MOBILE_BREAKPOINT);
+    const apply = () => {
+      if (mq.matches) {
+        document.documentElement.classList.add('mobile-home-locked');
+        document.body.classList.add('mobile-home-locked');
+      } else {
+        document.documentElement.classList.remove('mobile-home-locked');
+        document.body.classList.remove('mobile-home-locked');
+      }
+    };
+
+    apply();
+
+    // Keep correct if user rotates / resizes
+    if (mq.addEventListener) mq.addEventListener('change', apply);
+    else mq.addListener(apply);
+
     return () => {
+      if (mq.removeEventListener) mq.removeEventListener('change', apply);
+      else mq.removeListener(apply);
+
       document.documentElement.classList.remove('mobile-home-locked');
       document.body.classList.remove('mobile-home-locked');
     };
