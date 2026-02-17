@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './otherChannels.css';
 
 export default function OtherChannels() {
+  useEffect(() => {
+    document.body.classList.add('no-scroll-otherchannels');
+    return () => {
+      document.body.classList.remove('no-scroll-otherchannels');
+    };
+  }, []);
+
   return (
     <section className="otherChannels">
       <div className="otherChannels__spotlight" aria-hidden="true"></div>

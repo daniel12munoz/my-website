@@ -1,3 +1,30 @@
+/* =========================================
+   NO SCROLL — ONLY ON OTHER CHANNELS ROUTE
+   ========================================= */
+body.no-scroll-otherchannels {
+  overflow: hidden !important;
+  height: 100% !important;
+}
+
+body.no-scroll-otherchannels #root {
+  height: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Lock the section to the viewport */
+body.no-scroll-otherchannels .otherChannels {
+  height: 100svh !important;
+  min-height: 100svh !important;
+  overflow: hidden !important;
+}
+
+/* Extra safety: prevent any inner scrolling */
+body.no-scroll-otherchannels .otherChannels__frame,
+body.no-scroll-otherchannels .otherChannels__hero,
+body.no-scroll-otherchannels .otherChannels__bottom {
+  overflow: hidden !important;
+}
+
 .otherChannels {
   height: 100vh;
   min-height: 100vh;
@@ -131,6 +158,274 @@
 /* Safety: never allow sideways scroll */
 .os-mac body {
   overflow-x: hidden !important;
+}
+
+/* =========================================================
+   OTHER CHANNELS — TABLET + SMALL LAPTOP SYSTEM (SAFE BAND)
+   Applies ONLY to widths 601px–1280px.
+   Does NOT affect: Mobile (<=600px) or Desktop (>=1281px)
+   ========================================================= */
+@media (min-width: 601px) and (max-width: 1650px) {
+  .otherChannels {
+    /* ===== GLOBAL HANDLES (edit freely) ===== */
+    --oc-frame-x: -30px;      /* moves the entire stack left/right */
+    --oc-frame-y: -130px;      /* moves the entire stack up/down */
+
+    --oc-stats-y: 0px;      /* moves titles up/down */
+    --oc-stats-scale: 1.05;    /* scales BOTH title lines together */
+
+    --oc-scale: 1.2;          /* global scale for entire stack */
+
+    --oc-bottom-y: 0px;     /* moves paragraph up/down */
+
+    --oc-gap: clamp(14px, 2vh, 24px); /* spacing between titles and paragraph */
+
+    /* ===== TYPOGRAPHY KNOBS ===== */
+    --oc-title-size: clamp(34px, 4.2vw, 58px);
+    --oc-title-line-height: 1.12;
+
+    --oc-copy-size: clamp(14px, 1.6vw, 18px);
+    --oc-copy-width: min(55ch, 92vw);
+
+    /* Slightly safer padding on weird tablet heights */
+    padding-top: max(clamp(48px, 6vh, 86px), env(safe-area-inset-top));
+    padding-left: clamp(16px, 3vw, 42px);
+    padding-right: clamp(16px, 3vw, 42px);
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+
+    /* Allow section to break out of page container */
+    width: 100vw !important;
+    max-width: 100vw !important;
+
+    /* Center relative to viewport, not site container */
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+
+    /* Prevent clipping */
+    overflow: visible !important;
+  }
+
+  /* Replace the desktop "grid + big translate" behavior with a stable stack */
+  .otherChannels__frame {
+    transform:
+      translate(var(--oc-frame-x), var(--oc-frame-y))
+      scale(var(--oc-scale)) !important;
+    transform-origin: center center !important;
+    will-change: auto !important;
+
+    height: 100%;
+    min-height: 100%;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: var(--oc-gap) !important;
+
+    overflow: visible !important;
+  }
+
+  .otherChannels__hero {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .otherChannels__stats {
+    transform: translateY(var(--oc-stats-y)) scale(var(--oc-stats-scale)) !important;
+    transform-origin: center top !important;
+    will-change: auto !important;
+    width: 100% !important;
+  }
+
+  /* Titles: lock them to exactly 2 lines total (each line cannot wrap) */
+  .otherChannels__heroLine1,
+  .otherChannels__heroLine2 {
+    font-size: var(--oc-title-size) !important;
+    line-height: var(--oc-title-line-height) !important;
+    margin: 0 !important;
+
+    white-space: nowrap !important;     /* MUST stay single line */
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+    text-align: center !important;
+  }
+
+  .otherChannels__heroLine1 {
+    margin-bottom: clamp(8px, 1.2vh, 14px) !important;
+  }
+
+  /* Paragraph */
+  .otherChannels__bottom {
+    transform: translateY(var(--oc-bottom-y)) !important;
+    will-change: auto !important;
+
+    width: 100% !important;
+    padding-bottom: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    overflow: visible !important;
+  }
+
+  .otherChannels__copy {
+    max-width: var(--oc-copy-width) !important;
+    font-size: var(--oc-copy-size) !important;
+    line-height: 1.55 !important;
+    text-align: center !important;
+    margin: 0 !important;
+
+    overflow: visible !important;
+  }
+
+  /* Safety: prevent sideways spill in this band */
+  .otherChannels,
+  .otherChannels * {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+}
+
+/* =========================================================
+   OTHER CHANNELS — DEVICE-SPECIFIC HANDLES
+   These ONLY override X / Y / SCALE on exact devices.
+   ========================================================= */
+
+/* iPad mini — 768 x 1024 */
+@media (width: 768px) and (height: 1024px) {
+  .otherChannels {
+    --oc-ipadMini-x: -75px;
+    --oc-ipadMini-y: -122px;
+    --oc-ipadMini-scale: 1.2;
+
+    --oc-frame-x: var(--oc-ipadMini-x);
+    --oc-frame-y: var(--oc-ipadMini-y);
+    --oc-scale: var(--oc-ipadMini-scale);
+
+    --oc-title-size: 35px;
+    --oc-copy-width: 47ch;
+  }
+}
+
+/* iPad Air — 820 x 1180 */
+@media (width: 820px) and (height: 1180px) {
+  .otherChannels {
+    --oc-ipadAir-x: -70px;
+    --oc-ipadAir-y: -166px;
+    --oc-ipadAir-scale: 1.25;
+
+    --oc-frame-x: var(--oc-ipadAir-x);
+    --oc-frame-y: var(--oc-ipadAir-y);
+    --oc-scale: var(--oc-ipadAir-scale);
+
+    --oc-title-size: 35px;
+    --oc-copy-width: 47ch;
+  }
+}
+
+/* Surface Pro 7 — 912 x 1368 */
+@media (width: 912px) and (height: 1368px) {
+  .otherChannels {
+    --oc-surfacePro7-x: -60px;
+    --oc-surfacePro7-y: -145px;
+    --oc-surfacePro7-scale: 1.45;
+
+    --oc-frame-x: var(--oc-surfacePro7-x);
+    --oc-frame-y: var(--oc-surfacePro7-y);
+    --oc-scale: var(--oc-surfacePro7-scale);
+
+    --oc-title-size: 35px;
+    --oc-copy-width: 47ch;
+  }
+}
+
+/* Asus ZenBook Fold — 853 x 1280 */
+@media (width: 853px) and (height: 1280px) {
+  .otherChannels {
+    --oc-zenbookFold-x: -60px;
+    --oc-zenbookFold-y: -134px;
+    --oc-zenbookFold-scale: 1.45;
+
+    --oc-frame-x: var(--oc-zenbookFold-x);
+    --oc-frame-y: var(--oc-zenbookFold-y);
+    --oc-scale: var(--oc-zenbookFold-scale);
+
+    --oc-title-size: 35px;
+    --oc-copy-width: 47ch;
+  }
+}
+
+/* iPad Pro — 1024 x 1366 */
+@media (width: 1024px) and (height: 1366px) {
+  .otherChannels {
+    --oc-ipadPro-x: -75px;
+    --oc-ipadPro-y: -145px;
+    --oc-ipadPro-scale: 1.55;
+
+    --oc-frame-x: var(--oc-ipadPro-x);
+    --oc-frame-y: var(--oc-ipadPro-y);
+    --oc-scale: var(--oc-ipadPro-scale);
+
+    --oc-title-size: 35px;
+    --oc-copy-width: 47ch;
+  }
+}
+
+/* Nest Hub 1024x600 (short height: push content up, shrink copy a bit) */
+@media (width: 1024px) and (height: 600px) {
+  .otherChannels {
+    --oc-frame-x: -45px;
+    --oc-frame-y: -131px;
+    --oc-title-size: 44px;
+    --oc-copy-size: 14px;
+    --oc-copy-width: min(64ch, 92vw);
+    --oc-gap: 12px;
+  }
+}
+
+/* Nest Hub Max 1280x800 */
+@media (width: 1280px) and (height: 800px) {
+  .otherChannels {
+    --oc-frame-x: -82px;
+    --oc-frame-y: -160px;
+    --oc-title-size: 56px;
+    --oc-copy-width: 70ch;
+  }
+}
+
+/* =========================================================
+   OTHER CHANNELS — MINI TABLET FIX (601px–729px ONLY)
+   Prevent title overflow on narrow widths.
+   Does NOT affect 730px+.
+   ========================================================= */
+@media (min-width: 601px) and (max-width: 729px) {
+  .otherChannels {
+    /* Slightly tighter stack on narrow widths */
+    --oc-scale: 0.92;                 /* global stack scale */
+    --oc-title-size: clamp(30px, 5.2vw, 40px);
+    --oc-copy-width: min(56ch, 92vw);
+    --oc-copy-size: clamp(13px, 2.2vw, 15px);
+    --oc-gap: 12px;
+  }
+
+  /* Safety: ensure the title block can't visually clip */
+  .otherChannels__stats {
+    max-width: 100% !important;
+  }
+
+  /* OPTIONAL: if a specific viewport still can't fit (super narrow),
+     allow the first line to scale down instead of clipping.
+     This keeps it on ONE line but shrinks to fit.
+  */
+  .otherChannels__heroLine1,
+  .otherChannels__heroLine2 {
+    display: inline-block !important;
+    max-width: 100% !important;
+  }
 }
 
 /* =========================
