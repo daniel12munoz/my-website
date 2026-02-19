@@ -1,5 +1,27 @@
 @import url('./austin.css');
 
+/* =========================================================
+   BLAZE — POSITION HANDLES (EDIT HERE)
+   These variables control hero / link / heading cluster.
+   Defaults are no-op unless overridden by breakpoints.
+   ========================================================= */
+#blaze {
+  --bl-hero-scale: 1;
+  --bl-hero-x: 0px;
+  --bl-hero-y: 0px;
+
+  --bl-link-x: 0px;
+  --bl-link-y: 0px;
+
+  --bl-head-scale: 1;
+  --bl-head-x: 0px;
+  --bl-head-y: 0px;
+
+  /* iPad Pro-only offsets */
+  --bl-ipadpro-logo-x: 0px;
+  --bl-ipadpro-below-y: 0px;
+}
+
 /* Nudge Blaze section upward to align with AU + MA */
 .bl {
   color: var(--au-ink);
@@ -431,10 +453,11 @@
     --blaze-logo-scale: 0.95;
   }
 
+  /* Logo scale on mobile; handles do NOT affect logo */
   #blaze .bl__logo {
+    display: block;
     transform: scale(var(--blaze-logo-scale));
     transform-origin: top center;
-    display: block;
   }
 }
 
@@ -657,6 +680,7 @@
    Blaze: vertical nudges by breakpoint (no size/spacing changes)
    Desktop: link + desc + shorts + long-form up 10px; hero + heading stay.
    Mobile: everything below hero up 5px; hero stays.
+   Note: On desktop 981px+, --bl-hero-y is set so handle system preserves nudge.
    ========================= */
 @media (min-width: 601px) {
   #blaze .bl__heroLink,
@@ -666,6 +690,225 @@
   #blaze .bl__shortsSection,
   #blaze .bl__videosSection {
     top: -30px !important;
+  }
+}
+
+/* Desktop 981px+: link-only nudge (hero stays put; iPad Pro overrides via its block) */
+@media (min-width: 981px) {
+  #blaze {
+    --bl-link-y: -30px;
+  }
+}
+
+/* =========================================
+   Blaze — Responsive tuning handles (non-mobile)
+   ========================================= */
+@media (min-width: 981px) {
+  #blaze {
+    --bl-logo-x: 0px;          /* + moves logo right */
+    --bl-roles-size: unset;    /* set only when needed */
+    --bl-shorts-scale: 1;       /* scale shorts grid */
+    --bl-longform-shift: 0px;   /* translateY on long-form section */
+  }
+
+  /* LOGO: keep existing left/top rules, ONLY add a translateX handle */
+  #blaze .bl__logoWrap {
+    transform: translateX(var(--bl-logo-x));
+  }
+
+  /* Roles: only override when variable is set */
+  #blaze .bl__roles {
+    font-size: var(--bl-roles-size, clamp(15px, 2vw, 20px));
+  }
+
+  /* Shorts scale: affects the grid only (keeps rounded corners) */
+  #blaze .bl__shortsGrid {
+    transform: scale(var(--bl-shorts-scale)) !important;
+    transform-origin: center top;
+  }
+
+  /* Long-form vertical placement to fix gaps (override 601px normal-flow reset) */
+  #blaze .bl__videosSection {
+    transform: translateY(var(--bl-longform-shift)) !important;
+  }
+}
+
+/* 981–1049 */
+@media (min-width: 981px) and (max-width: 1049px) {
+  #blaze {
+    --bl-logo-x: 75px;
+    --bl-roles-size: clamp(13px, 1.2vw, 16px);
+    --bl-shorts-scale: 1.08;
+    --bl-longform-shift: -120px;
+  }
+}
+
+/* 1050–1118 */
+@media (min-width: 1050px) and (max-width: 1118px) {
+  #blaze {
+    --bl-logo-x: 75px;
+    --bl-roles-size: clamp(13px, 1.2vw, 16px);
+    --bl-shorts-scale: 0.92;
+    --bl-longform-shift: -120px;
+  }
+}
+
+/* 1119–1139 */
+@media (min-width: 1119px) and (max-width: 1139px) {
+  #blaze {
+    --bl-logo-x: 75px;
+    --bl-roles-size: clamp(13px, 1.2vw, 16px);
+    --bl-shorts-scale: 0.92;
+    --bl-longform-shift: -40px;
+  }
+}
+
+/* 981–1119: move long-form up 150px */
+@media (min-width: 981px) and (max-width: 1119px) {
+  #blaze {
+    --bl-longform-shift: -210px;
+  }
+}
+
+/* 1140–1199 */
+@media (min-width: 1140px) and (max-width: 1199px) {
+  #blaze {
+    --bl-logo-x: 75px;
+    --bl-roles-size: clamp(13px, 1.2vw, 16px);
+    --bl-shorts-scale: 1;
+    --bl-longform-shift: -40px;
+  }
+}
+
+/* 1200–1420 */
+@media (min-width: 1200px) and (max-width: 1420px) {
+  #blaze {
+    --bl-logo-x: 75px;
+    --bl-roles-size: clamp(13px, 1.2vw, 16px);
+    --bl-shorts-scale: 1;
+    --bl-longform-shift: 0px;
+  }
+}
+
+/* 1120–1240: move long-form up 100px */
+@media (min-width: 1120px) and (max-width: 1240px) {
+  #blaze {
+    --bl-longform-shift: -200px;
+  }
+}
+
+/* 981–1240: decrease shorts size, center grid, label stays left */
+@media (min-width: 981px) and (max-width: 1240px) {
+  #blaze {
+    --bl-shorts-scale: 0.81;
+  }
+  #blaze .bl__shortsSection {
+    display: flex;
+    flex-direction: column;
+  }
+  #blaze .bl__shortsGrid {
+    align-self: center;
+  }
+}
+
+/* 981–1400: decrease short-form link font size */
+@media (min-width: 981px) and (max-width: 1400px) {
+  #blaze .bl__shortCard .bl__link {
+    font-size: 0.54rem !important;
+    line-height: 0.92rem !important;
+  }
+}
+
+/* 1421–1600 (logo only) */
+@media (min-width: 1421px) and (max-width: 1600px) {
+  #blaze {
+    --bl-logo-x: 125px;
+    --bl-roles-size: unset;
+    --bl-shorts-scale: 1;
+    --bl-longform-shift: 0px;
+  }
+}
+
+/* 1601–1750 (logo only, revert to previous) */
+@media (min-width: 1601px) and (max-width: 1750px) {
+  #blaze {
+    --bl-logo-x: 95px;
+    --bl-roles-size: unset;
+    --bl-shorts-scale: 1;
+    --bl-longform-shift: 0px;
+  }
+}
+
+/* 1751+ disable logo fix */
+@media (min-width: 1751px) {
+  #blaze {
+    --bl-logo-x: 0px;
+  }
+}
+
+/* 1620–3200: make shorts scale with page like long-form */
+@media (min-width: 1620px) and (max-width: 3200px) {
+  #blaze .bl__shortsGrid {
+    grid-template-columns: repeat(5, minmax(140px, 1fr));
+    gap: clamp(14px, 2vw, 28px);
+  }
+}
+
+/* Nest Hub (1024×600) */
+@media (width: 1024px) and (height: 600px) {
+  #blaze .bl__roles {
+    font-size: 13.45px !important;
+    line-height: 1.25 !important;
+  }
+  #blaze .bl__logo {
+    transform: translateX(15px) scale(0.8) !important;
+    transform-origin: top center;
+  }
+  #blaze .bl__desc {
+    max-width: 85ch !important;
+  }
+  #blaze .bl__shortsSection {
+    display: flex;
+    flex-direction: column;
+  }
+  #blaze .bl__shortsGrid {
+    align-self: center;
+    transform: scale(0.85) !important;
+    transform-origin: center top;
+  }
+  #blaze .bl__shortCard .bl__link {
+    font-size: 0.55rem !important;
+    line-height: 0.9rem !important;
+  }
+  #blaze .bl__videosSection {
+    position: relative !important;
+    top: -200px !important;
+    transform: none !important;
+    margin-bottom: -82px !important;
+  }
+  #blaze.bl {
+    padding-bottom: 12px !important;
+  }
+}
+
+/* Nest Hub Max (1280×800) */
+@media (width: 1280px) and (height: 800px) {
+  #blaze {
+    --bl-logo-x: 65px;
+    --bl-longform-shift: 0px;
+    --bl-shorts-scale: 1;
+  }
+  #blaze .bl__roles {
+    font-size: 17px !important;
+    line-height: 1.25 !important;
+  }
+  #blaze .bl__logo {
+    transform: translateX(20px) scale(0.85) !important;
+    transform-origin: top center;
+  }
+  #blaze .bl__shortCard .bl__link {
+    font-size: 0.58rem !important;
+    line-height: 0.9rem !important;
   }
 }
 
@@ -716,5 +959,432 @@
   #blaze .bl__shortsGrid .bl__shortCard .bl__link {
     font-size: 0.48rem !important;
     line-height: 0.90rem !important;
+  }
+}
+
+/* =========================================
+   BLAZE MID SYSTEM — 601–980px
+   Mobile replica: iPad Mini/Air, Surface Pro 7, ZenBook Fold, Chrome tablet
+   MID-RANGE HANDLE OVERRIDES (edit values above for quick tuning)
+   ========================================= */
+
+@media (min-width: 601px) and (max-width: 980px) {
+  /* Hero clipping fix: allow translated/scaled hero to bleed left (Vonix-style) */
+  #blaze {
+    overflow: visible !important;
+  }
+  #blaze .bl__row1 {
+    overflow: visible !important;
+  }
+  /* BLAZE MID VAR OVERRIDES — hero slightly smaller, left ~10px, link down 5px */
+  #blaze {
+    --bl-hero-scale: 1.04;
+    --bl-hero-x: -19px;
+    --bl-hero-y: -12px;
+    --bl-link-x: 0px;
+    --bl-link-y: -8px;
+    --bl-head-x: -2px;
+    --bl-head-y: -27px;
+    --bl-head-scale: 1;
+  }
+
+  /* Constrain Blaze content to mobile-like column, centered */
+  #blaze,
+  #blaze .bl__row1,
+  #blaze .bl__shortsSection,
+  #blaze .bl__videosSection {
+    max-width: 520px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
+  }
+  /* Override os-mac padding so mobile-like 16px applies in this band */
+  .os-mac #blaze .bl__row1,
+  .os-mac #blaze .bl__fold {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Media elements don't overflow */
+  #blaze img,
+  #blaze video,
+  #blaze iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Force hero row to mobile stack */
+  #blaze .bl__row1 {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "hero"
+      "link"
+      "heading"
+      "desc";
+  }
+  #blaze .bl__heroMedia { grid-area: hero; }
+  #blaze .bl__heroLink { grid-area: link; }
+  #blaze .bl__heading { grid-area: heading; }
+  #blaze .bl__desc { grid-area: desc; }
+
+  /* Heading: mobile alignment (right-aligned title/rule/roles, centered logo) */
+  #blaze .bl__heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-items: end;
+    text-align: right;
+  }
+  #blaze .bl__title,
+  #blaze .bl__roles {
+    text-align: right;
+  }
+  #blaze .bl__logoWrap {
+    left: 0;
+    top: 0;
+    justify-content: center;
+    margin-top: clamp(18px, 2vw, 26px);
+  }
+  #blaze .bl__logo {
+    max-width: min(280px, 80vw);
+  }
+
+  /* Paragraph: mobile spacing, left-aligned */
+  #blaze .bl__desc {
+    max-width: none;
+    width: 100%;
+    padding-right: 10px;
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  /* Shorts grid = mobile: 2 columns, no staircase */
+  #blaze .bl__shortsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    justify-content: center;
+  }
+  #blaze .bl__shortCard {
+    transform: none !important;
+  }
+  #blaze .bl__shortCard:nth-child(5n + 1),
+  #blaze .bl__shortCard:nth-child(5n + 2),
+  #blaze .bl__shortCard:nth-child(5n + 3),
+  #blaze .bl__shortCard:nth-child(5n + 4),
+  #blaze .bl__shortCard:nth-child(5n + 5) {
+    transform: none !important;
+  }
+  #blaze .bl__shortCard:nth-child(2n) {
+    margin-top: 10px;
+  }
+
+  /* Videos grid = mobile: single column */
+  #blaze .bl__videoGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--au-gap);
+  }
+  #blaze .bl__videoBox {
+    max-width: 100%;
+  }
+
+  /* Prevent sideways scroll for Blaze only */
+  #blaze,
+  #blaze * {
+    min-width: 0;
+  }
+  #blaze {
+    overflow-x: clip;
+  }
+
+  /* Override desktop nudges; hero/link use handle vars */
+  #blaze .bl__heroMedia {
+    transform: translate(var(--bl-hero-x), var(--bl-hero-y)) scale(var(--bl-hero-scale)) !important;
+  }
+  #blaze .bl__heroLink {
+    transform: translate(
+        calc(var(--bl-hero-x) + var(--bl-link-x)),
+        calc(var(--bl-hero-y) + var(--bl-link-y))
+      )
+      scale(var(--bl-hero-scale)) !important;
+  }
+  #blaze .bl__desc,
+  #blaze .bl__shortsSection,
+  #blaze .bl__videosSection {
+    transform: none !important;
+    top: auto !important;
+  }
+
+  /* MID RANGE LIFTS — logo + desc + shorts + videos up 10px; long-form up 30px total */
+  #blaze {
+    --bl-mid-belowHero-lift: -30px;
+    --bl-mid-longform-extra: -40px;
+  }
+  #blaze .bl__logoWrap,
+  #blaze .bl__desc,
+  #blaze .bl__shortsSection,
+  #blaze .bl__videosSection {
+    position: relative !important;
+    top: var(--bl-mid-belowHero-lift) !important;
+  }
+  #blaze .bl__videosSection {
+    top: calc(var(--bl-mid-belowHero-lift) + var(--bl-mid-longform-extra)) !important;
+  }
+}
+
+/* 601–638: decrease roles size */
+@media (min-width: 601px) and (max-width: 638px) {
+  #blaze .bl__roles {
+    font-size: 13px !important;
+    line-height: 1.25 !important;
+  }
+}
+
+/* 601–719: decrease shorts link font size */
+@media (min-width: 601px) and (max-width: 719px) {
+  #blaze .bl__shortCard .bl__link {
+    font-size: 0.52rem !important;
+    line-height: 0.9rem !important;
+  }
+}
+
+/* =========================================
+   BLAZE MID SYSTEM — iPad Pro (1024×1366)
+   Same mobile replica as 601–980. Does NOT affect Nest Hub (1024×600).
+   ========================================= */
+@media (width: 1024px) and (height: 1366px) {
+  /* BLAZE IPAD PRO OVERRIDES — hero/link/head tuned; logo+below offsets; lower content scale */
+  #blaze {
+    --bl-ipadpro-lower-scale: 1.10;
+    --bl-hero-scale: 1.209;
+    --bl-hero-x: -68px;
+    --bl-hero-y: 0px;
+    --bl-link-x: 0px;
+    --bl-link-y: 30px;
+    --bl-head-x: 35px;
+    --bl-head-y: 28px;
+    --bl-head-scale: 1;
+
+    /* Logo right 10px; logo + desc + shorts + videos down 10px */
+    --bl-ipadpro-logo-x: 20px;
+    --bl-ipadpro-below-y: 10px;
+    /* Long-form videos: move down (transform-based, top didn't work) */
+    --bl-ipadpro-longform-y: 2120px;
+  }
+  #blaze.bl {
+    padding-bottom: 1500px !important;
+  }
+
+  /* Constrain Blaze content to mobile-like column, centered */
+  #blaze,
+  #blaze .bl__row1,
+  #blaze .bl__shortsSection,
+  #blaze .bl__videosSection {
+    max-width: 520px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
+  }
+  .os-mac #blaze .bl__row1,
+  .os-mac #blaze .bl__fold {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  #blaze img,
+  #blaze video,
+  #blaze iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Force hero row to mobile stack */
+  #blaze .bl__row1 {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "hero"
+      "link"
+      "heading"
+      "desc";
+  }
+  #blaze .bl__heroMedia { grid-area: hero; }
+  #blaze .bl__heroLink { grid-area: link; }
+  #blaze .bl__heading { grid-area: heading; }
+  #blaze .bl__desc { grid-area: desc; }
+
+  /* Heading: mobile alignment */
+  #blaze .bl__heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-items: end;
+    text-align: right;
+  }
+  #blaze .bl__title,
+  #blaze .bl__roles {
+    text-align: right;
+  }
+  /* Logo: move right via --bl-ipadpro-logo-x */
+  #blaze .bl__logoWrap {
+    position: relative;
+    left: var(--bl-ipadpro-logo-x);
+    top: var(--bl-ipadpro-below-y);
+    justify-content: center;
+    margin-top: clamp(18px, 2vw, 26px);
+  }
+  #blaze .bl__logo {
+    max-width: min(280px, 80vw);
+    transform: translateY(17px) scale(0.925);
+    transform-origin: center top;
+  }
+
+  /* Logo + desc + shorts + videos: down via --bl-ipadpro-below-y (hero/link/heading unchanged) */
+  #blaze .bl__desc,
+  #blaze .bl__shortsSection,
+  #blaze .bl__videosSection {
+    position: relative;
+    top: var(--bl-ipadpro-below-y);
+  }
+
+  /* Paragraph: mobile spacing */
+  #blaze .bl__desc {
+    max-width: none;
+    width: 100%;
+    padding-right: 10px;
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  /* Shorts grid = mobile */
+  #blaze .bl__shortsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    justify-content: center;
+  }
+  #blaze .bl__shortCard {
+    transform: none !important;
+  }
+  #blaze .bl__shortCard:nth-child(5n + 1),
+  #blaze .bl__shortCard:nth-child(5n + 2),
+  #blaze .bl__shortCard:nth-child(5n + 3),
+  #blaze .bl__shortCard:nth-child(5n + 4),
+  #blaze .bl__shortCard:nth-child(5n + 5) {
+    transform: none !important;
+  }
+  #blaze .bl__shortCard:nth-child(2n) {
+    margin-top: 10px;
+  }
+
+  /* Videos grid = mobile */
+  #blaze .bl__videoGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--au-gap);
+  }
+  #blaze .bl__videoBox {
+    max-width: 100%;
+  }
+
+  /* Prevent sideways scroll */
+  #blaze,
+  #blaze * {
+    min-width: 0;
+  }
+  #blaze {
+    overflow-x: clip;
+  }
+
+  /* Override desktop nudges; hero/link use handle vars */
+  #blaze .bl__heroMedia {
+    transform: translate(var(--bl-hero-x), var(--bl-hero-y)) scale(var(--bl-hero-scale)) !important;
+  }
+  #blaze .bl__heroLink {
+    transform: translate(
+        calc(var(--bl-hero-x) + var(--bl-link-x)),
+        calc(var(--bl-hero-y) + var(--bl-link-y))
+      )
+      scale(var(--bl-hero-scale)) !important;
+  }
+  /* Lower content: scale ~10%; keep top from earlier rule */
+  #blaze .bl__desc,
+  #blaze .bl__shortsSection,
+  #blaze .bl__videosSection {
+    transform: scale(var(--bl-ipadpro-lower-scale)) !important;
+    transform-origin: center top !important;
+    top: var(--bl-ipadpro-below-y) !important;
+  }
+
+  /* FINAL iPad Pro override — long-form videos down 160px (transform wins over top) */
+  html body #blaze section.bl__fold.bl__videosSection {
+    position: relative !important;
+    top: auto !important;
+    transform: scale(var(--bl-ipadpro-lower-scale)) translateY(var(--bl-ipadpro-longform-y)) !important;
+    transform-origin: top center !important;
+    will-change: transform;
+    z-index: 1;
+  }
+
+  /* iPad Pro — bottom spacer (real layout height, unaffected by transforms) */
+  html body #blaze::after {
+    content: "";
+    display: block;
+    height: 1050px;
+    width: 100%;
+  }
+}
+
+/* =========================================
+   BLAZE HANDLE WIRING
+   Hero media: hero vars only. Hero link: hero + link vars. Header cluster: head vars.
+   Logo is NOT affected by handles.
+   ========================================= */
+#blaze .bl__heroMedia {
+  transform: translate(var(--bl-hero-x), var(--bl-hero-y)) scale(var(--bl-hero-scale));
+  transform-origin: top left;
+}
+
+#blaze .bl__heroLink {
+  transform: translate(
+      calc(var(--bl-hero-x) + var(--bl-link-x)),
+      calc(var(--bl-hero-y) + var(--bl-link-y))
+    )
+    scale(var(--bl-hero-scale));
+  transform-origin: top left;
+}
+
+#blaze .bl__title,
+#blaze .bl__rule--main,
+#blaze .bl__roles {
+  position: relative;
+  transform: translate(var(--bl-head-x), var(--bl-head-y)) scale(var(--bl-head-scale));
+  transform-origin: top right;
+}
+
+/* =========================================
+   iPad Pro (1024×1366) — HARD EXCLUSION
+   Reset new handles so they do not affect iPad Pro layout.
+   iPad Pro block above keeps its own transforms/layout.
+   ========================================= */
+@media (width: 1024px) and (height: 1366px) {
+  #blaze {
+    --bl-logo-x: 0px;
+    --bl-roles-size: unset;
+    --bl-shorts-scale: 1;
+    --bl-longform-shift: 0px;
+  }
+  #blaze .bl__roles {
+    font-size: clamp(15px, 2vw, 20px) !important;
+  }
+  #blaze .bl__shortsGrid {
+    transform: scale(1.62) !important;
+    transform-origin: center top;
   }
 }
