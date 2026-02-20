@@ -27,6 +27,27 @@
   gap: calc(var(--au-gap) * 1.25);
 }
 
+/* iPad mini bottom spacer — hidden by default, shown only at 768×1024 */
+.au__ipadmini-spacer {
+  display: none;
+}
+/* iPad Air bottom spacer — hidden by default, shown only at 820×1180 */
+.au__ipadair-spacer {
+  display: none;
+}
+/* iPad Pro bottom spacer — hidden by default, shown only at 1024×1366 */
+.au__ipadpro-spacer {
+  display: none;
+}
+/* Surface Pro 7 bottom spacer — hidden by default, shown only at 912×1368 */
+.au__surfacepro7-spacer {
+  display: none;
+}
+/* Asus Zenbook Fold bottom spacer — hidden by default, shown only at 853×1280 */
+.au__zenbookfold-spacer {
+  display: none;
+}
+
 /* Subhead blocks */
 .au__subhead {
   display: flex;
@@ -1182,6 +1203,449 @@
 
 }
 
+/* =========================
+   Austin Underground 981–1750: hero, link, label, paragraph handles + bottom white space
+   All scale from 981 to 1750
+   ========================= */
+@media (min-width: 981px) and (max-width: 1750px) {
+  /* Prevent horizontal scroll: hide overflow at scroll container only (not on section, so content can bleed to right edge) */
+  main:has(#austin-underground) {
+    overflow-x: hidden !important;
+  }
+  /* Section uses full width so content extends to far right without being cut off */
+  #austin-underground {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  /* Logo: fixed 340px, same size at every resolution — no clamps, override max-width: 100% */
+  #austin-underground .au__collageWrap--desktop {
+    min-height: 300px !important;
+  }
+  #austin-underground .au__colImages {
+    min-height: 300px !important;
+    height: 300px !important;
+  }
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    width: 340px !important;
+    min-width: 340px !important;
+    max-width: 340px !important;
+    transform: translate(var(--au-collage-x-desktop), var(--au-collage-y-desktop)) scale(1) !important;
+  }
+  .os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(calc(var(--au-collage-x-desktop) + 2px), calc(var(--au-collage-y-desktop) + 40px)) scale(1) !important;
+  }
+  #austin-underground {
+    /* Hero video: x, y, scale (scale grows 0.95 at 981 → 1.02 at 1750) */
+    --au-desk-hero-x: 0px;
+    --au-desk-hero-y: 0px;
+    --au-desk-hero-scale: clamp(0.95, calc(0.95 + (100vw - 981px) * 0.000091), 1.02);
+    /* Hero link: x, y */
+    --au-desk-link-x: 0px;
+    --au-desk-link-y: 0px;
+    /* Main label (title + rule + roles): x, y, font-sizes */
+    --au-desk-title-x: 0px;
+    --au-desk-title-y: 0px;
+    --au-desk-title-font-size: clamp(24px, calc(24px + (100vw - 981px) * 0.021), 44px);
+    --au-desk-rule-width: clamp(90px, calc(90px + (100vw - 981px) * 0.065), 140px);
+    --au-desk-roles-font-size: clamp(11px, calc(11px + (100vw - 981px) * 0.010), 22px);
+    /* Paragraph: x, y, width */
+    --au-desk-desc-x: 0px;
+    --au-desk-desc-y: 0px;
+    --au-desk-desc-width: clamp(42ch, calc(42ch + (100vw - 981px) * 0.026), 62ch);
+  }
+  #austin-underground .au__heroMedia {
+    transform: translate(var(--au-desk-hero-x), var(--au-desk-hero-y)) scale(var(--au-desk-hero-scale)) !important;
+    transform-origin: top left !important;
+  }
+  #austin-underground .au__videoBlock .au__linkWrap.heroLinkWrap {
+    transform: translate(var(--au-desk-link-x), var(--au-desk-link-y)) !important;
+  }
+  #austin-underground .au__heading {
+    transform: translate(var(--au-desk-title-x), var(--au-desk-title-y)) !important;
+  }
+  #austin-underground .au__heading .au__title {
+    font-size: var(--au-desk-title-font-size) !important;
+  }
+  #austin-underground .au__heading .au__rule--main {
+    width: var(--au-desk-rule-width) !important;
+  }
+  #austin-underground .au__heading .au__roles {
+    font-size: var(--au-desk-roles-font-size) !important;
+  }
+  #austin-underground .au__desc {
+    transform: translate(var(--au-desk-desc-x), var(--au-desk-desc-y)) !important;
+    width: var(--au-desk-desc-width) !important;
+    max-width: var(--au-desk-desc-width) !important;
+  }
+  #austin-underground .au__concertPhotography {
+    padding-bottom: calc(100px + (100vw - 981px) * 0.104) !important;
+  }
+}
+
+/* 981–1750: Interviews + Concert Photography (exclude iPad Pro, Nest Hub, Nest Hub Max — they use their own blocks) */
+@media (min-width: 981px) and (max-width: 1750px) and (not ((width: 1024px) and (height: 1366px))) and (not ((width: 1024px) and (height: 600px))) and (not ((width: 1280px) and (height: 800px))) {
+  #austin-underground .au__row2.au-grid {
+    margin-bottom: 0 !important;
+  }
+  #austin-underground .au__fold2 {
+    margin-top: clamp(32px, calc(32px + (100vw - 981px) * 0.031), 56px) !important;
+    top: auto !important;
+    position: relative !important;
+    min-height: 0 !important;
+    gap: clamp(20px, calc(20px + (100vw - 981px) * 0.021), 40px) !important;
+  }
+  #austin-underground .au__interviews {
+    margin-top: 0 !important;
+    position: relative !important;
+    top: auto !important;
+    transform: none !important;
+  }
+  #austin-underground .au__concertPhotography {
+    margin-top: 0 !important;
+    position: relative !important;
+    top: auto !important;
+    transform: none !important;
+  }
+  #austin-underground .au__interviews .au__subhead h3,
+  #austin-underground .au__concertPhotography .au__subhead h3 {
+    font-size: clamp(20px, calc(20px + (100vw - 981px) * 0.031), 36px) !important;
+  }
+  #austin-underground .au__interviews .au__rule--interviews,
+  #austin-underground .au__concertPhotography .au__rule--concert {
+    width: clamp(60px, calc(60px + (100vw - 981px) * 0.104), 140px) !important;
+    max-width: none !important;
+  }
+  #austin-underground .au__interviews .au__videoGrid {
+    display: grid !important;
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: clamp(16px, calc(16px + (100vw - 981px) * 0.014), 28px) !important;
+    justify-items: center !important;
+  }
+  #austin-underground .au__interviews .au__videoGrid > * {
+    flex: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  #austin-underground .au__interviews .au__videoGrid > *:nth-child(1) { grid-column: 1 / span 2 !important; }
+  #austin-underground .au__interviews .au__videoGrid > *:nth-child(2) { grid-column: 3 / span 2 !important; }
+  #austin-underground .au__interviews .au__videoGrid > *:nth-child(3) { grid-column: 5 / span 2 !important; }
+  #austin-underground .au__interviews .au__videoGrid .au__videoBox--v5 { grid-column: 2 / span 2 !important; }
+  #austin-underground .au__interviews .au__videoGrid .au__videoBox--v6 { grid-column: 4 / span 2 !important; }
+  #austin-underground .au__interviews .au__videoBox .au__link {
+    font-size: clamp(12px, calc(12px + (100vw - 981px) * 0.004), 16px) !important;
+  }
+  #austin-underground .au__concertPhotography .au__concertGrid {
+    display: grid !important;
+    grid-template-columns: repeat(5, clamp(140px, calc(140px + (100vw - 981px) * 0.104), 220px)) !important;
+    gap: clamp(12px, calc(12px + (100vw - 981px) * 0.014), 24px) !important;
+    justify-content: start !important;
+    margin-top: clamp(12px, calc(12px + (100vw - 981px) * 0.012), 24px) !important;
+    left: auto !important;
+    transform: none !important;
+  }
+  #austin-underground .au__concertPhotography .au__concertGrid .media {
+    width: 100% !important;
+    aspect-ratio: 4 / 5 !important;
+  }
+  #austin-underground .au__concertPhotography .au__concertGrid .media + .media {
+    margin-left: 0 !important;
+  }
+}
+
+/* Austin Underground 981–1450: Interviews + Concert Photography slightly smaller, keep centered (exclude iPad Pro, Nest Hub, Nest Hub Max) */
+@media (min-width: 981px) and (max-width: 1450px) and (not ((width: 1024px) and (height: 1366px))) and (not ((width: 1024px) and (height: 600px))) and (not ((width: 1280px) and (height: 800px))) {
+  #austin-underground .au__fold2 {
+    max-width: 88% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  #austin-underground .au__interviews .au__subhead h3,
+  #austin-underground .au__concertPhotography .au__subhead h3 {
+    font-size: clamp(18px, calc(18px + (100vw - 981px) * 0.026), 28px) !important;
+  }
+  #austin-underground .au__interviews .au__rule--interviews,
+  #austin-underground .au__concertPhotography .au__rule--concert {
+    width: clamp(52px, calc(52px + (100vw - 981px) * 0.087), 110px) !important;
+  }
+  #austin-underground .au__interviews .au__videoGrid {
+    gap: clamp(12px, calc(12px + (100vw - 981px) * 0.012), 22px) !important;
+  }
+  #austin-underground .au__interviews .au__videoBox .au__link {
+    font-size: clamp(11px, calc(11px + (100vw - 981px) * 0.003), 14px) !important;
+  }
+  #austin-underground .au__concertPhotography .au__concertGrid {
+    grid-template-columns: repeat(5, clamp(120px, calc(120px + (100vw - 981px) * 0.085), 180px)) !important;
+    gap: clamp(10px, calc(10px + (100vw - 981px) * 0.012), 18px) !important;
+    justify-content: center !important;
+  }
+}
+
+/* Austin Underground 981–1199: Interviews + Concert Photography slightly smaller (overrides 981–1450, exclude iPad Pro, Nest Hub) */
+@media (min-width: 981px) and (max-width: 1199px) and (not ((width: 1024px) and (height: 1366px))) and (not ((width: 1024px) and (height: 600px))) {
+  #austin-underground .au__fold2 {
+    max-width: 85% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  #austin-underground .au__interviews .au__subhead h3,
+  #austin-underground .au__concertPhotography .au__subhead h3 {
+    font-size: clamp(17px, calc(17px + (100vw - 981px) * 0.023), 24px) !important;
+  }
+  #austin-underground .au__interviews .au__rule--interviews,
+  #austin-underground .au__concertPhotography .au__rule--concert {
+    width: clamp(48px, calc(48px + (100vw - 981px) * 0.078), 95px) !important;
+  }
+  #austin-underground .au__interviews .au__videoGrid {
+    gap: clamp(11px, calc(11px + (100vw - 981px) * 0.011), 18px) !important;
+  }
+  #austin-underground .au__interviews .au__videoBox .au__link {
+    font-size: clamp(10px, calc(10px + (100vw - 981px) * 0.003), 13px) !important;
+  }
+  #austin-underground .au__concertPhotography .au__concertGrid {
+    grid-template-columns: repeat(5, clamp(110px, calc(110px + (100vw - 981px) * 0.078), 155px)) !important;
+    gap: clamp(9px, calc(9px + (100vw - 981px) * 0.011), 16px) !important;
+    justify-content: center !important;
+  }
+}
+
+/* Austin Underground 981–1150: paragraph width handle — logo stays fixed (grid columns don't shrink) */
+@media (min-width: 981px) and (max-width: 1150px) {
+  #austin-underground {
+    --au-desk-desc-width: 36ch;
+  }
+  /* Lock grid columns to fixed ratio so logo never moves when paragraph width changes */
+  #austin-underground .au__row2.au-grid {
+    grid-template-columns: minmax(0, 0.56fr) minmax(0, 0.44fr) !important;
+  }
+}
+
+/* Austin Underground 981–1050: logo x, y, scale handles */
+@media (min-width: 981px) and (max-width: 1010px) {
+  #austin-underground {
+    --au-desk-logo-x: -30px;
+    --au-desk-logo-y: 0px;
+    --au-desk-logo-scale: 0.75 ;
+  }
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+  .os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+}
+
+/* Austin Underground 1011–1100: logo x, y, scale handles */
+@media (min-width: 1011px) and (max-width: 1050px) {
+  #austin-underground {
+    --au-desk-logo-x: -30px;
+    --au-desk-logo-y: 0px;
+    --au-desk-logo-scale: 0.80;
+  }
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+  .os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+}
+
+/* Austin Underground 1051–1100: logo x, y, scale handles */
+@media (min-width: 1051px) and (max-width: 1100px) {
+  #austin-underground {
+    --au-desk-logo-x: -30px;
+    --au-desk-logo-y: 0px;
+    --au-desk-logo-scale: 0.85;
+  }
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+  .os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+}
+
+/* Austin Underground 1101–1150: logo x, y, scale handles */
+@media (min-width: 1101px) and (max-width: 1150px) {
+  #austin-underground {
+    --au-desk-logo-x: -30px;
+    --au-desk-logo-y: 0px;
+    --au-desk-logo-scale: 0.9;
+  }
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+  .os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+}
+
+/* Austin Underground 1151–1200: logo x, y, scale handles */
+@media (min-width: 1151px) and (max-width: 1200px) {
+  #austin-underground {
+    --au-desk-logo-x: -180px;
+    --au-desk-logo-y: 0px;
+    --au-desk-logo-scale: 0.9;
+  }
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+  .os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+}
+
+/* Austin Underground 1201–1250: logo x, y, scale handles */
+@media (min-width: 1201px) and (max-width: 1250px) {
+  #austin-underground {
+    --au-desk-logo-x: -150px;
+    --au-desk-logo-y: 0px;
+    --au-desk-logo-scale: 0.9;
+  }
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+  .os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+}
+
+/* Austin Underground 1251–1300: logo x, y, scale handles */
+@media (min-width: 1251px) and (max-width: 1300px) {
+  #austin-underground {
+    --au-desk-logo-x: -110px;
+    --au-desk-logo-y: 0px;
+    --au-desk-logo-scale: 1;
+  }
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+  .os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+}
+
+/* Austin Underground 1301–1350: logo x, y, scale handles */
+@media (min-width: 1301px) and (max-width: 1350px) {
+  #austin-underground {
+    --au-desk-logo-x: -80px;
+    --au-desk-logo-y: 0px;
+    --au-desk-logo-scale: 1;
+  }
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+  .os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+}
+
+/* Austin Underground 1351–1400: logo x, y, scale handles */
+@media (min-width: 1351px) and (max-width: 1400px) {
+  #austin-underground {
+    --au-desk-logo-x: -30px;
+    --au-desk-logo-y: 0px;
+    --au-desk-logo-scale: 1;
+  }
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+  .os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+}
+
+/* Austin Underground 1401–1450: logo x, y, scale handles */
+@media (min-width: 1401px) and (max-width: 1450px) {
+  #austin-underground {
+    --au-desk-logo-x: 0px;
+    --au-desk-logo-y: 0px;
+    --au-desk-logo-scale: 1;
+  }
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+  .os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+}
+
+/* Austin Underground 1451–1500: logo x, y, scale handles */
+@media (min-width: 1451px) and (max-width: 1500px) {
+  #austin-underground {
+    --au-desk-logo-x: 70px;
+    --au-desk-logo-y: 0px;
+    --au-desk-logo-scale: 1.2;
+  }
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+  .os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+}
+
+/* Austin Underground 1501–1550: logo x, y, scale handles */
+@media (min-width: 1501px) and (max-width: 1509px) {
+  #austin-underground {
+    --au-desk-logo-x: 110px;
+    --au-desk-logo-y: -30px;
+    --au-desk-logo-scale: 1.3;
+  }
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+  .os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+}
+
+/* Austin Underground 1510–1600: logo x, y, scale handles */
+@media (min-width: 1510px) and (max-width: 1600px) {
+  #austin-underground {
+    --au-desk-logo-x: 0px;
+    --au-desk-logo-y: -40px;
+    --au-desk-logo-scale: 1.33;
+  }
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+  .os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+}
+
+/* Austin Underground 1601–1675: logo x, y, scale handles */
+@media (min-width: 1601px) and (max-width: 1675px) {
+  #austin-underground {
+    --au-desk-logo-x: 0px;
+    --au-desk-logo-y: -50px;
+    --au-desk-logo-scale: 1.4;
+  }
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+  .os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+}
+
+/* Austin Underground 1676–1750: logo x, y, scale handles */
+@media (min-width: 1676px) and (max-width: 1750px) {
+  #austin-underground {
+    --au-desk-logo-x: 0px;
+    --au-desk-logo-y: -70px;
+    --au-desk-logo-scale: 1.4;
+  }
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+  .os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-desk-logo-x), var(--au-desk-logo-y)) scale(var(--au-desk-logo-scale)) !important;
+  }
+}
+
+/* Austin Underground 981–1023: overridden by 981–1750 block (fold2 flows naturally below paragraph) */
+
 /* Desktop: add small bottom padding to Austin Underground */
 @media (min-width: 601px) {
   #austin-underground {
@@ -1212,6 +1676,16 @@
   
   #austin-underground .au__concertPhotography {
     margin-top: 0px !important;
+  }
+}
+
+/* 981–1750: override above — Interviews/Concert flow naturally below paragraph */
+@media (min-width: 981px) and (max-width: 1750px) {
+  #austin-underground .au__interviews {
+    margin-top: 0 !important;
+  }
+  #austin-underground .au__concertPhotography {
+    margin-top: 0 !important;
   }
 }
 
@@ -1879,5 +2353,1350 @@
   #austin-underground .au__roles > div {
     font-size: inherit !important;
     line-height: inherit !important;
+  }
+}
+
+/* =========================================================
+   AU MID SYSTEM — 601–980px + exact tablet devices + iPad Pro
+   Mobile replica: centered 520px column, same order as <=600 mobile
+   ========================================================= */
+
+@media (min-width: 601px) and (max-width: 980px) {
+  /* MID SCALE knobs — increase size, stay centered */
+  #austin-underground {
+    --au-mid-maxw: 630px;
+    --au-mid-scale: 1.08;
+    --au-mid-pad: 18px;
+  }
+
+  /* A) Constrain Austin Underground to a centered mobile column */
+  #austin-underground,
+  #austin-underground .au__row1,
+  #austin-underground .au__belowCollage,
+  #austin-underground .au__row2,
+  #austin-underground .au__row2--desktop,
+  #austin-underground .au__fold2,
+  #austin-underground .au__interviews,
+  #austin-underground .au__concertPhotography {
+    max-width: var(--au-mid-maxw) !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: var(--au-mid-pad) !important;
+    padding-right: var(--au-mid-pad) !important;
+    box-sizing: border-box !important;
+  }
+  #austin-underground .au__row1,
+  #austin-underground .au__row2,
+  #austin-underground .au__row2--desktop,
+  #austin-underground .au__fold2 {
+    transform: scale(var(--au-mid-scale)) !important;
+    transform-origin: top center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  /* White space below Concert Photography: scales 100px at 601 → 280px at 980 (padding won't collapse) */
+  #austin-underground .au__concertPhotography {
+    padding-bottom: calc(40px + (100vw - 601px) * 0.476) !important;
+  }
+  /* Allow hero to bleed left over nav (no clipping) */
+  main:has(#austin-underground) {
+    overflow-x: visible !important;
+  }
+  #austin-underground {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+  }
+  #austin-underground .au__row1,
+  #austin-underground .au__videoBlock {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+  }
+  #austin-underground * {
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* B) Force ROW 1 to mobile stack */
+  #austin-underground .au__row1 {
+    grid-template-columns: 1fr !important;
+  }
+  /* Label, rule, roles: match Vonix/Blaze (compensate for scale) */
+  #austin-underground .au__title {
+    font-size: clamp(24px, 4vw, 36px) !important;
+    line-height: 1.1 !important;
+  }
+  #austin-underground .au__rule--main {
+    width: clamp(48px, 6.5vw, 86px) !important;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 15%,
+      rgba(0, 0, 0, 0.2) 100%
+    ) !important;
+    background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 15%,
+      rgba(0, 0, 0, 0.2) 100%
+    ) !important;
+  }
+  #austin-underground .au__roles {
+    font-size: clamp(13px, 1.8vw, 18px) !important;
+    line-height: 1.3 !important;
+  }
+  #austin-underground .au__heading {
+    justify-items: end !important;
+    text-align: right !important;
+    width: 100% !important;
+  }
+  #austin-underground .au__title,
+  #austin-underground .au__roles {
+    text-align: right !important;
+  }
+  #austin-underground .au__rule--main {
+    margin-left: auto !important;
+  }
+
+  /* C) Hero link directly under hero */
+  #austin-underground .au__linkWrap {
+    margin-top: 10px !important;
+    transform: none !important;
+  }
+
+  /* D) Force mobile collage, kill desktop collage column */
+  #austin-underground .au__collageWrap--desktop,
+  #austin-underground .au__row2--desktop .au__colImages,
+  #austin-underground .au__colImages {
+    display: none !important;
+  }
+  #austin-underground .au__row2--desktop {
+    grid-template-columns: 1fr !important;
+    grid-template-areas: "text" !important;
+  }
+  #austin-underground .au__collageWrap--mobile {
+    display: block !important;
+    margin: 20px 0 !important;
+    background: transparent !important;
+  }
+  #austin-underground .au__collageWrap--mobile .au__collage {
+    width: min(85vw, 395px) !important;
+    height: auto !important;
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border-radius: 10px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    filter: drop-shadow(0 6px 18px rgba(0,0,0,0.12)) drop-shadow(0 2px 6px rgba(0,0,0,0.06)) !important;
+    transform: none !important;
+  }
+
+  /* E) Paragraph: normal, no transforms */
+  #austin-underground .au__desc {
+    transform: none !important;
+    margin-top: 10px !important;
+    margin-bottom: 14px !important;
+    display: block !important;
+    font-size: clamp(18px, 2.2vw, 22px) !important;
+    line-height: 1.55 !important;
+    max-width: 62ch !important;
+  }
+
+  /* F) Interviews + Concert Photography: reset desktop lift, use mobile layouts */
+  #austin-underground .au__belowCollage {
+    transform: none !important;
+  }
+  #austin-underground .au__collageWrap--mobile {
+    transform: none !important; /* no mobile-only vertical shifts in mid band */
+  }
+  #austin-underground .au__fold2 {
+    position: relative !important;
+    top: auto !important;
+    margin-top: 12px !important;
+    transform: scale(var(--au-mid-scale)) !important;
+    transform-origin: top center !important;
+    min-height: 0 !important;
+    gap: clamp(6px, calc(6px + (100vw - 601px) * 0.23), 95px) !important;
+  }
+  #austin-underground .au__videosGrid,
+  #austin-underground .au__videosGrid--stagger,
+  #austin-underground .au__videoGrid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+  #austin-underground .au__videoGrid > * {
+    flex: none !important;
+    max-width: 100% !important;
+    grid-column: 1 !important;
+  }
+  /* Force Interviews 1×5 stack (override global 2-col at 901–980) */
+  #austin-underground .au__interviews .au__videoGrid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+  #austin-underground .au__videosGrid--stagger .t2,
+  #austin-underground .au__videosGrid--stagger .t3,
+  #austin-underground .au__videosGrid--stagger .t4,
+  #austin-underground .au__videosGrid--stagger .v5,
+  #austin-underground .au__videosGrid--stagger .v6 {
+    grid-column: auto !important;
+  }
+  #austin-underground .au__concertGrid,
+  #austin-underground .au__photoStrip,
+  #austin-underground .au__photoStrip--lower {
+    display: none !important;
+  }
+  #austin-underground .au__concertMobileGrid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 20px 0 0 !important;
+    padding: 0 !important;
+  }
+  #austin-underground .au__concertMobileGrid .media,
+  #austin-underground .au__concertMobileGrid img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 5 !important;
+    object-fit: cover !important;
+    border-radius: 10px !important;
+    display: block !important;
+    box-shadow: var(--shadow) !important;
+    transform: none !important;
+  }
+
+  /* G) No vertical clipping */
+  #austin-underground,
+  #austin-underground .au__row1,
+  #austin-underground .au__videoBlock {
+    overflow-y: visible !important;
+    contain: none !important;
+    clip-path: none !important;
+  }
+}
+
+/* ---- AU 601–980 × 50–2000: hero video + link + label/roles handles ---- */
+@media (min-width: 601px) and (max-width: 980px) and (min-height: 50px) and (max-height: 2000px) {
+  #austin-underground {
+    /* Hero video handles (601–980 mid band) */
+    --au-mid-hero-x: -20px;
+    --au-mid-hero-y: -10px;
+    --au-mid-hero-scale: 1.073;
+    /* Hero link handles (601–980 mid band) */
+    --au-mid-link-x: -20px;
+    --au-mid-link-y: -1px;
+    /* Label (title + rule) + roles handles — scale from 601 to 980 */
+    --au-mid-title-x: 0px;
+    --au-mid-title-y: 0px;
+    --au-mid-title-font-size: clamp(23px, calc(23px + (100vw - 601px) * 0.034), 36px);
+    --au-mid-rule-width: clamp(48px, calc(48px + (100vw - 601px) * 0.1), 86px);
+    --au-mid-roles-font-size: clamp(10px, calc(10px + (100vw - 601px) * 0.021), 18px);
+    /* Paragraph (desc) handles (601–980) — 23ch at 601, grows to ~62ch at 980 */
+    --au-mid-desc-x: 0px;
+    --au-mid-desc-y: -50px;
+    --au-mid-desc-width: clamp(23ch, calc(23ch + (100vw - 601px) * 0.82), 62ch);
+    /* Interviews section handles (601–980) */
+    --au-mid-interviews-x: 0px;
+    --au-mid-interviews-y: -25px;
+    --au-mid-interviews-scale: 1.2;
+    /* Concert Photography section handles (601–980) */
+    --au-mid-concert-x: 0px;
+    --au-mid-concert-y: 160px;
+    --au-mid-concert-scale: 1.21;
+  }
+  #austin-underground .au__heroMedia {
+    transform: translate(var(--au-mid-hero-x), var(--au-mid-hero-y)) scale(var(--au-mid-hero-scale)) !important;
+    transform-origin: top left !important;
+    overflow: visible !important;
+  }
+  #austin-underground .au__heroMedia > div,
+  #austin-underground .au__heroMedia > video {
+    overflow: hidden !important;
+    border-radius: inherit;
+  }
+  #austin-underground .au__videoBlock .au__linkWrap.heroLinkWrap {
+    transform: translate(var(--au-mid-link-x), var(--au-mid-link-y)) !important;
+  }
+  #austin-underground .au__heading {
+    transform: translate(var(--au-mid-title-x), var(--au-mid-title-y)) !important;
+  }
+  #austin-underground .au__heading .au__title {
+    font-size: var(--au-mid-title-font-size) !important;
+  }
+  #austin-underground .au__heading .au__roles {
+    font-size: var(--au-mid-roles-font-size) !important;
+  }
+  #austin-underground .au__heading .au__rule--main {
+    width: var(--au-mid-rule-width) !important;
+  }
+  /* Logo (collage): 10% smaller, 5px right, 10px down (601–980) */
+  #austin-underground .au__collageWrap--mobile .au__collage {
+    transform: translate(5px, 10px) scale(0.9) !important;
+    transform-origin: center top !important;
+  }
+  #austin-underground .au__desc {
+    transform: translate(var(--au-mid-desc-x), var(--au-mid-desc-y)) !important;
+    width: var(--au-mid-desc-width) !important;
+    max-width: var(--au-mid-desc-width) !important;
+  }
+  #austin-underground .au__interviews {
+    transform: translate(var(--au-mid-interviews-x), var(--au-mid-interviews-y)) scale(var(--au-mid-interviews-scale)) !important;
+    transform-origin: top center !important;
+  }
+  #austin-underground .au__concertPhotography {
+    transform: translate(var(--au-mid-concert-x), var(--au-mid-concert-y)) scale(var(--au-mid-concert-scale)) !important;
+    transform-origin: top center !important;
+    /* Ensure Concert Photography stays below Interviews — grows at 980 to prevent overlap */
+    margin-top: clamp(0px, calc((100vw - 601px) * 0.19), 72px) !important;
+  }
+  /* Concert Photography sublabel: smaller, right-aligned (601–980) */
+  #austin-underground .au__concertPhotography .au__subhead {
+    align-items: flex-end !important;
+    text-align: right !important;
+  }
+  #austin-underground .au__concertPhotography .au__subhead h3 {
+    font-size: clamp(12px, calc(12px + (100vw - 601px) * 0.032), 24px) !important;
+    text-align: right !important;
+  }
+  /* Reduce size of links under each interview video (601–980) */
+  #austin-underground .au__interviews .au__videoBox .au__link {
+    font-size: clamp(10px, 0.85vw, 12px) !important;
+  }
+  /* Force 1×5 stack for Interviews (override 2-col from max-width: 900px global rules at 901–980) */
+  #austin-underground .au__interviews .au__videoGrid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+  #austin-underground .au__interviews .au__videoGrid > * {
+    grid-column: 1 !important;
+    flex: none !important;
+    max-width: 100% !important;
+  }
+}
+
+/* ---- Exact tablet devices: re-assert key switches + larger scale ---- */
+@media (width: 768px) and (height: 1024px) {
+  #austin-underground {
+    --au-mid-maxw: 650px;
+    --au-mid-scale: 1.10;
+    --au-mid-pad: 18px;
+    /* Hero video positioning handles (iPad mini) */
+    --au-ipadmini-hero-x: -17px;
+    --au-ipadmini-hero-y: -10px;
+    --au-ipadmini-hero-scale: 1.003;
+    /* Hero link positioning handles (iPad mini) */
+    --au-ipadmini-link-x: -17px;
+    --au-ipadmini-link-y: -12px;
+    /* Heading cluster (label + rule + roles) positioning handles (iPad mini) */
+    --au-ipadmini-head-x: -16px;
+    --au-ipadmini-head-y: -15px;
+    /* Paragraph (desc) handles (iPad mini) — px-based so container can widen; ch had no effect */
+    --au-ipadmini-desc-width: 420px;
+    --au-ipadmini-desc-x: -35px;
+    --au-ipadmini-desc-y: -35px;
+    /* Interviews section size (iPad mini) */
+    --au-ipadmini-interviews-scale: 1.27;
+    --au-ipadmini-interviews-maxw: 720px;
+    --au-ipadmini-interviews-x: -10px;
+    --au-ipadmini-interviews-y: 150px;
+    /* Concert photography section (iPad mini) */
+    --au-ipadmini-concert-scale: 1.25;
+    --au-ipadmini-concert-maxw: 720px;
+    --au-ipadmini-concert-x: -10px;
+    --au-ipadmini-concert-y: 410px;
+    --au-ipadmini-bottom-pad: 130px;
+  }
+  #austin-underground .au__colText {
+    min-width: var(--au-ipadmini-desc-width) !important;
+  }
+  #austin-underground .au__desc {
+    max-width: 100% !important;
+    width: 100% !important;
+    transform: translate(var(--au-ipadmini-desc-x), var(--au-ipadmini-desc-y)) !important;
+  }
+  #austin-underground .au__heading {
+    transform: translate(var(--au-ipadmini-head-x), var(--au-ipadmini-head-y)) !important;
+  }
+  #austin-underground .au__videoBlock .au__linkWrap.heroLinkWrap {
+    transform: translate(var(--au-ipadmini-link-x), var(--au-ipadmini-link-y)) !important;
+  }
+  #austin-underground .au__heroMedia {
+    transform: translate(var(--au-ipadmini-hero-x), var(--au-ipadmini-hero-y)) scale(var(--au-ipadmini-hero-scale)) !important;
+    transform-origin: top left;
+    overflow: visible !important;
+  }
+  #austin-underground .au__heroMedia > div,
+  #austin-underground .au__heroMedia > video {
+    overflow: hidden !important;
+    border-radius: inherit;
+  }
+  /* Allow hero to bleed left over nav */
+  main:has(#austin-underground) { overflow-x: visible !important; }
+  #austin-underground { overflow-x: visible !important; overflow-y: visible !important; }
+  #austin-underground .au__row1,
+  #austin-underground .au__videoBlock { overflow-x: visible !important; overflow-y: visible !important; }
+  /* Label, rule, roles: match Vonix/Blaze (compensate for AU row1 scale 1.10) */
+  #austin-underground .au__title {
+    font-size: clamp(24px, 4vw, 36px) !important;
+    line-height: 1.1 !important;
+  }
+  #austin-underground .au__rule--main {
+    width: clamp(48px, 6.5vw, 86px) !important;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 15%,
+      rgba(0, 0, 0, 0.2) 100%
+    ) !important;
+    background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 15%,
+      rgba(0, 0, 0, 0.2) 100%
+    ) !important;
+  }
+  #austin-underground .au__roles {
+    font-size: clamp(13px, 1.8vw, 18px) !important;
+    line-height: 1.3 !important;
+  }
+  #austin-underground,
+  #austin-underground .au__row1,
+  #austin-underground .au__belowCollage,
+  #austin-underground .au__row2,
+  #austin-underground .au__row2--desktop,
+  #austin-underground .au__fold2,
+  #austin-underground .au__interviews,
+  #austin-underground .au__concertPhotography {
+    max-width: max(var(--au-mid-maxw), calc(var(--au-ipadmini-desc-width) + 36px), var(--au-ipadmini-interviews-maxw), var(--au-ipadmini-concert-maxw)) !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: var(--au-mid-pad) !important;
+    padding-right: var(--au-mid-pad) !important;
+    box-sizing: border-box !important;
+  }
+  #austin-underground .au__row1,
+  #austin-underground .au__row2,
+  #austin-underground .au__row2--desktop,
+  #austin-underground .au__fold2 {
+    transform: scale(var(--au-mid-scale)) !important;
+    transform-origin: top center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  #austin-underground .au__collageWrap--desktop,
+  #austin-underground .au__row2--desktop .au__colImages,
+  #austin-underground .au__colImages { display: none !important; }
+  #austin-underground .au__collageWrap--mobile { display: block !important; }
+  /* Interviews: larger on iPad mini, centered, with x/y handles */
+  #austin-underground .au__interviews {
+    max-width: var(--au-ipadmini-interviews-maxw) !important;
+    transform: translate(var(--au-ipadmini-interviews-x), var(--au-ipadmini-interviews-y)) scale(var(--au-ipadmini-interviews-scale)) !important;
+    transform-origin: center center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  /* Concert photography: larger on iPad mini, centered, with x/y handles */
+  #austin-underground .au__concertPhotography {
+    max-width: var(--au-ipadmini-concert-maxw) !important;
+    transform: translate(var(--au-ipadmini-concert-x), var(--au-ipadmini-concert-y)) scale(var(--au-ipadmini-concert-scale)) !important;
+    transform-origin: center center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  /* "Interviews" + "Concert Photography" labels: match Vonix iPad mini subhead size */
+  #austin-underground .au__interviews .au__subhead h3,
+  #austin-underground .au__concertPhotography .au__subhead h3 {
+    font-size: clamp(18px, 2.4vw, 26px) !important;
+    letter-spacing: 0.02em !important;
+  }
+  /* Line under Interviews subheading: smaller to match reduced label size (iPad mini) */
+  #austin-underground .au__interviews .au__rule--interviews {
+    width: clamp(50px, 5.5vw, 90px) !important;
+    max-width: 90px !important;
+  }
+  /* Bottom whitespace below concert photography — margin on last section + spacer div in DOM */
+  #austin-underground .au__concertPhotography {
+    margin-bottom: var(--au-ipadmini-bottom-pad) !important;
+  }
+  #austin-underground .au__fold2 .au__ipadmini-spacer {
+    display: block !important; /* visible on iPad mini only (hidden by default below) */
+    height: var(--au-ipadmini-bottom-pad) !important;
+    min-height: var(--au-ipadmini-bottom-pad) !important;
+    width: 100% !important;
+  }
+  #austin-underground .au__concertGrid,
+  #austin-underground .au__photoStrip,
+  #austin-underground .au__photoStrip--lower { display: none !important; }
+  #austin-underground .au__concertMobileGrid { display: grid !important; }
+  #austin-underground .au__videosGrid,
+  #austin-underground .au__videosGrid--stagger,
+  #austin-underground .au__videoGrid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (width: 820px) and (height: 1180px) {
+  #austin-underground {
+    --au-mid-maxw: 670px;
+    --au-mid-scale: 1.10;
+    --au-mid-pad: 18px;
+    /* Hero video positioning handles (iPad Air) */
+    --au-ipadair-hero-x: -6px;
+    --au-ipadair-hero-y: -10px;
+    --au-ipadair-hero-scale: 0.969;
+    /* Hero link positioning handles (iPad Air) */
+    --au-ipadair-link-x: -7px;
+    --au-ipadair-link-y: -25px;
+    /* Heading cluster: main label + rule + roles as one unit (iPad Air) */
+    --au-ipadair-head-x: -19px;
+    --au-ipadair-head-y: -23px;
+    /* Paragraph (desc) handles (iPad Air) — px-based width like iPad mini */
+    --au-ipadair-desc-width: 450px;
+    --au-ipadair-desc-x: -25px;
+    --au-ipadair-desc-y: -50px;
+    /* Interviews section (iPad Air) */
+    --au-ipadair-interviews-scale: 1.15;
+    --au-ipadair-interviews-maxw: 720px;
+    --au-ipadair-interviews-x: -15px;
+    --au-ipadair-interviews-y: 70px;
+    /* Concert photography section (iPad Air) */
+    --au-ipadair-concert-scale: 1.15;
+    --au-ipadair-concert-maxw: 720px;
+    --au-ipadair-concert-x: -15px;
+    --au-ipadair-concert-y: 200px;
+    --au-ipadair-bottom-pad: 60px;
+  }
+  #austin-underground .au__colText {
+    min-width: var(--au-ipadair-desc-width) !important;
+  }
+  #austin-underground .au__desc {
+    max-width: 100% !important;
+    width: 100% !important;
+    transform: translate(var(--au-ipadair-desc-x), var(--au-ipadair-desc-y)) !important;
+  }
+  #austin-underground .au__heading {
+    transform: translate(var(--au-ipadair-head-x), var(--au-ipadair-head-y)) !important;
+  }
+  #austin-underground .au__heroMedia {
+    transform: translate(var(--au-ipadair-hero-x), var(--au-ipadair-hero-y)) scale(var(--au-ipadair-hero-scale)) !important;
+    transform-origin: top left !important;
+    overflow: visible !important;
+  }
+  #austin-underground .au__heroMedia > div,
+  #austin-underground .au__heroMedia > video {
+    overflow: hidden !important;
+    border-radius: inherit;
+  }
+  #austin-underground .au__videoBlock .au__linkWrap.heroLinkWrap {
+    transform: translate(var(--au-ipadair-link-x), var(--au-ipadair-link-y)) !important;
+  }
+  main:has(#austin-underground) { overflow-x: visible !important; }
+  #austin-underground { overflow-x: visible !important; overflow-y: visible !important; }
+  #austin-underground .au__row1,
+  #austin-underground .au__videoBlock { overflow-x: visible !important; overflow-y: visible !important; }
+  /* Label, rule, roles: match Vonix/Blaze (iPad Air) */
+  #austin-underground .au__title {
+    font-size: clamp(24px, 4vw, 36px) !important;
+    line-height: 1.1 !important;
+  }
+  #austin-underground .au__rule--main {
+    width: clamp(48px, 6.5vw, 86px) !important;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 15%,
+      rgba(0, 0, 0, 0.2) 100%
+    ) !important;
+    background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 15%,
+      rgba(0, 0, 0, 0.2) 100%
+    ) !important;
+  }
+  #austin-underground .au__roles {
+    font-size: clamp(13px, 1.8vw, 18px) !important;
+    line-height: 1.3 !important;
+  }
+  #austin-underground,
+  #austin-underground .au__row1,
+  #austin-underground .au__belowCollage,
+  #austin-underground .au__row2,
+  #austin-underground .au__row2--desktop,
+  #austin-underground .au__fold2,
+  #austin-underground .au__interviews,
+  #austin-underground .au__concertPhotography {
+    max-width: max(var(--au-mid-maxw), calc(var(--au-ipadair-desc-width) + 36px), var(--au-ipadair-interviews-maxw), var(--au-ipadair-concert-maxw)) !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: var(--au-mid-pad) !important;
+    padding-right: var(--au-mid-pad) !important;
+    box-sizing: border-box !important;
+  }
+  #austin-underground .au__row1,
+  #austin-underground .au__row2,
+  #austin-underground .au__row2--desktop,
+  #austin-underground .au__fold2 {
+    transform: scale(var(--au-mid-scale)) !important;
+    transform-origin: top center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  #austin-underground .au__collageWrap--desktop,
+  #austin-underground .au__row2--desktop .au__colImages,
+  #austin-underground .au__colImages { display: none !important; }
+  #austin-underground .au__collageWrap--mobile { display: block !important; }
+  /* Interviews: x/y/scale handles (iPad Air) */
+  #austin-underground .au__interviews {
+    max-width: var(--au-ipadair-interviews-maxw) !important;
+    transform: translate(var(--au-ipadair-interviews-x), var(--au-ipadair-interviews-y)) scale(var(--au-ipadair-interviews-scale)) !important;
+    transform-origin: center center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  /* Concert photography: x/y/scale handles (iPad Air) */
+  #austin-underground .au__concertPhotography {
+    max-width: var(--au-ipadair-concert-maxw) !important;
+    transform: translate(var(--au-ipadair-concert-x), var(--au-ipadair-concert-y)) scale(var(--au-ipadair-concert-scale)) !important;
+    transform-origin: center center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: var(--au-ipadair-bottom-pad) !important;
+  }
+  /* iPad Air bottom spacer */
+  #austin-underground .au__fold2 .au__ipadair-spacer {
+    display: block !important;
+    height: var(--au-ipadair-bottom-pad) !important;
+    min-height: var(--au-ipadair-bottom-pad) !important;
+    width: 100% !important;
+  }
+  /* "Interviews" + "Concert Photography" labels + rules: match Vonix subhead size (iPad Air) */
+  #austin-underground .au__interviews .au__subhead h3,
+  #austin-underground .au__concertPhotography .au__subhead h3 {
+    font-size: clamp(18px, 2.4vw, 26px) !important;
+    letter-spacing: 0.02em !important;
+  }
+  #austin-underground .au__interviews .au__rule--interviews,
+  #austin-underground .au__concertPhotography .au__rule--concert {
+    width: clamp(80px, 7vw, 120px) !important;
+    max-width: 120px !important;
+  }
+  #austin-underground .au__concertGrid,
+  #austin-underground .au__photoStrip,
+  #austin-underground .au__photoStrip--lower { display: none !important; }
+  #austin-underground .au__concertMobileGrid { display: grid !important; }
+  #austin-underground .au__videosGrid,
+  #austin-underground .au__videosGrid--stagger,
+  #austin-underground .au__videoGrid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (width: 912px) and (height: 1368px) {
+  #austin-underground {
+    --au-mid-maxw: 680px;
+    --au-mid-scale: 1.11;
+    --au-mid-pad: 18px;
+    /* Hero video positioning handles (Surface Pro 7) */
+    --au-surfacepro7-hero-x: 50px;
+    --au-surfacepro7-hero-y: -10px;
+    --au-surfacepro7-hero-scale: 0.85;
+    /* Hero link positioning handles (Surface Pro 7) */
+    --au-surfacepro7-link-x: 49px;
+    --au-surfacepro7-link-y: -61px;
+    /* Heading cluster: main label + rule + roles as one unit (Surface Pro 7) */
+    --au-surfacepro7-head-x: -30px;
+    --au-surfacepro7-head-y: -60px;
+    /* Paragraph (desc) handles (Surface Pro 7) */
+    --au-surfacepro7-desc-x: 30px;
+    --au-surfacepro7-desc-y: 0px;
+    --au-surfacepro7-desc-width: 95%;
+    /* Interviews section (Surface Pro 7) */
+    --au-surfacepro7-interviews-x: 10px;
+    --au-surfacepro7-interviews-y: 40px;
+    --au-surfacepro7-interviews-scale: 1;
+    /* Concert photography section (Surface Pro 7): moved up 50px */
+    --au-surfacepro7-concert-x: 10px;
+    --au-surfacepro7-concert-y: -55px;
+    --au-surfacepro7-concert-scale: 1;
+    --au-surfacepro7-bottom-pad: -40; /* was 60px, reduced by half */
+  }
+  #austin-underground .au__heroMedia {
+    transform: translate(var(--au-surfacepro7-hero-x), var(--au-surfacepro7-hero-y)) scale(var(--au-surfacepro7-hero-scale)) !important;
+    transform-origin: top left !important;
+    overflow: visible !important;
+  }
+  #austin-underground .au__heroMedia > div,
+  #austin-underground .au__heroMedia > video {
+    overflow: hidden !important;
+    border-radius: inherit;
+  }
+  #austin-underground .au__videoBlock .au__linkWrap.heroLinkWrap {
+    transform: translate(var(--au-surfacepro7-link-x), var(--au-surfacepro7-link-y)) !important;
+  }
+  #austin-underground .au__heading {
+    transform: translate(var(--au-surfacepro7-head-x), var(--au-surfacepro7-head-y)) !important;
+  }
+  #austin-underground .au__desc {
+    transform: translate(var(--au-surfacepro7-desc-x), var(--au-surfacepro7-desc-y)) !important;
+    width: var(--au-surfacepro7-desc-width) !important;
+    max-width: var(--au-surfacepro7-desc-width) !important;
+  }
+  /* "Interviews" + "Concert Photography" labels + rules: match Vonix subhead size (Surface Pro 7) */
+  #austin-underground .au__interviews .au__subhead h3,
+  #austin-underground .au__concertPhotography .au__subhead h3 {
+    font-size: clamp(18px, 2.4vw, 26px) !important;
+    letter-spacing: 0.02em !important;
+  }
+  #austin-underground .au__interviews .au__rule--interviews,
+  #austin-underground .au__concertPhotography .au__rule--concert {
+    width: clamp(80px, 7vw, 120px) !important;
+    max-width: 120px !important;
+  }
+  /* Interviews: x/y/scale handles (Surface Pro 7) */
+  #austin-underground .au__interviews {
+    transform: translate(var(--au-surfacepro7-interviews-x), var(--au-surfacepro7-interviews-y)) scale(var(--au-surfacepro7-interviews-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Concert photography: x/y/scale handles + bottom whitespace (Surface Pro 7) */
+  #austin-underground .au__concertPhotography {
+    transform: translate(var(--au-surfacepro7-concert-x), var(--au-surfacepro7-concert-y)) scale(var(--au-surfacepro7-concert-scale)) !important;
+    transform-origin: top center !important;
+    margin-bottom: var(--au-surfacepro7-bottom-pad) !important;
+  }
+  /* Surface Pro 7 bottom spacer */
+  #austin-underground .au__fold2 .au__surfacepro7-spacer {
+    display: block !important;
+    height: var(--au-surfacepro7-bottom-pad) !important;
+    min-height: var(--au-surfacepro7-bottom-pad) !important;
+    width: 100% !important;
+  }
+  main:has(#austin-underground) { overflow-x: visible !important; }
+  #austin-underground { overflow-x: visible !important; overflow-y: visible !important; }
+  #austin-underground .au__row1,
+  #austin-underground .au__videoBlock { overflow-x: visible !important; overflow-y: visible !important; }
+  /* Label, rule, roles: match Vonix/Blaze */
+  #austin-underground .au__title {
+    font-size: clamp(24px, 4vw, 36px) !important;
+    line-height: 1.1 !important;
+  }
+  #austin-underground .au__rule--main {
+    width: clamp(48px, 6.5vw, 86px) !important;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 15%,
+      rgba(0, 0, 0, 0.2) 100%
+    ) !important;
+    background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 15%,
+      rgba(0, 0, 0, 0.2) 100%
+    ) !important;
+  }
+  #austin-underground .au__roles {
+    font-size: clamp(13px, 1.8vw, 18px) !important;
+    line-height: 1.3 !important;
+  }
+  #austin-underground,
+  #austin-underground .au__row1,
+  #austin-underground .au__belowCollage,
+  #austin-underground .au__row2,
+  #austin-underground .au__row2--desktop,
+  #austin-underground .au__fold2,
+  #austin-underground .au__interviews,
+  #austin-underground .au__concertPhotography {
+    max-width: var(--au-mid-maxw) !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: var(--au-mid-pad) !important;
+    padding-right: var(--au-mid-pad) !important;
+    box-sizing: border-box !important;
+  }
+  #austin-underground .au__row1,
+  #austin-underground .au__row2,
+  #austin-underground .au__row2--desktop,
+  #austin-underground .au__fold2 {
+    transform: scale(var(--au-mid-scale)) !important;
+    transform-origin: top center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  #austin-underground .au__collageWrap--desktop,
+  #austin-underground .au__row2--desktop .au__colImages,
+  #austin-underground .au__colImages { display: none !important; }
+  #austin-underground .au__collageWrap--mobile { display: block !important; }
+  #austin-underground .au__concertGrid,
+  #austin-underground .au__photoStrip,
+  #austin-underground .au__photoStrip--lower { display: none !important; }
+  #austin-underground .au__concertMobileGrid { display: grid !important; }
+  #austin-underground .au__collageWrap--mobile .au__collage {
+    transform: translateX(25px) !important;
+  }
+  /* Interviews: 1×5 vertical stack (Surface Pro 7) */
+  #austin-underground .au__interviews .au__videoGrid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: auto !important;
+    gap: 14px !important;
+  }
+  #austin-underground .au__interviews .au__videoGrid > * {
+    grid-column: 1 !important;
+    flex: none !important;
+    max-width: 100% !important;
+  }
+  #austin-underground .au__videosGrid,
+  #austin-underground .au__videosGrid--stagger,
+  #austin-underground .au__videoGrid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+  #austin-underground .au__videoGrid > * {
+    flex: none !important;
+    max-width: 100% !important;
+  }
+}
+
+/* ---- Asus Zenbook Fold 853×1280 ---- */
+@media (width: 853px) and (height: 1280px) {
+  #austin-underground {
+    --au-mid-maxw: 690px;
+    --au-mid-scale: 1.10;
+    --au-mid-pad: 18px;
+    /* Hero video positioning handles (Zenbook Fold) */
+    --au-zenbookfold-hero-x: 10px;
+    --au-zenbookfold-hero-y: -11px;
+    --au-zenbookfold-hero-scale: 0.905;
+    /* Hero link positioning handles (Zenbook Fold) */
+    --au-zenbookfold-link-x: 8px;
+    --au-zenbookfold-link-y: -43px;
+    /* Heading cluster: main label + rule + roles as one unit (Zenbook Fold) */
+    --au-zenbookfold-head-x: -33px;
+    --au-zenbookfold-head-y: -42px;
+    /* Paragraph (desc) handles (Zenbook Fold) */
+    --au-zenbookfold-desc-x: -7px;
+    --au-zenbookfold-desc-y: 0px;
+    --au-zenbookfold-desc-width: 100%;
+    /* Interviews section (Zenbook Fold) */
+    --au-zenbookfold-interviews-x: 0px;
+    --au-zenbookfold-interviews-y: 30px;
+    --au-zenbookfold-interviews-scale: 1.1;
+    /* Concert photography section (Zenbook Fold): moved up 50px */
+    --au-zenbookfold-concert-x: 0px;
+    --au-zenbookfold-concert-y: 110px;
+    --au-zenbookfold-concert-scale: 1.1;
+    --au-zenbookfold-bottom-pad: 90px; /* was 180px, reduced by half */
+  }
+  #austin-underground .au__heroMedia {
+    transform: translate(var(--au-zenbookfold-hero-x), var(--au-zenbookfold-hero-y)) scale(var(--au-zenbookfold-hero-scale)) !important;
+    transform-origin: top left !important;
+    overflow: visible !important;
+  }
+  #austin-underground .au__heroMedia > div,
+  #austin-underground .au__heroMedia > video {
+    overflow: hidden !important;
+    border-radius: inherit;
+  }
+  #austin-underground .au__videoBlock .au__linkWrap.heroLinkWrap {
+    transform: translate(var(--au-zenbookfold-link-x), var(--au-zenbookfold-link-y)) !important;
+  }
+  #austin-underground .au__heading {
+    transform: translate(var(--au-zenbookfold-head-x), var(--au-zenbookfold-head-y)) !important;
+  }
+  #austin-underground .au__desc {
+    transform: translate(var(--au-zenbookfold-desc-x), var(--au-zenbookfold-desc-y)) !important;
+    width: var(--au-zenbookfold-desc-width) !important;
+    max-width: var(--au-zenbookfold-desc-width) !important;
+  }
+  /* Logo (collage) — move right 25px (Zenbook Fold) */
+  #austin-underground .au__collageWrap--mobile .au__collage {
+    transform: translateX(25px) !important;
+  }
+  /* "Interviews" + "Concert Photography" labels + rules: match Vonix subhead size (Zenbook Fold) */
+  #austin-underground .au__interviews .au__subhead h3,
+  #austin-underground .au__concertPhotography .au__subhead h3 {
+    font-size: clamp(18px, 2.4vw, 26px) !important;
+    letter-spacing: 0.02em !important;
+  }
+  #austin-underground .au__interviews .au__rule--interviews,
+  #austin-underground .au__concertPhotography .au__rule--concert {
+    width: clamp(80px, 7vw, 120px) !important;
+    max-width: 120px !important;
+  }
+  /* Interviews: x/y/scale handles (Zenbook Fold) */
+  #austin-underground .au__interviews {
+    transform: translate(var(--au-zenbookfold-interviews-x), var(--au-zenbookfold-interviews-y)) scale(var(--au-zenbookfold-interviews-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Concert photography: x/y/scale handles + bottom whitespace (Zenbook Fold) */
+  #austin-underground .au__concertPhotography {
+    transform: translate(var(--au-zenbookfold-concert-x), var(--au-zenbookfold-concert-y)) scale(var(--au-zenbookfold-concert-scale)) !important;
+    transform-origin: top center !important;
+    margin-bottom: var(--au-zenbookfold-bottom-pad) !important;
+  }
+  /* Zenbook Fold bottom spacer */
+  #austin-underground .au__fold2 .au__zenbookfold-spacer {
+    display: block !important;
+    height: var(--au-zenbookfold-bottom-pad) !important;
+    min-height: var(--au-zenbookfold-bottom-pad) !important;
+    width: 100% !important;
+  }
+  main:has(#austin-underground) { overflow-x: visible !important; }
+  #austin-underground { overflow-x: visible !important; overflow-y: visible !important; }
+  #austin-underground .au__row1,
+  #austin-underground .au__videoBlock { overflow-x: visible !important; overflow-y: visible !important; }
+  /* Label, rule, roles: match Vonix/Blaze */
+  #austin-underground .au__title {
+    font-size: clamp(24px, 4vw, 36px) !important;
+    line-height: 1.1 !important;
+  }
+  #austin-underground .au__rule--main {
+    width: clamp(48px, 6.5vw, 86px) !important;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 15%,
+      rgba(0, 0, 0, 0.2) 100%
+    ) !important;
+    background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 15%,
+      rgba(0, 0, 0, 0.2) 100%
+    ) !important;
+  }
+  #austin-underground .au__roles {
+    font-size: clamp(13px, 1.8vw, 18px) !important;
+    line-height: 1.3 !important;
+  }
+  #austin-underground,
+  #austin-underground .au__row1,
+  #austin-underground .au__belowCollage,
+  #austin-underground .au__row2,
+  #austin-underground .au__row2--desktop,
+  #austin-underground .au__fold2,
+  #austin-underground .au__interviews,
+  #austin-underground .au__concertPhotography {
+    max-width: var(--au-mid-maxw) !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: var(--au-mid-pad) !important;
+    padding-right: var(--au-mid-pad) !important;
+    box-sizing: border-box !important;
+  }
+  #austin-underground .au__row1,
+  #austin-underground .au__row2,
+  #austin-underground .au__row2--desktop,
+  #austin-underground .au__fold2 {
+    transform: scale(var(--au-mid-scale)) !important;
+    transform-origin: top center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  #austin-underground .au__collageWrap--desktop,
+  #austin-underground .au__row2--desktop .au__colImages,
+  #austin-underground .au__colImages { display: none !important; }
+  #austin-underground .au__collageWrap--mobile { display: block !important; }
+  #austin-underground .au__concertGrid,
+  #austin-underground .au__photoStrip,
+  #austin-underground .au__photoStrip--lower { display: none !important; }
+  #austin-underground .au__concertMobileGrid { display: grid !important; }
+  /* Interviews: 1×5 vertical stack (Zenbook Fold) */
+  #austin-underground .au__interviews .au__videoGrid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: auto !important;
+    gap: 14px !important;
+  }
+  #austin-underground .au__interviews .au__videoGrid > * {
+    grid-column: 1 !important;
+    flex: none !important;
+    max-width: 100% !important;
+  }
+  #austin-underground .au__videosGrid,
+  #austin-underground .au__videosGrid--stagger,
+  #austin-underground .au__videoGrid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+  #austin-underground .au__videoGrid > * {
+    flex: none !important;
+    max-width: 100% !important;
+  }
+}
+
+/* ---- Nest Hub 1024×600: main title + rule + roles only (hero unchanged) ---- */
+@media (width: 1024px) and (height: 600px) {
+  #austin-underground {
+    /* Main title + rule + roles: x, y, title font-size, roles font-size */
+    --au-nesthub-title-x: 0px;
+    --au-nesthub-title-y: 20px;
+    --au-nesthub-title-font-size: clamp(24px, 4vw, 26px);
+    --au-nesthub-roles-font-size: clamp(11px, 1.8vw, 11px);
+    /* Logo (collage) handles (Nest Hub): 10% smaller, 5px right, 5px up */
+    --au-nesthub-logo-x: 0px;
+    --au-nesthub-logo-y: 15px;
+    /* Paragraph (desc) handles (Nest Hub) */
+    --au-nesthub-desc-x: 0px;
+    --au-nesthub-desc-y: 0px;
+    --au-nesthub-desc-width: 125%;
+    /* Interviews section (Nest Hub) */
+    --au-nesthub-interviews-x: -155px;
+    --au-nesthub-interviews-y: 430px;
+    --au-nesthub-interviews-scale: 0.7;
+    /* Concert photography section (Nest Hub) */
+    --au-nesthub-concert-x: -150px;
+    --au-nesthub-concert-y: 300px;
+    --au-nesthub-concert-scale: 0.69;
+  }
+  #austin-underground .au__heading {
+    transform: translate(var(--au-nesthub-title-x), var(--au-nesthub-title-y)) !important;
+  }
+  #austin-underground .au__heading .au__title {
+    font-size: var(--au-nesthub-title-font-size) !important;
+  }
+  #austin-underground .au__heading .au__roles {
+    font-size: var(--au-nesthub-roles-font-size) !important;
+  }
+  #austin-underground .au__collageWrap--mobile .au__collage,
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-nesthub-logo-x), var(--au-nesthub-logo-y)) scale(0.9) !important;
+  }
+  #austin-underground .au__desc {
+    transform: translate(var(--au-nesthub-desc-x), var(--au-nesthub-desc-y)) !important;
+    width: var(--au-nesthub-desc-width) !important;
+    max-width: var(--au-nesthub-desc-width) !important;
+  }
+  #austin-underground .au__interviews {
+    transform: translate(var(--au-nesthub-interviews-x), var(--au-nesthub-interviews-y)) scale(var(--au-nesthub-interviews-scale)) !important;
+    transform-origin: top center !important;
+  }
+  #austin-underground .au__concertPhotography {
+    transform: translate(var(--au-nesthub-concert-x), var(--au-nesthub-concert-y)) scale(var(--au-nesthub-concert-scale)) !important;
+    transform-origin: top center !important;
+  }
+  #austin-underground .au__fold2 {
+    min-height: 0 !important;
+  }
+  /* Override desktop margin-top: 362px (austin.css:1230) — that rule adds 362px gap above Interviews on Nest Hub */
+  #austin-underground .au__interviews {
+    margin-top: 12px !important;
+  }
+}
+
+/* ---- Nest Hub Max 1280×800: main title + rule + roles only (hero unchanged) ---- */
+@media (width: 1280px) and (height: 800px) {
+  #austin-underground {
+    /* Main title + rule + roles: x, y, title font-size, roles font-size */
+    --au-nesthubmax-title-x: 0px;
+    --au-nesthubmax-title-y: 0px;
+    --au-nesthubmax-title-font-size: clamp(24px, 4vw, 31px);
+    --au-nesthubmax-roles-font-size: clamp(11px, 1.8vw, 14px);
+    /* Logo (collage) handles (Nest Hub Max) */
+    --au-nesthubmax-logo-x: 0px;
+    --au-nesthubmax-logo-y: -5px;
+    --au-nesthubmax-logo-scale: 1;
+    /* Paragraph (desc) width handle (Nest Hub Max) */
+    --au-nesthubmax-desc-width: 130%;
+    /* Interviews section (Nest Hub Max) */
+    --au-nesthubmax-interviews-x: -165px;
+    --au-nesthubmax-interviews-y: 390px;
+    --au-nesthubmax-interviews-scale: 0.72;
+    /* Concert Photography section (Nest Hub Max) */
+    --au-nesthubmax-concert-x: -170px;
+    --au-nesthubmax-concert-y: 270px;
+    --au-nesthubmax-concert-scale: 0.72;
+  }
+  #austin-underground .au__heading {
+    transform: translate(var(--au-nesthubmax-title-x), var(--au-nesthubmax-title-y)) !important;
+  }
+  #austin-underground .au__heading .au__title {
+    font-size: var(--au-nesthubmax-title-font-size) !important;
+  }
+  #austin-underground .au__heading .au__roles {
+    font-size: var(--au-nesthubmax-roles-font-size) !important;
+  }
+  #austin-underground .au__collageWrap--mobile .au__collage,
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    transform: translate(var(--au-nesthubmax-logo-x), var(--au-nesthubmax-logo-y)) scale(var(--au-nesthubmax-logo-scale)) !important;
+  }
+  #austin-underground .au__desc {
+    width: var(--au-nesthubmax-desc-width) !important;
+    max-width: var(--au-nesthubmax-desc-width) !important;
+  }
+  #austin-underground .au__interviews {
+    transform: translate(var(--au-nesthubmax-interviews-x), var(--au-nesthubmax-interviews-y)) scale(var(--au-nesthubmax-interviews-scale)) !important;
+    transform-origin: top center !important;
+  }
+  #austin-underground .au__concertPhotography {
+    transform: translate(var(--au-nesthubmax-concert-x), var(--au-nesthubmax-concert-y)) scale(var(--au-nesthubmax-concert-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Reduce bottom whitespace: override desktop margin-top: 362px + fold2 min-height 400-600px */
+  #austin-underground .au__interviews {
+    margin-top: 0px !important;
+  }
+  #austin-underground .au__fold2 {
+    min-height: 0 !important;
+  }
+}
+
+/* ---- iPad Pro 1024×1366: full mobile replica (excludes Nest Hub 1024×600) ---- */
+@media (width: 1024px) and (height: 1366px) {
+  #austin-underground {
+    --au-mid-maxw: 690px; 
+    --au-mid-scale: 1.13;
+    --au-mid-pad: 18px;
+    /* Hero video positioning handles (iPad Pro) */
+    --au-ipadpro-hero-x: 40px;
+    --au-ipadpro-hero-y: 0px;
+    --au-ipadpro-hero-scale: 0.89;
+    /* Hero link positioning handles (iPad Pro) */
+    --au-ipadpro-link-x: 40px;
+    --au-ipadpro-link-y: -42px;
+    /* Heading cluster: main label + rule + roles as one unit (iPad Pro) */
+    --au-ipadpro-head-x: -23px;
+    --au-ipadpro-head-y: -38px;
+    /* Paragraph (desc) handles (iPad Pro) — px-based width like iPad mini/Air */
+    --au-ipadpro-desc-width: 550px;
+    --au-ipadpro-desc-x: 20px;
+    --au-ipadpro-desc-y: 0px;
+    /* Interviews section (iPad Pro) */
+    --au-ipadpro-interviews-x: 0px;
+    --au-ipadpro-interviews-y: 260px;
+    /* Concert photography section (iPad Pro) */
+    --au-ipadpro-concert-x: 0px;
+    --au-ipadpro-concert-y: 280px;
+    --au-ipadpro-bottom-pad: 10px;
+  }
+  #austin-underground .au__colText {
+    min-width: var(--au-ipadpro-desc-width) !important;
+  }
+  #austin-underground .au__heroMedia {
+    transform: translate(var(--au-ipadpro-hero-x), var(--au-ipadpro-hero-y)) scale(var(--au-ipadpro-hero-scale)) !important;
+    transform-origin: top left !important;
+    overflow: visible !important;
+  }
+  #austin-underground .au__heroMedia > div,
+  #austin-underground .au__heroMedia > video {
+    overflow: hidden !important;
+    border-radius: inherit;
+  }
+  #austin-underground .au__videoBlock .au__linkWrap.heroLinkWrap {
+    transform: translate(var(--au-ipadpro-link-x), var(--au-ipadpro-link-y)) !important;
+  }
+  #austin-underground .au__heading {
+    transform: translate(var(--au-ipadpro-head-x), var(--au-ipadpro-head-y)) !important;
+  }
+  main:has(#austin-underground) { overflow-x: visible !important; }
+  #austin-underground { overflow-x: visible !important; overflow-y: visible !important; }
+  #austin-underground .au__row1,
+  #austin-underground .au__videoBlock { overflow-x: visible !important; overflow-y: visible !important; }
+  /* Label, rule, roles: ~60% larger for iPad Pro — use .au__heading child selectors to override 981–1750 */
+  #austin-underground .au__heading .au__title {
+    font-size: clamp(35px, 6.5vw, 10px) !important;
+    line-height: 1.1 !important;
+  }
+  #austin-underground .au__heading .au__rule--main {
+    width: clamp(10px, 12vw, 224px) !important;
+    height: 2px !important;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 15%,
+      rgba(0, 0, 0, 0.2) 100%
+    ) !important;
+    background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 15%,
+      rgba(0, 0, 0, 0.2) 100%
+    ) !important;
+  }
+  #austin-underground .au__heading .au__roles {
+    font-size: clamp(11px, 2.9vw, 16px) !important;
+    line-height: 1.3 !important;
+  }
+  #austin-underground,
+  #austin-underground .au__row1,
+  #austin-underground .au__belowCollage,
+  #austin-underground .au__row2,
+  #austin-underground .au__row2--desktop,
+  #austin-underground .au__fold2,
+  #austin-underground .au__interviews,
+  #austin-underground .au__concertPhotography {
+    max-width: max(var(--au-mid-maxw), calc(var(--au-ipadpro-desc-width) + 36px)) !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: var(--au-mid-pad) !important;
+    padding-right: var(--au-mid-pad) !important;
+    box-sizing: border-box !important;
+  }
+  #austin-underground .au__row1,
+  #austin-underground .au__row2,
+  #austin-underground .au__row2--desktop,
+  #austin-underground .au__fold2 {
+    transform: scale(var(--au-mid-scale)) !important;
+    transform-origin: top center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  #austin-underground { overflow-x: visible !important; overflow-y: visible !important; }
+  #austin-underground * { min-width: 0 !important; box-sizing: border-box !important; }
+  #austin-underground .au__row1 { grid-template-columns: 1fr !important; }
+  #austin-underground .au__heading {
+    justify-items: end !important;
+    text-align: right !important;
+    width: 100% !important;
+  }
+  #austin-underground .au__title,
+  #austin-underground .au__roles { text-align: right !important; }
+  #austin-underground .au__rule--main { margin-left: auto !important; }
+  #austin-underground .au__linkWrap {
+    margin-top: 10px !important;
+    transform: none !important;
+  }
+  #austin-underground .au__collageWrap--desktop,
+  #austin-underground .au__row2--desktop .au__colImages,
+  #austin-underground .au__colImages { display: none !important; }
+  #austin-underground .au__row2--desktop {
+    grid-template-columns: 1fr !important;
+    grid-template-areas: "text" !important;
+  }
+  #austin-underground .au__collageWrap--mobile {
+    display: block !important;
+    margin: 20px 0 !important;
+    background: transparent !important;
+  }
+  #austin-underground .au__collageWrap--mobile .au__collage {
+    width: min(85vw, 395px) !important;
+    height: auto !important;
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border-radius: 10px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    filter: drop-shadow(0 6px 18px rgba(0,0,0,0.12)) drop-shadow(0 2px 6px rgba(0,0,0,0.06)) !important;
+    transform: translateX(25px) !important;
+  }
+  #austin-underground .au__desc {
+    margin-top: 10px !important;
+    margin-bottom: 14px !important;
+    display: block !important;
+    font-size: clamp(18px, 2.2vw, 22px) !important;
+    line-height: 1.55 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    transform: translate(var(--au-ipadpro-desc-x), var(--au-ipadpro-desc-y)) !important;
+  }
+  #austin-underground .au__belowCollage { transform: none !important; }
+  #austin-underground .au__collageWrap--mobile { transform: none !important; }
+  #austin-underground .au__fold2 {
+    position: relative !important;
+    top: auto !important;
+    margin-top: 12px !important;
+    transform: scale(var(--au-mid-scale)) !important;
+    transform-origin: top center !important;
+    min-height: 0 !important;
+  }
+  #austin-underground .au__videosGrid,
+  #austin-underground .au__videosGrid--stagger,
+  #austin-underground .au__videoGrid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+  /* "Interviews" + "Concert Photography" labels + rules: match Vonix subhead size (iPad Pro) */
+  #austin-underground .au__interviews .au__subhead h3,
+  #austin-underground .au__concertPhotography .au__subhead h3 {
+    font-size: clamp(18px, 2.4vw, 26px) !important;
+    letter-spacing: 0.02em !important;
+  }
+  #austin-underground .au__interviews .au__rule--interviews,
+  #austin-underground .au__concertPhotography .au__rule--concert {
+    width: clamp(80px, 7vw, 120px) !important;
+    max-width: 120px !important;
+  }
+  /* Interviews: x/y handles (iPad Pro) */
+  #austin-underground .au__interviews {
+    transform: translate(var(--au-ipadpro-interviews-x), var(--au-ipadpro-interviews-y)) !important;
+  }
+  /* Concert photography: x/y handles + bottom whitespace (iPad Pro) */
+  #austin-underground .au__concertPhotography {
+    transform: translate(var(--au-ipadpro-concert-x), var(--au-ipadpro-concert-y)) !important;
+    margin-bottom: var(--au-ipadpro-bottom-pad) !important;
+  }
+  /* iPad Pro bottom spacer */
+  #austin-underground .au__fold2 .au__ipadpro-spacer {
+    display: block !important;
+    height: var(--au-ipadpro-bottom-pad) !important;
+    min-height: var(--au-ipadpro-bottom-pad) !important;
+    width: 100% !important;
+  }
+  /* Interviews: 1×5 vertical stack (iPad Pro) */
+  #austin-underground .au__interviews .au__videoGrid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: auto !important;
+    gap: 14px !important;
+  }
+  #austin-underground .au__interviews .au__videoGrid > * {
+    grid-column: 1 !important;
+    flex: none !important;
+    max-width: 100% !important;
+  }
+  #austin-underground .au__videoGrid > * {
+    flex: none !important;
+    max-width: 100% !important;
+  }
+  #austin-underground .au__videosGrid--stagger .t2,
+  #austin-underground .au__videosGrid--stagger .t3,
+  #austin-underground .au__videosGrid--stagger .t4,
+  #austin-underground .au__videosGrid--stagger .v5,
+  #austin-underground .au__videosGrid--stagger .v6 { grid-column: auto !important; }
+  #austin-underground .au__concertGrid,
+  #austin-underground .au__photoStrip,
+  #austin-underground .au__photoStrip--lower { display: none !important; }
+  #austin-underground .au__concertMobileGrid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 20px 0 0 !important;
+    padding: 0 !important;
+  }
+  #austin-underground .au__concertMobileGrid .media,
+  #austin-underground .au__concertMobileGrid img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 5 !important;
+    object-fit: cover !important;
+    border-radius: 10px !important;
+    display: block !important;
+    box-shadow: var(--shadow) !important;
+    transform: none !important;
+  }
+  #austin-underground,
+  #austin-underground .au__row1,
+  #austin-underground .au__videoBlock {
+    overflow-y: visible !important;
+    contain: none !important;
+    clip-path: none !important;
   }
 }

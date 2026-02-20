@@ -1,0 +1,27 @@
+---
+description: Do not alter Austin Underground device-specific presets (iPad mini, iPad Air, iPad Pro, Surface Pro 7, ASUS Zenbook Fold)
+globs: src/sections/austin.css, src/sections/AustinUnderground.jsx
+alwaysApply: false
+---
+
+# Austin Underground Device Presets — DO NOT ALTER
+
+The following device-specific blocks in Austin Underground are **final**. Never modify them:
+
+| Device | Media Query | Files |
+|--------|------------|-------|
+| iPad mini | `768×1024` | austin.css |
+| iPad Air | `820×1180` | austin.css |
+| iPad Pro | `1024×1366` | austin.css |
+| Surface Pro 7 | `912×1368` | austin.css |
+| ASUS Zenbook Fold | `853×1280` | austin.css |
+| Nest Hub | `1024×600` | austin.css |
+| Nest Hub Max | `1280×800` | austin.css |
+
+
+**Do not:**
+- Edit CSS inside these media query blocks
+- Add/remove spacer divs for these devices (au__ipadmini-spacer, au__ipadair-spacer, au__ipadpro-spacer, au__surfacepro7-spacer, au__zenbookfold-spacer)
+- Change handle variable names or default values for these devices
+
+**New devices only:** When adding support for a *different* device, create a new block—do not touch the blocks above.

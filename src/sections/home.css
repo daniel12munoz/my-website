@@ -1091,3 +1091,20 @@ body.mobile-home-locked {
     backface-visibility: hidden;
   }
 }
+
+/* =========================================================
+   HOME — Prevent vertical scroll at smaller resolutions
+   Lock viewport; no layout/content changes.
+   ========================================================= */
+@media (max-width: 1440px) {
+  html:has(#home.home),
+  body:has(#home.home) {
+    overflow-y: hidden !important;
+    overscroll-behavior-y: none;
+  }
+
+  body:has(#home.home) .App > main.vp-main--home {
+    overflow: hidden !important;
+    overscroll-behavior: none;
+  }
+}

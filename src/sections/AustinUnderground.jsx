@@ -270,6 +270,11 @@ export default function AustinUnderground() {
             ))}
           </div>
         </div>
+        <div className="au__ipadmini-spacer" aria-hidden="true" />
+        <div className="au__ipadair-spacer" aria-hidden="true" />
+        <div className="au__ipadpro-spacer" aria-hidden="true" />
+        <div className="au__surfacepro7-spacer" aria-hidden="true" />
+        <div className="au__zenbookfold-spacer" aria-hidden="true" />
       </section>
       </div>
     </section>
