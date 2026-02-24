@@ -59,6 +59,13 @@
   margin-top: 0;
 }
 
+.ma__headingUnit {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
 .ma__title {
   margin: 0;
   font-family: 'IBM Plex Serif', 'Georgia', 'Times New Roman', serif;
@@ -871,58 +878,375 @@
   }
 }
 
-/* ===========================
-   Mac desktop: add right gutter (whitespace) without shifting left
-   =========================== */
-
-.os-mac body {
-  overflow-x: hidden;
+/* =========================================================
+   Marketing Alliance: prevent horizontal scroll (Windows only; Mac keeps original)
+   ========================================================= */
+html:not(.os-mac):has(#marketing-alliance),
+html:not(.os-mac) body:has(#marketing-alliance),
+html:not(.os-mac) main:has(#marketing-alliance),
+html:not(.os-mac) .vp-main:has(#marketing-alliance) {
+  overflow-x: hidden !important;
 }
 
-/* ---- Marketing Alliance ---- */
-.os-mac #marketing-alliance {
-  overflow-x: hidden;
+/* =========================================================
+   Marketing Alliance 981–1479: reduce main title size
+   ========================================================= */
+@media (min-width: 981px) and (max-width: 1479px) {
+  #marketing-alliance .ma__title {
+    font-size: clamp(24px, 3.5vw, 36px) !important;
+  }
 }
 
-.os-mac #marketing-alliance .ma__row1,
-.os-mac #marketing-alliance .ma__row2,
-.os-mac #marketing-alliance .ma__fold,
-.os-mac #marketing-alliance .ma__videoGrid,
-.os-mac #marketing-alliance .ma__photoStrip,
-.os-mac #marketing-alliance .ma__content {
-  box-sizing: border-box;
-  padding-right: clamp(18px, 2.5vw, 38px);
-  padding-left: 0;
-  max-width: 100%;
+/* 981–1286: additional reduction (smaller than 981–1479) */
+@media (min-width: 981px) and (max-width: 1286px) {
+  #marketing-alliance .ma__title {
+    font-size: clamp(22px, 3vw, 30px) !important;
+  }
 }
 
-.os-mac #marketing-alliance img,
-.os-mac #marketing-alliance video,
-.os-mac #marketing-alliance iframe {
-  max-width: 100%;
+/* 981–1078: further reduction (smallest) */
+@media (min-width: 981px) and (max-width: 1078px) {
+  #marketing-alliance .ma__title {
+    font-size: clamp(20px, 2.6vw, 26px) !important;
+  }
 }
 
-/* Mac-only Marketing Alliance logo nudge */
-.os-mac #marketing-alliance .ma__logoWrap {
-  position: relative;
-  left: -55px;
+/* =========================================================
+   Marketing Alliance 980–1554: reduce roles line size
+   ========================================================= */
+@media (min-width: 980px) and (max-width: 1554px) {
+  #marketing-alliance .ma__roles {
+    font-size: clamp(12px, 1.6vw, 16px) !important;
+  }
 }
 
-.os-mac #marketing-alliance .ma__logo {
-  transform: translateY(-10px);
+/* 981–1328: additional reduction (smaller than 980–1554) */
+@media (min-width: 981px) and (max-width: 1328px) {
+  #marketing-alliance .ma__roles {
+    font-size: clamp(11px, 1.4vw, 14px) !important;
+  }
+}
+
+/* 981–1182: further reduction (smaller than 981–1328) */
+@media (min-width: 981px) and (max-width: 1182px) {
+  #marketing-alliance .ma__roles {
+    font-size: clamp(10px, 1.2vw, 12px) !important;
+  }
+}
+
+/* 981–1018: smallest reduction */
+@media (min-width: 981px) and (max-width: 1018px) {
+  #marketing-alliance .ma__roles {
+    font-size: clamp(9px, 1.1vw, 11px) !important;
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 981–1670: title unit + logo x/y handles
+   Title unit: main title + rule + roles
+   Logo: magnetized below and a little to the left of the title
+   ========================================================= */
+@media (min-width: 981px) and (max-width: 1670px) {
+  #marketing-alliance {
+    --ma-desk-heading-unit-x: 0px;
+    --ma-desk-heading-unit-y: 0px;
+    --ma-desk-logo-x: -60px;   /* a little to the left of title */
+    --ma-desk-logo-y: 70px;    /* 50px down */
+  }
+  #marketing-alliance .ma__headingUnit {
+    transform: translate(var(--ma-desk-heading-unit-x), var(--ma-desk-heading-unit-y)) !important;
+  }
+}
+
+/* 1200–1670: logo 20px to the right */
+@media (min-width: 1200px) and (max-width: 1670px) {
+  #marketing-alliance {
+    --ma-desk-logo-x: -60px;   /* was -40px; +20px to the right */
+  }
+}
+
+/* 1300–1679: logo another 20px to the right */
+@media (min-width: 1300px) and (max-width: 1670px) {
+  #marketing-alliance {
+    --ma-desk-logo-x: -35px;   /* was -60px; +20px to the right */
+  }
+}
+
+/* 1400–1670: logo another 20px to the right */
+@media (min-width: 1400px) and (max-width: 1670px) {
+  #marketing-alliance {
+    --ma-desk-logo-x: -15px;   /* was -35px; +20px to the right */
+  }
+}
+
+/* 1500–1670: logo another 20px to the right */
+@media (min-width: 1500px) and (max-width: 1670px) {
+  #marketing-alliance {
+    --ma-desk-logo-x: 20px;     /* was -15px; +20px to the right */
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 981–1049: Shorts slightly smaller + Headshots slightly smaller; shorts left, headshots right
+   ========================================================= */
+@media (min-width: 981px) and (max-width: 1049px) {
+  #marketing-alliance .ma__shortsColumn {
+    align-items: flex-start;
+  }
+  #marketing-alliance .ma__shortsGrid .ma__shortCard {
+    flex: 0 0 clamp(90px, 11.5vw, 118px);
+    max-width: clamp(90px, 11.5vw, 118px);
+  }
+  #marketing-alliance .ma__headshotsColumn {
+    align-items: flex-end;
+  }
+  #marketing-alliance .ma__headshotPile {
+    width: clamp(218px, 24vw, 282px);
+    height: clamp(168px, 19vw, 218px);
+  }
+  #marketing-alliance .ma__headshotPile .shot {
+    width: clamp(108px, 12vw, 145px);
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 1050–1099: Shorts slightly smaller + Headshots smaller; shorts left, headshots right
+   ========================================================= */
+@media (min-width: 1050px) and (max-width: 1099px) {
+  #marketing-alliance .ma__shortsColumn {
+    align-items: flex-start;
+  }
+  #marketing-alliance .ma__shortsGrid .ma__shortCard {
+    flex: 0 0 clamp(90px, 11.5vw, 118px);
+    max-width: clamp(90px, 11.5vw, 118px);
+  }
+  #marketing-alliance .ma__headshotsColumn {
+    align-items: flex-end;
+  }
+  #marketing-alliance .ma__headshotPile {
+    width: clamp(230px, 26vw, 300px);
+    height: clamp(178px, 20vw, 230px);
+  }
+  #marketing-alliance .ma__headshotPile .shot {
+    width: clamp(115px, 13vw, 155px);
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 1100: Shorts smaller + Headshots smaller; shorts left, headshots right
+   ========================================================= */
+@media (min-width: 1100px) and (max-width: 1100px) {
+  #marketing-alliance .ma__shortsColumn {
+    align-items: flex-start;
+  }
+  #marketing-alliance .ma__shortsGrid .ma__shortCard {
+    flex: 0 0 clamp(95px, 12vw, 125px);
+    max-width: clamp(95px, 12vw, 125px);
+  }
+  #marketing-alliance .ma__headshotsColumn {
+    align-items: flex-end;
+  }
+  #marketing-alliance .ma__headshotPile {
+    width: clamp(230px, 26vw, 300px);
+    height: clamp(178px, 20vw, 230px);
+  }
+  #marketing-alliance .ma__headshotPile .shot {
+    width: clamp(115px, 13vw, 155px);
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 1101–1145: Shorts + Headshots slightly smaller; shorts left, headshots right
+   ========================================================= */
+@media (min-width: 1101px) and (max-width: 1145px) {
+  #marketing-alliance .ma__shortsColumn {
+    align-items: flex-start;
+  }
+  #marketing-alliance .ma__shortsGrid .ma__shortCard {
+    flex: 0 0 clamp(100px, 13vw, 130px);
+    max-width: clamp(100px, 13vw, 130px);
+  }
+  #marketing-alliance .ma__headshotsColumn {
+    align-items: flex-end;
+  }
+  #marketing-alliance .ma__headshotPile {
+    width: clamp(238px, 25vw, 305px);
+    height: clamp(185px, 19vw, 238px);
+  }
+  #marketing-alliance .ma__headshotPile .shot {
+    width: clamp(108px, 11.5vw, 148px);
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 1146–1169: Shorts + Headshots smaller; shorts left, headshots right
+   ========================================================= */
+@media (min-width: 1146px) and (max-width: 1169px) {
+  #marketing-alliance .ma__shortsColumn {
+    align-items: flex-start;
+  }
+  #marketing-alliance .ma__shortsGrid .ma__shortCard {
+    flex: 0 0 clamp(100px, 13vw, 130px);
+    max-width: clamp(100px, 13vw, 130px);
+  }
+  #marketing-alliance .ma__headshotsColumn {
+    align-items: flex-end;
+  }
+  #marketing-alliance .ma__headshotPile {
+    width: clamp(250px, 26vw, 320px);
+    height: clamp(195px, 20vw, 250px);
+  }
+  #marketing-alliance .ma__headshotPile .shot {
+    width: clamp(115px, 12vw, 155px);
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 1170–1199: Shorts smaller + Headshots slightly smaller; shorts left, headshots right
+   ========================================================= */
+@media (min-width: 1170px) and (max-width: 1199px) {
+  #marketing-alliance .ma__shortsColumn {
+    align-items: flex-start;
+  }
+  #marketing-alliance .ma__shortsGrid .ma__shortCard {
+    flex: 0 0 clamp(108px, 15vw, 145px);
+    max-width: clamp(108px, 15vw, 145px);
+  }
+  #marketing-alliance .ma__headshotsColumn {
+    align-items: flex-end;
+  }
+  #marketing-alliance .ma__headshotPile {
+    width: clamp(210px, 23vw, 270px);
+    height: clamp(160px, 17vw, 210px);
+  }
+  #marketing-alliance .ma__headshotPile .shot {
+    width: clamp(102px, 11vw, 138px);
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 1200–1325: Shorts smaller + Headshots smaller; shorts left, headshots right
+   ========================================================= */
+@media (min-width: 1200px) and (max-width: 1325px) {
+  #marketing-alliance .ma__shortsColumn {
+    align-items: flex-start;
+  }
+  #marketing-alliance .ma__shortsGrid .ma__shortCard {
+    flex: 0 0 clamp(108px, 15vw, 145px);
+    max-width: clamp(108px, 15vw, 145px);
+  }
+  #marketing-alliance .ma__headshotsColumn {
+    align-items: flex-end;
+  }
+  #marketing-alliance .ma__headshotPile {
+    width: clamp(220px, 24vw, 285px);
+    height: clamp(170px, 18vw, 220px);
+  }
+  #marketing-alliance .ma__headshotPile .shot {
+    width: clamp(108px, 12vw, 145px);
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 1326–1420: Shorts smaller + Headshots; shorts left, headshots right
+   ========================================================= */
+@media (min-width: 1326px) and (max-width: 1420px) {
+  #marketing-alliance .ma__shortsColumn {
+    align-items: flex-start;
+  }
+  #marketing-alliance .ma__shortsGrid .ma__shortCard {
+    flex: 0 0 clamp(108px, 15vw, 145px);
+    max-width: clamp(108px, 15vw, 145px);
+  }
+  #marketing-alliance .ma__headshotsColumn {
+    align-items: flex-end;
+  }
+  #marketing-alliance .ma__headshotPile {
+    width: clamp(290px, 32vw, 380px);
+    height: clamp(225px, 25vw, 295px);
+  }
+  #marketing-alliance .ma__headshotPile .shot {
+    width: clamp(140px, 16vw, 195px);
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 1421–1670: Shorts + Headshots; shorts left, headshots right
+   ========================================================= */
+@media (min-width: 1421px) and (max-width: 1670px) {
+  #marketing-alliance .ma__shortsColumn {
+    align-items: flex-start;
+  }
+  #marketing-alliance .ma__shortsGrid .ma__shortCard {
+    flex: 0 0 clamp(120px, 18vw, 170px);
+    max-width: clamp(120px, 18vw, 170px);
+  }
+  #marketing-alliance .ma__headshotsColumn {
+    align-items: flex-end;
+  }
+  #marketing-alliance .ma__headshotPile {
+    width: clamp(290px, 32vw, 380px);
+    height: clamp(225px, 25vw, 295px);
+  }
+  #marketing-alliance .ma__headshotPile .shot {
+    width: clamp(140px, 16vw, 195px);
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 981–1590: Photography section match width
+   of Looping Headers + Testimonials
+   ========================================================= */
+@media (min-width: 981px) and (max-width: 1590px) {
+  #marketing-alliance .ma__photos .ma__photoGrid {
+    max-width: min(960px, 85vw);
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  #marketing-alliance .ma__photos .ma__photoGrid img {
+    width: 100%;
+    max-width: 100%;
+    transform: scale(0.865) !important;  /* 5% smaller than base 0.91 */
+    transform-origin: center center !important;
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 981–1700: hero + link handles (Windows only; Mac keeps original)
+   ========================================================= */
+@media (min-width: 981px) and (max-width: 1700px) {
+  html:not(.os-mac) #marketing-alliance {
+    --ma-desk-hero-x: 0px;
+    --ma-desk-hero-y: 17px;
+    --ma-desk-hero-scale: 1;
+    --ma-desk-link-x: 0px;
+    --ma-desk-link-y: 0px;
+    --ma-desk-link-scale: 1;
+  }
+  html:not(.os-mac) #marketing-alliance .ma__heroFrame {
+    transform: translate(var(--ma-desk-hero-x), var(--ma-desk-hero-y)) scale(var(--ma-desk-hero-scale)) !important;
+    transform-origin: top left !important;
+  }
+  html:not(.os-mac) #marketing-alliance .ma__videoBlock .ma__linkWrap.heroLinkWrap,
+  html:not(.os-mac) #marketing-alliance .ma__videoBlock .ma__linkRule {
+    transform: translate(calc(var(--ma-desk-hero-x) + var(--ma-desk-link-x)), calc(var(--ma-desk-hero-y) + var(--ma-desk-link-y))) scale(var(--ma-desk-link-scale)) !important;
+    transform-origin: top left !important;
+  }
 }
 
 /* =========================
-   DESKTOP (Windows + Mac) — Marketing Alliance fixes
+   DESKTOP (Windows only) — Marketing Alliance fixes
    ========================= */
 @media (min-width: 981px) {
-  /* Description paragraph: move DOWN ~10px (both Mac + Windows) */
-  #marketing-alliance .ma__row2 .ma__colText .ma__desc {
+  /* Description paragraph: move DOWN ~10px */
+  html:not(.os-mac) #marketing-alliance .ma__row2 .ma__colText .ma__desc {
     margin-top: 20px;
   }
 
-  /* Logo: move DOWN ~5px (both Mac + Windows) */
-  #marketing-alliance .ma__logoWrap {
+  /* Logo: move DOWN ~5px */
+  html:not(.os-mac) #marketing-alliance .ma__logoWrap {
     margin-top: calc(clamp(10px, 1.6vw, 46px) + 10px);
   }
 }
@@ -931,53 +1255,152 @@
    WINDOWS ONLY — Marketing Alliance fixes
    ========================= */
 @media (min-width: 981px) {
-  /* Stop horizontal scrolling */
-  :not(.os-mac) section#marketing-alliance,
-  :not(.os-mac) #marketing-alliance.ma {
-    overflow-x: clip;
+  /* Prevent horizontal scroll (no overflow-x: visible) */
+  html:not(.os-mac) section#marketing-alliance,
+  html:not(.os-mac) #marketing-alliance.ma {
+    overflow-x: clip !important;
   }
 
-  :not(.os-mac) #marketing-alliance * {
+  html:not(.os-mac) #marketing-alliance * {
     max-width: 100%;
     box-sizing: border-box;
   }
 
-  :not(.os-mac) #marketing-alliance img,
-  :not(.os-mac) #marketing-alliance video,
-  :not(.os-mac) #marketing-alliance .media {
+  html:not(.os-mac) #marketing-alliance img,
+  html:not(.os-mac) #marketing-alliance video,
+  html:not(.os-mac) #marketing-alliance .media {
     max-width: 100%;
   }
 
   /* Logo: move RIGHT ~90px (combine with desktop margin-top above) */
-  :not(.os-mac) #marketing-alliance .ma__logoWrap {
+  html:not(.os-mac) #marketing-alliance .ma__logoWrap {
     transform: translateX(95px);
   }
 }
 
 /* =========================================================
-   FINAL: Marketing Alliance spacing fixes (desktop only)
-   - Logo down 40px on Mac + Windows
-   - Windows-only: paragraph + everything below row1 down 40px
+   FINAL: Marketing Alliance spacing fixes (Windows only)
    ========================================================= */
 @media (min-width: 981px) {
-  /* 1) LOGO down 40px on BOTH Mac + Windows */
-  #marketing-alliance .ma__logoWrap {
+  /* Logo down 40px */
+  html:not(.os-mac) #marketing-alliance .ma__logoWrap {
     position: relative;
     top: 75px;
   }
 
-  /* 2) Windows-only: push paragraph + all sections below row1 down 40px */
-  :not(.os-mac) #marketing-alliance .ma__belowRow1 {
+  /* Push paragraph + all sections below row1 down 40px */
+  html:not(.os-mac) #marketing-alliance .ma__belowRow1 {
     position: relative;
     top: 25px;
   }
+}
 
-  /* 3) Mac-only: move paragraph + all sections below row1 UP by 10px */
-  .os-mac #marketing-alliance .ma__belowRow1 {
-    position: relative;
-    transform: translateY(-25px);
+/* =========================================================
+   Marketing Alliance 981–1670: logo magnetized to title unit
+   (overrides Windows logo positioning; applies to all)
+   ========================================================= */
+@media (min-width: 981px) and (max-width: 1670px) {
+  html:has(#marketing-alliance) #marketing-alliance .ma__logoWrap {
+    transform: translate(
+      calc(var(--ma-desk-heading-unit-x) + var(--ma-desk-logo-x)),
+      calc(var(--ma-desk-heading-unit-y) + var(--ma-desk-logo-y))
+    ) !important;
+    position: relative !important;
+    top: 0 !important;
   }
 }
+
+/* =========================================================
+   Marketing Alliance 981–1679: paragraph 20px below hero link
+   ========================================================= */
+@media (min-width: 981px) and (max-width: 1301px) {
+  html:has(#marketing-alliance) #marketing-alliance .ma__belowRow1 {
+    top: 0 !important;
+  }
+  #marketing-alliance .ma__row2 {
+    margin-top: -90px !important;
+  }
+  #marketing-alliance .ma__row2 .ma__colText .ma__desc {
+    margin-top: 0 !important;
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 981–1679: paragraph 20px below hero link
+   ========================================================= */
+   @media (min-width: 1302px) and (max-width: 1318px) {
+    html:has(#marketing-alliance) #marketing-alliance .ma__belowRow1 {
+      top: 0 !important;
+    }
+    #marketing-alliance .ma__row2 {
+      margin-top: -90px !important;
+    }
+    #marketing-alliance .ma__row2 .ma__colText .ma__desc {
+      margin-top: 0 !important;
+    }
+  }
+
+  /* =========================================================
+   Marketing Alliance 981–1679: paragraph 20px below hero link
+   ========================================================= */
+   @media (min-width: 1319px) and (max-width: 1369px) {
+    html:has(#marketing-alliance) #marketing-alliance .ma__belowRow1 {
+      top: 0 !important;
+    }
+    #marketing-alliance .ma__row2 {
+      margin-top: -70px !important;
+    }
+    #marketing-alliance .ma__row2 .ma__colText .ma__desc {
+      margin-top: 0 !important;
+    }
+  }
+
+  /* =========================================================
+   Marketing Alliance 981–1679: paragraph 20px below hero link
+   ========================================================= */
+   @media (min-width: 1370px) and (max-width: 1440px) {
+    html:has(#marketing-alliance) #marketing-alliance .ma__belowRow1 {
+      top: 0 !important;
+    }
+    #marketing-alliance .ma__row2 {
+      margin-top: -50px !important;
+    }
+    #marketing-alliance .ma__row2 .ma__colText .ma__desc {
+      margin-top: 0 !important;
+    }
+  }
+
+    /* =========================================================
+   Marketing Alliance 981–1679: paragraph 20px below hero link
+   ========================================================= */
+   @media (min-width: 1441px) and (max-width: 1560px) {
+    html:has(#marketing-alliance) #marketing-alliance .ma__belowRow1 {
+      top: 0 !important;
+    }
+    #marketing-alliance .ma__row2 {
+      margin-top: -30px !important;
+    }
+    #marketing-alliance .ma__row2 .ma__colText .ma__desc {
+      margin-top: 0 !important;
+    }
+  }
+
+  
+    /* =========================================================
+   Marketing Alliance 981–1679: paragraph 20px below hero link
+   ========================================================= */
+   @media (min-width: 1561px) and (max-width: 1670px) {
+    html:has(#marketing-alliance) #marketing-alliance .ma__belowRow1 {
+      top: 0 !important;
+    }
+    #marketing-alliance .ma__row2 {
+      margin-top: -10px !important;
+    }
+    #marketing-alliance .ma__row2 .ma__colText .ma__desc {
+      margin-top: 0 !important;
+    }
+  }
+
 
 /* ===== MOBILE ONLY: Marketing Alliance layout fixes ===== */
 @media (max-width: 600px) {
@@ -1383,6 +1806,251 @@
     line-height: 1.18 !important;
   }
 
+}
+
+/* =========================================================
+   Marketing Alliance 601–980: mobile replica with nav on left
+   Same layout as 600 (mobile) but scaled 601→980; nav stays left (App handles it)
+   ========================================================= */
+@media (min-width: 601px) and (max-width: 980px) and (min-height: 50px) and (max-height: 2000px) {
+  #marketing-alliance {
+    --ma-mid-scale: clamp(1, calc(1 + (100vw - 601px) * 0.001), 1.38);
+    --ma-shorts-scale: clamp(1.05, calc(1.05 + (100vw - 601px) * 0.0005), 1.25);
+    --ma-shorts-y: clamp(12px, calc(12px + (100vw - 601px) * 0.016), 18px);
+    --ma-headshots-shift-y: clamp(40px, calc(40px + (100vw - 601px) * 0.053), 60px);
+    --ma-headshots-nudge-x: 0px;
+    --ma-headshots-label-y: clamp(15px, calc(15px + (100vw - 601px) * 0.026), 25px);
+    --ma-headshots-photos-y: clamp(-25px, calc(-25px + (100vw - 601px) * 0.026), -15px);
+    --ma-headshots-y-final: clamp(12px, calc(12px + (100vw - 601px) * 0.026), 20px);
+    --ma-headshot-width: clamp(160px, calc(160px + (100vw - 601px) * 0.05), 180px);
+    --ma-lower-sections-nudge: clamp(-8px, calc(-8px + (100vw - 601px) * 0.013), 0px);
+    --ma-testimonial-nudge: clamp(-8px, calc(-8px + (100vw - 601px) * 0.013), 0px);
+    --ma-logo-scale: clamp(0.14, calc(0.14 + (100vw - 601px) * 0.00015), 0.24);
+    --ma-logo-nudge-x: clamp(5px, calc(5px + (100vw - 601px) * 0.013), 10px);
+    --ma-logo-margin-top: clamp(40px, calc(40px + (100vw - 601px) * 0.016), 53px);
+    --ma-stack-lift: clamp(-35px, calc(-35px + (100vw - 601px) * 0.02), -10px);
+    /* Hero video handles (601-980) */
+    --ma-hero-x: 5px;
+    --ma-hero-y: -17px;
+    --ma-hero-scale: 0.93;
+    /* Hero link handles (601-980) */
+    --ma-hero-link-x: 15px;
+    --ma-hero-link-y: -23px;
+    /* Heading unit handles: title + rule + roles (601-980) */
+    --ma-heading-unit-x: -6px;
+    --ma-heading-unit-y: -32px;
+    padding-left: clamp(10px, calc(10px + (100vw - 601px) * 0.026), 20px);
+    padding-right: clamp(10px, calc(10px + (100vw - 601px) * 0.026), 20px);
+    padding-bottom: clamp(150px, calc(150px + (100vw - 601px) * 0.342), 280px);
+  }
+  #marketing-alliance .ma__row1,
+  #marketing-alliance .ma__row2,
+  #marketing-alliance .ma__overviewHeadshots {
+    grid-template-columns: 1fr !important;
+  }
+  #marketing-alliance .ma__heading {
+    justify-items: end !important;
+    text-align: right !important;
+  }
+  #marketing-alliance .ma__headingUnit {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    gap: 10px !important;
+    transform: translate(var(--ma-heading-unit-x), var(--ma-heading-unit-y)) !important;
+  }
+  #marketing-alliance .ma__logoWrap,
+  #marketing-alliance .ma__logo,
+  #marketing-alliance .ma__logo img {
+    transform: none !important;
+    left: auto !important;
+    right: auto !important;
+  }
+  #marketing-alliance .ma__logoWrap,
+  #marketing-alliance .ma__logoContainer {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: var(--ma-logo-margin-top) !important;
+    transform: translateY(calc(var(--ma-stack-lift) - 25px)) !important;
+  }
+  #marketing-alliance .ma__logoWrap img,
+  #marketing-alliance .ma__logo img,
+  #marketing-alliance img.ma__logo {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    height: auto !important;
+    width: clamp(220px, 28vw, 340px) !important;
+    max-width: clamp(220px, 28vw, 340px) !important;
+    transform: translateX(var(--ma-logo-nudge-x)) !important;
+    transform-origin: center center !important;
+  }
+  #marketing-alliance .ma__belowRow1 {
+    position: relative !important;
+    top: var(--ma-stack-lift) !important;
+  }
+  #marketing-alliance .ma__photoGrid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: clamp(12px, calc(12px + (100vw - 601px) * 0.021), 18px) !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+  }
+  #marketing-alliance .ma__photoGrid img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 5 !important;
+    object-fit: cover !important;
+    border-radius: 10px !important;
+    display: block !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+  #marketing-alliance .ma__photoStrip,
+  #marketing-alliance .ma__photoStrip--lower {
+    display: none !important;
+  }
+  #marketing-alliance .ma__videoGrid--quad {
+    grid-template-columns: 1fr !important;
+  }
+  #marketing-alliance .ma__testimonialsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: clamp(12px, calc(12px + (100vw - 601px) * 0.021), 18px) !important;
+    position: relative !important;
+    top: var(--ma-testimonial-nudge) !important;
+  }
+  #marketing-alliance .ma__testimonialsGrid .ma__videoCard {
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: none !important;
+  }
+  #marketing-alliance .ma__testimonialsGrid .media {
+    width: 100% !important;
+    aspect-ratio: 16 / 9 !important;
+  }
+  #marketing-alliance .ma__shortsHeadshots {
+    position: relative !important;
+    top: var(--ma-lower-sections-nudge) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  #marketing-alliance .ma__shorts {
+    flex-direction: column !important;
+    align-items: center !important;
+    max-width: clamp(240px, calc(240px + (100vw - 601px) * 0.476), 420px) !important;
+  }
+  #marketing-alliance .ma__shortsColumn {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  #marketing-alliance .ma__shortsGrid {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: clamp(14px, calc(14px + (100vw - 601px) * 0.021), 20px) !important;
+    padding-inline: clamp(12px, calc(12px + (100vw - 601px) * 0.021), 18px) !important;
+  }
+  #marketing-alliance .ma__shortsGrid .ma__shortCard {
+    min-width: 0 !important;
+    width: 100% !important;
+    transform: translateY(var(--ma-shorts-y)) scale(var(--ma-shorts-scale)) !important;
+    transform-origin: center center !important;
+  }
+  #marketing-alliance .ma__subhead--shorts {
+    align-items: flex-end !important;
+    text-align: right !important;
+    align-self: flex-end !important;
+    margin-left: auto !important;
+  }
+  #marketing-alliance .ma__subhead--shorts .ma__rule {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    background-image: linear-gradient(to left, var(--rule-ink) 0%, transparent 100%) !important;
+    background-color: transparent !important;
+  }
+  #marketing-alliance .ma__headshotsColumn {
+    width: 100% !important;
+    max-width: 100% !important;
+    align-items: center !important;
+  }
+  #marketing-alliance .ma__headshotsColumn .ma__subhead--headshots {
+    transform: translateY(var(--ma-headshots-label-y)) !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    align-self: flex-start !important;
+    margin-right: auto !important;
+  }
+  #marketing-alliance .ma__headshotsColumn .ma__subhead--headshots .ma__rule {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+    background-image: linear-gradient(to right, var(--rule-ink) 0%, transparent 100%) !important;
+    background-color: transparent !important;
+  }
+  #marketing-alliance .ma__headshotPile {
+    transform: translate(var(--ma-headshots-nudge-x), calc(var(--ma-headshots-shift-y) + var(--ma-headshots-photos-y))) !important;
+    transform-origin: center !important;
+    width: clamp(340px, calc(340px + (100vw - 601px) * 0.03), 352px) !important;
+    height: clamp(260px, calc(260px + (100vw - 601px) * 0.02), 268px) !important;
+    max-width: 95vw !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  #marketing-alliance .ma__headshotPile .shot {
+    width: var(--ma-headshot-width) !important;
+    min-width: var(--ma-headshot-width) !important;
+    max-width: none !important;
+  }
+  #marketing-alliance .ma__heroFrame {
+    width: 100% !important;
+    aspect-ratio: 16 / 9 !important;
+    transform: translate(var(--ma-hero-x), var(--ma-hero-y)) scale(var(--ma-hero-scale)) !important;
+    transform-origin: center center !important;
+  }
+  #marketing-alliance .ma__videoBlock .ma__linkWrap {
+    transform: translate(var(--ma-hero-link-x), var(--ma-hero-link-y)) !important;
+  }
+  #marketing-alliance .ma__heroFrame video,
+  #marketing-alliance .ma__heroFrame .vp-videoEl,
+  #marketing-alliance .ma__heroFrame .hls-video,
+  #marketing-alliance .ma__heroFrame .ma__heroVideoEl {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  #marketing-alliance .ma__title {
+    font-size: clamp(28px, calc(28px + (100vw - 601px) * 0.042), 44px) !important;
+  }
+  /* Roles: scale from 601 to 980, match AU/Vonix/Blaze at 980 (~18px) */
+  #marketing-alliance .ma__roles {
+    font-size: clamp(12px, calc(12px + (100vw - 601px) * 0.016), 18px) !important;
+  }
+  #marketing-alliance .ma__desc {
+    font-size: clamp(20px, calc(20px + (100vw - 601px) * 0.011), 24px) !important;
+    position: relative !important;
+    top: 10px !important;
+  }
+  #marketing-alliance .ma__subhead h3 {
+    font-size: clamp(18px, calc(18px + (100vw - 601px) * 0.026), 28px) !important;
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 901–980: shift entire section right 20px
+   ========================================================= */
+@media (min-width: 901px) and (max-width: 980px) {
+  #marketing-alliance {
+    transform: translateX(30px) !important;
+  }
 }
 
 /* =========================================

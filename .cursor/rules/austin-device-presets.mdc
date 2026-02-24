@@ -16,7 +16,7 @@ The following device-specific blocks in Austin Underground are **final**. Never 
 | Surface Pro 7 | `912×1368` | austin.css |
 | ASUS Zenbook Fold | `853×1280` | austin.css |
 | Nest Hub | `1024×600` | austin.css |
-| Nest Hub Max | `1280×800` | austin.css |
+| Nest Hub Max | `1280×800s` | austin.css |
 
 
 **Do not:**

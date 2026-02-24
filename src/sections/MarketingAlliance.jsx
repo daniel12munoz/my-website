@@ -53,10 +53,12 @@ export default function MarketingAlliance() {
         </div>
 
         <div className="ma__heading">
-          <h2 className="ma__title">Marketing Alliance</h2>
-          <span className="ma__rule ruleFade--left" />
-          <div className="ma__roles">
-            Videographer / Editor • Dec 2024 – Present
+          <div className="ma__headingUnit">
+            <h2 className="ma__title">Marketing Alliance</h2>
+            <span className="ma__rule ruleFade--left" />
+            <div className="ma__roles">
+              Videographer / Editor • Dec 2024 – Present
+            </div>
           </div>
 
           <div className="ma__logoWrap">
