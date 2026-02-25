@@ -2045,6 +2045,1017 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
 }
 
 /* =========================================================
+   Marketing Alliance — iPad Mini 768×1024
+   Device-specific handles (override 601–980 values)
+   ========================================================= */
+@media (width: 768px) and (height: 1024px) {
+  #marketing-alliance {
+    /* Hero video positioning handles (iPad Mini) */
+    --ma-ipadmini-hero-x: 8px;
+    --ma-ipadmini-hero-y: -15px;
+    --ma-ipadmini-hero-scale: 0.965;
+    /* Hero link positioning handles (iPad Mini) */
+    --ma-ipadmini-link-x: 14px;
+    --ma-ipadmini-link-y: -20px;
+    /* Heading cluster (title + rule + roles) positioning handles (iPad Mini) */
+    --ma-ipadmini-head-x: -1px;
+    --ma-ipadmini-head-y: -33px;
+    /* Logo positioning handles (iPad Mini) */
+    --ma-ipadmini-logo-x: 0px;
+    --ma-ipadmini-logo-y: -75px;
+    /* Paragraph positioning handles (iPad Mini) */
+    --ma-ipadmini-desc-x: 15px;
+    --ma-ipadmini-desc-y: -50px;
+    --ma-ipadmini-desc-width: 50ch;
+    /* Looping Headers section handles (iPad Mini) */
+    --ma-ipadmini-looping-x: 10px;
+    --ma-ipadmini-looping-y: -35px;
+    --ma-ipadmini-looping-scale: 0.97;
+    /* Photography section handles (iPad Mini) */
+    --ma-ipadmini-photo-x: 10px;
+    --ma-ipadmini-photo-y: -50px;
+    --ma-ipadmini-photo-scale: 0.97;
+    /* Testimonials section handles (iPad Mini) */
+    --ma-ipadmini-testimonials-x: 10px;
+    --ma-ipadmini-testimonials-y: -80px;
+    --ma-ipadmini-testimonials-scale: 0.97;
+    /* Shorts section handles (iPad Mini) */
+    --ma-ipadmini-shorts-x: 10px;
+    --ma-ipadmini-shorts-y: -70px;
+    --ma-ipadmini-shorts-scale: 0.97;
+    /* Headshots section handles (iPad Mini) */
+    --ma-ipadmini-headshots-x: 10px;
+    --ma-ipadmini-headshots-y: -80px;
+    --ma-ipadmini-headshots-scale: 0.97;
+  }
+  /* Hero video: x, y, scale */
+  #marketing-alliance .ma__heroFrame {
+    transform: translate(var(--ma-ipadmini-hero-x), var(--ma-ipadmini-hero-y)) scale(var(--ma-ipadmini-hero-scale)) !important;
+  }
+  /* Hero link: x, y */
+  #marketing-alliance .ma__videoBlock .ma__linkWrap.heroLinkWrap,
+  #marketing-alliance .ma__videoBlock .ma__linkRule {
+    transform: translate(var(--ma-ipadmini-link-x), var(--ma-ipadmini-link-y)) !important;
+  }
+  /* Main heading (title + rule + roles): x, y */
+  #marketing-alliance .ma__headingUnit {
+    transform: translate(var(--ma-ipadmini-head-x), var(--ma-ipadmini-head-y)) !important;
+  }
+  /* Logo: x, y */
+  #marketing-alliance .ma__logoWrap,
+  #marketing-alliance .ma__logoContainer {
+    transform: translate(var(--ma-ipadmini-logo-x), var(--ma-ipadmini-logo-y)) !important;
+  }
+  #marketing-alliance .ma__logoWrap img,
+  #marketing-alliance .ma__logo img,
+  #marketing-alliance img.ma__logo {
+    transform: none !important;
+  }
+  /* Paragraph: x, y, width */
+  #marketing-alliance .ma__row2 .ma__colText {
+    transform: translate(var(--ma-ipadmini-desc-x), var(--ma-ipadmini-desc-y)) !important;
+    max-width: var(--ma-ipadmini-desc-width) !important;
+  }
+  /* Looping Headers section: x, y, scale */
+  #marketing-alliance .ma__testimonials {
+    transform: translate(var(--ma-ipadmini-looping-x), var(--ma-ipadmini-looping-y)) scale(var(--ma-ipadmini-looping-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Photography section: x, y, scale */
+  #marketing-alliance .ma__photos {
+    transform: translate(var(--ma-ipadmini-photo-x), var(--ma-ipadmini-photo-y)) scale(var(--ma-ipadmini-photo-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Testimonials section: x, y, scale */
+  #marketing-alliance .ma__shortsBlock {
+    transform: translate(var(--ma-ipadmini-testimonials-x), var(--ma-ipadmini-testimonials-y)) scale(var(--ma-ipadmini-testimonials-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Shorts section: x, y, scale */
+  #marketing-alliance .ma__shortsColumn {
+    transform: translate(var(--ma-ipadmini-shorts-x), var(--ma-ipadmini-shorts-y)) scale(var(--ma-ipadmini-shorts-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Headshots section: x, y, scale */
+  #marketing-alliance .ma__headshotsColumn {
+    transform: translate(var(--ma-ipadmini-headshots-x), var(--ma-ipadmini-headshots-y)) scale(var(--ma-ipadmini-headshots-scale)) !important;
+    transform-origin: top center !important;
+  }
+}
+
+/* =========================================================
+   Marketing Alliance — iPad Air 820×1180
+   Device-specific handles (override 601–980 values)
+   ========================================================= */
+@media (width: 820px) and (height: 1180px) {
+  #marketing-alliance {
+    /* Hero video positioning handles (iPad Air) */
+    --ma-ipadair-hero-x: 7px;
+    --ma-ipadair-hero-y: -16px;
+    --ma-ipadair-hero-scale: 0.97;
+    /* Hero link positioning handles (iPad Air) */
+    --ma-ipadair-link-x: 10px;
+    --ma-ipadair-link-y: -20px;
+    /* Heading cluster (title + rule + roles) positioning handles (iPad Air) */
+    --ma-ipadair-head-x: 0px;
+    --ma-ipadair-head-y: -35px;
+    /* Logo positioning handles (iPad Air) */
+    --ma-ipadair-logo-x: 0px;
+    --ma-ipadair-logo-y: -70px;
+    /* Paragraph positioning handles (iPad Air) */
+    --ma-ipadair-desc-x: 15px;
+    --ma-ipadair-desc-y: -40px;
+    --ma-ipadair-desc-width: 62ch;
+    /* Looping Headers section handles (iPad Air) */
+    --ma-ipadair-looping-x: 5px;
+    --ma-ipadair-looping-y: -30px;
+    --ma-ipadair-looping-scale: 0.97;
+    /* Photography section handles (iPad Air) */
+    --ma-ipadair-photo-x: 5px;
+    --ma-ipadair-photo-y: -25px;
+    --ma-ipadair-photo-scale: 0.97;
+    /* Testimonials section handles (iPad Air) */
+    --ma-ipadair-testimonials-x: 5px;
+    --ma-ipadair-testimonials-y: -50px;
+    --ma-ipadair-testimonials-scale: 0.97;
+    /* Shorts section handles (iPad Air) */
+    --ma-ipadair-shorts-x: 5px;
+    --ma-ipadair-shorts-y: -40px;
+    --ma-ipadair-shorts-scale: 0.97;
+    /* Headshots section handles (iPad Air) */
+    --ma-ipadair-headshots-x: 5px;
+    --ma-ipadair-headshots-y: -40px;
+    --ma-ipadair-headshots-scale: 0.97;
+  }
+  /* Hero video: x, y, scale */
+  #marketing-alliance .ma__heroFrame {
+    transform: translate(var(--ma-ipadair-hero-x), var(--ma-ipadair-hero-y)) scale(var(--ma-ipadair-hero-scale)) !important;
+  }
+  /* Hero link: x, y */
+  #marketing-alliance .ma__videoBlock .ma__linkWrap.heroLinkWrap,
+  #marketing-alliance .ma__videoBlock .ma__linkRule {
+    transform: translate(var(--ma-ipadair-link-x), var(--ma-ipadair-link-y)) !important;
+  }
+  /* Main heading (title + rule + roles): x, y */
+  #marketing-alliance .ma__headingUnit {
+    transform: translate(var(--ma-ipadair-head-x), var(--ma-ipadair-head-y)) !important;
+  }
+  /* Logo: x, y */
+  #marketing-alliance .ma__logoWrap,
+  #marketing-alliance .ma__logoContainer {
+    transform: translate(var(--ma-ipadair-logo-x), var(--ma-ipadair-logo-y)) !important;
+  }
+  #marketing-alliance .ma__logoWrap img,
+  #marketing-alliance .ma__logo img,
+  #marketing-alliance img.ma__logo {
+    transform: none !important;
+  }
+  /* Paragraph: x, y, width */
+  #marketing-alliance .ma__row2 .ma__colText {
+    transform: translate(var(--ma-ipadair-desc-x), var(--ma-ipadair-desc-y)) !important;
+    max-width: var(--ma-ipadair-desc-width) !important;
+  }
+  /* Looping Headers section: x, y, scale */
+  #marketing-alliance .ma__testimonials {
+    transform: translate(var(--ma-ipadair-looping-x), var(--ma-ipadair-looping-y)) scale(var(--ma-ipadair-looping-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Photography section: x, y, scale */
+  #marketing-alliance .ma__photos {
+    transform: translate(var(--ma-ipadair-photo-x), var(--ma-ipadair-photo-y)) scale(var(--ma-ipadair-photo-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Testimonials section: x, y, scale */
+  #marketing-alliance .ma__shortsBlock {
+    transform: translate(var(--ma-ipadair-testimonials-x), var(--ma-ipadair-testimonials-y)) scale(var(--ma-ipadair-testimonials-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Shorts section: x, y, scale */
+  #marketing-alliance .ma__shortsColumn {
+    transform: translate(var(--ma-ipadair-shorts-x), var(--ma-ipadair-shorts-y)) scale(var(--ma-ipadair-shorts-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Headshots section: x, y, scale */
+  #marketing-alliance .ma__headshotsColumn {
+    transform: translate(var(--ma-ipadair-headshots-x), var(--ma-ipadair-headshots-y)) scale(var(--ma-ipadair-headshots-scale)) !important;
+    transform-origin: top center !important;
+  }
+}
+
+/* =========================================================
+   Marketing Alliance — iPad Pro 1024×1366
+   Stacked layout like iPad Mini/Air: hero top, then title, logo, desc, looping...
+   Excludes Nest Hub (1024×600) via height check
+   ========================================================= */
+@media (width: 1024px) and (height: 1366px) {
+  /* Override Austin 93% width so hero video isn't cut off on the right */
+  html:has(#marketing-alliance) #marketing-alliance.ma,
+  html:has(#marketing-alliance) section#marketing-alliance {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  #marketing-alliance {
+    /* Hero video positioning handles (iPad Pro) */
+    --ma-ipadpro-hero-x: -1px;
+    --ma-ipadpro-hero-y: -3px;
+    --ma-ipadpro-hero-scale: 0.958;
+    /* Hero link positioning handles (iPad Pro) */
+    --ma-ipadpro-link-x: 0px;
+    --ma-ipadpro-link-y: -15px;
+    /* Heading cluster (title + rule + roles) positioning handles (iPad Pro) */
+    --ma-ipadpro-head-x: -30px;
+    --ma-ipadpro-head-y: -10px;
+    --ma-ipadpro-head-scale: 1.5;
+    /* Logo positioning handles (iPad Pro) */
+    --ma-ipadpro-logo-x: 0px;
+    --ma-ipadpro-logo-y: 25px;
+    /* Paragraph positioning handles (iPad Pro) */
+    --ma-ipadpro-desc-x: 0px;
+    --ma-ipadpro-desc-y: 160px;
+    --ma-ipadpro-desc-width: 65ch;
+    /* Looping Headers section handles (iPad Pro) */
+    --ma-ipadpro-looping-x: -10px;
+    --ma-ipadpro-looping-y: 150px;
+    --ma-ipadpro-looping-scale: 0.95;
+    /* Photography section handles (iPad Pro) */
+    --ma-ipadpro-photo-x: -10px;
+    --ma-ipadpro-photo-y: 90px;
+    --ma-ipadpro-photo-scale: 0.95;
+    /* Testimonials section handles (iPad Pro) */
+    --ma-ipadpro-testimonials-x: -10px;
+    --ma-ipadpro-testimonials-y: -30px;
+    --ma-ipadpro-testimonials-scale: 0.95;
+    /* Shorts section handles (iPad Pro) */
+    --ma-ipadpro-shorts-x: -10px;
+    --ma-ipadpro-shorts-y: -40px;
+    --ma-ipadpro-shorts-scale: 0.95;
+    /* Headshots section handles (iPad Pro) */
+    --ma-ipadpro-headshots-x: -10px;
+    --ma-ipadpro-headshots-y: 0px;
+    --ma-ipadpro-headshots-scale: 0.95;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 120px;
+  }
+  /* Stacked layout: hero top, then title, logo, desc, looping... */
+  #marketing-alliance .ma__row1,
+  #marketing-alliance .ma__row2,
+  #marketing-alliance .ma__overviewHeadshots {
+    grid-template-columns: 1fr !important;
+  }
+  /* Heading cluster: right-aligned (title, rule, roles stacked and aligned right) */
+  #marketing-alliance .ma__heading {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    justify-items: end !important;
+    text-align: right !important;
+    gap: 0 !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__headingUnit {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    gap: 10px !important;
+    transform: translate(var(--ma-ipadpro-head-x), var(--ma-ipadpro-head-y)) scale(var(--ma-ipadpro-head-scale)) !important;
+    transform-origin: top right !important;
+  }
+  #marketing-alliance .ma__headingUnit .ma__roles {
+    text-align: right !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__logoWrap,
+  html:has(#marketing-alliance) #marketing-alliance .ma__logoContainer {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: clamp(20px, 2vw, 40px) !important;
+    transform: translate(var(--ma-ipadpro-logo-x), var(--ma-ipadpro-logo-y)) !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__logoWrap img,
+  html:has(#marketing-alliance) #marketing-alliance .ma__logo img,
+  html:has(#marketing-alliance) #marketing-alliance img.ma__logo {
+    transform: none !important;
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: clamp(220px, 22vw, 280px) !important;
+    max-width: clamp(220px, 22vw, 280px) !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__belowRow1 {
+    position: relative !important;
+    top: 0 !important;
+  }
+  #marketing-alliance .ma__videoGrid--quad {
+    grid-template-columns: 1fr !important;
+  }
+  #marketing-alliance .ma__photoGrid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+    width: 100% !important;
+  }
+  #marketing-alliance .ma__photoGrid img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 5 !important;
+    object-fit: cover !important;
+  }
+  /* Override 981–1590 scale(0.865) — higher specificity so photos appear slightly larger */
+  html:has(#marketing-alliance) #marketing-alliance .ma__photos .ma__photoGrid img {
+    transform: scale(0.95) !important;
+    transform-origin: center center !important;
+  }
+  #marketing-alliance .ma__shortsHeadshots {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  #marketing-alliance .ma__headshotsColumn {
+    align-items: center !important;
+  }
+  #marketing-alliance .ma__testimonialsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+  #marketing-alliance .ma__testimonialsGrid .ma__videoCard {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  #marketing-alliance .ma__testimonialsGrid .media {
+    width: 100% !important;
+    aspect-ratio: 16 / 9 !important;
+  }
+  /* Testimonials videos: slightly smaller (per-video scale override) */
+  html:has(#marketing-alliance) #marketing-alliance .ma__shortsBlock .ma__testimonialsGrid .ma__videoCard .media {
+    transform: scale(0.95) !important;
+    transform-origin: center center !important;
+  }
+  /* Shorts section: full width, centered, like mobile; label + line right-aligned, line solid right / fade left */
+  #marketing-alliance .ma__shortsColumn {
+    width: 100% !important;
+    max-width: 100% !important;
+    align-items: center !important;
+  }
+  #marketing-alliance .ma__shortsGrid {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+    justify-content: center !important;
+    margin-top: 70px !important;
+    margin-left: 80px !important;
+  }
+  #marketing-alliance .ma__subhead--shorts {
+    align-items: flex-end !important;
+    align-self: flex-end !important;
+    text-align: right !important;
+    width: 100% !important;
+  }
+  #marketing-alliance .ma__subhead--shorts .ma__rule {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    width: clamp(60px, 7.5vw, 108px) !important;
+    background-image: linear-gradient(
+      to left,
+      rgba(90, 90, 90, 0.85) 0%,
+      rgba(90, 90, 90, 0.75) 55%,
+      rgba(255, 255, 255, 1) 100%
+    ) !important;
+    background-color: transparent !important;
+  }
+  /* Headshots section: full width, centered; label + line left-aligned, line solid left / fade right */
+  #marketing-alliance .ma__headshotsColumn {
+    width: 100% !important;
+    max-width: 100% !important;
+    align-items: center !important;
+  }
+  #marketing-alliance .ma__headshotsColumn .ma__subhead--headshots {
+    align-items: flex-start !important;
+    align-self: flex-start !important;
+    text-align: left !important;
+    width: 100% !important;
+    margin-top: 16px !important;
+  }
+  #marketing-alliance .ma__headshotsColumn .ma__subhead--headshots .ma__rule {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+    width: clamp(64px, 7.2vw, 96px) !important;
+    background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.55) 55%,
+      rgba(255, 255, 255, 1) 100%
+    ) !important;
+    background-color: transparent !important;
+  }
+  #marketing-alliance .ma__headshotPile {
+    width: 330px !important;
+    max-width: 100% !important;
+    height: 220px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  #marketing-alliance .ma__headshotPile .shot {
+    width: 150px !important;
+    min-width: 150px !important;
+  }
+  /* Shorts: each video larger within section (per-item scale) */
+  html:has(#marketing-alliance) #marketing-alliance .ma__shortsColumn .ma__shortsGrid .ma__shortCard .ma__shortMedia {
+    transform: scale(1.6) !important;
+    transform-origin: center center !important;
+  }
+  /* Headshots: pile larger within section (scale preserves shot positions/rotations) */
+  html:has(#marketing-alliance) #marketing-alliance .ma__headshotsColumn .ma__headshotPile {
+    transform: scale(1.4) !important;
+    transform-origin: center center !important;
+  }
+  /* Hero video: x, y, scale */
+  html:has(#marketing-alliance) #marketing-alliance .ma__heroFrame {
+    transform: translate(var(--ma-ipadpro-hero-x), var(--ma-ipadpro-hero-y)) scale(var(--ma-ipadpro-hero-scale)) !important;
+  }
+  /* Hero link: x, y */
+  html:has(#marketing-alliance) #marketing-alliance .ma__videoBlock .ma__linkWrap.heroLinkWrap,
+  html:has(#marketing-alliance) #marketing-alliance .ma__videoBlock .ma__linkRule {
+    transform: translate(var(--ma-ipadpro-link-x), var(--ma-ipadpro-link-y)) !important;
+  }
+  /* Paragraph: x, y, width */
+  html:has(#marketing-alliance) #marketing-alliance .ma__row2 .ma__colText {
+    transform: translate(var(--ma-ipadpro-desc-x), var(--ma-ipadpro-desc-y)) !important;
+    max-width: var(--ma-ipadpro-desc-width) !important;
+  }
+  /* Looping Headers section: x, y, scale */
+  html:has(#marketing-alliance) #marketing-alliance .ma__testimonials {
+    transform: translate(var(--ma-ipadpro-looping-x), var(--ma-ipadpro-looping-y)) scale(var(--ma-ipadpro-looping-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Photography section: x, y, scale */
+  html:has(#marketing-alliance) #marketing-alliance .ma__photos {
+    transform: translate(var(--ma-ipadpro-photo-x), var(--ma-ipadpro-photo-y)) scale(var(--ma-ipadpro-photo-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Testimonials section: x, y, scale */
+  html:has(#marketing-alliance) #marketing-alliance .ma__shortsBlock {
+    transform: translate(var(--ma-ipadpro-testimonials-x), var(--ma-ipadpro-testimonials-y)) scale(var(--ma-ipadpro-testimonials-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Shorts section: x, y, scale */
+  html:has(#marketing-alliance) #marketing-alliance .ma__shortsColumn {
+    transform: translate(var(--ma-ipadpro-shorts-x), var(--ma-ipadpro-shorts-y)) scale(var(--ma-ipadpro-shorts-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Headshots section: x, y, scale */
+  html:has(#marketing-alliance) #marketing-alliance .ma__headshotsColumn {
+    transform: translate(var(--ma-ipadpro-headshots-x), var(--ma-ipadpro-headshots-y)) scale(var(--ma-ipadpro-headshots-scale)) !important;
+    transform-origin: top center !important;
+  }
+}
+
+/* =========================================================
+   Marketing Alliance — Surface Pro 7 912×1368
+   Same stacked layout as iPad Pro; device-specific handles
+   ========================================================= */
+@media (width: 912px) and (height: 1368px) {
+  /* Override Austin 93% width so hero video isn't cut off on the right */
+  html:has(#marketing-alliance) #marketing-alliance.ma,
+  html:has(#marketing-alliance) section#marketing-alliance {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  #marketing-alliance {
+    /* Hero video positioning handles (Surface Pro 7) */
+    --ma-surfacepro7-hero-x: -43px;
+    --ma-surfacepro7-hero-y: -27px;
+    --ma-surfacepro7-hero-scale: 0.902;
+    /* Hero link positioning handles (Surface Pro 7) */
+    --ma-surfacepro7-link-x: -18px;
+    --ma-surfacepro7-link-y: -37px;
+    /* Heading cluster (title + rule + roles) positioning handles (Surface Pro 7) */
+    --ma-surfacepro7-head-x: -70px;
+    --ma-surfacepro7-head-y: -60px;
+    --ma-surfacepro7-head-scale: 1.0;
+    /* Logo positioning handles (Surface Pro 7) */
+    --ma-surfacepro7-logo-x: -27px;
+    --ma-surfacepro7-logo-y: -25px;
+    --ma-surfacepro7-logo-scale: 1.3;
+    /* Paragraph positioning handles (Surface Pro 7) */
+    --ma-surfacepro7-desc-x: -20px;
+    --ma-surfacepro7-desc-y: 10px;
+    --ma-surfacepro7-desc-width: 60ch;
+    /* Looping Headers section handles (Surface Pro 7) */
+    --ma-surfacepro7-looping-x: -40px;
+    --ma-surfacepro7-looping-y: 30px;
+    --ma-surfacepro7-looping-scale: 0.915;
+    /* Photography section handles (Surface Pro 7) */
+    --ma-surfacepro7-photo-x: -40px;
+    --ma-surfacepro7-photo-y: -50px;
+    --ma-surfacepro7-photo-scale: 0.915;
+    /* Testimonials section handles (Surface Pro 7) */
+    --ma-surfacepro7-testimonials-x: -40px;
+    --ma-surfacepro7-testimonials-y: -180px;
+    --ma-surfacepro7-testimonials-scale: 0.915;
+    /* Shorts section handles (Surface Pro 7) */
+    --ma-surfacepro7-shorts-x: -40px;
+    --ma-surfacepro7-shorts-y: -190px;
+    --ma-surfacepro7-shorts-scale: 0.915;
+    /* Headshots section handles (Surface Pro 7) */
+    --ma-surfacepro7-headshots-x: -40px;
+    --ma-surfacepro7-headshots-y: -270px;
+    --ma-surfacepro7-headshots-scale: 0.915;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 120px;
+  }
+  /* Stacked layout: hero top, then title, logo, desc, looping... */
+  #marketing-alliance .ma__row1,
+  #marketing-alliance .ma__row2,
+  #marketing-alliance .ma__overviewHeadshots {
+    grid-template-columns: 1fr !important;
+  }
+  /* Heading cluster: right-aligned (title, rule, roles stacked and aligned right) */
+  #marketing-alliance .ma__heading {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    justify-items: end !important;
+    text-align: right !important;
+    gap: 0 !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__headingUnit {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    gap: 10px !important;
+    transform: translate(var(--ma-surfacepro7-head-x), var(--ma-surfacepro7-head-y)) scale(var(--ma-surfacepro7-head-scale)) !important;
+    transform-origin: top right !important;
+  }
+  #marketing-alliance .ma__headingUnit .ma__roles {
+    text-align: right !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__logoWrap,
+  html:has(#marketing-alliance) #marketing-alliance .ma__logoContainer {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: clamp(20px, 2vw, 40px) !important;
+    transform: translate(var(--ma-surfacepro7-logo-x), var(--ma-surfacepro7-logo-y)) scale(var(--ma-surfacepro7-logo-scale)) !important;
+    transform-origin: center center !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__logoWrap img,
+  html:has(#marketing-alliance) #marketing-alliance .ma__logo img,
+  html:has(#marketing-alliance) #marketing-alliance img.ma__logo {
+    transform: none !important;
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: clamp(220px, 22vw, 280px) !important;
+    max-width: clamp(220px, 22vw, 280px) !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__belowRow1 {
+    position: relative !important;
+    top: 0 !important;
+  }
+  #marketing-alliance .ma__videoGrid--quad {
+    grid-template-columns: 1fr !important;
+  }
+  #marketing-alliance .ma__photoGrid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+    width: 100% !important;
+  }
+  #marketing-alliance .ma__photoGrid img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 5 !important;
+    object-fit: cover !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__photos .ma__photoGrid img {
+    transform: scale(0.95) !important;
+    transform-origin: center center !important;
+  }
+  #marketing-alliance .ma__shortsHeadshots {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  #marketing-alliance .ma__headshotsColumn {
+    align-items: center !important;
+  }
+  #marketing-alliance .ma__testimonialsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+  #marketing-alliance .ma__testimonialsGrid .ma__videoCard {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  #marketing-alliance .ma__testimonialsGrid .media {
+    width: 100% !important;
+    aspect-ratio: 16 / 9 !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__shortsBlock .ma__testimonialsGrid .ma__videoCard .media {
+    transform: scale(0.95) !important;
+    transform-origin: center center !important;
+  }
+  /* Shorts section: full width, centered, like mobile */
+  #marketing-alliance .ma__shortsColumn {
+    width: 100% !important;
+    max-width: 100% !important;
+    align-items: center !important;
+  }
+  #marketing-alliance .ma__shortsGrid {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+    justify-content: center !important;
+    margin-top: 70px !important;
+    margin-left: 80px !important;
+  }
+  #marketing-alliance .ma__subhead--shorts {
+    align-items: flex-end !important;
+    align-self: flex-end !important;
+    text-align: right !important;
+    width: 100% !important;
+  }
+  #marketing-alliance .ma__subhead--shorts .ma__rule {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    width: clamp(60px, 7.5vw, 108px) !important;
+    background-image: linear-gradient(
+      to left,
+      rgba(90, 90, 90, 0.85) 0%,
+      rgba(90, 90, 90, 0.75) 55%,
+      rgba(255, 255, 255, 1) 100%
+    ) !important;
+    background-color: transparent !important;
+  }
+  /* Headshots section: full width, centered */
+  #marketing-alliance .ma__headshotsColumn {
+    width: 100% !important;
+    max-width: 100% !important;
+    align-items: center !important;
+  }
+  #marketing-alliance .ma__headshotsColumn .ma__subhead--headshots {
+    align-items: flex-start !important;
+    align-self: flex-start !important;
+    text-align: left !important;
+    width: 100% !important;
+    margin-top: 16px !important;
+  }
+  #marketing-alliance .ma__headshotsColumn .ma__subhead--headshots .ma__rule {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+    width: clamp(64px, 7.2vw, 96px) !important;
+    background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.55) 55%,
+      rgba(255, 255, 255, 1) 100%
+    ) !important;
+    background-color: transparent !important;
+  }
+  #marketing-alliance .ma__headshotPile {
+    width: 323px !important;
+    max-width: 100% !important;
+    height: 200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  #marketing-alliance .ma__headshotPile .shot {
+    width: 150px !important;
+    min-width: 150px !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__shortsColumn .ma__shortsGrid {
+    transform: translate(-40px, -50px) !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__shortsColumn .ma__shortsGrid .ma__shortCard .ma__shortMedia {
+    transform: scale(1.0) !important;
+    transform-origin: center center !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__headshotsColumn .ma__headshotPile {
+    transform: translateY(50px) scale(1.4) !important;
+    transform-origin: center center !important;
+  }
+  /* Hero video: x, y, scale */
+  html:has(#marketing-alliance) #marketing-alliance .ma__heroFrame {
+    transform: translate(var(--ma-surfacepro7-hero-x), var(--ma-surfacepro7-hero-y)) scale(var(--ma-surfacepro7-hero-scale)) !important;
+  }
+  /* Hero link: x, y */
+  html:has(#marketing-alliance) #marketing-alliance .ma__videoBlock .ma__linkWrap.heroLinkWrap,
+  html:has(#marketing-alliance) #marketing-alliance .ma__videoBlock .ma__linkRule {
+    transform: translate(var(--ma-surfacepro7-link-x), var(--ma-surfacepro7-link-y)) !important;
+  }
+  /* Paragraph: x, y, width */
+  html:has(#marketing-alliance) #marketing-alliance .ma__row2 .ma__colText {
+    transform: translate(var(--ma-surfacepro7-desc-x), var(--ma-surfacepro7-desc-y)) !important;
+    max-width: var(--ma-surfacepro7-desc-width) !important;
+  }
+  /* Looping Headers section: x, y, scale */
+  html:has(#marketing-alliance) #marketing-alliance .ma__testimonials {
+    transform: translate(var(--ma-surfacepro7-looping-x), var(--ma-surfacepro7-looping-y)) scale(var(--ma-surfacepro7-looping-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Photography section: x, y, scale */
+  html:has(#marketing-alliance) #marketing-alliance .ma__photos {
+    transform: translate(var(--ma-surfacepro7-photo-x), var(--ma-surfacepro7-photo-y)) scale(var(--ma-surfacepro7-photo-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Testimonials section: x, y, scale */
+  html:has(#marketing-alliance) #marketing-alliance .ma__shortsBlock {
+    transform: translate(var(--ma-surfacepro7-testimonials-x), var(--ma-surfacepro7-testimonials-y)) scale(var(--ma-surfacepro7-testimonials-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Shorts section: x, y, scale */
+  html:has(#marketing-alliance) #marketing-alliance .ma__shortsColumn {
+    transform: translate(var(--ma-surfacepro7-shorts-x), var(--ma-surfacepro7-shorts-y)) scale(var(--ma-surfacepro7-shorts-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Headshots section: x, y, scale */
+  html:has(#marketing-alliance) #marketing-alliance .ma__headshotsColumn {
+    transform: translate(var(--ma-surfacepro7-headshots-x), var(--ma-surfacepro7-headshots-y)) scale(var(--ma-surfacepro7-headshots-scale)) !important;
+    transform-origin: top center !important;
+  }
+}
+
+/* =========================================================
+   Marketing Alliance — Asus Zenbook Fold 853×1280
+   Same stacked layout as iPad Pro/Surface Pro 7; device-specific handles
+   ========================================================= */
+@media (width: 853px) and (height: 1280px) {
+  /* Override Austin 93% width so hero video isn't cut off on the right */
+  html:has(#marketing-alliance) #marketing-alliance.ma,
+  html:has(#marketing-alliance) section#marketing-alliance {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  #marketing-alliance {
+    /* Hero video positioning handles (Zenbook Fold) */
+    --ma-zenbookfold-hero-x: -10px;
+    --ma-zenbookfold-hero-y: -27px;
+    --ma-zenbookfold-hero-scale: 0.902;
+    /* Hero link positioning handles (Zenbook Fold) */
+    --ma-zenbookfold-link-x: 14px;
+    --ma-zenbookfold-link-y: -37px;
+    /* Heading cluster (title + rule + roles) positioning handles (Zenbook Fold) */
+    --ma-zenbookfold-head-x: -35px;
+    --ma-zenbookfold-head-y: -55px;
+    --ma-zenbookfold-head-scale: 1.0;
+    /* Logo positioning handles (Zenbook Fold) */
+    --ma-zenbookfold-logo-x: -27px;
+    --ma-zenbookfold-logo-y: -25px;
+    --ma-zenbookfold-logo-scale: 1.3;
+    /* Paragraph positioning handles (Zenbook Fold) */
+    --ma-zenbookfold-desc-x: 10px;
+    --ma-zenbookfold-desc-y: 10px;
+    --ma-zenbookfold-desc-width: 50ch;
+    /* Looping Headers section handles (Zenbook Fold) */
+    --ma-zenbookfold-looping-x: -10px;
+    --ma-zenbookfold-looping-y: 30px;
+    --ma-zenbookfold-looping-scale: 0.915;
+    /* Photography section handles (Zenbook Fold) */
+    --ma-zenbookfold-photo-x: -10px;
+    --ma-zenbookfold-photo-y: -60px;
+    --ma-zenbookfold-photo-scale: 0.915;
+    /* Testimonials section handles (Zenbook Fold) */
+    --ma-zenbookfold-testimonials-x: -10px;
+    --ma-zenbookfold-testimonials-y: -200px;
+    --ma-zenbookfold-testimonials-scale: 0.915;
+    /* Shorts section handles (Zenbook Fold) */
+    --ma-zenbookfold-shorts-x: -10px;
+    --ma-zenbookfold-shorts-y: -230px;
+    --ma-zenbookfold-shorts-scale: 0.915;
+    /* Headshots section handles (Zenbook Fold) */
+    --ma-zenbookfold-headshots-x: -10px;
+    --ma-zenbookfold-headshots-y: -320px;
+    --ma-zenbookfold-headshots-scale: 0.915;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 120px;
+  }
+  /* Stacked layout: hero top, then title, logo, desc, looping... */
+  #marketing-alliance .ma__row1,
+  #marketing-alliance .ma__row2,
+  #marketing-alliance .ma__overviewHeadshots {
+    grid-template-columns: 1fr !important;
+  }
+  /* Heading cluster: right-aligned (title, rule, roles stacked and aligned right) */
+  #marketing-alliance .ma__heading {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    justify-items: end !important;
+    text-align: right !important;
+    gap: 0 !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__headingUnit {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    gap: 10px !important;
+    transform: translate(var(--ma-zenbookfold-head-x), var(--ma-zenbookfold-head-y)) scale(var(--ma-zenbookfold-head-scale)) !important;
+    transform-origin: top right !important;
+  }
+  #marketing-alliance .ma__headingUnit .ma__roles {
+    text-align: right !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__logoWrap,
+  html:has(#marketing-alliance) #marketing-alliance .ma__logoContainer {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: clamp(20px, 2vw, 40px) !important;
+    transform: translate(var(--ma-zenbookfold-logo-x), var(--ma-zenbookfold-logo-y)) scale(var(--ma-zenbookfold-logo-scale)) !important;
+    transform-origin: center center !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__logoWrap img,
+  html:has(#marketing-alliance) #marketing-alliance .ma__logo img,
+  html:has(#marketing-alliance) #marketing-alliance img.ma__logo {
+    transform: none !important;
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: clamp(220px, 22vw, 280px) !important;
+    max-width: clamp(220px, 22vw, 280px) !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__belowRow1 {
+    position: relative !important;
+    top: 0 !important;
+  }
+  #marketing-alliance .ma__videoGrid--quad {
+    grid-template-columns: 1fr !important;
+  }
+  #marketing-alliance .ma__photoGrid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+    width: 100% !important;
+  }
+  #marketing-alliance .ma__photoGrid img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 5 !important;
+    object-fit: cover !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__photos .ma__photoGrid img {
+    transform: scale(0.95) !important;
+    transform-origin: center center !important;
+  }
+  #marketing-alliance .ma__shortsHeadshots {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  #marketing-alliance .ma__headshotsColumn {
+    align-items: center !important;
+  }
+  #marketing-alliance .ma__testimonialsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+  #marketing-alliance .ma__testimonialsGrid .ma__videoCard {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  #marketing-alliance .ma__testimonialsGrid .media {
+    width: 100% !important;
+    aspect-ratio: 16 / 9 !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__shortsBlock .ma__testimonialsGrid .ma__videoCard .media {
+    transform: scale(0.95) !important;
+    transform-origin: center center !important;
+  }
+  /* Shorts section: full width, centered, like mobile */
+  #marketing-alliance .ma__shortsColumn {
+    width: 100% !important;
+    max-width: 100% !important;
+    align-items: center !important;
+  }
+  #marketing-alliance .ma__shortsGrid {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+    justify-content: center !important;
+    margin-top: 70px !important;
+    margin-left: 80px !important;
+  }
+  #marketing-alliance .ma__subhead--shorts {
+    align-items: flex-end !important;
+    align-self: flex-end !important;
+    text-align: right !important;
+    width: 100% !important;
+  }
+  #marketing-alliance .ma__subhead--shorts .ma__rule {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    width: clamp(60px, 7.5vw, 108px) !important;
+    background-image: linear-gradient(
+      to left,
+      rgba(90, 90, 90, 0.85) 0%,
+      rgba(90, 90, 90, 0.75) 55%,
+      rgba(255, 255, 255, 1) 100%
+    ) !important;
+    background-color: transparent !important;
+  }
+  /* Headshots section: full width, centered */
+  #marketing-alliance .ma__headshotsColumn {
+    width: 100% !important;
+    max-width: 100% !important;
+    align-items: center !important;
+  }
+  #marketing-alliance .ma__headshotsColumn .ma__subhead--headshots {
+    align-items: flex-start !important;
+    align-self: flex-start !important;
+    text-align: left !important;
+    width: 100% !important;
+    margin-top: 16px !important;
+  }
+  #marketing-alliance .ma__headshotsColumn .ma__subhead--headshots .ma__rule {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+    width: clamp(64px, 7.2vw, 96px) !important;
+    background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.55) 55%,
+      rgba(255, 255, 255, 1) 100%
+    ) !important;
+    background-color: transparent !important;
+  }
+  #marketing-alliance .ma__headshotPile {
+    width: 323px !important;
+    max-width: 100% !important;
+    height: 200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  #marketing-alliance .ma__headshotPile .shot {
+    width: 150px !important;
+    min-width: 150px !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__shortsColumn .ma__shortsGrid {
+    transform: translate(-40px, -50px) !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__shortsColumn .ma__shortsGrid .ma__shortCard .ma__shortMedia {
+    transform: scale(1.0) !important;
+    transform-origin: center center !important;
+  }
+  html:has(#marketing-alliance) #marketing-alliance .ma__headshotsColumn .ma__headshotPile {
+    transform: translateY(50px) scale(1.4) !important;
+    transform-origin: center center !important;
+  }
+  /* Hero video: x, y, scale */
+  html:has(#marketing-alliance) #marketing-alliance .ma__heroFrame {
+    transform: translate(var(--ma-zenbookfold-hero-x), var(--ma-zenbookfold-hero-y)) scale(var(--ma-zenbookfold-hero-scale)) !important;
+  }
+  /* Hero link: x, y */
+  html:has(#marketing-alliance) #marketing-alliance .ma__videoBlock .ma__linkWrap.heroLinkWrap,
+  html:has(#marketing-alliance) #marketing-alliance .ma__videoBlock .ma__linkRule {
+    transform: translate(var(--ma-zenbookfold-link-x), var(--ma-zenbookfold-link-y)) !important;
+  }
+  /* Paragraph: x, y, width */
+  html:has(#marketing-alliance) #marketing-alliance .ma__row2 .ma__colText {
+    transform: translate(var(--ma-zenbookfold-desc-x), var(--ma-zenbookfold-desc-y)) !important;
+    max-width: var(--ma-zenbookfold-desc-width) !important;
+  }
+  /* Looping Headers section: x, y, scale */
+  html:has(#marketing-alliance) #marketing-alliance .ma__testimonials {
+    transform: translate(var(--ma-zenbookfold-looping-x), var(--ma-zenbookfold-looping-y)) scale(var(--ma-zenbookfold-looping-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Photography section: x, y, scale */
+  html:has(#marketing-alliance) #marketing-alliance .ma__photos {
+    transform: translate(var(--ma-zenbookfold-photo-x), var(--ma-zenbookfold-photo-y)) scale(var(--ma-zenbookfold-photo-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Testimonials section: x, y, scale */
+  html:has(#marketing-alliance) #marketing-alliance .ma__shortsBlock {
+    transform: translate(var(--ma-zenbookfold-testimonials-x), var(--ma-zenbookfold-testimonials-y)) scale(var(--ma-zenbookfold-testimonials-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Shorts section: x, y, scale */
+  html:has(#marketing-alliance) #marketing-alliance .ma__shortsColumn {
+    transform: translate(var(--ma-zenbookfold-shorts-x), var(--ma-zenbookfold-shorts-y)) scale(var(--ma-zenbookfold-shorts-scale)) !important;
+    transform-origin: top center !important;
+  }
+  /* Headshots section: x, y, scale */
+  html:has(#marketing-alliance) #marketing-alliance .ma__headshotsColumn {
+    transform: translate(var(--ma-zenbookfold-headshots-x), var(--ma-zenbookfold-headshots-y)) scale(var(--ma-zenbookfold-headshots-scale)) !important;
+    transform-origin: top center !important;
+  }
+}
+
+/* =========================================================
    Marketing Alliance 901–980: shift entire section right 20px
    ========================================================= */
 @media (min-width: 901px) and (max-width: 980px) {
