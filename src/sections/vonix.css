@@ -2277,3 +2277,166 @@
     top: 140px !important;
   }
 }
+
+/* Vonix 375×667: move Technology and everything below down 20px */
+@media (width: 375px) and (height: 667px) {
+  #vonix .vo__technology {
+    margin-top: calc(clamp(32px, 4vw, 48px) - 30px) !important; /* base mobile - 40 + 20 = -20 */
+  }
+}
+
+/* Vonix 667×375: move Technology and everything below down 25px */
+@media (width: 667px) and (height: 375px) {
+  #vonix .vo__technology {
+    margin-top: 50px !important;
+  }
+}
+
+/* Vonix 896×414: move Technology and everything below down 30px */
+@media (width: 896px) and (height: 414px) {
+  #vonix .vo__technology {
+    margin-top: 50px !important;
+  }
+}
+
+/* Vonix 844×390: move Technology and everything below down 40px */
+@media (width: 844px) and (height: 390px) {
+  #vonix .vo__technology {
+    margin-top: 50px !important;
+  }
+}
+
+/* Vonix 812×375: move Technology and everything below down 40px */
+@media (width: 812px) and (height: 375px) {
+  #vonix .vo__technology {
+    margin-top: 50px !important;
+  }
+}
+
+/* Vonix 915×412: move Technology and everything below down 40px */
+@media (width: 915px) and (height: 412px) {
+  #vonix .vo__technology {
+    margin-top: 60px !important;
+  }
+}
+
+/* Vonix 740×360: move Technology and everything below down 50px */
+@media (width: 740px) and (height: 360px) {
+  #vonix .vo__technology {
+    margin-top: 50px !important;
+  }
+}
+
+/* Vonix 768×1024: move Technology and everything below down 50px */
+@media (width: 768px) and (height: 1024px) {
+  #vonix .vo__technology {
+    margin-top: 60px !important;
+  }
+}
+
+/* Vonix 820×1180: move Technology and everything below down 40px */
+@media (width: 820px) and (height: 1180px) {
+  #vonix .vo__technology {
+    margin-top: 60px !important;
+  }
+}
+
+/* Vonix 912×1368: move Technology and everything below down 50px */
+@media (width: 912px) and (height: 1368px) {
+  #vonix .vo__technology {
+    margin-top: 60px !important;
+  }
+}
+
+/* Vonix 720×540: move Technology and everything below down 50px */
+@media (width: 720px) and (height: 540px) {
+  #vonix .vo__technology {
+    margin-top: 50px !important;
+  }
+}
+
+/* Vonix 882×344: move Technology and everything below down 40px */
+@media (width: 882px) and (height: 344px) {
+  #vonix .vo__technology {
+    margin-top: 55px !important;
+  }
+}
+
+/* Vonix 853×1280: move Technology and everything below down 40px */
+@media (width: 853px) and (height: 1280px) {
+  #vonix .vo__technology {
+    margin-top: 60px !important;
+  }
+}
+
+/* Vonix 914×412: move Technology and everything below down 50px */
+@media (width: 914px) and (height: 412px) {
+  #vonix .vo__technology {
+    margin-top: 55px !important;
+  }
+}
+
+/* Vonix 1024×600: move Technology and everything below up 30px */
+@media (width: 1024px) and (height: 600px) {
+  #vonix .vo__technology {
+    margin-top: -30px !important;
+  }
+}
+
+/* Vonix 600×1024: move Technology and everything below down 40px */
+@media (width: 600px) and (height: 1024px) {
+  #vonix .vo__technology {
+    margin-top: 0px !important;
+  }
+}
+
+/* Vonix 1280×800: move Technology and everything below up 50px */
+@media (width: 1280px) and (height: 800px) {
+  #vonix .vo__technology {
+    margin-top: -50px !important;
+  }
+}
+
+/* Vonix 800×1280: move Technology and everything below down 40px */
+@media (width: 800px) and (height: 1280px) {
+  #vonix .vo__technology {
+    margin-top: 60px !important;
+  }
+}
+
+/* Vonix 1280×853: logo left 40px, Technology and below down 40px */
+@media (width: 1280px) and (height: 853px) {
+  #vonix .vo__logoWrap.vonix__topRight {
+    position: relative !important;
+    left: -50px !important;
+  }
+
+  #vonix .vo__technology {
+    margin-top: 60px !important;
+  }
+}
+
+/* Vonix 1368×912: logo left 40px, Technology and below down 40px */
+@media (width: 1368px) and (height: 912px) {
+  #vonix .vo__logoWrap.vonix__topRight {
+    position: relative !important;
+    left: -70px !important;
+  }
+
+  #vonix .vo__technology {
+    margin-top: 60px !important;
+  }
+}
+
+/* Vonix 1366×1024: move Technology down 30px, logo left 30px */
+@media (width: 1366px) and (height: 1024px) {
+  #vonix .vo__technology {
+    margin-top: 70px !important;
+  }
+
+  #vonix .vo__logoWrap.vonix__topRight,
+  #vonix .vonix__topRight .vo__logoWrap {
+    position: relative !important;
+    left: -65px !important;
+  }
+}

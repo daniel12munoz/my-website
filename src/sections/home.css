@@ -687,6 +687,325 @@ oad) */
 }
 
 /* =========================================================
+   HOME — 667×375 ONLY (e.g. iPhone SE landscape)
+   Entire homescreen visible to the right of nav, centered.
+   Does NOT affect any other page or viewport.
+   ========================================================= */
+@media (width: 667px) and (height: 375px) {
+  .App > main.vp-main--home {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeViewport {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeGroup {
+    --home-667-scale: 0.55;
+    --home-667-x: 0px;
+    --home-667-y: -120px;
+    transform: translate(var(--home-667-x), var(--home-667-y)) scale(var(--home-667-scale)) !important;
+    transform-origin: center center !important;
+  }
+}
+
+/* =========================================================
+   HOME — 896×414 ONLY (e.g. iPhone Pro Max landscape)
+   Entire homescreen visible to the right of nav, centered.
+   Does NOT affect any other page or viewport.
+   ========================================================= */
+@media (width: 896px) and (height: 414px) {
+  .App > main.vp-main--home {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeViewport {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeGroup {
+    --home-896-scale: 0.8;
+    --home-896-x: -45px;
+    --home-896-y: -40px;
+    transform: translate(var(--home-896-x), var(--home-896-y)) scale(var(--home-896-scale)) !important;
+    transform-origin: center center !important;
+  }
+}
+
+/* =========================================================
+   HOME — 844×390 ONLY (e.g. iPhone 14/15 landscape)
+   Entire homescreen visible to the right of nav, centered.
+   Does NOT affect any other page or viewport.
+   ========================================================= */
+@media (width: 844px) and (height: 390px) {
+  .App > main.vp-main--home {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeViewport {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeGroup {
+    --home-844-scale: 0.8;
+    --home-844-x: -35px;
+    --home-844-y: -40px;
+    transform: translate(var(--home-844-x), var(--home-844-y)) scale(var(--home-844-scale)) !important;
+    transform-origin: center center !important;
+  }
+}
+
+/* =========================================================
+   HOME — 932×430 ONLY (e.g. iPhone 16 Pro Max landscape)
+   Entire homescreen visible to the right of nav, centered.
+   Does NOT affect any other page or viewport.
+   ========================================================= */
+@media (width: 932px) and (height: 430px) {
+  .App > main.vp-main--home {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeViewport {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeGroup {
+    --home-932-scale: 0.8;
+    --home-932-x: -20px;
+    --home-932-y: -42px;
+    transform: translate(var(--home-932-x), var(--home-932-y)) scale(var(--home-932-scale)) !important;
+    transform-origin: center center !important;
+  }
+}
+
+/* =========================================================
+   HOME — 915×412 ONLY
+   Entire homescreen visible to the right of nav, centered.
+   Does NOT affect any other page or viewport.
+   ========================================================= */
+@media (width: 915px) and (height: 412px) {
+  .App > main.vp-main--home {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeViewport {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeGroup {
+    --home-915-scale: 0.8;
+    --home-915-x: -15px;
+    --home-915-y: -47px;
+    transform: translate(var(--home-915-x), var(--home-915-y)) scale(var(--home-915-scale)) !important;
+    transform-origin: center center !important;
+  }
+}
+
+/* =========================================================
+   HOME — 914×412 ONLY
+   Entire homescreen visible to the right of nav, centered.
+   Does NOT affect any other page or viewport.
+   ========================================================= */
+@media (width: 914px) and (height: 412px) {
+  .App > main.vp-main--home {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeViewport {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeGroup {
+    --home-914-scale: 0.75;
+    --home-914-x: -10px;
+    --home-914-y: -45px;
+    transform: translate(var(--home-914-x), var(--home-914-y)) scale(var(--home-914-scale)) !important;
+    transform-origin: center center !important;
+  }
+}
+
+/* =========================================================
+   HOME — 800×1280 ONLY
+   Entire homescreen visible to the right of nav, centered.
+   Does NOT affect any other page or viewport.
+   ========================================================= */
+@media (width: 800px) and (height: 1280px) {
+  .App > main.vp-main--home {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeViewport {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeGroup {
+    --home-800-scale: 1.4;
+    --home-800-x: -120px;
+    --home-800-y: 400px;
+    transform: translate(var(--home-800-x), var(--home-800-y)) scale(var(--home-800-scale)) !important;
+    transform-origin: center center !important;
+  }
+}
+
+/* =========================================================
+   HOME — 812×375 ONLY
+   Entire homescreen visible to the right of nav, centered.
+   Does NOT affect any other page or viewport.
+   ========================================================= */
+@media (width: 812px) and (height: 375px) {
+  .App > main.vp-main--home {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeViewport {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeGroup {
+    --home-812-scale: 0.8;
+    --home-812-x: -35px;
+    --home-812-y: -35px;
+    transform: translate(var(--home-812-x), var(--home-812-y)) scale(var(--home-812-scale)) !important;
+    transform-origin: center center !important;
+  }
+}
+
+/* =========================================================
+   HOME — 740×360 ONLY
+   Entire homescreen visible to the right of nav, centered.
+   Does NOT affect any other page or viewport.
+   ========================================================= */
+@media (width: 740px) and (height: 360px) {
+  .App > main.vp-main--home {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeViewport {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeGroup {
+    --home-740-scale: 0.50;
+    --home-740-x: 0px;
+    --home-740-y: -120px;
+    transform: translate(var(--home-740-x), var(--home-740-y)) scale(var(--home-740-scale)) !important;
+    transform-origin: center center !important;
+  }
+}
+
+/* =========================================================
+   HOME — 720×540 ONLY
+   Entire homescreen visible to the right of nav, centered.
+   Does NOT affect any other page or viewport.
+   ========================================================= */
+@media (width: 720px) and (height: 540px) {
+  .App > main.vp-main--home {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeViewport {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeGroup {
+    --home-720-scale: 0.7;
+    --home-720-x: -5px;
+    --home-720-y: -100px;
+    transform: translate(var(--home-720-x), var(--home-720-y)) scale(var(--home-720-scale)) !important;
+    transform-origin: center center !important;
+  }
+}
+
+/* =========================================================
+   HOME — 882×344 ONLY
+   Entire homescreen visible to the right of nav, centered.
+   Does NOT affect any other page or viewport.
+   ========================================================= */
+@media (width: 882px) and (height: 344px) {
+  .App > main.vp-main--home {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeViewport {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeGroup {
+    --home-882-scale: 0.7;
+    --home-882-x: -40px;
+    --home-882-y: -65px;
+    transform: translate(var(--home-882-x), var(--home-882-y)) scale(var(--home-882-scale)) !important;
+    transform-origin: center center !important;
+  }
+}
+
+/* =========================================================
    MOBILE HOME: scroll lock + viewport/group centering
    Only when body.mobile-home-locked (homepage on mobile).
    No X nudges; vertical centering via grid + responsive translateY.
@@ -1093,6 +1412,25 @@ body.mobile-home-locked {
 }
 
 /* =========================================================
+   HOME — 853×1280 ONLY: remove white gutter so drop-shadow reaches screen edge
+   scrollbar-gutter + padding create right-side gap that clips the shadow.
+   ========================================================= */
+@media (width: 853px) and (height: 1280px) {
+  html:has(#home.home) {
+    scrollbar-gutter: auto !important;
+  }
+
+  /* Remove right padding so shadow can extend to screen edge */
+  #home.home {
+    padding-right: 0 !important;
+  }
+
+  /* Move entire homescreen unit left 15px */
+  .App > main.vp-main--home .mobileHomeGroup {
+    transform: translateX(-35px) !important;
+  }
+}
+/* =========================================================
    HOME — Prevent vertical scroll at smaller resolutions
    Lock viewport; no layout/content changes.
    ========================================================= */
@@ -1108,3 +1446,4 @@ body.mobile-home-locked {
     overscroll-behavior: none;
   }
 }
+
