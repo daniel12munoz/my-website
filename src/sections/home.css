@@ -687,6 +687,64 @@ oad) */
 }
 
 /* =========================================================
+   HOME — 601–767 width (all heights) — FALLBACK
+   Entire homescreen visible, centered. Does NOT affect 667×375,
+   720×540, 740×360 (those have specific rules that override this).
+   Covers 601–760 and 761–767.
+   ========================================================= */
+@media (min-width: 601px) and (max-width: 767px) {
+  .App > main.vp-main--home {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeViewport {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeGroup {
+    --home-601-760-scale: 0.75;
+    --home-601-760-x: -55px;
+    --home-601-760-y: -40px;
+    transform: translate(var(--home-601-760-x), var(--home-601-760-y)) scale(var(--home-601-760-scale)) !important;
+    transform-origin: center center !important;
+  }
+}
+
+/* =========================================================
+   HOME — 761–767 width: ensure scale applies (gap before laptop)
+   Same fix as 601–760; explicit block so scale is not overridden.
+   ========================================================= */
+@media (min-width: 761px) and (max-width: 767px) {
+  .App > main.vp-main--home {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeViewport {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+  }
+
+  .App > main.vp-main--home .mobileHomeGroup {
+    --home-761-767-scale: 1.05;
+    --home-761-767-x: -45px;
+    --home-761-767-y: 70px;
+    transform: translate(var(--home-761-767-x), var(--home-761-767-y)) scale(var(--home-761-767-scale)) !important;
+    transform-origin: center center !important;
+  }
+}
+
+/* =========================================================
    HOME — 667×375 ONLY (e.g. iPhone SE landscape)
    Entire homescreen visible to the right of nav, centered.
    Does NOT affect any other page or viewport.
