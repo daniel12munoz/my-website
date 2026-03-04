@@ -352,6 +352,19 @@ body {
   }
 }
 
+/* 1441+: match 601–1440 Home overflow behavior + kill padding-top
+   padding-top pushed content down; mobileHomeGroup scaling left white strip */
+@media (min-width: 1441px) {
+  .App > main.vp-main--home {
+    padding-top: 0 !important;
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: hidden !important;
+    position: relative;
+    z-index: 1;
+  }
+}
+
 @media (max-width: 600px) {
   /* Mobile hamburger button */
   .vp-mobile-menu-toggle {
@@ -703,16 +716,6 @@ a {
    Does NOT touch any Home hero rules.
    ========================================================= */
 
-/* iPad Air — 820 x 1180 */
-@media (width: 820px) and (height: 1180px) {
-  .vp-brand, .vp-brand-inner {
-    --nav-scale: 1.02;
-    --nav-font-scale: 1.06;
-    --nav-logo-scale: 1.06;
-  }
-  .vp-nav { gap: 14px; }
-}
-
 /* iPad Pro — 1024 x 1366 */
 @media (width: 1024px) and (height: 1366px) {
   .vp-brand, .vp-brand-inner {
@@ -756,7 +759,6 @@ a {
   --vp-nav-top-clearance: 0px;
 }
 
-@media (width: 820px) and (height: 1180px)  { :root { --vp-nav-overlap-comp: 10px; } }
 @media (width: 1024px) and (height: 1366px) { :root { --vp-nav-overlap-comp: 68px; --vp-nav-top-clearance: 18px; } }
 @media (width: 912px) and (height: 1368px)  { :root { --vp-nav-overlap-comp: 68px; --vp-nav-top-clearance: 14px; } }
 @media (width: 853px) and (height: 1280px)  { :root { --vp-nav-overlap-comp: 28px; --vp-nav-top-clearance: 10px; } }
