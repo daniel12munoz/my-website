@@ -5,6 +5,16 @@
   color: var(--au-ink);
 }
 
+/* Prevent horizontal scrollbar on Vonix page */
+html:has(#vonix),
+html:has(#vonix) body,
+html:has(#vonix) #root,
+html:has(#vonix) .App,
+html:has(#vonix) main,
+html:has(#vonix) .vp-main {
+  overflow-x: hidden !important;
+}
+
 /* Match hero vertical height with Marketing Alliance / Blaze / Austin Underground */
 .vo {
   position: relative;
@@ -1438,6 +1448,31 @@
   }
 }
 
+/* 1601+: logo right 20px */
+@media (min-width: 1601px) {
+  #vonix {
+    --vonix-logo-x: 145px;
+  }
+}
+
+/* 1850–1920: logo left 50px */
+@media (min-width: 1750px) and (max-width: 1920px) {
+  #vonix {
+    --vonix-logo-x: 95px;
+  }
+}
+
+/* 1921+: logo left 40px, scale heading group proportionally with viewport */
+@media (min-width: 1921px) {
+  #vonix {
+    --vonix-logo-x: 75px;
+  }
+  #vonix .vo__heading {
+    scale: tan(atan2(100vw, 1920px));
+    transform-origin: top right !important;
+  }
+}
+
 /* DESKTOP+ ONLY — push Tech/Vlogs/Favorites down (do not affect <=1200px) */
 @media (min-width: 1601px) {
   #vonix .vo__belowHeroDesktop {
@@ -1465,7 +1500,7 @@
    Does NOT affect <=929 (already perfect)
    ========================================================= */
 @media (min-width: 930px) and (max-width: 980px)
-  and (min-height: 50px) and (max-height: 2000px) {
+  and (min-height: 50px) and (max-height: 9999px) {
   #vonix { --vo-psych-scale-930: 0.95; }
   #vonix .vo__psychology {
     transform: scale(var(--vo-psych-scale-930));
@@ -1475,7 +1510,7 @@
 
 /* ---------- COMMON MID CLONE (Tablet-ish widths only) ---------- */
 @media (min-width: 601px) and (max-width: 980px)
-  and (min-height: 50px) and (max-height: 2000px) {
+  and (min-height: 50px) and (max-height: 9999px) {
   #vonix {
     --vo-mid-content-maxw: 540px;
     --vo-mid-content-pad: 16px;
@@ -1494,7 +1529,7 @@
     --vo-mid-logo-to-desc-gap: 16px;
     --vo-mid-logo-scale: 1.25;
     --vo-mid-logo-x: 0px;
-    --vo-mid-logo-y: -30px;    /* logo up 30px */
+    --vo-mid-logo-y: -40px;    /* logo up 40px */
 
     /* lower stack: left 7 + up 20 (total -11, -65) */
     --vo-mid-lower-x: -11px;
@@ -1760,7 +1795,7 @@
    Fix: reuse the EXACT 1024 laptop logo vars across the range.
    ========================================================= */
 @media (min-width: 981px) and (max-width: 1200px)
-  and (min-height: 50px) and (max-height: 2000px) {
+  and (min-height: 50px) and (max-height: 9999px) {
   #vonix {
     --vo-mid-logo-scale: 1.12;
     --vo-mid-logo-x: 158px;
@@ -1776,7 +1811,7 @@
    - shorts sizing
    ========================================================= */
 @media (width: 980px)
-  and (min-height: 50px) and (max-height: 2000px) {
+  and (min-height: 50px) and (max-height: 9999px) {
   #vonix {
     --vo-mid-logo-scale: var(--vo-mid-logo-scale-979, 1.25);
     --vo-mid-logo-x: var(--vo-mid-logo-x-979, 0px);
@@ -1803,7 +1838,7 @@
 
 /* Laptop (981–1200 × any height except 600 for Nest Hub) */
 @media (min-width: 981px) and (max-width: 1200px)
-  and (min-height: 50px) and (max-height: 2000px) {
+  and (min-height: 50px) and (max-height: 9999px) {
   #vonix {
     --vo-mid-logo-scale: 1.12;
     --vo-mid-logo-x: 10px;
@@ -1814,6 +1849,10 @@
     --vo-short-right: 6px;
 
     --vo-roles-size: 16px;
+
+    --vo-desc-x: 0px;
+    --vo-desc-y: -50px;
+    --vo-desc-maxw: 36ch;
   }
   #vonix .vo__psychShort {
     width: var(--vo-short-w) !important;
@@ -1823,11 +1862,15 @@
   #vonix .vo__roles {
     font-size: var(--vo-roles-size) !important;
   }
+  #vonix .vo__desc {
+    transform: translate(var(--vo-desc-x), var(--vo-desc-y)) !important;
+    max-width: var(--vo-desc-maxw) !important;
+  }
 }
 
 /* Laptop Large (1201–2000 × any height) */
 @media (min-width: 1201px) and (max-width: 2000px)
-  and (min-height: 50px) and (max-height: 2000px) {
+  and (min-height: 50px) and (max-height: 9999px) {
   #vonix {
     --vo-mid-logo-scale: 1.10;
     --vo-mid-logo-x: 12px;
@@ -1892,20 +1935,15 @@
    - Shorts sizing only where explicitly set
    ========================================================= */
 
-/* Laptop (981–1200): logo right, paragraph thinner, shorts smaller */
+/* Laptop (981–1200): logo right, shorts smaller */
 @media (min-width: 981px) and (max-width: 1200px)
-  and (min-height: 50px) and (max-height: 2000px) {
+  and (min-height: 50px) and (max-height: 9999px) {
   #vonix {
     --vo-mid-logo-x: 158px;
-
-    --vo-desc-maxw: 43ch;
 
     --vo-short-w2: 108px;
     --vo-short-top2: -10px;
     --vo-short-right2: 8px;
-  }
-  #vonix .vo__desc {
-    max-width: var(--vo-desc-maxw) !important;
   }
   #vonix .vo__psychShort {
     width: var(--vo-short-w2) !important;
@@ -1916,15 +1954,22 @@
 
 /* Laptop Large (1201–2000): logo right ONLY, keep paragraph + shorts untouched */
 @media (min-width: 1201px) and (max-width: 2000px)
-  and (min-height: 50px) and (max-height: 2000px) {
+  and (min-height: 50px) and (max-height: 9999px) {
   #vonix {
     --vo-mid-logo-x: 196px;
   }
 }
 
+/* 1201–1439: logo left 15px */
+@media (min-width: 1201px) and (max-width: 1439px) {
+  #vonix {
+    --vo-mid-logo-x: 160px;
+  }
+}
+
 /* Paragraph only: tighten max-width for 1200–1439 (too wide in this band) */
 @media (min-width: 1200px) and (max-width: 1439px)
-  and (min-height: 50px) and (max-height: 2000px) {
+  and (min-height: 50px) and (max-height: 9999px) {
   #vonix .vo__desc {
     max-width: 44ch !important;
   }
@@ -1994,9 +2039,14 @@
 
 /* Laptop 981–1200 × any height except 600 */
 @media (min-width: 981px) and (max-width: 1200px)
-  and (min-height: 50px) and (max-height: 2000px) {
+  and (min-height: 50px) and (max-height: 9999px) {
   #vonix {
-    --vo-lower-lift: -15px;
+    --vo-lower-lift: -40px;
+  }
+
+  #vonix .vo__psychology {
+    position: relative !important;
+    top: -40px !important;
   }
 
   #vonix .vo__psychShort {
@@ -2008,7 +2058,7 @@
 
 /* Laptop Large 1201–2000 × any height */
 @media (min-width: 1201px) and (max-width: 2000px)
-  and (min-height: 50px) and (max-height: 2000px) {
+  and (min-height: 50px) and (max-height: 9999px) {
   #vonix {
     --vo-lower-lift: -95px;
   }
@@ -2036,7 +2086,7 @@
 
 /* 1201–1599: move group UP 45px */
 @media (min-width: 1201px) and (max-width: 1599px)
-  and (min-height: 50px) and (max-height: 2600px) {
+  and (min-height: 50px) and (max-height: 9999px) {
   #vonix .vo__rowDesc,
   #vonix .vo__belowHeroDesktop,
   #vonix .vo__fold {
@@ -2047,7 +2097,7 @@
 
 /* 1940–2200: move group DOWN 45px */
 @media (min-width: 1940px) and (max-width: 2200px)
-  and (min-height: 50px) and (max-height: 2600px) {
+  and (min-height: 50px) and (max-height: 9999px) {
   #vonix .vo__rowDesc,
   #vonix .vo__belowHeroDesktop,
   #vonix .vo__fold {
@@ -2056,9 +2106,8 @@
   }
 }
 
-/* 2201–2600: move group DOWN 60px */
-@media (min-width: 2201px) and (max-width: 2600px)
-  and (min-height: 50px) and (max-height: 2600px) {
+/* 2201+: move group DOWN 60px */
+@media (min-width: 2201px) {
   #vonix .vo__rowDesc,
   #vonix .vo__belowHeroDesktop,
   #vonix .vo__fold {
@@ -2100,17 +2149,17 @@
 /* 2) Move ONLY lower sections down 100px on: Nest Hub, Nest Hub Max, Laptop, Laptop L */
 /* Laptop + Laptop L first (broad height), then Nest Hub + Nest Hub Max override for their exact viewports */
 @media (min-width: 981px) and (max-width: 1200px)
-  and (min-height: 50px) and (max-height: 2000px) {  /* Laptop */
+  and (min-height: 50px) and (max-height: 9999px) {  /* Laptop */
   #vonix { --vo-lower2-y: 70px; }
 }
 
 @media (min-width: 1201px) and (max-width: 1600px)
-  and (min-height: 50px) and (max-height: 2000px) {  /* 1201–1600: Tech/Vlogs/Favorites down 30px more */
+  and (min-height: 50px) and (max-height: 9999px) {  /* 1201–1600: Tech/Vlogs/Favorites down 30px more */
   #vonix { --vo-lower2-y: 140px; }
 }
 
 @media (min-width: 1201px) and (max-width: 1599px)
-  and (min-height: 50px) and (max-height: 4000px) {  /* 1201–1599: Tech/Vlogs/Favorites UP 50px */
+  and (min-height: 50px) and (max-height: 9999px) {  /* 1201–1599: Tech/Vlogs/Favorites UP 50px */
   #vonix .vo__technology,
   #vonix .vo__vlogs,
   #vonix .vo__favorites {
@@ -2119,18 +2168,28 @@
   }
 }
 
-@media (min-width: 1601px) and (max-width: 2000px)
-  and (min-height: 50px) and (max-height: 2000px) {  /* Laptop Large 1601–2000 */
+@media (min-width: 1601px) and (max-width: 1920px)
+  and (min-height: 50px) and (max-height: 9999px) {  /* Laptop Large 1601–1920 */
   #vonix { --vo-lower2-y: 70px; }
 
   #vonix .vo__psychShort {
+    width: 7.8125vw !important;
     transform: scale(1.28) !important;
     transform-origin: top right !important;
   }
 }
 
-@media (min-width: 2001px) and (max-width: 2600px)
-  and (min-height: 50px) and (max-height: 4000px) {  /* 2001–2600: Tech/Vlogs/Favorites down 40px */
+@media (min-width: 1921px) {
+  #vonix { --vo-lower2-y: 70px; }
+
+  #vonix .vo__psychShort {
+    width: 7.8125vw !important;
+    transform: scale(1.28) !important;
+    transform-origin: top right !important;
+  }
+}
+
+@media (min-width: 2001px) {  /* 2001+: Tech/Vlogs/Favorites down 40px */
   #vonix .vo__technology,
   #vonix .vo__vlogs,
   #vonix .vo__favorites {
@@ -2149,7 +2208,7 @@
 
 /* 3) Laptop ONLY: shrink BOTH psychology shorts (exclude 1024×600 Nest Hub) */
 @media (min-width: 981px) and (max-width: 1200px)
-  and (min-height: 601px) and (max-height: 2000px) {
+  and (min-height: 601px) and (max-height: 9999px) {
   #vonix .vo__psychShort {
     width: 88px !important;         /* shrink */
   }
@@ -2164,7 +2223,7 @@
 /* ===== 980px ONLY — logo size + position tweak ===== */
 @media (width: 980px) {
   #vonix .vo__masterLogo--desktop {
-    transform: translateY(-30px) scale(1.25) !important;
+    transform: translateY(-40px) scale(1.25) !important;
   }
 }
 
