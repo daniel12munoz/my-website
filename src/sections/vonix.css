@@ -1887,6 +1887,13 @@ html:has(#vonix) .vp-main {
   }
 }
 
+/* Roles font-size bridge (1201–1439): ease from 16px → 20px */
+@media (min-width: 1201px) and (max-width: 1439px) {
+  #vonix .vo__roles {
+    font-size: 18px !important;
+  }
+}
+
 /* Nest Hub (1024x600) */
 @media (width: 1024px) and (height: 600px) {
   #vonix {
