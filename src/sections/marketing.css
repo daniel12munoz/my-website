@@ -1812,7 +1812,7 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
    Marketing Alliance 601–980: mobile replica with nav on left
    Same layout as 600 (mobile) but scaled 601→980; nav stays left (App handles it)
    ========================================================= */
-@media (min-width: 601px) and (max-width: 980px) and (min-height: 50px) and (max-height: 2000px) {
+@media (min-width: 601px) and (max-width: 980px) and (min-height: 50px) {
   #marketing-alliance {
     --ma-mid-scale: clamp(1, calc(1 + (100vw - 601px) * 0.001), 1.38);
     --ma-shorts-scale: clamp(1.05, calc(1.05 + (100vw - 601px) * 0.0005), 1.25);
@@ -3052,6 +3052,102 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
   html:has(#marketing-alliance) #marketing-alliance .ma__headshotsColumn {
     transform: translate(var(--ma-zenbookfold-headshots-x), var(--ma-zenbookfold-headshots-y)) scale(var(--ma-zenbookfold-headshots-scale)) !important;
     transform-origin: top center !important;
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 601–1920: testimonials 15% smaller cards
+   ========================================================= */
+@media (min-width: 601px) and (max-width: 1920px) {
+  #marketing-alliance .ma__testimonialsGrid .ma__videoCard {
+    scale: 0.95;
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 981–1920: testimonials tight 2×2 grid
+   Switch to auto columns so they shrink-wrap to card width,
+   then center the grid. Cards keep their natural size while
+   the gap between left and right pairs is just the grid gap.
+   ========================================================= */
+@media (min-width: 981px) and (max-width: 1920px) {
+  #marketing-alliance .ma__testimonialsGrid {
+    grid-template-columns: auto auto !important;
+    justify-content: center !important;
+  }
+  #marketing-alliance .ma__testimonialsGrid .ma__testimonial {
+    transform: none !important;
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 1921+: proportional scaling
+   ========================================================= */
+@media (min-width: 1921px) {
+  /* Title + rule + roles: scale from top right */
+  #marketing-alliance .ma__headingUnit {
+    scale: tan(atan2(100vw, 1920px));
+    transform-origin: top right !important;
+  }
+
+  /* Logo image: grow proportionally in place */
+  #marketing-alliance img.ma__logo {
+    width: calc(340px * tan(atan2(100vw, 1920px))) !important;
+  }
+
+  /* Logo wrap: track the headingUnit's visual growth.
+     Moves right + down proportionally so the logo stays in its
+     correct visual relationship with the scaled title/roles. */
+  #marketing-alliance .ma__logoWrap {
+    translate: calc((tan(atan2(100vw, 1920px)) - 1) * 100px)
+               calc((tan(atan2(100vw, 1920px)) - 1) * 140px);
+  }
+
+  /* Photography grid: scale uniformly from center */
+  #marketing-alliance .ma__photoGrid {
+    scale: tan(atan2(100vw, 1920px));
+    transform-origin: top center !important;
+  }
+
+  /* Testimonials: lock to 1920px width, scale from center.
+     Add column-gap and remove card X-nudges for clear separation. */
+  #marketing-alliance .ma__testimonialsGrid {
+    max-width: calc(1920px * 0.93);
+    margin-inline: auto;
+    scale: tan(atan2(100vw, 1920px));
+    transform-origin: top center !important;
+    column-gap: 40px !important;
+  }
+  #marketing-alliance .ma__testimonialsGrid .ma__testimonial {
+    transform: none !important;
+  }
+
+  /* Push testimonials down to stay below scaled photography */
+  #marketing-alliance .ma__shortsBlock {
+    margin-top: calc(80px + (tan(atan2(100vw, 1920px)) - 1) * 650px) !important;
+  }
+
+  /* Shorts + Headshots: auto-size columns centered together.
+     Each column scales individually from the inner edge so they
+     grow outward while the gap between them stays constant. */
+  #marketing-alliance .ma__shortsHeadshots {
+    grid-template-columns: auto auto !important;
+    justify-content: center !important;
+    gap: 260px !important;
+    margin-top: calc(100px + (tan(atan2(100vw, 1920px)) - 1) * 720px) !important;
+  }
+  #marketing-alliance .ma__shortsColumn {
+    scale: tan(atan2(100vw, 1920px));
+    transform-origin: top right !important;
+  }
+  #marketing-alliance .ma__headshotsColumn {
+    scale: tan(atan2(100vw, 1920px));
+    transform-origin: top left !important;
+  }
+
+  #marketing-alliance .ma__subhead--shorts,
+  #marketing-alliance .ma__subhead--headshots {
+    scale: calc(1 / tan(atan2(100vw, 1920px)));
   }
 }
 
