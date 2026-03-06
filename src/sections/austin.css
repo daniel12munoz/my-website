@@ -1355,7 +1355,7 @@
 /* Austin Underground 981–1450: Interviews + Concert Photography slightly smaller, keep centered (exclude iPad Pro, Nest Hub, Nest Hub Max) */
 @media (min-width: 981px) and (max-width: 1450px) and (not ((width: 1024px) and (height: 1366px))) and (not ((width: 1024px) and (height: 600px))) and (not ((width: 1280px) and (height: 800px))) {
   #austin-underground .au__fold2 {
-    max-width: 88% !important;
+    max-width: 100% !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }
@@ -1383,7 +1383,7 @@
 /* Austin Underground 981–1199: Interviews + Concert Photography slightly smaller (overrides 981–1450, exclude iPad Pro, Nest Hub) */
 @media (min-width: 981px) and (max-width: 1199px) and (not ((width: 1024px) and (height: 1366px))) and (not ((width: 1024px) and (height: 600px))) {
   #austin-underground .au__fold2 {
-    max-width: 85% !important;
+    max-width: 100% !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }
@@ -2653,6 +2653,13 @@
     transform-origin: top center !important;
     /* Ensure Concert Photography stays below Interviews — grows at 980 to prevent overlap */
     margin-top: clamp(0px, calc((100vw - 601px) * 0.19), 72px) !important;
+  }
+  /* Interviews sublabel: 25% smaller (601–980) */
+  #austin-underground .au__interviews .au__subhead h3 {
+    font-size: clamp(13.5px, 2.25vw, 21px) !important;
+  }
+  #austin-underground .au__interviews .au__rule--interviews {
+    width: 37px !important;
   }
   /* Concert Photography sublabel: smaller, right-aligned (601–980) */
   #austin-underground .au__concertPhotography .au__subhead {

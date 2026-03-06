@@ -1208,7 +1208,8 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
   #marketing-alliance .ma__photos .ma__photoGrid img {
     width: 100%;
     max-width: 100%;
-    transform: scale(0.865) !important;  /* 5% smaller than base 0.91 */
+    margin-left: 0 !important;
+    transform: scale(0.865) !important;
     transform-origin: center center !important;
   }
 }
@@ -1833,8 +1834,8 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
     --ma-hero-x: 5px;
     --ma-hero-y: -17px;
     --ma-hero-scale: 0.93;
-    /* Hero link handles (601-980) */
-    --ma-hero-link-x: 15px;
+    /* Hero link handles (601-980) — X grows with viewport to track the scaled video's left edge */
+    --ma-hero-link-x: clamp(15px, calc(15px + (100vw - 601px) * 0.03), 26px);
     --ma-hero-link-y: -23px;
     /* Heading unit handles: title + rule + roles (601-980) */
     --ma-heading-unit-x: -6px;
@@ -2362,6 +2363,8 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
     height: auto !important;
     aspect-ratio: 4 / 5 !important;
     object-fit: cover !important;
+    margin-left: 0 !important;
+    margin-top: 0 !important;
   }
   /* Override 981–1590 scale(0.865) — higher specificity so photos appear slightly larger */
   html:has(#marketing-alliance) #marketing-alliance .ma__photos .ma__photoGrid img {
@@ -2634,6 +2637,8 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
     height: auto !important;
     aspect-ratio: 4 / 5 !important;
     object-fit: cover !important;
+    margin-left: 0 !important;
+    margin-top: 0 !important;
   }
   html:has(#marketing-alliance) #marketing-alliance .ma__photos .ma__photoGrid img {
     transform: scale(0.95) !important;
@@ -2905,6 +2910,8 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
     height: auto !important;
     aspect-ratio: 4 / 5 !important;
     object-fit: cover !important;
+    margin-left: 0 !important;
+    margin-top: 0 !important;
   }
   html:has(#marketing-alliance) #marketing-alliance .ma__photos .ma__photoGrid img {
     transform: scale(0.95) !important;
@@ -3148,6 +3155,15 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
   #marketing-alliance .ma__subhead--shorts,
   #marketing-alliance .ma__subhead--headshots {
     scale: calc(1 / tan(atan2(100vw, 1920px)));
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 780–980: widen headshot pile for more gap
+   ========================================================= */
+@media (min-width: 780px) and (max-width: 980px) {
+  #marketing-alliance .ma__headshotPile {
+    width: clamp(370px, calc(340px + (100vw - 780px) * 0.25), 400px) !important;
   }
 }
 
