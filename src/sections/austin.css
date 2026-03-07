@@ -3362,7 +3362,7 @@
     --au-nesthub-desc-width: 125%;
     /* Interviews section (Nest Hub) */
     --au-nesthub-interviews-x: -155px;
-    --au-nesthub-interviews-y: 430px;
+    --au-nesthub-interviews-y: 460px;
     --au-nesthub-interviews-scale: 0.7;
     /* Concert photography section (Nest Hub) */
     --au-nesthub-concert-x: -150px;
@@ -3420,7 +3420,7 @@
     --au-nesthubmax-desc-width: 130%;
     /* Interviews section (Nest Hub Max) */
     --au-nesthubmax-interviews-x: -165px;
-    --au-nesthubmax-interviews-y: 390px;
+    --au-nesthubmax-interviews-y: 430px;
     --au-nesthubmax-interviews-scale: 0.72;
     /* Concert Photography section (Nest Hub Max) */
     --au-nesthubmax-concert-x: -170px;
@@ -3483,7 +3483,7 @@
     --au-ipadpro-desc-y: 0px;
     /* Interviews section (iPad Pro) */
     --au-ipadpro-interviews-x: 0px;
-    --au-ipadpro-interviews-y: 260px;
+    --au-ipadpro-interviews-y: 290px;
     /* Concert photography section (iPad Pro) */
     --au-ipadpro-concert-x: 0px;
     --au-ipadpro-concert-y: 280px;
@@ -3705,5 +3705,42 @@
     overflow-y: visible !important;
     contain: none !important;
     clip-path: none !important;
+  }
+}
+
+/* =========================================================
+   Austin Underground 1921+: proportional scaling
+   ========================================================= */
+@media (min-width: 1921px) {
+  /* Title + rule + roles: scale from top right */
+  #austin-underground .au__heading {
+    scale: tan(atan2(100vw, 1920px));
+    transform-origin: top right !important;
+  }
+
+  /* Collage/logo: grow proportionally, reduce downward drift */
+  #austin-underground .au__collageWrap--desktop .au__collage {
+    width: calc(420px * tan(atan2(100vw, 1920px))) !important;
+    transform: translate(
+      calc(-30px - (tan(atan2(100vw, 1920px)) - 1) * 60px),
+      calc(-100px - (tan(atan2(100vw, 1920px)) - 1) * 500px)
+    ) scale(1.2) !important;
+  }
+  .os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    width: calc(420px * tan(atan2(100vw, 1920px))) !important;
+    transform: translate(
+      calc(-30px - (tan(atan2(100vw, 1920px)) - 1) * 60px),
+      calc(-60px - (tan(atan2(100vw, 1920px)) - 1) * 500px)
+    ) scale(1.2) !important;
+  }
+
+  /* Concert Photography: grow columns proportionally, stay centered */
+  #austin-underground .au__concertPhotography .au__concertGrid {
+    grid-template-columns: repeat(5, calc(220px * tan(atan2(100vw, 1920px)))) !important;
+    gap: calc(28px * tan(atan2(100vw, 1920px))) !important;
+    justify-content: center !important;
+  }
+  #austin-underground .au__concertPhotography .au__concertGrid .media {
+    width: 100% !important;
   }
 }
