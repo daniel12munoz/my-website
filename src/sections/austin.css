@@ -1282,6 +1282,13 @@
   }
 }
 
+/* 981–1150: slightly smaller roles */
+@media (min-width: 981px) and (max-width: 1150px) {
+  #austin-underground .au__heading .au__roles {
+    font-size: clamp(10.5px, calc(10.5px + (100vw - 981px) * 0.009), 16px) !important;
+  }
+}
+
 /* 981–1750: Interviews + Concert Photography (exclude iPad Pro, Nest Hub, Nest Hub Max — they use their own blocks) */
 @media (min-width: 981px) and (max-width: 1750px) and (not ((width: 1024px) and (height: 1366px))) and (not ((width: 1024px) and (height: 600px))) and (not ((width: 1280px) and (height: 800px))) {
   #austin-underground .au__row2.au-grid {
