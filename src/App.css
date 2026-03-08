@@ -247,9 +247,17 @@ body {
   padding-top: clamp(56px, 8vh, 110px);
 }
 
-/* OTHER CHANNELS: disable scrolling in the main container */
+/* OTHER CHANNELS: allow section overflow so translated content isn't clipped at short viewport heights;
+   body.no-scroll-otherchannels on body + #root still prevents actual scrolling */
 .App > main.vp-main--other {
-  overflow: hidden;
+  overflow: visible;
+}
+
+/* OTHER CHANNELS (601px+): lock padding-top so no Y shift at 980px when --content-top changes */
+@media (min-width: 601px) {
+  .App > main.vp-main--other {
+    padding-top: 0 !important;
+  }
 }
 
 /* ABOUT ME: disable scrolling in main container */
