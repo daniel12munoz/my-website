@@ -99,65 +99,845 @@
   }
 
   .contact__center {
-    margin: 0 !important;
-    transform: translate(var(--contact-mid-x), var(--contact-mid-y)) scale(var(--contact-mid-scale)) !important;
+    /* Vertical: keep a nearly-constant offset (-280px to -305px) so the
+       text stays at the same visual height as the 1600px reference.
+       Slope 0.063 only transitions over the last ~400px before 1600px. */
+    margin-top: clamp(-305px, calc(-305px + (1600px - 100vw) * 0.063), -280px);
+    /* Horizontal: ramp to 0 by ~1200px so the text never clips behind
+       the sidebar at narrower widths. */
+    margin-left: clamp(-195px, calc(-195px + (1600px - 100vw) * 0.489), 0px);
+    transform: translate(var(--contact-mid-x), var(--contact-mid-y)) scale(var(--contact-mid-scale));
     transform-origin: center center;
     will-change: transform;
   }
 }
 
-/* ── RANGE-BASED BASELINE QUERIES (±tolerance) ────────── */
-
-/* A) Chrome "Tablet" family (~768x800) */
-@media (min-width: 601px) and (max-width: 979px) and (min-height: 100px) and (max-height: 1200px) {
-  .contact { --contact-mid-x: -31px; --contact-mid-y: -95px; --contact-mid-scale: 1; }
+/* =========================================================
+   CONTACT — ALLOW OVERFLOW (601–1300px) so email never gets
+   clipped/covered on the left when handles shift it.
+   ========================================================= */
+@media (min-width: 601px) and (max-width: 1300px) {
+  .contact {
+    overflow: visible;
+    overflow-x: visible;
+  }
 }
 
-/* B) Chrome "Laptop" family (~1024x800) */
-@media (min-width: 980px) and (max-width: 1120px) and (min-height: 740px) and (max-height: 900px) {
-  .contact { --contact-mid-x: -45px; --contact-mid-y: -115px; --contact-mid-scale: 1; }
+/* =========================================================
+   CONTACT — HANDLE GRID (601–1300px width × 50px height steps)
+   Override --contact-mid-x, --contact-mid-y, --contact-mid-scale
+   per cell. Base values: 0px, 0px, 1.
+   ========================================================= */
+
+/* ── 601–650 width ─────────────────────────────────────── */
+@media (min-width: 601px) and (max-width: 650px) and (max-height: 200px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: .85; }
+}
+@media (min-width: 601px) and (max-width: 650px) and (min-height: 201px) and (max-height: 250px) {
+  .contact { --contact-mid-x: -15px; --contact-mid-y: 0px; --contact-mid-scale: .9; }
+}
+@media (min-width: 601px) and (max-width: 650px) and (min-height: 251px) and (max-height: 300px) {
+  .contact { --contact-mid-x: -15px; --contact-mid-y: 0px; --contact-mid-scale: 0.9; }
+}
+@media (min-width: 601px) and (max-width: 650px) and (min-height: 301px) and (max-height: 350px) {
+  .contact { --contact-mid-x: -15px; --contact-mid-y: 0px; --contact-mid-scale: 0.9; }
+}
+@media (min-width: 601px) and (max-width: 650px) and (min-height: 351px) and (max-height: 400px) {
+  .contact { --contact-mid-x: -15px; --contact-mid-y: 0px; --contact-mid-scale: 0.9; }
+}
+@media (min-width: 601px) and (max-width: 650px) and (min-height: 401px) and (max-height: 450px) {
+  .contact { --contact-mid-x: -15px; --contact-mid-y: 0px; --contact-mid-scale: 0.9; }
+}
+@media (min-width: 601px) and (max-width: 650px) and (min-height: 451px) and (max-height: 500px) {
+  .contact { --contact-mid-x: -15px; --contact-mid-y: 0px; --contact-mid-scale: 0.9; }
+}
+@media (min-width: 601px) and (max-width: 650px) and (min-height: 501px) and (max-height: 550px) {
+  .contact { --contact-mid-x: -40px; --contact-mid-y: 60px; --contact-mid-scale: 0.9; }
+}
+@media (min-width: 601px) and (max-width: 650px) and (min-height: 551px) and (max-height: 600px) {
+  .contact { --contact-mid-x: -70px; --contact-mid-y: 60px; --contact-mid-scale: 0.9; }
+}
+@media (min-width: 601px) and (max-width: 650px) and (min-height: 601px) and (max-height: 650px) {
+  .contact { --contact-mid-x: -110px; --contact-mid-y: 60px; --contact-mid-scale: 0.9; }
+}
+@media (min-width: 601px) and (max-width: 650px) and (min-height: 651px) and (max-height: 700px) {
+  .contact { --contact-mid-x: -110px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
+}
+@media (min-width: 601px) and (max-width: 650px) and (min-height: 701px) and (max-height: 750px) {
+  .contact { --contact-mid-x: -110px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
+}
+@media (min-width: 601px) and (max-width: 650px) and (min-height: 751px) and (max-height: 800px) {
+  .contact { --contact-mid-x: -110px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
+}
+@media (min-width: 601px) and (max-width: 650px) and (min-height: 801px) and (max-height: 850px) {
+  .contact { --contact-mid-x: -110px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
+}
+@media (min-width: 601px) and (max-width: 650px) and (min-height: 851px) and (max-height: 900px) {
+  .contact { --contact-mid-x: -110px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
+}
+@media (min-width: 601px) and (max-width: 650px) and (min-height: 901px) and (max-height: 950px) {
+  .contact { --contact-mid-x: -110px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
+}
+@media (min-width: 601px) and (max-width: 650px) and (min-height: 951px) and (max-height: 1000px) {
+  .contact { --contact-mid-x: -110px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
+}
+@media (min-width: 601px) and (max-width: 650px) and (min-height: 1001px) {
+  .contact { --contact-mid-x: -110px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
 }
 
-/* C) Chrome "Laptop L" family (~1440x800) */
-@media (min-width: 1121px) and (max-width: 1599px) and (min-height: 740px) and (max-height: 900px) {
-  .contact { --contact-mid-x: -87px; --contact-mid-y: -154px; --contact-mid-scale: 1; }
+/* ── 651–700 width ─────────────────────────────────────── */
+@media (min-width: 651px) and (max-width: 700px) and (max-height: 200px) {
+  .contact { --contact-mid-x: -30px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 651px) and (max-width: 700px) and (min-height: 201px) and (max-height: 250px) {
+  .contact { --contact-mid-x: -30px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 651px) and (max-width: 700px) and (min-height: 251px) and (max-height: 300px) {
+  .contact { --contact-mid-x: -30px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 651px) and (max-width: 700px) and (min-height: 301px) and (max-height: 350px) {
+  .contact { --contact-mid-x: -30px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 651px) and (max-width: 700px) and (min-height: 351px) and (max-height: 400px) {
+  .contact { --contact-mid-x: -30px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 651px) and (max-width: 700px) and (min-height: 401px) and (max-height: 450px) {
+  .contact { --contact-mid-x: -30px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 651px) and (max-width: 700px) and (min-height: 451px) and (max-height: 500px) {
+  .contact { --contact-mid-x: -30px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 651px) and (max-width: 700px) and (min-height: 501px) and (max-height: 550px) {
+  .contact { --contact-mid-x: -40px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
+}
+@media (min-width: 651px) and (max-width: 700px) and (min-height: 551px) and (max-height: 600px) {
+  .contact { --contact-mid-x: -60px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
+}
+@media (min-width: 651px) and (max-width: 700px) and (min-height: 601px) and (max-height: 650px) {
+  .contact { --contact-mid-x: -70px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
+}
+@media (min-width: 651px) and (max-width: 700px) and (min-height: 651px) and (max-height: 700px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
+}
+@media (min-width: 651px) and (max-width: 700px) and (min-height: 701px) and (max-height: 750px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
+}
+@media (min-width: 651px) and (max-width: 700px) and (min-height: 751px) and (max-height: 800px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
+}
+@media (min-width: 651px) and (max-width: 700px) and (min-height: 801px) and (max-height: 850px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
+}
+@media (min-width: 651px) and (max-width: 700px) and (min-height: 851px) and (max-height: 900px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
+}
+@media (min-width: 651px) and (max-width: 700px) and (min-height: 901px) and (max-height: 950px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
+}
+@media (min-width: 651px) and (max-width: 700px) and (min-height: 951px) and (max-height: 1000px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
+}
+@media (min-width: 651px) and (max-width: 700px) and (min-height: 1001px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 60px; --contact-mid-scale: 1; }
+}
+
+/* ── 701–750 width ─────────────────────────────────────── */
+@media (min-width: 701px) and (max-width: 750px) and (max-height: 200px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 701px) and (max-width: 750px) and (min-height: 201px) and (max-height: 250px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 701px) and (max-width: 750px) and (min-height: 251px) and (max-height: 300px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 701px) and (max-width: 750px) and (min-height: 301px) and (max-height: 350px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 701px) and (max-width: 750px) and (min-height: 351px) and (max-height: 400px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 701px) and (max-width: 750px) and (min-height: 401px) and (max-height: 450px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 701px) and (max-width: 750px) and (min-height: 451px) and (max-height: 500px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 701px) and (max-width: 750px) and (min-height: 501px) and (max-height: 550px) {
+  .contact { --contact-mid-x: -60px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 701px) and (max-width: 750px) and (min-height: 551px) and (max-height: 600px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 701px) and (max-width: 750px) and (min-height: 601px) and (max-height: 650px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 701px) and (max-width: 750px) and (min-height: 651px) and (max-height: 700px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 701px) and (max-width: 750px) and (min-height: 701px) and (max-height: 750px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 701px) and (max-width: 750px) and (min-height: 751px) and (max-height: 800px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 701px) and (max-width: 750px) and (min-height: 801px) and (max-height: 850px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 701px) and (max-width: 750px) and (min-height: 851px) and (max-height: 900px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 701px) and (max-width: 750px) and (min-height: 901px) and (max-height: 950px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 701px) and (max-width: 750px) and (min-height: 951px) and (max-height: 1000px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 701px) and (max-width: 750px) and (min-height: 1001px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+
+/* ── 751–800 width ─────────────────────────────────────── */
+@media (min-width: 751px) and (max-width: 800px) and (max-height: 200px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 751px) and (max-width: 800px) and (min-height: 201px) and (max-height: 250px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 751px) and (max-width: 800px) and (min-height: 251px) and (max-height: 300px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 751px) and (max-width: 800px) and (min-height: 301px) and (max-height: 350px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 751px) and (max-width: 800px) and (min-height: 351px) and (max-height: 400px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 751px) and (max-width: 800px) and (min-height: 401px) and (max-height: 450px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 751px) and (max-width: 800px) and (min-height: 451px) and (max-height: 500px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 751px) and (max-width: 800px) and (min-height: 501px) and (max-height: 550px) {
+  .contact { --contact-mid-x: -50px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 751px) and (max-width: 800px) and (min-height: 551px) and (max-height: 600px) {
+  .contact { --contact-mid-x: -60px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 751px) and (max-width: 800px) and (min-height: 601px) and (max-height: 650px) {
+  .contact { --contact-mid-x: -70px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 751px) and (max-width: 800px) and (min-height: 651px) and (max-height: 700px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 751px) and (max-width: 800px) and (min-height: 701px) and (max-height: 750px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 751px) and (max-width: 800px) and (min-height: 751px) and (max-height: 800px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 751px) and (max-width: 800px) and (min-height: 801px) and (max-height: 850px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 751px) and (max-width: 800px) and (min-height: 851px) and (max-height: 900px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 751px) and (max-width: 800px) and (min-height: 901px) and (max-height: 950px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 751px) and (max-width: 800px) and (min-height: 951px) and (max-height: 1000px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+@media (min-width: 751px) and (max-width: 800px) and (min-height: 1001px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 50px; --contact-mid-scale: 1; }
+}
+
+/* ── 801–850 width ─────────────────────────────────────── */
+@media (min-width: 801px) and (max-width: 850px) and (max-height: 200px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 801px) and (max-width: 850px) and (min-height: 201px) and (max-height: 250px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 801px) and (max-width: 850px) and (min-height: 251px) and (max-height: 300px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 801px) and (max-width: 850px) and (min-height: 301px) and (max-height: 350px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 801px) and (max-width: 850px) and (min-height: 351px) and (max-height: 400px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 801px) and (max-width: 850px) and (min-height: 401px) and (max-height: 450px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 801px) and (max-width: 850px) and (min-height: 451px) and (max-height: 500px) {
+  .contact { --contact-mid-x: -20px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 801px) and (max-width: 850px) and (min-height: 501px) and (max-height: 550px) {
+  .contact { --contact-mid-x: -50px; --contact-mid-y: 40px; --contact-mid-scale: 1; }
+}
+@media (min-width: 801px) and (max-width: 850px) and (min-height: 551px) and (max-height: 600px) {
+  .contact { --contact-mid-x: -60px; --contact-mid-y: 40px; --contact-mid-scale: 1; }
+}
+@media (min-width: 801px) and (max-width: 850px) and (min-height: 601px) and (max-height: 650px) {
+  .contact { --contact-mid-x: -70px; --contact-mid-y: 40px; --contact-mid-scale: 1; }
+}
+@media (min-width: 801px) and (max-width: 850px) and (min-height: 651px) and (max-height: 700px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 40px; --contact-mid-scale: 1; }
+}
+@media (min-width: 801px) and (max-width: 850px) and (min-height: 701px) and (max-height: 750px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 40px; --contact-mid-scale: 1; }
+}
+@media (min-width: 801px) and (max-width: 850px) and (min-height: 751px) and (max-height: 800px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 40px; --contact-mid-scale: 1; }
+}
+@media (min-width: 801px) and (max-width: 850px) and (min-height: 801px) and (max-height: 850px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 40px; --contact-mid-scale: 1; }
+}
+@media (min-width: 801px) and (max-width: 850px) and (min-height: 851px) and (max-height: 900px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 40px; --contact-mid-scale: 1; }
+}
+@media (min-width: 801px) and (max-width: 850px) and (min-height: 901px) and (max-height: 950px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 40px; --contact-mid-scale: 1; }
+}
+@media (min-width: 801px) and (max-width: 850px) and (min-height: 951px) and (max-height: 1000px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 40px; --contact-mid-scale: 1; }
+}
+@media (min-width: 801px) and (max-width: 850px) and (min-height: 1001px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 40px; --contact-mid-scale: 1; }
+}
+
+/* ── 851–900 width ─────────────────────────────────────── */
+@media (min-width: 851px) and (max-width: 900px) and (max-height: 200px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 851px) and (max-width: 900px) and (min-height: 201px) and (max-height: 250px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 851px) and (max-width: 900px) and (min-height: 251px) and (max-height: 300px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 851px) and (max-width: 900px) and (min-height: 301px) and (max-height: 350px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 851px) and (max-width: 900px) and (min-height: 351px) and (max-height: 400px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 851px) and (max-width: 900px) and (min-height: 401px) and (max-height: 450px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 851px) and (max-width: 900px) and (min-height: 451px) and (max-height: 500px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 851px) and (max-width: 900px) and (min-height: 501px) and (max-height: 550px) {
+  .contact { --contact-mid-x: -30px; --contact-mid-y: 35px; --contact-mid-scale: 1; }
+}
+@media (min-width: 851px) and (max-width: 900px) and (min-height: 551px) and (max-height: 600px) {
+  .contact { --contact-mid-x: -40px; --contact-mid-y: 35px; --contact-mid-scale: 1; }
+}
+@media (min-width: 851px) and (max-width: 900px) and (min-height: 601px) and (max-height: 650px) {
+  .contact { --contact-mid-x: -50px; --contact-mid-y: 35px; --contact-mid-scale: 1; }
+}
+@media (min-width: 851px) and (max-width: 900px) and (min-height: 651px) and (max-height: 700px) {
+  .contact { --contact-mid-x: -60px; --contact-mid-y: 35px; --contact-mid-scale: 1; }
+}
+@media (min-width: 851px) and (max-width: 900px) and (min-height: 701px) and (max-height: 750px) {
+  .contact { --contact-mid-x: -70px; --contact-mid-y: 35px; --contact-mid-scale: 1; }
+}
+@media (min-width: 851px) and (max-width: 900px) and (min-height: 751px) and (max-height: 800px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 35px; --contact-mid-scale: 1; }
+}
+@media (min-width: 851px) and (max-width: 900px) and (min-height: 801px) and (max-height: 850px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 35px; --contact-mid-scale: 1; }
+}
+@media (min-width: 851px) and (max-width: 900px) and (min-height: 851px) and (max-height: 900px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 35px; --contact-mid-scale: 1; }
+}
+@media (min-width: 851px) and (max-width: 900px) and (min-height: 901px) and (max-height: 950px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 35px; --contact-mid-scale: 1; }
+}
+@media (min-width: 851px) and (max-width: 900px) and (min-height: 951px) and (max-height: 1000px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 35px; --contact-mid-scale: 1; }
+}
+@media (min-width: 851px) and (max-width: 900px) and (min-height: 1001px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 35px; --contact-mid-scale: 1; }
+}
+
+/* ── 901–950 width ─────────────────────────────────────── */
+@media (min-width: 901px) and (max-width: 950px) and (max-height: 200px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 901px) and (max-width: 950px) and (min-height: 201px) and (max-height: 250px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 901px) and (max-width: 950px) and (min-height: 251px) and (max-height: 300px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 901px) and (max-width: 950px) and (min-height: 301px) and (max-height: 350px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 901px) and (max-width: 950px) and (min-height: 351px) and (max-height: 400px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 901px) and (max-width: 950px) and (min-height: 401px) and (max-height: 450px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 901px) and (max-width: 950px) and (min-height: 451px) and (max-height: 500px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 901px) and (max-width: 950px) and (min-height: 501px) and (max-height: 550px) {
+  .contact { --contact-mid-x: -30px; --contact-mid-y: 30px; --contact-mid-scale: 1; }
+}
+@media (min-width: 901px) and (max-width: 950px) and (min-height: 551px) and (max-height: 600px) {
+  .contact { --contact-mid-x: -40px; --contact-mid-y: 30px; --contact-mid-scale: 1; }
+}
+@media (min-width: 901px) and (max-width: 950px) and (min-height: 601px) and (max-height: 650px) {
+  .contact { --contact-mid-x: -50px; --contact-mid-y: 30px; --contact-mid-scale: 1; }
+}
+@media (min-width: 901px) and (max-width: 950px) and (min-height: 651px) and (max-height: 700px) {
+  .contact { --contact-mid-x: -60px; --contact-mid-y: 30px; --contact-mid-scale: 1; }
+}
+@media (min-width: 901px) and (max-width: 950px) and (min-height: 701px) and (max-height: 750px) {
+  .contact { --contact-mid-x: -70px; --contact-mid-y: 30px; --contact-mid-scale: 1; }
+}
+@media (min-width: 901px) and (max-width: 950px) and (min-height: 751px) and (max-height: 800px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 30px; --contact-mid-scale: 1; }
+}
+@media (min-width: 901px) and (max-width: 950px) and (min-height: 801px) and (max-height: 850px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 30px; --contact-mid-scale: 1; }
+}
+@media (min-width: 901px) and (max-width: 950px) and (min-height: 851px) and (max-height: 900px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 30px; --contact-mid-scale: 1; }
+}
+@media (min-width: 901px) and (max-width: 950px) and (min-height: 901px) and (max-height: 950px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 30px; --contact-mid-scale: 1; }
+}
+@media (min-width: 901px) and (max-width: 950px) and (min-height: 951px) and (max-height: 1000px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 30px; --contact-mid-scale: 1; }
+}
+@media (min-width: 901px) and (max-width: 950px) and (min-height: 1001px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 30px; --contact-mid-scale: 1; }
+}
+
+/* ── 951–1000 width ─────────────────────────────────────── */
+@media (min-width: 951px) and (max-width: 1000px) and (max-height: 200px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 951px) and (max-width: 1000px) and (min-height: 201px) and (max-height: 250px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 951px) and (max-width: 1000px) and (min-height: 251px) and (max-height: 300px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 951px) and (max-width: 1000px) and (min-height: 301px) and (max-height: 350px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 951px) and (max-width: 1000px) and (min-height: 351px) and (max-height: 400px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 951px) and (max-width: 1000px) and (min-height: 401px) and (max-height: 450px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 951px) and (max-width: 1000px) and (min-height: 451px) and (max-height: 500px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 951px) and (max-width: 1000px) and (min-height: 501px) and (max-height: 550px) {
+  .contact { --contact-mid-x: -30px; --contact-mid-y: 25px; --contact-mid-scale: 1; }
+}
+@media (min-width: 951px) and (max-width: 1000px) and (min-height: 551px) and (max-height: 600px) {
+  .contact { --contact-mid-x: -40px; --contact-mid-y: 25px; --contact-mid-scale: 1; }
+}
+@media (min-width: 951px) and (max-width: 1000px) and (min-height: 601px) and (max-height: 650px) {
+  .contact { --contact-mid-x: -50px; --contact-mid-y: 25px; --contact-mid-scale: 1; }
+}
+@media (min-width: 951px) and (max-width: 1000px) and (min-height: 651px) and (max-height: 700px) {
+  .contact { --contact-mid-x: -60px; --contact-mid-y: 25px; --contact-mid-scale: 1; }
+}
+@media (min-width: 951px) and (max-width: 1000px) and (min-height: 701px) and (max-height: 750px) {
+  .contact { --contact-mid-x: -70px; --contact-mid-y: 25px; --contact-mid-scale: 1; }
+}
+@media (min-width: 951px) and (max-width: 1000px) and (min-height: 751px) and (max-height: 800px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 25px; --contact-mid-scale: 1; }
+}
+@media (min-width: 951px) and (max-width: 1000px) and (min-height: 801px) and (max-height: 850px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 25px; --contact-mid-scale: 1; }
+}
+@media (min-width: 951px) and (max-width: 1000px) and (min-height: 851px) and (max-height: 900px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 25px; --contact-mid-scale: 1; }
+}
+@media (min-width: 951px) and (max-width: 1000px) and (min-height: 901px) and (max-height: 950px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 25px; --contact-mid-scale: 1; }
+}
+@media (min-width: 951px) and (max-width: 1000px) and (min-height: 951px) and (max-height: 1000px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 25px; --contact-mid-scale: 1; }
+}
+@media (min-width: 951px) and (max-width: 1000px) and (min-height: 1001px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 25px; --contact-mid-scale: 1; }
+}
+
+/* ── 1001–1050 width ─────────────────────────────────────── */
+@media (min-width: 1001px) and (max-width: 1050px) and (max-height: 200px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1001px) and (max-width: 1050px) and (min-height: 201px) and (max-height: 250px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1001px) and (max-width: 1050px) and (min-height: 251px) and (max-height: 300px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1001px) and (max-width: 1050px) and (min-height: 301px) and (max-height: 350px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1001px) and (max-width: 1050px) and (min-height: 351px) and (max-height: 400px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1001px) and (max-width: 1050px) and (min-height: 401px) and (max-height: 450px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1001px) and (max-width: 1050px) and (min-height: 451px) and (max-height: 500px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1001px) and (max-width: 1050px) and (min-height: 501px) and (max-height: 550px) {
+  .contact { --contact-mid-x: -30px; --contact-mid-y: 20px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1001px) and (max-width: 1050px) and (min-height: 551px) and (max-height: 600px) {
+  .contact { --contact-mid-x: -40px; --contact-mid-y: 20px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1001px) and (max-width: 1050px) and (min-height: 601px) and (max-height: 650px) {
+  .contact { --contact-mid-x: -50px; --contact-mid-y: 20px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1001px) and (max-width: 1050px) and (min-height: 651px) and (max-height: 700px) {
+  .contact { --contact-mid-x: -60px; --contact-mid-y: 20px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1001px) and (max-width: 1050px) and (min-height: 701px) and (max-height: 750px) {
+  .contact { --contact-mid-x: -70px; --contact-mid-y: 20px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1001px) and (max-width: 1050px) and (min-height: 751px) and (max-height: 800px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 20px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1001px) and (max-width: 1050px) and (min-height: 801px) and (max-height: 850px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 20px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1001px) and (max-width: 1050px) and (min-height: 851px) and (max-height: 900px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 20px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1001px) and (max-width: 1050px) and (min-height: 901px) and (max-height: 950px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 20px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1001px) and (max-width: 1050px) and (min-height: 951px) and (max-height: 1000px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 20px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1001px) and (max-width: 1050px) and (min-height: 1001px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 20px; --contact-mid-scale: 1; }
+}
+
+/* ── 1051–1100 width ─────────────────────────────────────── */
+@media (min-width: 1051px) and (max-width: 1100px) and (max-height: 200px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1051px) and (max-width: 1100px) and (min-height: 201px) and (max-height: 250px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1051px) and (max-width: 1100px) and (min-height: 251px) and (max-height: 300px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1051px) and (max-width: 1100px) and (min-height: 301px) and (max-height: 350px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1051px) and (max-width: 1100px) and (min-height: 351px) and (max-height: 400px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1051px) and (max-width: 1100px) and (min-height: 401px) and (max-height: 450px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1051px) and (max-width: 1100px) and (min-height: 451px) and (max-height: 500px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1051px) and (max-width: 1100px) and (min-height: 501px) and (max-height: 550px) {
+  .contact { --contact-mid-x: -30px; --contact-mid-y: 15px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1051px) and (max-width: 1100px) and (min-height: 551px) and (max-height: 600px) {
+  .contact { --contact-mid-x: -40px; --contact-mid-y: 15px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1051px) and (max-width: 1100px) and (min-height: 601px) and (max-height: 650px) {
+  .contact { --contact-mid-x: -50px; --contact-mid-y: 15px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1051px) and (max-width: 1100px) and (min-height: 651px) and (max-height: 700px) {
+  .contact { --contact-mid-x: -60px; --contact-mid-y: 15px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1051px) and (max-width: 1100px) and (min-height: 701px) and (max-height: 750px) {
+  .contact { --contact-mid-x: -70px; --contact-mid-y: 15px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1051px) and (max-width: 1100px) and (min-height: 751px) and (max-height: 800px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 15px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1051px) and (max-width: 1100px) and (min-height: 801px) and (max-height: 850px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 15px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1051px) and (max-width: 1100px) and (min-height: 851px) and (max-height: 900px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 15px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1051px) and (max-width: 1100px) and (min-height: 901px) and (max-height: 950px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 15px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1051px) and (max-width: 1100px) and (min-height: 951px) and (max-height: 1000px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 15px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1051px) and (max-width: 1100px) and (min-height: 1001px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 15px; --contact-mid-scale: 1; }
+}
+
+/* ── 1101–1150 width ─────────────────────────────────────── */
+@media (min-width: 1101px) and (max-width: 1150px) and (max-height: 200px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1101px) and (max-width: 1150px) and (min-height: 201px) and (max-height: 250px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1101px) and (max-width: 1150px) and (min-height: 251px) and (max-height: 300px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1101px) and (max-width: 1150px) and (min-height: 301px) and (max-height: 350px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1101px) and (max-width: 1150px) and (min-height: 351px) and (max-height: 400px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1101px) and (max-width: 1150px) and (min-height: 401px) and (max-height: 450px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1101px) and (max-width: 1150px) and (min-height: 451px) and (max-height: 500px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1101px) and (max-width: 1150px) and (min-height: 501px) and (max-height: 550px) {
+  .contact { --contact-mid-x: -30px; --contact-mid-y: 12px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1101px) and (max-width: 1150px) and (min-height: 551px) and (max-height: 600px) {
+  .contact { --contact-mid-x: -40px; --contact-mid-y: 12px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1101px) and (max-width: 1150px) and (min-height: 601px) and (max-height: 650px) {
+  .contact { --contact-mid-x: -50px; --contact-mid-y: 12px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1101px) and (max-width: 1150px) and (min-height: 651px) and (max-height: 700px) {
+  .contact { --contact-mid-x: -60px; --contact-mid-y: 12px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1101px) and (max-width: 1150px) and (min-height: 701px) and (max-height: 750px) {
+  .contact { --contact-mid-x: -70px; --contact-mid-y: 12px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1101px) and (max-width: 1150px) and (min-height: 751px) and (max-height: 800px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 12px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1101px) and (max-width: 1150px) and (min-height: 801px) and (max-height: 850px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 12px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1101px) and (max-width: 1150px) and (min-height: 851px) and (max-height: 900px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 12px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1101px) and (max-width: 1150px) and (min-height: 901px) and (max-height: 950px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 12px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1101px) and (max-width: 1150px) and (min-height: 951px) and (max-height: 1000px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 12px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1101px) and (max-width: 1150px) and (min-height: 1001px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 12px; --contact-mid-scale: 1; }
+}
+
+/* ── 1151–1200 width ─────────────────────────────────────── */
+@media (min-width: 1151px) and (max-width: 1200px) and (max-height: 200px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1151px) and (max-width: 1200px) and (min-height: 201px) and (max-height: 250px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1151px) and (max-width: 1200px) and (min-height: 251px) and (max-height: 300px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1151px) and (max-width: 1200px) and (min-height: 301px) and (max-height: 350px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1151px) and (max-width: 1200px) and (min-height: 351px) and (max-height: 400px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1151px) and (max-width: 1200px) and (min-height: 401px) and (max-height: 450px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1151px) and (max-width: 1200px) and (min-height: 451px) and (max-height: 500px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1151px) and (max-width: 1200px) and (min-height: 501px) and (max-height: 550px) {
+  .contact { --contact-mid-x: -30px; --contact-mid-y: 10px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1151px) and (max-width: 1200px) and (min-height: 551px) and (max-height: 600px) {
+  .contact { --contact-mid-x: -40px; --contact-mid-y: 10px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1151px) and (max-width: 1200px) and (min-height: 601px) and (max-height: 650px) {
+  .contact { --contact-mid-x: -50px; --contact-mid-y: 10px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1151px) and (max-width: 1200px) and (min-height: 651px) and (max-height: 700px) {
+  .contact { --contact-mid-x: -60px; --contact-mid-y: 10px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1151px) and (max-width: 1200px) and (min-height: 701px) and (max-height: 750px) {
+  .contact { --contact-mid-x: -70px; --contact-mid-y: 10px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1151px) and (max-width: 1200px) and (min-height: 751px) and (max-height: 800px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 10px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1151px) and (max-width: 1200px) and (min-height: 801px) and (max-height: 850px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 10px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1151px) and (max-width: 1200px) and (min-height: 851px) and (max-height: 900px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 10px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1151px) and (max-width: 1200px) and (min-height: 901px) and (max-height: 950px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 10px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1151px) and (max-width: 1200px) and (min-height: 951px) and (max-height: 1000px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 10px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1151px) and (max-width: 1200px) and (min-height: 1001px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 10px; --contact-mid-scale: 1; }
+}
+
+/* ── 1201–1250 width ─────────────────────────────────────── */
+@media (min-width: 1201px) and (max-width: 1250px) and (max-height: 200px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1201px) and (max-width: 1250px) and (min-height: 201px) and (max-height: 250px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1201px) and (max-width: 1250px) and (min-height: 251px) and (max-height: 300px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1201px) and (max-width: 1250px) and (min-height: 301px) and (max-height: 350px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1201px) and (max-width: 1250px) and (min-height: 351px) and (max-height: 400px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1201px) and (max-width: 1250px) and (min-height: 401px) and (max-height: 450px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1201px) and (max-width: 1250px) and (min-height: 451px) and (max-height: 500px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1201px) and (max-width: 1250px) and (min-height: 501px) and (max-height: 550px) {
+  .contact { --contact-mid-x: -30px; --contact-mid-y: 8px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1201px) and (max-width: 1250px) and (min-height: 551px) and (max-height: 600px) {
+  .contact { --contact-mid-x: -40px; --contact-mid-y: 8px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1201px) and (max-width: 1250px) and (min-height: 601px) and (max-height: 650px) {
+  .contact { --contact-mid-x: -50px; --contact-mid-y: 8px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1201px) and (max-width: 1250px) and (min-height: 651px) and (max-height: 700px) {
+  .contact { --contact-mid-x: -60px; --contact-mid-y: 8px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1201px) and (max-width: 1250px) and (min-height: 701px) and (max-height: 750px) {
+  .contact { --contact-mid-x: -70px; --contact-mid-y: 8px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1201px) and (max-width: 1250px) and (min-height: 751px) and (max-height: 800px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 8px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1201px) and (max-width: 1250px) and (min-height: 801px) and (max-height: 850px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 8px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1201px) and (max-width: 1250px) and (min-height: 851px) and (max-height: 900px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 8px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1201px) and (max-width: 1250px) and (min-height: 901px) and (max-height: 950px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 8px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1201px) and (max-width: 1250px) and (min-height: 951px) and (max-height: 1000px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 8px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1201px) and (max-width: 1250px) and (min-height: 1001px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 8px; --contact-mid-scale: 1; }
+}
+
+/* ── 1251–1300 width ─────────────────────────────────────── */
+@media (min-width: 1251px) and (max-width: 1300px) and (max-height: 200px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1251px) and (max-width: 1300px) and (min-height: 201px) and (max-height: 250px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1251px) and (max-width: 1300px) and (min-height: 251px) and (max-height: 300px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1251px) and (max-width: 1300px) and (min-height: 301px) and (max-height: 350px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1251px) and (max-width: 1300px) and (min-height: 351px) and (max-height: 400px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1251px) and (max-width: 1300px) and (min-height: 401px) and (max-height: 450px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1251px) and (max-width: 1300px) and (min-height: 451px) and (max-height: 500px) {
+  .contact { --contact-mid-x: -10px; --contact-mid-y: 0px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1251px) and (max-width: 1300px) and (min-height: 501px) and (max-height: 550px) {
+  .contact { --contact-mid-x: -30px; --contact-mid-y: 5px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1251px) and (max-width: 1300px) and (min-height: 551px) and (max-height: 600px) {
+  .contact { --contact-mid-x: -40px; --contact-mid-y: 5px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1251px) and (max-width: 1300px) and (min-height: 601px) and (max-height: 650px) {
+  .contact { --contact-mid-x: -50px; --contact-mid-y: 5px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1251px) and (max-width: 1300px) and (min-height: 651px) and (max-height: 700px) {
+  .contact { --contact-mid-x: -60px; --contact-mid-y: 5px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1251px) and (max-width: 1300px) and (min-height: 701px) and (max-height: 750px) {
+  .contact { --contact-mid-x: -70px; --contact-mid-y: 5px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1251px) and (max-width: 1300px) and (min-height: 751px) and (max-height: 800px) {
+  .contact { --contact-mid-x: -80px; --contact-mid-y: 5px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1251px) and (max-width: 1300px) and (min-height: 801px) and (max-height: 850px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 5px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1251px) and (max-width: 1300px) and (min-height: 851px) and (max-height: 900px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 5px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1251px) and (max-width: 1300px) and (min-height: 901px) and (max-height: 950px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 5px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1251px) and (max-width: 1300px) and (min-height: 951px) and (max-height: 1000px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 5px; --contact-mid-scale: 1; }
+}
+@media (min-width: 1251px) and (max-width: 1300px) and (min-height: 1001px) {
+  .contact { --contact-mid-x: -90px; --contact-mid-y: 5px; --contact-mid-scale: 1; }
 }
 
 /* ── DEVICE-SPECIFIC QUERIES ─────────────────────────── */
 
 /* 4) iPad Mini 768x1024 */
 @media (width: 768px) and (height: 1024px) {
-  .contact { --contact-mid-x: -79px; --contact-mid-y: -94px; --contact-mid-scale: 1.2; }
+  .contact { --contact-mid-scale: 1; }
 }
 
 /* 5) iPad Air 820x1180 */
 @media (width: 820px) and (height: 1180px) {
-  .contact { --contact-mid-x: -69px; --contact-mid-y: -101px; --contact-mid-scale: 1.2; }
+  .contact { --contact-mid-scale: 1; }
 }
 
 /* 6) iPad Pro 1024x1366 */
 @media (width: 1024px) and (height: 1366px) {
-  .contact { --contact-mid-x: -81px; --contact-mid-y: -118px; --contact-mid-scale: 1.25; }
+  .contact { --contact-mid-scale: 1; }
 }
 
 /* 7) Surface Pro 7 912x1368 */
 @media (width: 912px) and (height: 1368px) {
-  .contact { --contact-mid-x: -60px; --contact-mid-y: -112px; --contact-mid-scale: 1.35; }
+  .contact { --contact-mid-scale: 1; }
 }
 
 /* 8) Asus ZenBook Fold 853x1280 */
 @media (width: 853px) and (height: 1280px) {
-  .contact { --contact-mid-x: -62px; --contact-mid-y: -106px; --contact-mid-scale: 1.30; }
-}
-
-/* 9) Nest Hub 1024x600 */
-@media (width: 1024px) and (height: 600px) {
-  .contact { --contact-mid-x: -45px; --contact-mid-y: -115px; --contact-mid-scale: 1; }
-}
-
-/* 10) Nest Hub Max 1280x800 */
-@media (width: 1280px) and (height: 800px) {
-  .contact { --contact-mid-x: -85px; --contact-mid-y: -145px; --contact-mid-scale: 1; }
+  .contact { --contact-mid-scale: 1; }
 }
 
 /* ── iPAD MINI / iPAD AIR — LEFT GUTTER ANTI-CLIP ───── */
@@ -282,20 +1062,48 @@
 @media (min-width: 820px) and (max-width: 900px)
        and (min-height: 1200px) and (max-height: 1350px) {
 
-  /* Asus ZenBook Fold: FIX LEFT CLIP (paint only) */
-  .contact {
-    overflow: visible !important;
+  /* Asus ZenBook Fold: allow left overflow so text is never clipped; keep overflow-y hidden to prevent scroll */
+  html:has(.contact) {
+    overflow-y: hidden !important;
     overflow-x: visible !important;
-    overflow-y: visible !important;
+  }
+
+  /* Lift contact out of main flow so it paints above nav; full viewport with padding so content position matches main */
+  .contact {
+    position: fixed !important;
+    inset: 0 !important;
+    /* Match main content area + contact's own padding so grid center is identical */
+    padding-left: calc(var(--brand-col) + var(--content-gutter) + var(--main-x-nudge, 0px) + clamp(18px, 4vw, 46px)) !important;
+    padding-top: calc(var(--content-top) + clamp(18px, 3vw, 34px)) !important;
+    padding-right: clamp(18px, 4vw, 46px) !important;
+    padding-bottom: clamp(18px, 3vw, 34px) !important;
+    z-index: 100 !important;
+    overflow-x: visible !important;
+    overflow-y: hidden !important;
     contain: none !important;
     clip-path: none !important;
     isolation: isolate;
-    z-index: 2;
+    /* Transparent over nav so nav shows through; white over content area */
+    background: linear-gradient(
+      to right,
+      transparent 0,
+      transparent calc(24px + var(--brand-col)),
+      #fff calc(24px + var(--brand-col))
+    ) !important;
+    pointer-events: none !important;
   }
 
   .contact__center {
     position: relative;
     z-index: 5;
+    pointer-events: none !important;
+    /* Compensate for Y shift: fixed overlay centers differently; push down to match in-flow position */
+    margin-top: calc(-305px + var(--content-top) / 2) !important;
+  }
+
+  /* Only the Instagram link needs to receive clicks; center has pointer-events: none so nav works */
+  .contact__center .contact__ig {
+    pointer-events: auto !important;
   }
 
   .contact,
@@ -305,15 +1113,42 @@
 
   body:has(.contact) {
     overflow-x: visible !important;
+    overflow-y: hidden !important;
   }
 
   main:has(.contact),
   .vp-main:has(.contact),
   .App:has(.contact) {
-    overflow: visible !important;
     overflow-x: visible !important;
+    overflow-y: hidden !important;
     contain: none !important;
     clip-path: none !important;
+  }
+}
+
+/* =========================
+   SHORT HEIGHT FIX — CONTACT PAGE (601px+ width)
+   At very short viewport heights the padding-top on vp-main and
+   large negative offsets push the text off the visible area.
+   Reset to simple centring so the text is never covered.
+   ========================= */
+@media (min-width: 601px) and (max-height: 500px) {
+  .contact {
+    min-height: 100vh;
+    min-height: 100svh;
+    height: 100vh;
+    height: 100svh;
+  }
+
+  .contact__center {
+    margin-top: 0 !important;
+  }
+}
+
+/* 601–650px short-height nudge: shift text 25px left */
+@media (min-width: 601px) and (max-width: 650px) and (max-height: 500px) {
+  .contact__center {
+    margin-left: -25px;
   }
 }
 

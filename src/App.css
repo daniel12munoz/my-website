@@ -108,7 +108,7 @@ body {
   position: fixed;
   top: 48px;
   left: 48px;
-  z-index: 10;
+  z-index: 30;
   width: var(--brand-col);
   animation: fadeIn 1.5s ease-in;
 }
@@ -265,9 +265,17 @@ body {
   overflow: hidden;
 }
 
-/* CONTACT: disable scrolling in main container */
+/* CONTACT: disable scrolling in main container; raise above nav so text never gets covered by nav white bar */
 .App > main.vp-main--contact {
   overflow: hidden;
+  z-index: 11;
+}
+
+/* CONTACT — SHORT HEIGHT: remove padding-top so the section fills the viewport */
+@media (min-width: 601px) and (max-height: 500px) {
+  .App > main.vp-main--contact {
+    padding-top: 0 !important;
+  }
 }
 
 /* Fade-in animation */
@@ -626,6 +634,29 @@ body.nav-open {
     overflow: hidden !important;
     height: 100svh !important;
     max-height: 100svh !important;
+    overscroll-behavior: none !important;
+    touch-action: none !important;
+  }
+}
+
+/* 820–900px: Contact text shifts left; nav stays above via its z-index: 30 baseline */
+@media (min-width: 820px) and (max-width: 900px) {
+  .App > main.vp-main--contact {
+    position: relative;
+    z-index: 20;
+  }
+}
+
+/* Asus ZenBook Fold 853×1280: lock Contact page — no scroll allowed */
+@media (width: 853px) and (height: 1280px) {
+  html:has(.contact) {
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+  }
+  .App > main.vp-main--contact {
+    overflow: hidden !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
     overscroll-behavior: none !important;
     touch-action: none !important;
   }
