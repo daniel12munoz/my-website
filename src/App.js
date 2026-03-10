@@ -89,6 +89,12 @@ function App() {
     };
 
     const reset = () => {
+      // Always reset mainRef directly — getScrollContainer() can miss it
+      // when the new page's content hasn't inflated scrollHeight yet
+      if (mainRef.current) {
+        mainRef.current.scrollTop = 0;
+        mainRef.current.scrollLeft = 0;
+      }
       const scroller = getScrollContainer();
       if (scroller && typeof scroller.scrollTo === 'function') {
         scroller.scrollTo({ top: 0, left: 0, behavior: 'auto' });
@@ -207,7 +213,14 @@ function App() {
 
     // Mobile-only: clear scroll lock immediately (hamburger menu bug fix)
     if (isMobile) {
+      // Zero the .vp-main scroll WHILE body is still position:fixed —
+      // iOS Safari saves this value internally and restores it when
+      // fixed positioning is removed, so it must be 0 beforehand
+      if (mainRef.current) mainRef.current.scrollTop = 0;
+      scrollYRef.current = 0;
       clearScrollLock();
+      // Belt-and-suspenders: zero again after un-fixing
+      if (mainRef.current) mainRef.current.scrollTop = 0;
     }
 
     // Navigate to new page
