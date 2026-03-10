@@ -1220,7 +1220,7 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
 @media (min-width: 981px) and (max-width: 1700px) {
   html:not(.os-mac) #marketing-alliance {
     --ma-desk-hero-x: 0px;
-    --ma-desk-hero-y: 17px;
+    --ma-desk-hero-y: 0px;
     --ma-desk-hero-scale: 1;
     --ma-desk-link-x: 0px;
     --ma-desk-link-y: 0px;
@@ -1234,6 +1234,17 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
   html:not(.os-mac) #marketing-alliance .ma__videoBlock .ma__linkRule {
     transform: translate(calc(var(--ma-desk-hero-x) + var(--ma-desk-link-x)), calc(var(--ma-desk-hero-y) + var(--ma-desk-link-y))) scale(var(--ma-desk-link-scale)) !important;
     transform-origin: top left !important;
+  }
+}
+
+/* =========================================================
+   Marketing Alliance 981–1023: hero + link nudge DOWN to match 1024+
+   (Section lacks the margin-top:-28px and heading margin-top:-18px
+    that kick in at 1024, so the hero sits higher without this.)
+   ========================================================= */
+@media (min-width: 981px) and (max-width: 1023px) {
+  html:not(.os-mac) #marketing-alliance {
+    --ma-desk-hero-y: 17px;
   }
 }
 
@@ -1428,10 +1439,12 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
     --ma-testimonial-nudge: -8px;
     --ma-logo-scale: 0.8;           /* decreased by 20% */
     --ma-safe-gutter: 10px;
+    --ma-center-nudge: 7px;        /* shift entire page right to visually center on mobile */
     --ma-bottom-gutter: 150px;      /* fat white space at bottom for scrolling */
     padding-left: var(--ma-safe-gutter);
     padding-right: var(--ma-safe-gutter);
     padding-bottom: var(--ma-bottom-gutter);
+    transform: translateX(var(--ma-center-nudge));
   }
 
   /* Roles text */
@@ -1830,24 +1843,41 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
     --ma-logo-nudge-x: clamp(5px, calc(5px + (100vw - 601px) * 0.013), 10px);
     --ma-logo-margin-top: clamp(40px, calc(40px + (100vw - 601px) * 0.016), 53px);
     --ma-stack-lift: clamp(-35px, calc(-35px + (100vw - 601px) * 0.02), -10px);
-    /* Hero video handles (601-980) */
-    --ma-hero-x: 5px;
-    --ma-hero-y: -17px;
-    --ma-hero-scale: 0.93;
-    /* Hero link handles (601-980) — X grows with viewport to track the scaled video's left edge */
-    --ma-hero-link-x: clamp(15px, calc(15px + (100vw - 601px) * 0.03), 26px);
-    --ma-hero-link-y: -23px;
-    /* Heading unit handles: title + rule + roles (601-980) */
-    --ma-heading-unit-x: -6px;
-    --ma-heading-unit-y: -32px;
+    /* Hero video handles (601-980) — match Blaze */
+    --ma-hero-x: -19px;
+    --ma-hero-y: -12px;
+    --ma-hero-scale: 1.04;
+    /* Hero link handles (601-980) — match Blaze */
+    --ma-hero-link-x: 0px;
+    --ma-hero-link-y: 8px;
+    /* Heading unit handles: title + rule + roles (601-980) — match Blaze (no offset) */
+    --ma-heading-unit-x: 0px;
+    --ma-heading-unit-y: 0px;
     padding-left: clamp(10px, calc(10px + (100vw - 601px) * 0.026), 20px);
     padding-right: clamp(10px, calc(10px + (100vw - 601px) * 0.026), 20px);
     padding-bottom: clamp(150px, calc(150px + (100vw - 601px) * 0.342), 280px);
+    /* Nudge entire MA section slightly right + up (601-980) */
+    position: relative;
+    left: 30px;
+    top: 10px;
   }
   #marketing-alliance .ma__row1,
   #marketing-alliance .ma__row2,
   #marketing-alliance .ma__overviewHeadshots {
     grid-template-columns: 1fr !important;
+  }
+  #marketing-alliance .ma__row1 {
+    max-width: 520px !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+  }
+  #marketing-alliance {
+    overflow: visible !important;
   }
   #marketing-alliance .ma__heading {
     justify-items: end !important;
@@ -1875,8 +1905,10 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
     align-items: center !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    margin-top: var(--ma-logo-margin-top) !important;
-    transform: translateY(calc(var(--ma-stack-lift) - 25px)) !important;
+    margin-top: clamp(18px, 2vw, 26px) !important;
+    transform: none !important;
+    position: relative !important;
+    top: -30px !important;
   }
   #marketing-alliance .ma__logoWrap img,
   #marketing-alliance .ma__logo img,
@@ -1886,8 +1918,8 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
     margin-right: auto !important;
     height: auto !important;
     width: clamp(220px, 28vw, 340px) !important;
-    max-width: clamp(220px, 28vw, 340px) !important;
-    transform: translateX(var(--ma-logo-nudge-x)) !important;
+    max-width: min(280px, 80vw) !important;
+    transform: none !important;
     transform-origin: center center !important;
   }
   #marketing-alliance .ma__belowRow1 {
@@ -2018,7 +2050,10 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
     transform-origin: center center !important;
   }
   #marketing-alliance .ma__videoBlock .ma__linkWrap {
-    transform: translate(var(--ma-hero-link-x), var(--ma-hero-link-y)) !important;
+    transform: translate(
+      calc(var(--ma-hero-x) + var(--ma-hero-link-x)),
+      calc(var(--ma-hero-y) + var(--ma-hero-link-y))
+    ) scale(var(--ma-hero-scale)) !important;
   }
   #marketing-alliance .ma__heroFrame video,
   #marketing-alliance .ma__heroFrame .vp-videoEl,
@@ -2034,6 +2069,12 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
   /* Roles: scale from 601 to 980, match AU/Vonix/Blaze at 980 (~18px) */
   #marketing-alliance .ma__roles {
     font-size: clamp(12px, calc(12px + (100vw - 601px) * 0.016), 18px) !important;
+  }
+  /* 601px only: slightly smaller roles */
+  @media (max-width: 605px) {
+    #marketing-alliance .ma__roles {
+      font-size: 10.5px !important;
+    }
   }
   #marketing-alliance .ma__desc {
     font-size: clamp(20px, calc(20px + (100vw - 601px) * 0.011), 24px) !important;
@@ -3168,11 +3209,11 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
 }
 
 /* =========================================================
-   Marketing Alliance 901–980: shift entire section right 20px
+   Marketing Alliance 901–980: keep section stable when nav changes
    ========================================================= */
 @media (min-width: 901px) and (max-width: 980px) {
   #marketing-alliance {
-    transform: translateX(30px) !important;
+    transform: none !important;
   }
 }
 

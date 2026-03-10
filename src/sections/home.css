@@ -2543,61 +2543,61 @@ body.mobile-home-locked {
 
 /* 1601–1920 × height bands (scale ×1.10, x ×1.25 vs 1441–1600) */
 @media (min-width: 1601px) and (max-width: 1920px) and (max-height: 300px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.37; --home-1441-2560-x: -50px; --home-1441-2560-y: -10px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.32; --home-1441-2560-x: -50px; --home-1441-2560-y: -10px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 301px) and (max-height: 350px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.45; --home-1441-2560-x: -50px; --home-1441-2560-y: -10px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.40; --home-1441-2560-x: -50px; --home-1441-2560-y: -10px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 351px) and (max-height: 400px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.53; --home-1441-2560-x: -50px; --home-1441-2560-y: -15px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.45; --home-1441-2560-x: -50px; --home-1441-2560-y: -15px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 401px) and (max-height: 450px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.57; --home-1441-2560-x: -50px; --home-1441-2560-y: -15px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.52; --home-1441-2560-x: -50px; --home-1441-2560-y: -15px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 451px) and (max-height: 500px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.6; --home-1441-2560-x: -50px; --home-1441-2560-y: -15px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.56; --home-1441-2560-x: -50px; --home-1441-2560-y: -15px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 501px) and (max-height: 550px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.71; --home-1441-2560-x: -50px; --home-1441-2560-y: -15px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.65; --home-1441-2560-x: -50px; --home-1441-2560-y: -15px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 551px) and (max-height: 600px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.81; --home-1441-2560-x: -50px; --home-1441-2560-y: -15px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.70; --home-1441-2560-x: -50px; --home-1441-2560-y: -15px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 601px) and (max-height: 650px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.88; --home-1441-2560-x: -50px; --home-1441-2560-y: -15px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.77; --home-1441-2560-x: -50px; --home-1441-2560-y: -15px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 651px) and (max-height: 700px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.92; --home-1441-2560-x: -50px; --home-1441-2560-y: -15px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.82; --home-1441-2560-x: -50px; --home-1441-2560-y: -15px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 701px) and (max-height: 750px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.01; --home-1441-2560-x: -50px; --home-1441-2560-y: -15px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.9; --home-1441-2560-x: -50px; --home-1441-2560-y: -15px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 751px) and (max-height: 800px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.08; --home-1441-2560-x: -60px; --home-1441-2560-y: -25px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.97; --home-1441-2560-x: -60px; --home-1441-2560-y: -25px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 801px) and (max-height: 850px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.08; --home-1441-2560-x: -70px; --home-1441-2560-y: -45px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.03; --home-1441-2560-x: -70px; --home-1441-2560-y: -45px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 851px) and (max-height: 900px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.08; --home-1441-2560-x: -80px; --home-1441-2560-y: -45px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.05; --home-1441-2560-x: -80px; --home-1441-2560-y: -45px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 901px) and (max-height: 950px) {
   .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.08; --home-1441-2560-x: -90px; --home-1441-2560-y: -55px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 951px) and (max-height: 1000px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.19; --home-1441-2560-x: -90px; --home-1441-2560-y: -55px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.1; --home-1441-2560-x: -90px; --home-1441-2560-y: -55px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 1001px) and (max-height: 1050px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.30; --home-1441-2560-x: -90px; --home-1441-2560-y: -55px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.15; --home-1441-2560-x: -90px; --home-1441-2560-y: -55px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 1051px) and (max-height: 1100px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.30; --home-1441-2560-x: -100px; --home-1441-2560-y: -55px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.2; --home-1441-2560-x: -100px; --home-1441-2560-y: -55px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 1101px) and (max-height: 1150px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.30; --home-1441-2560-x: -100px; --home-1441-2560-y: -60px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.25; --home-1441-2560-x: -100px; --home-1441-2560-y: -60px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 1151px) and (max-height: 1200px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.30; --home-1441-2560-x: -100px; --home-1441-2560-y: -70px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.26; --home-1441-2560-x: -100px; --home-1441-2560-y: -70px; }
 }
 @media (min-width: 1601px) and (max-width: 1920px) and (min-height: 1201px) and (max-height: 1250px) {
   .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.35; --home-1441-2560-x: -100px; --home-1441-2560-y: -80px; }
@@ -2623,7 +2623,7 @@ body.mobile-home-locked {
 
 /* 1921–2240 × height bands (derived from perfected 1601–1920: scale ×1.08, x ×1.30, y ×0.65) */
 @media (min-width: 1921px) and (max-width: 2240px) and (max-height: 300px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.40; --home-1441-2560-x: -65px; --home-1441-2560-y: -5px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.35; --home-1441-2560-x: -65px; --home-1441-2560-y: -5px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 301px) and (max-height: 350px) {
   .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.43; --home-1441-2560-x: -65px; --home-1441-2560-y: -5px; }
@@ -2632,55 +2632,55 @@ body.mobile-home-locked {
   .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.5; --home-1441-2560-x: -65px; --home-1441-2560-y: -10px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 401px) and (max-height: 450px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.57; --home-1441-2560-x: -65px; --home-1441-2560-y: -10px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.52; --home-1441-2560-x: -65px; --home-1441-2560-y: -10px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 451px) and (max-height: 500px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.65; --home-1441-2560-x: -65px; --home-1441-2560-y: -15px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.57; --home-1441-2560-x: -65px; --home-1441-2560-y: -15px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 501px) and (max-height: 550px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.73; --home-1441-2560-x: -65px; --home-1441-2560-y: -15px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.65; --home-1441-2560-x: -65px; --home-1441-2560-y: -15px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 551px) and (max-height: 600px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.8; --home-1441-2560-x: -65px; --home-1441-2560-y: -15px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.7; --home-1441-2560-x: -65px; --home-1441-2560-y: -15px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 601px) and (max-height: 650px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.85; --home-1441-2560-x: -65px; --home-1441-2560-y: -15px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.74; --home-1441-2560-x: -65px; --home-1441-2560-y: -15px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 651px) and (max-height: 700px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.9; --home-1441-2560-x: -65px; --home-1441-2560-y: -15px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.8; --home-1441-2560-x: -65px; --home-1441-2560-y: -15px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 701px) and (max-height: 750px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.0; --home-1441-2560-x: -65px; --home-1441-2560-y: -15px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.85; --home-1441-2560-x: -65px; --home-1441-2560-y: -15px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 751px) and (max-height: 800px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.05; --home-1441-2560-x: -80px; --home-1441-2560-y: -20px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.9; --home-1441-2560-x: -80px; --home-1441-2560-y: -20px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 801px) and (max-height: 850px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.1; --home-1441-2560-x: -90px; --home-1441-2560-y: -30px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.0; --home-1441-2560-x: -90px; --home-1441-2560-y: -30px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 851px) and (max-height: 900px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.1; --home-1441-2560-x: -105px; --home-1441-2560-y: -30px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.05; --home-1441-2560-x: -105px; --home-1441-2560-y: -30px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 901px) and (max-height: 950px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.17; --home-1441-2560-x: -115px; --home-1441-2560-y: -35px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.07; --home-1441-2560-x: -115px; --home-1441-2560-y: -35px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 951px) and (max-height: 1000px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.29; --home-1441-2560-x: -115px; --home-1441-2560-y: -45px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.11; --home-1441-2560-x: -115px; --home-1441-2560-y: -45px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 1001px) and (max-height: 1050px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.35; --home-1441-2560-x: -115px; --home-1441-2560-y: -55px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.2; --home-1441-2560-x: -115px; --home-1441-2560-y: -55px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 1051px) and (max-height: 1100px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.35; --home-1441-2560-x: -130px; --home-1441-2560-y: -55px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.21; --home-1441-2560-x: -130px; --home-1441-2560-y: -55px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 1101px) and (max-height: 1150px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.40; --home-1441-2560-x: -130px; --home-1441-2560-y: -65px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.25; --home-1441-2560-x: -130px; --home-1441-2560-y: -65px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 1151px) and (max-height: 1200px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.40; --home-1441-2560-x: -130px; --home-1441-2560-y: -75px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.30; --home-1441-2560-x: -130px; --home-1441-2560-y: -75px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 1201px) and (max-height: 1250px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.46; --home-1441-2560-x: -130px; --home-1441-2560-y: -80px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.33; --home-1441-2560-x: -130px; --home-1441-2560-y: -80px; }
 }
 @media (min-width: 1921px) and (max-width: 2240px) and (min-height: 1251px) and (max-height: 1300px) {
   .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.46; --home-1441-2560-x: -145px; --home-1441-2560-y: -85px; }
@@ -2703,31 +2703,31 @@ body.mobile-home-locked {
 
 /* 2241–2560 × height bands (derived from perfected 1921–2240: scale ×1.04, x ×1.30, y reduced at short/medium heights) */
 @media (min-width: 2241px) and (max-width: 2560px) and (max-height: 300px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.42; --home-1441-2560-x: -85px; --home-1441-2560-y: -5px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.40; --home-1441-2560-x: -85px; --home-1441-2560-y: -5px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 301px) and (max-height: 350px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.45; --home-1441-2560-x: -85px; --home-1441-2560-y: -5px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.42; --home-1441-2560-x: -85px; --home-1441-2560-y: -5px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 351px) and (max-height: 400px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.52; --home-1441-2560-x: -85px; --home-1441-2560-y: -5px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.47; --home-1441-2560-x: -85px; --home-1441-2560-y: -5px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 401px) and (max-height: 450px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.59; --home-1441-2560-x: -85px; --home-1441-2560-y: -5px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.51; --home-1441-2560-x: -85px; --home-1441-2560-y: -5px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 451px) and (max-height: 500px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.68; --home-1441-2560-x: -85px; --home-1441-2560-y: -10px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.57; --home-1441-2560-x: -85px; --home-1441-2560-y: -10px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 501px) and (max-height: 550px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.68; --home-1441-2560-x: -85px; --home-1441-2560-y: -10px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.6; --home-1441-2560-x: -85px; --home-1441-2560-y: -10px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 551px) and (max-height: 600px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.76; --home-1441-2560-x: -85px; --home-1441-2560-y: -10px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.67; --home-1441-2560-x: -85px; --home-1441-2560-y: -10px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 601px) and (max-height: 650px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.76; --home-1441-2560-x: -85px; --home-1441-2560-y: -10px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.71; --home-1441-2560-x: -85px; --home-1441-2560-y: -10px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 651px) and (max-height: 700px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.88; --home-1441-2560-x: -85px; --home-1441-2560-y: -10px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.77; --home-1441-2560-x: -85px; --home-1441-2560-y: -10px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 701px) and (max-height: 750px) {
   .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.88; --home-1441-2560-x: -90px; --home-1441-2560-y: -10px; }
@@ -2736,31 +2736,31 @@ body.mobile-home-locked {
   .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.95; --home-1441-2560-x: -90px; --home-1441-2560-y: -15px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 801px) and (max-height: 850px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.05; --home-1441-2560-x: -90px; --home-1441-2560-y: -30px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.0; --home-1441-2560-x: -90px; --home-1441-2560-y: -30px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 851px) and (max-height: 900px) {
   .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.05; --home-1441-2560-x: -90px; --home-1441-2560-y: -30px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 901px) and (max-height: 950px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.22; --home-1441-2560-x: -90px; --home-1441-2560-y: -35px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.1; --home-1441-2560-x: -90px; --home-1441-2560-y: -35px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 951px) and (max-height: 1000px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.25; --home-1441-2560-x: -90px; --home-1441-2560-y: -35px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.13; --home-1441-2560-x: -90px; --home-1441-2560-y: -35px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 1001px) and (max-height: 1050px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.28; --home-1441-2560-x: -90px; --home-1441-2560-y: -40px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.17; --home-1441-2560-x: -90px; --home-1441-2560-y: -40px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 1051px) and (max-height: 1100px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.40; --home-1441-2560-x: -90px; --home-1441-2560-y: -50px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.25; --home-1441-2560-x: -90px; --home-1441-2560-y: -50px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 1101px) and (max-height: 1150px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.46; --home-1441-2560-x: -90px; --home-1441-2560-y: -60px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.3; --home-1441-2560-x: -90px; --home-1441-2560-y: -60px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 1151px) and (max-height: 1200px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.46; --home-1441-2560-x: -90px; --home-1441-2560-y: -70px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.35; --home-1441-2560-x: -90px; --home-1441-2560-y: -70px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 1201px) and (max-height: 1250px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.52; --home-1441-2560-x: -90px; --home-1441-2560-y: -75px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.4; --home-1441-2560-x: -90px; --home-1441-2560-y: -75px; }
 }
 @media (min-width: 2241px) and (max-width: 2560px) and (min-height: 1251px) and (max-height: 1300px) {
   .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.52; --home-1441-2560-x: -90px; --home-1441-2560-y: -80px; }
@@ -2783,28 +2783,28 @@ body.mobile-home-locked {
 
 /* 2561+ × coarse height bands (ultrawide monitors — derived from perfected 2241–2560) */
 @media (min-width: 2561px) and (max-height: 350px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.44; --home-1441-2560-x: -105px; --home-1441-2560-y: 0px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.40; --home-1441-2560-x: -105px; --home-1441-2560-y: 0px; }
 }
 @media (min-width: 2561px) and (min-height: 351px) and (max-height: 500px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.62; --home-1441-2560-x: -105px; --home-1441-2560-y: -5px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.5; --home-1441-2560-x: -105px; --home-1441-2560-y: -5px; }
 }
 @media (min-width: 2561px) and (min-height: 501px) and (max-height: 650px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.75; --home-1441-2560-x: -105px; --home-1441-2560-y: -5px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.65; --home-1441-2560-x: -105px; --home-1441-2560-y: -5px; }
 }
 @media (min-width: 2561px) and (min-height: 651px) and (max-height: 800px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.88; --home-1441-2560-x: -105px; --home-1441-2560-y: -10px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.75; --home-1441-2560-x: -105px; --home-1441-2560-y: -10px; }
 }
 @media (min-width: 2561px) and (min-height: 801px) and (max-height: 950px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.05; --home-1441-2560-x: -105px; --home-1441-2560-y: -25px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 0.9; --home-1441-2560-x: -105px; --home-1441-2560-y: -25px; }
 }
 @media (min-width: 2561px) and (min-height: 951px) and (max-height: 1100px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.28; --home-1441-2560-x: -100px; --home-1441-2560-y: -35px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.1; --home-1441-2560-x: -100px; --home-1441-2560-y: -35px; }
 }
 @media (min-width: 2561px) and (min-height: 1101px) and (max-height: 1250px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.48; --home-1441-2560-x: -100px; --home-1441-2560-y: -60px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.25; --home-1441-2560-x: -100px; --home-1441-2560-y: -60px; }
 }
 @media (min-width: 2561px) and (min-height: 1251px) and (max-height: 1400px) {
-  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.52; --home-1441-2560-x: -100px; --home-1441-2560-y: -75px; }
+  .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.35; --home-1441-2560-x: -100px; --home-1441-2560-y: -75px; }
 }
 @media (min-width: 2561px) and (min-height: 1401px) {
   .App > main.vp-main--home .mobileHomeGroup { --home-1441-2560-scale: 1.55; --home-1441-2560-x: -100px; --home-1441-2560-y: -100px; }

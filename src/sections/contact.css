@@ -1199,3 +1199,17 @@
     font-size: clamp(15px, 4.2vw, 18px);
   }
 }
+
+/* 1101–1599px width, 1000–1050px height: slightly smaller */
+@media (min-width: 1101px) and (max-width: 1599px) and (min-height: 1000px) and (max-height: 1050px) {
+  .contact__center {
+    scale: 0.70 !important;
+  }
+}
+
+/* 1248–1599px width, 601–999px height: slightly smaller */
+@media (min-width: 1248px) and (max-width: 1599px) and (min-height: 601px) and (max-height: 999px) {
+  .contact__center {
+    scale: 0.92 !important;
+  }
+}

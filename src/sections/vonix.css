@@ -674,6 +674,7 @@ html:has(#vonix) .vp-main {
     position: relative;
     box-sizing: border-box;
     touch-action: pan-y;
+    transform: translateX(13px);
   }
 
   /* B) IMPORTANT: remove section padding so shadows/plaque aren't clipped by a "white border" */
@@ -1119,12 +1120,14 @@ html:has(#vonix) .vp-main {
    Mac desktop fine-tuning — Vonix only
    =========================== */
 
-/* Profile image + plaque group */
-.os-mac #vonix .vo__logoWrap,
-.os-mac #vonix .vonix__topRight {
-  position: relative;
-  left: -80px;
-  top: 50px;
+/* Profile image + plaque group (1600px+ only) */
+@media (min-width: 1600px) {
+  .os-mac #vonix .vo__logoWrap,
+  .os-mac #vonix .vonix__topRight {
+    position: relative;
+    left: -80px;
+    top: 50px;
+  }
 }
 
 /* Description paragraph spacing */
@@ -1181,9 +1184,9 @@ html:has(#vonix) .vp-main {
 
 /* ===========================
    Mac desktop — Vonix logo+plaque move UP 20px
-   (Windows + mobile unchanged)
+   (Windows + mobile unchanged; 1600px+ only)
    =========================== */
-@media (min-width: 981px) {
+@media (min-width: 1600px) {
   .os-mac #vonix .vo__logoWrap {
     top: -60px;
     left: -60px;

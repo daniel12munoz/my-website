@@ -493,11 +493,12 @@
     display: block;
   }
 
-  /* (1) Shift Blaze content RIGHT ~20px without breaking layout */
+  /* (1) Shift Blaze content RIGHT to visually center on mobile */
   #blaze.bl {
-    padding-left: 14px !important; /* was 20px; net shift LEFT by ~4px */
+    padding-left: 5px !important;
     padding-right: 0 !important;
     overflow-x: clip !important;
+    transform: translateX(13px);
   }
 
   /* Make sure inner grids don't create sideways overflow */
