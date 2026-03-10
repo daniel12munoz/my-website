@@ -1767,13 +1767,14 @@
     overflow: hidden !important;
   }
 
-  /* VIDEO: stable by default; optional micro-nudge can be added here if needed */
+  /* VIDEO: stable by default; object-position prevents top clipping flash on load */
   #marketing-alliance .ma__heroFrame video,
   #marketing-alliance .ma__heroFrame .ma__heroVideoEl,
   #marketing-alliance .ma__heroFrame .ma__heroVideoEl video {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
+    object-position: top center !important;
     display: block !important;
     transform: none !important;
   }

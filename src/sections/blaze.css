@@ -438,6 +438,12 @@
     align-items: flex-end;
   }
 
+  /* Nudge title unit (title + rule + roles) 15px left, hero link 5px left */
+  #blaze {
+    --bl-head-x: -12px;
+    --bl-link-x: -7px;
+  }
+
   .bl__title,
   .bl__roles {
     text-align: right;
@@ -575,6 +581,12 @@
   #blaze .bl__videosSection {
     position: relative !important;
     top: -20px !important;
+  }
+
+  /* Short form + long-form sections: nudge 5px left */
+  #blaze .bl__shortsSection,
+  #blaze .bl__videosSection {
+    transform: translateX(-3px) !important;
   }
 }
 

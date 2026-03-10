@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import './marketing.css';
 import HlsVideo from '../components/HlsVideo';
 import ClickToPlayHlsVideo from '../components/ClickToPlayHlsVideo';
@@ -16,6 +16,17 @@ const Img = ({ src, className = '', alt = '', loading = 'lazy', fetchPriority, d
 
 export default function MarketingAlliance() {
   const [activeMAClipId, setActiveMAClipId] = useState(null);
+
+  // Aggressively reset every possible scroll container to 0 BEFORE first paint.
+  // Prevents the brief hero-top clip caused by .vp-main retaining the previous
+  // page's scrollTop when clearScrollLock() restores it during navigation.
+  useLayoutEffect(() => {
+    const main = document.querySelector('main.vp-main') || document.querySelector('main');
+    if (main) { main.scrollTop = 0; main.scrollLeft = 0; }
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    try { window.scrollTo(0, 0); } catch (_) {}
+  }, []);
 
   return (
     <section id="marketing-alliance" className="ma au">
