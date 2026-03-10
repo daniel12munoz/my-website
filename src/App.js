@@ -69,13 +69,8 @@ function App() {
     }
   };
 
-  // Mobile only: scroll the REAL scroll container (main.vp-main) before paint to avoid flash + white screen
+  // Scroll to top on route change — ALL devices, before paint
   useLayoutEffect(() => {
-    const isMobile =
-      window.matchMedia('(max-width: 600px)').matches ||
-      window.matchMedia('(pointer: coarse)').matches;
-    if (!isMobile) return;
-
     const getScrollContainer = () => {
       const candidates = [
         mainRef.current,
