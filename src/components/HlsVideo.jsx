@@ -175,6 +175,24 @@ const HlsVideoInner = forwardRef(function HlsVideoInner({
       hlsRef.current = null;
     }
 
+    // Direct file path: bypass HLS entirely for non-.m3u8 URLs (e.g., .mp4/.webm from R2)
+    const isDirectFile = !src.endsWith('.m3u8');
+
+    if (isDirectFile) {
+      if (shouldDebug) {
+        console.log('[HERO VIDEO] Using direct file path (non-HLS)', { src });
+      }
+      video.src = src;
+      if (autoPlayRef.current && video.muted) {
+        video.play().catch(() => {});
+      }
+
+      return () => {
+        try { video.removeEventListener('ended', onEnded); } catch {}
+        try { video.removeEventListener('timeupdate', onTimeUpdate); } catch {}
+      };
+    }
+
     // Platform detection for path selection
     const isiOS = isIOSorIPadOS();
     const safari = isSafari();
@@ -489,9 +507,10 @@ const HlsVideoInner = forwardRef(function HlsVideoInner({
         ? 1920
         : 1280;
 
-  // Auto-generate poster if not provided and src is HLS
+  // Poster: explicit prop → posterSrc fallback (heroes) → HLS auto-thumbnail → null
   const poster =
     posterProp ||
+    posterSrc ||
     (src && src.endsWith(".m3u8")
       ? (cloudflareThumbnail(src, { time: "0s", width: computedPosterWidth }) || null)
       : null);

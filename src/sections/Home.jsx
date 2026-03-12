@@ -55,7 +55,8 @@ export default function Home() {
             {/* Desktop static (original behavior) */}
             <HlsVideo
               className="home__tvStatic"
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/ec00cd5eef23481e587f6bd15263546b/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/box-static-2.mp4"
+              posterSrc="/staticthumb.jpg"
               autoPlay
               loop
               muted
@@ -70,7 +71,8 @@ export default function Home() {
             <div className="home__tvScreen" aria-hidden="true">
               <HlsVideo
                 className="home__tvStaticScreen"
-                src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/ec00cd5eef23481e587f6bd15263546b/manifest/video.m3u8"
+                src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/box-static-2.mp4"
+                posterSrc="/staticthumb.jpg"
                 autoPlay
                 loop
                 muted
@@ -86,7 +88,8 @@ export default function Home() {
             <div className="home__tvScreenTL" aria-hidden="true">
               <HlsVideo
                 className="home__tvStaticScreenTL"
-                src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/ec00cd5eef23481e587f6bd15263546b/manifest/video.m3u8"
+                src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/box-static-2.mp4"
+                posterSrc="/staticthumb.jpg"
                 autoPlay
                 loop
                 muted

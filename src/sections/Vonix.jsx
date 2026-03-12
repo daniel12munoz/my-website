@@ -13,7 +13,7 @@ export default function Vonix() {
         <div className="vo__videoBlock">
           <div className="media media--video vo__heroMedia">
             <HlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/61d67aad31ee537fd8dd0cda7830def7/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/vonix-newmasterfinalfinalfinal.webm"
               posterSrc="/vonixthumb.jpg"
               autoPlay
               muted
@@ -125,7 +125,8 @@ export default function Vonix() {
           {/* Duo 2 - Right side */}
           <article className="vo__psychDuo" key="/vo-video3againagain.mp4">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/cfa5c80d23b7f2e4ac671c94d67cfe1f/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/vo-video3.mp4"
+              poster="/vo-video3thumb.jpg"
               videoId="vo-clip-3"
               wrapperClassName="media media--video vo__psychMain"
               className="vo__videoEl"
@@ -150,7 +151,8 @@ export default function Vonix() {
 
             <div className="vo__psychShort" key="/vo-short2.mp4">
               <ClickToPlayHlsVideo
-                src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/6f53b55acfdc162ff0772c1b8c58bd93/manifest/video.m3u8"
+                src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/vo-short2.mp4"
+                poster="/vo-short2thumb.jpg"
                 videoId="vo-clip-short-2"
                 wrapperClassName="media media--short vo__psychShortMedia"
                 className="vo__shortVideo"
@@ -190,7 +192,8 @@ export default function Vonix() {
           {/* Top row: 3 videos */}
           <article className="vo__videoCard" key="/vo-video4againagain.mp4">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/46766f3b28684d293686ecc81cc2bd4c/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/vo-video4.mp4"
+              poster="/vo-video4thumb.jpg"
               videoId="vo-clip-4"
               wrapperClassName="media media--video"
               className="vo__videoEl"
@@ -216,7 +219,8 @@ export default function Vonix() {
 
           <article className="vo__videoCard" key="/vo-video5againagain.mp4">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/be7c3244f5eae13a7920232603a2c3a1/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/vo-video5.mp4"
+              poster="/vo-video5thumb.jpg"
               videoId="vo-clip-5"
               wrapperClassName="media media--video"
               className="vo__videoEl"
@@ -242,7 +246,8 @@ export default function Vonix() {
 
           <article className="vo__videoCard" key="/vo-video6againagain.mp4">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/53da8db5d5f4ece4a1791a53037fc06c/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/vo-video6.mp4"
+              poster="/vo-video6thumb.jpg"
               videoId="vo-clip-6"
               wrapperClassName="media media--video"
               className="vo__videoEl"
@@ -269,7 +274,8 @@ export default function Vonix() {
           {/* Bottom row: 2 centered videos */}
           <article className="vo__videoCard vo__videoCard--bottom" key="/vo-video7againagain.mp4">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/f08db30369dc64985bf08f0ed045cef7/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/vo-video7.mp4"
+              poster="/vo-video7thumb.jpg"
               videoId="vo-clip-7"
               wrapperClassName="media media--video"
               className="vo__videoEl"
@@ -295,7 +301,8 @@ export default function Vonix() {
 
           <article className="vo__videoCard vo__videoCard--bottom" key="/vo-video8againagain.mp4">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/37f00028853e15b8aa71aec035d77c80/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/vo-video8.mp4"
+              poster="/vo-video8thumb.jpg"
               videoId="vo-clip-8"
               wrapperClassName="media media--video"
               className="vo__videoEl"
@@ -332,7 +339,8 @@ export default function Vonix() {
           {/* Top row: 3 videos */}
           <article className="vo__videoCard" key="/vo-video9againagain.mp4">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/9bbfffd245d9c5286645f7b767ec2993/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/vo-video9.mp4"
+              poster="/vo-video9thumb.jpg"
               videoId="vo-clip-9"
               wrapperClassName="media media--video"
               className="vo__videoEl"
@@ -358,7 +366,8 @@ export default function Vonix() {
 
           <article className="vo__videoCard" key="/vo-video10againagain.mp4">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/31358e5c87201ba65239f5afede0d7e7/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/vo-video10.mp4"
+              poster="/vo-video10thumb.jpg"
               videoId="vo-clip-10"
               wrapperClassName="media media--video"
               className="vo__videoEl"
@@ -384,7 +393,8 @@ export default function Vonix() {
 
           <article className="vo__videoCard" key="/vo-video11againagain.mp4">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/6450925208e4b8a51d27b0a48f201fec/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/vo-video11.mp4"
+              poster="/vo-video11thumb.jpg"
               videoId="vo-clip-11"
               wrapperClassName="media media--video"
               className="vo__videoEl"
@@ -411,7 +421,8 @@ export default function Vonix() {
           {/* Bottom row: 2 centered videos */}
           <article className="vo__videoCard vo__videoCard--bottom" key="/vo-video12againagain.mp4">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/142b13ec93fb2adf6b764a7d2d4262bf/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/vo-video12.mp4"
+              poster="/vo-video12thumb.jpg"
               videoId="vo-clip-12"
               wrapperClassName="media media--video"
               className="vo__videoEl"
@@ -437,7 +448,8 @@ export default function Vonix() {
 
           <article className="vo__videoCard vo__videoCard--bottom" key="/vo-video13againagain.mp4">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/cdeba6393a83ff080b70bbddcc6d4024/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/vo-video13.mp4"
+              poster="/vo-video13thumb.jpg"
               videoId="vo-clip-13"
               wrapperClassName="media media--video"
               className="vo__videoEl"
@@ -474,7 +486,8 @@ export default function Vonix() {
           {/* Video 14 */}
           <article className="vo__videoCard" key="/vo-video14againagain.mp4">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/f2ebd06a38d2a4d871fd528e771750f8/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/vo-video14.mp4"
+              poster="/vo-video14thumb.jpg"
               videoId="vo-clip-14"
               wrapperClassName="media media--video"
               className="vo__videoEl"
@@ -501,7 +514,8 @@ export default function Vonix() {
           {/* Video 15 */}
           <article className="vo__videoCard" key="/vo-video15againagainagain.mp4">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/6b01fbe3a77e639bf9298eb813ff356e/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/vo-video15.mp4"
+              poster="/vo-video15thumb.jpg"
               videoId="vo-clip-15"
               wrapperClassName="media media--video"
               className="vo__videoEl"
@@ -528,7 +542,8 @@ export default function Vonix() {
           {/* Video 16 */}
           <article className="vo__videoCard" key="/vo-video16againagain.mp4">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/956c523692f9793d1862421d4b5b9009/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/vo-video16.mp4"
+              poster="/vo-video16thumb.jpg"
               videoId="vo-clip-16"
               wrapperClassName="media media--video"
               className="vo__videoEl"
@@ -555,7 +570,8 @@ export default function Vonix() {
           {/* Video 17 */}
           <article className="vo__videoCard" key="/vo-video17againagain.mp4">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/da5102ebe7634b16880f18ba9b4ebb0b/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/vo-video17.mp4"
+              poster="/vo-video17thumb.jpg"
               videoId="vo-clip-17"
               wrapperClassName="media media--video"
               className="vo__videoEl"
@@ -582,7 +598,8 @@ export default function Vonix() {
           {/* Video 18 */}
           <article className="vo__videoCard" key="/vo-video18againagain.mp4">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/c00e1bd44b221b15d2fd9e9b8707f9ba/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/vo-video18.mp4"
+              poster="/vo-video18thumb.jpg"
               videoId="vo-clip-18"
               wrapperClassName="media media--video"
               className="vo__videoEl"

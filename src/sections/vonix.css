@@ -600,6 +600,12 @@ html:has(#vonix) .vp-main {
   background: #000;
 }
 
+/* Shift video crop upward inside the frame to eliminate top-edge gap */
+.vo__videoGrid--tech .ctphv-wrapper > video,
+.vo__videoGrid--vlogs .ctphv-wrapper > video {
+  object-position: center top !important;
+}
+
 /* Mini link under each card (same as AU/Blaze link style) */
 .vo__videoCard .vo__link--mini {
   display: inline-block;

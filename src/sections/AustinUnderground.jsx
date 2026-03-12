@@ -12,7 +12,7 @@ export default function AustinUnderground() {
         <div className="au__videoBlock">
           <div className="media media--video au__heroMedia">
             <HlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/5403e21c3a5fdc02ce600c8e351d7fd5/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/au-newmasterfinalfinal.webm"
               posterSrc="/austinundergroundthumb.jpg"
               autoPlay
               muted
@@ -98,7 +98,7 @@ export default function AustinUnderground() {
             <div className="au__videoBox">
               <div className="au__videoContainer">
                 <HlsVideo
-                  src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/b69208204f5aad4bf156ce9e1b5242ae/manifest/video.m3u8"
+                  src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/au-video2.webm"
                   autoPlay
                   loop
                   muted
@@ -126,7 +126,7 @@ export default function AustinUnderground() {
             <div className="au__videoBox">
               <div className="au__videoContainer">
                 <HlsVideo
-                  src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/8cffa70ef37255d753103ea9ede9e85e/manifest/video.m3u8"
+                  src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/au-video3.webm"
                   autoPlay
                   loop
                   muted
@@ -154,7 +154,7 @@ export default function AustinUnderground() {
             <div className="au__videoBox">
               <div className="au__videoContainer">
                 <HlsVideo
-                  src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/e6f17cafa3adf74d90e397cf269f9b4e/manifest/video.m3u8"
+                  src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/au-video4.webm"
                   autoPlay
                   loop
                   muted
@@ -182,7 +182,7 @@ export default function AustinUnderground() {
             <div className="au__videoBox au__videoBox--v5">
               <div className="au__videoContainer">
                 <HlsVideo
-                  src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/4a19306ce523fe2dd6b1a5c5cddcb4a2/manifest/video.m3u8"
+                  src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/au-video5.webm"
                   autoPlay
                   loop
                   muted
@@ -210,7 +210,7 @@ export default function AustinUnderground() {
             <div className="au__videoBox au__videoBox--v6">
               <div className="au__videoContainer">
                 <HlsVideo
-                  src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/3dada1f38800be1d616737973de66c39/manifest/video.m3u8"
+                  src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/au-video6.webm"
                   autoPlay
                   loop
                   muted

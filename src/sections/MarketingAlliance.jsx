@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useCallback, useRef, useEffect } from 'react';
 import './marketing.css';
 import HlsVideo from '../components/HlsVideo';
 import ClickToPlayHlsVideo from '../components/ClickToPlayHlsVideo';
@@ -14,18 +14,80 @@ const Img = ({ src, className = '', alt = '', loading = 'lazy', fetchPriority, d
   />
 );
 
+function LoopingHeaderVideo({ src, onClick }) {
+  const wrapperRef = useRef(null);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    const video = wrapperRef.current?.querySelector('video');
+    if (!video) return;
+    const onPlay = () => setPaused(false);
+    const onPause = () => setPaused(true);
+    video.addEventListener('play', onPlay);
+    video.addEventListener('pause', onPause);
+    return () => {
+      video.removeEventListener('play', onPlay);
+      video.removeEventListener('pause', onPause);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={wrapperRef}
+      className="ma__videoBox"
+      onClick={onClick}
+      style={{ cursor: 'pointer' }}
+    >
+      <div className="media media--video" style={{ position: 'relative' }}>
+        <HlsVideo
+          className="ma__video ma__videoEl"
+          src={src}
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls={false}
+        />
+        {paused && (
+          <div className="playOverlay" style={{ zIndex: 3 }}>
+            <span className="playOverlay__icon" />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function MarketingAlliance() {
   const [activeMAClipId, setActiveMAClipId] = useState(null);
 
-  // Aggressively reset every possible scroll container to 0 BEFORE first paint.
-  // Prevents the brief hero-top clip caused by .vp-main retaining the previous
-  // page's scrollTop when clearScrollLock() restores it during navigation.
   useLayoutEffect(() => {
     const main = document.querySelector('main.vp-main') || document.querySelector('main');
     if (main) { main.scrollTop = 0; main.scrollLeft = 0; }
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
     try { window.scrollTo(0, 0); } catch (_) {}
+  }, []);
+
+  const pauseAutoplayVideos = useCallback(() => {
+    const section = document.getElementById('marketing-alliance');
+    if (!section) return;
+    section.querySelectorAll('video').forEach(v => {
+      if (v.muted && !v.paused && !v.classList.contains('ma__heroVideoEl')) {
+        v.pause();
+      }
+    });
+  }, []);
+
+  const handleHeaderClick = useCallback((e) => {
+    const video = e.currentTarget.querySelector('video');
+    if (!video) return;
+    if (video.paused) {
+      setActiveMAClipId('ma-header-active');
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
   }, []);
 
   return (
@@ -36,7 +98,7 @@ export default function MarketingAlliance() {
           <div className="media media--video ma__heroFrame">
             <HlsVideo
               className="ma__heroVideoEl"
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/f33e2bc3aed778a80d5050985fda79cc/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/ma-newmasterfinal.webm"
               posterSrc="/marketingalliancethumb.jpg"
               autoPlay
               loop
@@ -105,70 +167,22 @@ export default function MarketingAlliance() {
         </div>
 
         <div className="ma__videoGrid ma__videoGrid--quad">
-          <div className="ma__videoBox">
-            <div className="media media--video">
-              <HlsVideo
-                className="ma__video ma__videoEl"
-                src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/4a3192f46de64a4520d1016df1cb7f5d/manifest/video.m3u8"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                priority
-                lazy={false}
-                controls={false}
-              />
-            </div>
-          </div>
-          <div className="ma__videoBox">
-            <div className="media media--video">
-              <HlsVideo
-                className="ma__video ma__videoEl"
-                src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/8d37b772e30474a2732049adce0b06e5/manifest/video.m3u8"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                priority
-                lazy={false}
-                controls={false}
-              />
-            </div>
-          </div>
-          <div className="ma__videoBox">
-            <div className="media media--video">
-              <HlsVideo
-                className="ma__video ma__videoEl"
-                src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/2f8e29eac63ca9da416929175435e274/manifest/video.m3u8"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                priority
-                lazy={false}
-                controls={false}
-              />
-            </div>
-          </div>
-          <div className="ma__videoBox">
-            <div className="media media--video">
-              <HlsVideo
-                className="ma__video ma__videoEl"
-                src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/5ea790e9fb658a9365ea6c755577ffdd/manifest/video.m3u8"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                priority
-                lazy={false}
-                controls={false}
-              />
-            </div>
-          </div>
+          <LoopingHeaderVideo
+            src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/ma-video2.webm"
+            onClick={handleHeaderClick}
+          />
+          <LoopingHeaderVideo
+            src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/ma-video3.webm"
+            onClick={handleHeaderClick}
+          />
+          <LoopingHeaderVideo
+            src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/ma-video4.webm"
+            onClick={handleHeaderClick}
+          />
+          <LoopingHeaderVideo
+            src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/ma-video5.webm"
+            onClick={handleHeaderClick}
+          />
         </div>
       </div>
 
@@ -203,7 +217,8 @@ export default function MarketingAlliance() {
         <div className="ma__testimonialsGrid">
           <div className="ma__videoCard ma__testimonial ma__testimonial--v6">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/3f27d4b270ed0b1d66058691bcbddaca/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/ma-video6.webm"
+              poster="/ma-video6thumb.jpg"
               videoId="ma-clip-testimonial-1"
               wrapperClassName="media media--video"
               className="ma__video ma__videoEl"
@@ -211,6 +226,7 @@ export default function MarketingAlliance() {
               muted={false}
               startQuality="high"
               onRequestPlay={() => {
+                pauseAutoplayVideos();
                 setActiveMAClipId('ma-clip-testimonial-1');
               }}
               forcePause={activeMAClipId !== null && activeMAClipId !== 'ma-clip-testimonial-1'}
@@ -218,7 +234,8 @@ export default function MarketingAlliance() {
           </div>
           <div className="ma__videoCard ma__testimonial ma__testimonial--v7">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/8d1954f73f3a307cfb0e49446e2b05be/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/ma-video7.webm"
+              poster="/ma-video7thumb.jpg"
               videoId="ma-clip-testimonial-2"
               wrapperClassName="media media--video"
               className="ma__video ma__videoEl"
@@ -226,6 +243,7 @@ export default function MarketingAlliance() {
               muted={false}
               startQuality="high"
               onRequestPlay={() => {
+                pauseAutoplayVideos();
                 setActiveMAClipId('ma-clip-testimonial-2');
               }}
               forcePause={activeMAClipId !== null && activeMAClipId !== 'ma-clip-testimonial-2'}
@@ -233,7 +251,8 @@ export default function MarketingAlliance() {
           </div>
           <div className="ma__videoCard ma__testimonial ma__testimonial--v8">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/58c6309a3d0282d2b8e468d177d3d3a5/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/ma-video8.webm"
+              poster="/ma-video8thumb.jpg"
               videoId="ma-clip-testimonial-3"
               wrapperClassName="media media--video"
               className="ma__video ma__videoEl"
@@ -241,6 +260,7 @@ export default function MarketingAlliance() {
               muted={false}
               startQuality="high"
               onRequestPlay={() => {
+                pauseAutoplayVideos();
                 setActiveMAClipId('ma-clip-testimonial-3');
               }}
               forcePause={activeMAClipId !== null && activeMAClipId !== 'ma-clip-testimonial-3'}
@@ -248,7 +268,8 @@ export default function MarketingAlliance() {
           </div>
           <div className="ma__videoCard ma__testimonial ma__testimonial--v9">
             <ClickToPlayHlsVideo
-              src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/b2f5bf4ade64aac387b2e7e986cc74bd/manifest/video.m3u8"
+              src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/ma-video9.webm"
+              poster="/ma-video9thumb.jpg"
               videoId="ma-clip-testimonial-4"
               wrapperClassName="media media--video"
               className="ma__video ma__videoEl"
@@ -256,6 +277,7 @@ export default function MarketingAlliance() {
               muted={false}
               startQuality="high"
               onRequestPlay={() => {
+                pauseAutoplayVideos();
                 setActiveMAClipId('ma-clip-testimonial-4');
               }}
               forcePause={activeMAClipId !== null && activeMAClipId !== 'ma-clip-testimonial-4'}
@@ -275,7 +297,8 @@ export default function MarketingAlliance() {
           <div className="ma__shortsGrid">
             <div className="ma__shortCard ma__shortCard--v10">
               <ClickToPlayHlsVideo
-                src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/2f320453f80ec991033c4a329754774c/manifest/video.m3u8"
+                src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/ma-video10.webm"
+                poster="/ma-video10thumb.jpg"
                 videoId="ma-clip-short-1"
                 wrapperClassName="media media--short ma__shortMedia"
                 className="ma__shortVideo"
@@ -283,6 +306,7 @@ export default function MarketingAlliance() {
                 muted={false}
                 startQuality="high"
                 onRequestPlay={() => {
+                  pauseAutoplayVideos();
                   setActiveMAClipId('ma-clip-short-1');
                 }}
                 forcePause={activeMAClipId !== null && activeMAClipId !== 'ma-clip-short-1'}
@@ -290,22 +314,8 @@ export default function MarketingAlliance() {
             </div>
             <div className="ma__shortCard ma__shortCard--v12">
               <ClickToPlayHlsVideo
-                src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/f37981c80a7928ff6446ee52a43e9ece/manifest/video.m3u8"
-                videoId="ma-clip-short-3"
-                wrapperClassName="media media--short ma__shortMedia"
-                className="ma__shortVideo"
-                loop={true}
-                muted={false}
-                startQuality="high"
-                onRequestPlay={() => {
-                  setActiveMAClipId('ma-clip-short-3');
-                }}
-                forcePause={activeMAClipId !== null && activeMAClipId !== 'ma-clip-short-3'}
-              />
-            </div>
-            <div className="ma__shortCard ma__shortCard--v11">
-              <ClickToPlayHlsVideo
-                src="https://customer-j47qk7l1wwcd8bxv.cloudflarestream.com/0d603ba86d8a7b549e5e464724045ecb/manifest/video.m3u8"
+                src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/ma-video12.webm"
+                poster="/ma-video12thumb.jpg"
                 videoId="ma-clip-short-2"
                 wrapperClassName="media media--short ma__shortMedia"
                 className="ma__shortVideo"
@@ -313,9 +323,27 @@ export default function MarketingAlliance() {
                 muted={false}
                 startQuality="high"
                 onRequestPlay={() => {
+                  pauseAutoplayVideos();
                   setActiveMAClipId('ma-clip-short-2');
                 }}
                 forcePause={activeMAClipId !== null && activeMAClipId !== 'ma-clip-short-2'}
+              />
+            </div>
+            <div className="ma__shortCard ma__shortCard--v11">
+              <ClickToPlayHlsVideo
+                src="https://pub-fb66b219406c478cabc59dde5af6f3d2.r2.dev/ma-video11.webm"
+                poster="/ma-video11thumb.jpg"
+                videoId="ma-clip-short-3"
+                wrapperClassName="media media--short ma__shortMedia"
+                className="ma__shortVideo"
+                loop={true}
+                muted={false}
+                startQuality="high"
+                onRequestPlay={() => {
+                  pauseAutoplayVideos();
+                  setActiveMAClipId('ma-clip-short-3');
+                }}
+                forcePause={activeMAClipId !== null && activeMAClipId !== 'ma-clip-short-3'}
               />
             </div>
           </div>
