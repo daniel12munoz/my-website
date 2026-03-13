@@ -1022,13 +1022,13 @@
    =========================== */
 
 .os-mac body {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ---- Austin Underground ---- */
 .os-mac .au__section,
 .os-mac .au.au__section {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Apply gutter to Austin's major rows/folds/grids */
@@ -1058,9 +1058,11 @@
   transform-origin: top left;   /* keep left pinned */
 }
 
-/* Prevent the scaled interview videos from causing horizontal overflow */
+/* Prevent the scaled interview videos from causing horizontal overflow.
+   MUST use clip, not hidden — hidden forces overflow-y to auto (CSS spec),
+   which turns .au__interviews into a nested scroll container. */
 .os-mac .au__section .au__interviews {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Mac-only: nudge interview links down slightly (avoid overlap) */
@@ -1209,9 +1211,9 @@
    All scale from 981 to 1750
    ========================= */
 @media (min-width: 981px) and (max-width: 1750px) {
-  /* Prevent horizontal scroll: hide overflow at scroll container only (not on section, so content can bleed to right edge) */
+  /* Prevent horizontal scroll: clip overflow at scroll container only (not on section, so content can bleed to right edge) */
   main:has(#austin-underground) {
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
   }
   /* Section uses full width so content extends to far right without being cut off */
   #austin-underground {
@@ -3784,5 +3786,187 @@
   }
   html.os-mac #blaze .bl__logoWrap {
     translate: -30px !important;
+  }
+}
+
+/* =========================================================
+   Mac-only 981px+: prevent scroll chaining from .vp-main
+   to the viewport on Austin Underground
+   ========================================================= */
+@media (min-width: 981px) {
+  html.os-mac .App > main.vp-main:has(#austin-underground) {
+    overscroll-behavior-y: contain !important;
+  }
+}
+
+/* =========================================================
+   AUSTIN UNDERGROUND — Mac-only fine-tuning
+   ========================================================= */
+
+/* 1751px+ Mac: logo right 40px (baseline -40px 50px → 0px 50px) */
+@media (min-width: 1751px) {
+  html.os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    translate: 0px -15px !important;
+  }
+}
+
+@media (min-width: 1676px) and (max-width: 1750px) {
+  html.os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    translate: -30px 50px !important;
+  }
+}
+
+@media (min-width: 1660px) and (max-width: 1675px) {
+  html.os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    translate: -30px 30px !important;
+  }
+}
+
+@media (min-width: 1601px) and (max-width: 1659px) {
+  html.os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    translate: 80px 30px !important;
+    scale: 0.9 !important;
+  }
+}
+
+@media (min-width: 1510px) and (max-width: 1600px) {
+  html.os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    translate: -5px 40px !important;
+    scale: 0.85 !important;
+  }
+}
+
+@media (min-width: 1501px) and (max-width: 1509px) {
+  html.os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    translate: -120px 40px !important;
+    scale: 0.85 !important;
+  }
+}
+
+@media (min-width: 1451px) and (max-width: 1500px) {
+  html.os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    translate: -120px 0px !important;
+    scale: 0.85 !important;
+  }
+}
+
+@media (min-width: 1401px) and (max-width: 1450px) {
+  html.os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    translate: -100px 0px !important;
+    scale: 1.0 !important;
+  }
+}
+
+@media (min-width: 1351px) and (max-width: 1400px) {
+  html.os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    translate: -120px 0px !important;
+    scale: 0.9 !important;
+  }
+}
+
+@media (min-width: 1301px) and (max-width: 1350px) {
+  html.os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    translate: -120px 0px !important;
+    scale: 0.9 !important;
+  }
+}
+
+@media (min-width: 1251px) and (max-width: 1300px) {
+  html.os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    translate: -140px -10px !important;
+    scale: 0.85 !important;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1250px) {
+  html.os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    translate: -130px -10px !important;
+    scale: 0.85 !important;
+  }
+}
+
+@media (min-width: 1189px) and (max-width: 1200px) {
+  html.os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    translate: -120px -20px !important;
+    scale: 0.8 !important;
+  }
+}
+
+@media (min-width: 1151px) and (max-width: 1189px) {
+  html.os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    translate: -160px -20px !important;
+    scale: 0.75 !important;
+  }
+}
+
+@media (min-width: 100px) and (max-width: 1150px) {
+  html.os-mac #austin-underground .au__collageWrap--desktop .au__collage {
+    translate: 0px -20px !important;
+    scale: 0.93 !important;
+  }
+}
+
+/* 981px–1541px Mac: AU roles text slightly smaller */
+@media (min-width: 1369px) and (max-width: 1541px) {
+  html.os-mac #austin-underground .au__heading .au__roles {
+    font-size: 14px !important;
+  }
+}
+
+@media (min-width: 1211px) and (max-width: 1368px) {
+  html.os-mac #austin-underground .au__heading .au__roles {
+    font-size: 12px !important;
+  }
+}
+
+@media (min-width: 1016px) and (max-width: 1210px) {
+  html.os-mac #austin-underground .au__heading .au__roles {
+    font-size: 10px !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1015px) {
+  html.os-mac #austin-underground .au__heading .au__roles {
+    font-size: 9px !important;
+  }
+}
+
+/* 981px–996px Mac: AU main title slightly smaller */
+@media (min-width: 981px) and (max-width: 996px) {
+  html.os-mac #austin-underground .au__heading .au__title {
+    font-size: 23px !important;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 665px) {
+  html.os-mac #austin-underground .au__heading .au__roles {
+    font-size: 9.3px !important;
+  }
+}
+
+@media (min-width: 1px) and (max-width: 400px) {
+  html.os-mac #austin-underground .au__heading .au__roles {
+    font-size: 9.3px !important;
+  }
+}
+
+@media (min-width: 1px) and (max-width: 368px) {
+  html.os-mac #austin-underground .au__heading .au__title {
+    font-size: 24px !important;
+  }
+}
+
+/* 1451px–1568px Mac: concert photography 5% smaller + left 5px */
+@media (min-width: 1451px) and (max-width: 1568px) {
+  html.os-mac #austin-underground .au__concertPhotography {
+    transform: translateX(50px) scale(0.9) !important;
+    transform-origin: top left !important;
+  }
+}
+
+@media (min-width: 1569px) and (max-width: 1750px) {
+  html.os-mac #austin-underground .au__concertPhotography {
+    transform: translateX(70px) scale(0.9) !important;
+    transform-origin: top left !important;
   }
 }

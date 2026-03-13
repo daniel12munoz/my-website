@@ -983,6 +983,30 @@
   }
 }
 
+/* Extra-small phones (321px and below) */
+@media (max-width: 321px) {
+  #blaze .bl__roles {
+    font-size: 11.8px !important;
+    line-height: 1.18 !important;
+  }
+}
+
+/* 361–370px: roles slightly smaller than the 15px base */
+@media (min-width: 361px) and (max-width: 370px) {
+  #blaze .bl__roles {
+    font-size: 13.8px !important;
+    line-height: 1.22 !important;
+  }
+}
+
+/* 322–330px: roles slightly smaller than the 13.2px small-phone size */
+@media (min-width: 322px) and (max-width: 330px) {
+  #blaze .bl__roles {
+    font-size: 12.4px !important;
+    line-height: 1.18 !important;
+  }
+}
+
 /* =========================================
    BLAZE MID SYSTEM — 601–980px
    Mobile replica: iPad Mini/Air, Surface Pro 7, ZenBook Fold, Chrome tablet
@@ -1161,6 +1185,13 @@
 @media (min-width: 639px) and (max-width: 720px) {
   #blaze .bl__logoWrap {
     left: 30px !important;
+  }
+}
+
+/* 721–731: logo right 5px */
+@media (min-width: 721px) and (max-width: 731px) {
+  #blaze .bl__logoWrap {
+    left: 15px !important;
   }
 }
 
@@ -1415,4 +1446,91 @@
     transform: scale(1.62) !important;
     transform-origin: center top;
   }
+}
+
+/* =========================================================
+   BLAZE — Mac-only fine-tuning
+   ========================================================= */
+
+/* 1751px+ Mac: logo right 30px (baseline is -30px, so 0px net) */
+@media (min-width: 1751px) {
+  html.os-mac #blaze .bl__logoWrap {
+    translate: 30px !important;
+  }
+}
+
+/* 1421px–1555px Mac: roles text slightly smaller + logo left 30px */
+@media (min-width: 1421px) and (max-width: 1555px) {
+  html.os-mac #blaze .bl__roles {
+    font-size: 16px !important;
+  }
+  html.os-mac #blaze .bl__logoWrap {
+    translate: -120px !important;
+  }
+}
+
+
+
+
+@media (min-width: 981px) and (max-width: 1420px) {
+  html.os-mac #blaze .bl__logoWrap {
+    translate: -50px 0px !important;
+    scale: 0.9 !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1100px) {
+  html.os-mac #blaze .bl__roles {
+    font-size: 11.3px !important;
+  }
+
+}
+
+@media (min-width: 1101px) and (max-width: 1330px) {
+  html.os-mac #blaze .bl__roles {
+    font-size: 12px !important;
+  }
+
+}
+
+@media (min-width: 639px) and (max-width: 671px) {
+  html.os-mac #blaze .bl__roles {
+    font-size: 13.7px !important;
+  }
+
+}
+
+@media (min-width: 601px) and (max-width: 621px) {
+  html.os-mac #blaze .bl__roles {
+    font-size: 12.1px !important;
+  }
+
+}
+
+@media (min-width: 401px) and (max-width: 422px) {
+  html.os-mac #blaze .bl__roles {
+    font-size: 14px !important;
+  }
+
+}
+
+@media (min-width: 377px) and (max-width: 400px) {
+  html.os-mac #blaze .bl__roles {
+    font-size: 13px !important;
+  }
+
+}
+
+@media (min-width: 353px) and (max-width: 376px) {
+  html.os-mac #blaze .bl__roles {
+    font-size: 12px !important;
+  }
+
+}
+
+@media (min-width: 305px) and (max-width: 352px) {
+  html.os-mac #blaze .bl__roles {
+    font-size: 10px !important;
+  }
+
 }

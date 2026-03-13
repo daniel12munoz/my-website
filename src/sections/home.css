@@ -2811,10 +2811,10 @@ body.mobile-home-locked {
 }
 
 /* =========================================================
-   HOME — TABLET ONLY (601–980px)
+   HOME — TABLET ONLY (601–979px)
    - Move entire stack DOWN 15px
    ========================================================= */
-@media (min-width: 601px) and (max-width: 980px) {
+@media (min-width: 601px) and (max-width: 979px) {
   #home.home {
     --home-stage-y: 15px; /* knob — change freely */
   }
@@ -2826,7 +2826,7 @@ body.mobile-home-locked {
    - Lift bottom copy 10px
    - Keep "Daniel Muñoz" unbroken so it jumps to next line if needed
    ========================================================= */
-@media (min-width: 981px) and (max-width: 1279px) {
+@media (min-width: 980px) and (max-width: 1279px) {
   #home.home {
     --home-stage-x: -16px;
     --home-stage-y: 48px;

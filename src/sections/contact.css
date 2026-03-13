@@ -1213,3 +1213,11 @@
     scale: 0.92 !important;
   }
 }
+
+/* ≤334px width: shrink entire contact page */
+@media (max-width: 334px) {
+  .contact__center {
+    scale: 0.8 !important;
+    transform-origin: center center;
+  }
+}

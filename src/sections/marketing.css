@@ -929,6 +929,45 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
   }
 }
 
+/* Mac 1555–1661: slightly smaller roles */
+@media (min-width: 1555px) and (max-width: 1661px) {
+  html.os-mac #marketing-alliance .ma__roles {
+    font-size: clamp(14px, 1.8vw, 18px) !important;
+  }
+}
+
+@media (min-width: 1329px) and (max-width: 1441px) {
+  html.os-mac #marketing-alliance .ma__roles {
+    font-size: clamp(14px, 1.8vw, 13px) !important;
+  }
+}
+
+@media (min-width: 1183px) and (max-width: 1289px) {
+  html.os-mac #marketing-alliance .ma__roles {
+    font-size: clamp(12.5px, 1.8vw, 11px) !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1112px) {
+  html.os-mac #marketing-alliance .ma__roles {
+    font-size: clamp(10.5px, 1.8vw, 10px) !important;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 657px) {
+  html.os-mac #marketing-alliance .ma__roles {
+    font-size: clamp(10.9px, 1.8vw, 10px) !important;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 379px) {
+  html.os-mac #marketing-alliance .ma__roles {
+    font-size: clamp(10px, 1.8vw, 10px) !important;
+  }
+}
+
+
+
 /* 981–1328: additional reduction (smaller than 980–1554) */
 @media (min-width: 981px) and (max-width: 1328px) {
   #marketing-alliance .ma__roles {
@@ -3263,5 +3302,58 @@ html:not(.os-mac) .vp-main:has(#marketing-alliance) {
     width: var(--ma-small-headshot-width) !important;
     max-width: 100% !important;
     aspect-ratio: 1 / 1 !important;
+  }
+}
+
+/* =========================================
+   Marketing Alliance — EXTRA-SMALL PHONE (<=309px)
+   ========================================= */
+@media (max-width: 309px) and (pointer: coarse) {
+  #marketing-alliance .ma__title {
+    font-size: 23.5px !important;
+  }
+
+  #marketing-alliance .ma__roles {
+    font-size: 9.8px !important;
+  }
+}
+
+/* =========================================================
+   MARKETING ALLIANCE — Mac-only fine-tuning
+   ========================================================= */
+
+/* 601px–980px Mac: logo down 10px */
+@media (min-width: 601px) and (max-width: 980px) {
+  html.os-mac #marketing-alliance .ma__logoWrap {
+    translate: 0px 10px !important;
+    scale: 1.00 !important;
+  }
+}
+
+@media (min-width: 1500px) and (max-width: 1670px) {
+  html.os-mac #marketing-alliance .ma__logoWrap {
+    translate: 10px -15px !important;
+    scale: 1.00 !important;
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1499px) {
+  html.os-mac #marketing-alliance .ma__logoWrap {
+    translate: 10px -15px !important;
+    scale: 1.00 !important;
+  }
+}
+
+@media (min-width: 1300px) and (max-width: 1399px) {
+  html.os-mac #marketing-alliance .ma__logoWrap {
+    translate: 5px -15px !important;
+    scale: 1.00 !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1299px) {
+  html.os-mac #marketing-alliance .ma__logoWrap {
+    translate: 0px 0px !important;
+    scale: 1.00 !important;
   }
 }
